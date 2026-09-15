@@ -1,0 +1,137 @@
+# Noise bench: repeated A/A measurements of the demo app on GitHub-hosted runners.
+# Raw JSONL is committed to the `data` branch (artifacts expire, the data must not).
+name: noise
+
+on:
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: Loads per variant
+        default: "20"
+  schedule:
+    # 4 times a day to capture time-of-day variance of shared runners
+    - cron: "17 1,7,13,19 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: noise
+  cancel-in-progress: false
+
+env:
+  # pinned so that browser updates do not show up as regressions in the data
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: ${{ inputs.runs || '20' }}
+
+jobs:
+  collect:
+    name: ${{ matrix.label }} ${{ matrix.mode }} ${{ matrix.throttling }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        label: [aa]
+        throttling: [simulate, devtools]
+        mode: [sequential, abab]
+        include:
+          # sanity check: a known regression must be clearly visible.
+          # devtools, because simulate (Lantern) re-estimates timings and hides some regressions
+          - label: control
+            throttling: devtools
+            mode: abab
+            pr_query: "?inject=script-delay:50"
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build and serve demo app
+        run: |
+          pnpm --filter demo-spa build
+          nohup pnpm --filter demo-spa preview > preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:4173/ > /dev/null && exit 0
+            sleep 1
+          done
+          cat preview.log
+          exit 1
+
+      - name: Collect
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.label }}-${{ matrix.mode }}-${{ matrix.throttling }}"
+          pnpm perfgate collect \
+            --url "http://127.0.0.1:4173/" \
+            --pr-url "http://127.0.0.1:4173/${{ matrix.pr_query }}" \
+            --runs "$RUNS" \
+            --mode "${{ matrix.mode }}" \
+            --throttling "${{ matrix.throttling }}" \
+            --app demo-spa \
+            --experiment "$id" \
+            --out "results/$id.jsonl"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runs-${{ matrix.label }}-${{ matrix.mode }}-${{ matrix.throttling }}
+          path: results/*.jsonl
+          retention-days: 7
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: runs-*
+          merge-multiple: true
+          path: incoming
+
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*.jsonl)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin data > /dev/null; then
+            git switch data
+          else
+            git switch --orphan data
+          fi
+
+          dest="raw/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f raw
+          git commit -m "data: noise run ${{ github.run_id }}"
+
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1

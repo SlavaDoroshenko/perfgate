@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+
+# local measurement output (CI data lives in the `data` branch)
+results/
+*.jsonl
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.parquet
+analysis/reports/

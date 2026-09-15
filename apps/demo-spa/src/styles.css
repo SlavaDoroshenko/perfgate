@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #1d2330;
+  background: #f7f7f5;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2c14e;
+  font-weight: 600;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #fff;
+  border-bottom: 1px solid #e3e3e0;
+}
+
+.header nav {
+  display: flex;
+  gap: 16px;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 2;
+  border-radius: 12px;
+  background: #d9dde3;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.thumb {
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+}
+
+.card h2 {
+  margin: 8px 0 4px;
+  font-size: 16px;
+}
+
+.card p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #5b6270;
+}
+
+.price {
+  font-weight: 700;
+}
