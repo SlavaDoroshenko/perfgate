@@ -31,6 +31,7 @@ jobs:
         working-directory: analysis
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      # no moving major tag published for v10
+      - uses: astral-sh/setup-uv@v10.1.0
       - run: uv sync --locked
       - run: uv run pytest
