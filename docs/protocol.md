@@ -31,6 +31,20 @@ kept unchanged as the low-work reference point, so noise can be compared between
 Data collected before 2026-09-16 comes from smoke runs (5 loads per variant) and is kept only for
 sanity checks.
 
+### Build isolation
+Each page is built by its own Vite config (`vite.light.config.ts`, `vite.heavy.config.ts`) into the
+same `dist`, with separate asset directories. The reason is an observed accident: when both pages
+were built together, Vite extracted a shared chunk, the light page began loading one extra file,
+and its `simulate` FCP/LCP jumped by ~150 ms (commit `5b4491b`) while `devtools` did not move at
+all. Lantern charges a fixed penalty per additional round trip, so a purely structural change of
+the bundle looked like a regression. Separate builds keep an edit of one page from moving the
+other.
+
+Consequence for analysis: the bundle differs between commits, so every run record carries `gitSha`
+and cross-job statistics are grouped by build (`noise.within_between`). Mixing builds inside one
+group would count the difference between bundles as measurement noise — `noise_summary.csv` reports
+a `builds` column to make such mixing visible.
+
 ## Series
 Each job is one experiment:
 - one unrecorded warm-up load per URL;
@@ -76,6 +90,8 @@ LCP under `simulate` is also bimodal on this page (~1350 / ~1500 ms), i.e. the n
 ## Threats to validity
 - Lab metrics only; no field data, no INP.
 - Runner hardware and images change over time: image version and CPU model are stored per load.
+  This is not a formality — on the heavy page the median LCP differs by ~7% between CPU models
+  (see `rq1-preliminary.md`), which is larger than most regressions worth catching.
 - One small SPA in this iteration; SSR and static apps are added in later iterations.
 - Multiplicative shift is an idealised regression; real injected regressions are measured separately.
 

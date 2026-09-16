@@ -26,6 +26,16 @@ def test_summary_recovers_sigma():
     assert tbt["zero_share"] == 1.0
 
 
+def test_within_between_splits_builds():
+    records = synthetic_records(experiments=4, runs=10, sigma=0.05)
+    for r in records[: len(records) // 2]:
+        r["gitSha"] = "aaaaaaa1"
+    for r in records[len(records) // 2 :]:
+        r["gitSha"] = "bbbbbbb2"
+    wb = within_between(to_frame(records))
+    assert set(wb[wb["metric"] == "lcp"]["build"]) == {"aaaaaaa", "bbbbbbb"}
+
+
 def test_within_between():
     df = to_frame(synthetic_records(experiments=10, runs=20, sigma=0.05))
     wb = within_between(df)

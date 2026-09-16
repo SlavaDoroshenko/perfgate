@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --config vite.light.config.ts && vite build --config vite.heavy.config.ts",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"

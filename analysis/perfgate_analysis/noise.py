@@ -29,7 +29,7 @@ def long_metrics(df: pd.DataFrame) -> pd.DataFrame:
     """Clean successful A/A loads in long format: one row per (load, metric)."""
     clean = df[df["ok"] & df["is_aa"]]
     return clean.melt(
-        id_vars=[*GROUP, "experiment", "variant", "order", "timestamp"],
+        id_vars=[*GROUP, "build", "experiment", "variant", "order", "timestamp"],
         value_vars=METRICS,
         var_name="metric",
     ).dropna(subset=["value"])
@@ -45,6 +45,9 @@ def summarize(df: pd.DataFrame) -> pd.DataFrame:
             {
                 **dict(zip([*GROUP, "metric"], key)),
                 "experiments": g["experiment"].nunique(),
+                # more than one build in a group means the pooled spread also contains
+                # the difference between bundles, not only measurement noise
+                "builds": g["build"].nunique(),
                 "n": len(v),
                 "median": med,
                 "iqr": q3 - q1,
@@ -60,15 +63,18 @@ def within_between(df: pd.DataFrame) -> pd.DataFrame:
     """
     within: typical spread inside one CI job (what a same-job base/PR comparison sees);
     between: spread of per-job medians over days (what a stored historical baseline sees).
+
+    Grouped per build: a new commit can change the bundle and shift the metric, which would
+    otherwise be counted as between-job noise.
     """
     rows = []
-    for key, g in long_metrics(df).groupby([*GROUP, "metric"]):
+    for key, g in long_metrics(df).groupby([*GROUP, "build", "metric"]):
         per_exp = g.groupby("experiment")["value"]
         medians = per_exp.median().to_numpy()
         within = per_exp.apply(robust_cv).dropna()
         rows.append(
             {
-                **dict(zip([*GROUP, "metric"], key)),
+                **dict(zip([*GROUP, "build", "metric"], key)),
                 "experiments": len(medians),
                 # nan when every job has a zero median (e.g. CLS of a stable page)
                 "within_robust_cv": float(within.median()) if len(within) else float("nan"),

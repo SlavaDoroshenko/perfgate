@@ -70,6 +70,10 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
                 "cpu_model": r["env"]["cpuModel"],
                 "chrome": r["env"]["chromeVersion"],
                 "lighthouse": r["env"]["lighthouseVersion"],
+                "git_sha": r["gitSha"],
+                # short commit id: the built bundle differs between commits, so metrics
+                # from different builds are not comparable across jobs
+                "build": (r["gitSha"] or "unknown")[:7],
                 "timestamp": r["timestamp"],
                 **r["metrics"],
             }
