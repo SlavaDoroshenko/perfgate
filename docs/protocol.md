@@ -13,9 +13,23 @@
 | Browser | Chrome for Testing, pinned in `.github/workflows/noise.yml` |
 | Lighthouse | pinned by `pnpm-lock.yaml`, performance category only, default mobile config |
 | Node | 22 |
-| App | `apps/demo-spa`, production build served by `vite preview` on 127.0.0.1 (no network) |
+| Apps | two pages of `apps/demo-spa`, production build served by `vite preview` on 127.0.0.1 (no network) |
 | Throttling | `simulate` (Lighthouse default, Lantern model) and `devtools` (applied CPU/network throttling) |
 | Schedule | 4 times a day, 01/07/13/19 UTC |
+
+## Pages
+| Label | URL | What it is |
+|---|---|---|
+| `demo-spa` | `/` | light page: 60 cards, almost no main-thread work after paint |
+| `demo-heavy` | `/heavy.html` | heavy page: 400 cards, deterministic computation in 3 chunks after the first frame, late promo banner |
+
+The light page keeps TBT and CLS at exactly zero, which makes those metrics useless for a
+relative-effect analysis. The heavy page was added on 2026-09-16 for that reason: locally it
+measures TBT ≈ 340–420 ms and CLS ≈ 0.16–0.24, both with run-to-run variation. The light page is
+kept unchanged as the low-work reference point, so noise can be compared between page weights.
+
+Data collected before 2026-09-16 comes from smoke runs (5 loads per variant) and is kept only for
+sanity checks.
 
 ## Series
 Each job is one experiment:

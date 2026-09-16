@@ -14,7 +14,7 @@ single-run thresholds.
 | Path | What |
 |---|---|
 | `packages/collector` | CLI: repeated Lighthouse runs → JSONL, one line per page load |
-| `apps/demo-spa` | demo app with injectable regressions (`?inject=type:size`) |
+| `apps/demo-spa` | demo app, light (`/`) and heavy (`/heavy.html`) pages, with injectable regressions (`?inject=type:size`) |
 | `schema/run.schema.json` | JSON Schema of a run record, generated from zod |
 | `analysis/` | Python: noise, minimum detectable effect, false alarms |
 | `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |

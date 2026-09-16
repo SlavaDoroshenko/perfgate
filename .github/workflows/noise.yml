@@ -26,7 +26,7 @@ env:
 
 jobs:
   collect:
-    name: ${{ matrix.label }} ${{ matrix.mode }} ${{ matrix.throttling }}
+    name: ${{ matrix.label }} ${{ matrix.page.app }} ${{ matrix.mode }} ${{ matrix.throttling }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     strategy:
@@ -35,12 +35,18 @@ jobs:
         label: [aa]
         throttling: [simulate, devtools]
         mode: [sequential, abab]
+        page:
+          # light: minimal main-thread work; heavy: large DOM and post-paint computation
+          # demo-spa keeps its name: renaming would split it from data already collected
+          - { app: demo-spa, path: "" }
+          - { app: demo-heavy, path: "heavy.html" }
         include:
           # sanity check: a known regression must be clearly visible.
           # devtools, because simulate (Lantern) re-estimates timings and hides some regressions
           - label: control
             throttling: devtools
             mode: abab
+            page: { app: demo-heavy, path: "heavy.html" }
             pr_query: "?inject=script-delay:50"
     steps:
       - uses: actions/checkout@v7
@@ -75,21 +81,21 @@ jobs:
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
-          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.label }}-${{ matrix.mode }}-${{ matrix.throttling }}"
+          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.label }}-${{ matrix.page.app }}-${{ matrix.mode }}-${{ matrix.throttling }}"
           pnpm perfgate collect \
-            --url "http://127.0.0.1:4173/" \
-            --pr-url "http://127.0.0.1:4173/${{ matrix.pr_query }}" \
+            --url "http://127.0.0.1:4173/${{ matrix.page.path }}" \
+            --pr-url "http://127.0.0.1:4173/${{ matrix.page.path }}${{ matrix.pr_query }}" \
             --runs "$RUNS" \
             --mode "${{ matrix.mode }}" \
             --throttling "${{ matrix.throttling }}" \
-            --app demo-spa \
+            --app "${{ matrix.page.app }}" \
             --experiment "$id" \
             --out "results/$id.jsonl"
 
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: runs-${{ matrix.label }}-${{ matrix.mode }}-${{ matrix.throttling }}
+          name: runs-${{ matrix.label }}-${{ matrix.page.app }}-${{ matrix.mode }}-${{ matrix.throttling }}
           path: results/*.jsonl
           retention-days: 7
           if-no-files-found: warn

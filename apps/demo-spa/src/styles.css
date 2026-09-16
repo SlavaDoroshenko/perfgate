@@ -45,6 +45,49 @@ main {
   background: #d9dde3;
 }
 
+.chart {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 8px 0 16px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #5b6270;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.stat-sub {
+  font-size: 12px;
+  color: #5b6270;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
