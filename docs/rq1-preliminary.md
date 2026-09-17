@@ -92,9 +92,10 @@ The same procedure at δ=0 gives 0.034-0.060 against a nominal 0.05, so the resa
 calibrated. 1% is the lowest grid point, so "1%" means "1% or better"; a finer grid is needed.
 
 ## Open questions
-- **Warm-up.** TBT of the light page is zero in 557 of 560 loads; all three non-zero values occur
-  in the first measured load of a job. One warm-up load may not be enough. Changing it now would
-  start another protocol epoch — decide before the long collection.
+- **Warm-up (resolved 2026-09-17).** TBT of the light page was zero in 557 of 560 loads; all three
+  non-zero values occurred in the first measured load of a job. The warm-up was raised from one
+  load to two, and the count is now stored per record as `warmup`, so the two protocol epochs can
+  be separated.
 - CLS on the heavy page is non-zero but nearly constant (0.154), so it needs absolute effects
   rather than relative ones.
 - Only `ubuntu-24.04`, one app family, injected effects are pure multiplicative shifts.

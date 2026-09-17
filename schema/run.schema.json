@@ -60,6 +60,11 @@
         "none"
       ]
     },
+    "warmup": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
     "runIndex": {
       "type": "integer",
       "minimum": 0,

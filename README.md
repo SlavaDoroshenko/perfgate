@@ -49,8 +49,9 @@ Modes:
 - `sequential` — all base loads, then all PR loads;
 - `abab` — interleaved, so slow drift of the machine affects both variants equally.
 
-Every load uses a fresh Chrome profile. Failed loads are recorded with `error` set,
-so failure rate stays visible in the data.
+Every load uses a fresh Chrome profile, and each series starts with unrecorded warm-up loads
+(`--warmup`, default 2). Failed loads are recorded with `error` set, so failure rate stays
+visible in the data.
 
 Regenerate the JSON Schema after changing `packages/collector/src/schema.ts`:
 

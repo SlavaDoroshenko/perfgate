@@ -60,6 +60,7 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
                 "variant": r["variant"],
                 "mode": r["mode"],
                 "throttling": r["throttling"],
+                "warmup": r.get("warmup"),
                 "run_index": r["runIndex"],
                 "order": r["order"],
                 "inject": f"{inject['type']}:{inject['size']:g}" if inject else None,

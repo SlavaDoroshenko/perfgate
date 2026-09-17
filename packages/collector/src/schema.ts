@@ -48,6 +48,8 @@ export const Run = z.object({
   inject: Inject.nullable(),
   mode: Mode,
   throttling: Throttling,
+  // unrecorded loads before the series; optional, absent in data collected before 2026-09-17
+  warmup: z.number().int().nonnegative().optional(),
   runIndex: z.number().int().nonnegative(),
   // global position of this load within the series (0-based), for drift analysis
   order: z.number().int().nonnegative(),

@@ -47,7 +47,9 @@ a `builds` column to make such mixing visible.
 
 ## Series
 Each job is one experiment:
-- one unrecorded warm-up load per URL;
+- unrecorded warm-up loads per URL: **two since 2026-09-17**, one before that (the first measured
+  load of a job was the only one with non-zero TBT on an otherwise idle page). The count is stored
+  in every record as `warmup`;
 - `runs` loads per variant (default 20), each in a fresh Chrome process with an empty profile;
 - `sequential`: all base loads, then all PR loads; `abab`: interleaved.
 

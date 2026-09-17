@@ -18,7 +18,7 @@ Options:
   --app <name>         app label stored with each run (default "app")
   --experiment <id>    experiment id (default: generated)
   --out <file>         JSONL file to append to (default results/runs.jsonl)
-  --no-warmup          skip the unrecorded warm-up load per variant
+  --warmup <n>         unrecorded warm-up loads per url (default 2, 0 disables)
 `;
 
 async function collect(argv: string[]) {
@@ -33,7 +33,7 @@ async function collect(argv: string[]) {
       app: { type: "string", default: "app" },
       experiment: { type: "string" },
       out: { type: "string", default: "results/runs.jsonl" },
-      "no-warmup": { type: "boolean", default: false },
+      warmup: { type: "string", default: "2" },
     },
     strict: true,
   });
@@ -42,6 +42,8 @@ async function collect(argv: string[]) {
   const mode = Mode.parse(values.mode);
   const throttling = Throttling.parse(values.throttling);
   const runs = Number(values.runs);
+  const warmup = Number(values.warmup);
+  if (!Number.isInteger(warmup) || warmup < 0) throw new UsageError(`--warmup must be >= 0, got ${values.warmup}`);
   const urls = { base: values.url, pr: values["pr-url"] };
   const experimentId =
     values.experiment ?? `${new Date().toISOString().replace(/[:.]/g, "-")}-${mode}-${throttling}`;
@@ -51,9 +53,11 @@ async function collect(argv: string[]) {
   const sha = gitSha();
   await mkdir(dirname(values.out), { recursive: true });
 
-  if (!values["no-warmup"]) {
+  // one warm-up load is not always enough: the first measured load of a job used to be
+  // the only one with non-zero TBT on an otherwise idle page
+  for (let i = 0; i < warmup; i++) {
     for (const url of [urls.base, urls.pr].filter((u): u is string => Boolean(u))) {
-      log(`warm-up ${url}`);
+      log(`warm-up ${i + 1}/${warmup} ${url}`);
       await measure(url, throttling).catch((err: unknown) => log(`warm-up failed: ${String(err)}`));
     }
   }
@@ -74,6 +78,7 @@ async function collect(argv: string[]) {
         inject: parseInject(url),
         mode,
         throttling,
+        warmup,
         runIndex: slot.runIndex,
         order: slot.order,
         metrics: extractMetrics(lhr),
@@ -94,6 +99,7 @@ async function collect(argv: string[]) {
         inject: parseInject(url),
         mode,
         throttling,
+        warmup,
         runIndex: slot.runIndex,
         order: slot.order,
         metrics: { lcp: null, fcp: null, tbt: null, cls: null, si: null, ttfb: null },
