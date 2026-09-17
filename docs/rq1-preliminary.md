@@ -1,28 +1,43 @@
-# RQ1, preliminary observations (2026-09-16)
+# RQ1, preliminary observations (updated 2026-09-17)
 
-**Status: one day of data — 3 to 5 jobs per configuration. Directional, not conclusive.**
-Everything below is measured on GitHub-hosted `ubuntu-24.04`, Chrome 153.0.8010.47,
-Lighthouse 13.4.1, two pages of the demo app served from localhost.
-All numbers are grouped per build (commit), see "Build isolation" in `protocol.md`.
+**Status: two days of data — 1780 loads in 55 jobs, no failed loads. Directional, not final.**
+GitHub-hosted `ubuntu-24.04`, Chrome 153.0.8010.47, Lighthouse 13.4.1, two pages of the demo app
+served from localhost. All statistics are grouped per build (commit); see "Build isolation" in
+`protocol.md`.
 
-## 1. Same-job noise is small; cross-job noise is 4-7x larger
+## 0. The bundle is part of the experiment
 
-Robust CV (1.4826·MAD/median) inside one job, against CV of job medians across jobs of the
-same build:
+Four build epochs exist in the data. The light page under `simulate`:
+
+| Build | Jobs | FCP | LCP |
+|---|---|---|---|
+| `0d567a8` | 2 | 1202.7 | 1504.1 |
+| `5b4491b` (shared chunk) | 6 | 1353.4 | 1654.8 |
+| `8bd59a9` | 2 | 1202.2 | 1503.2 |
+| `a79b8cb` (separate builds) | 4 | 1202.3 | 1503.4 |
+
+Building both pages together made Vite extract a shared chunk; one extra request cost ~150 ms of
+modelled FCP/LCP under `simulate` and nothing under `devtools`. After splitting the builds the
+metric returned to its original level, which confirms the cause. Any analysis that ignores the
+build would have reported this as a 6.4% cross-job noise level — an artefact ~100x larger than the
+real one (0.04%).
+
+## 1. Same-job comparison is 3-13x more sensitive than a stored baseline
+
+Robust CV inside one job vs CV of job medians across jobs of the same build (3 jobs each):
 
 | Page | Throttling | Metric | within job | between jobs | ratio |
 |---|---|---|---|---|---|
+| heavy | devtools | TBT | 1.40% | 17.85% | 12.7 |
+| heavy | devtools | LCP | 0.66% | 4.52% | 6.8 |
+| heavy | devtools | FCP | 0.46% | 1.91% | 4.1 |
 | light | devtools | LCP | 0.24% | 0.95% | 4.0 |
 | light | devtools | FCP | 0.38% | 1.32% | 3.5 |
-| heavy | devtools | LCP | 0.66% | 4.52% | 6.8 |
-| heavy | devtools | FCP | 0.46% | 1.91% | 4.2 |
-| heavy | devtools | TBT | 1.40% | 17.85% | 12.8 |
 
-Practical reading: comparing base and PR **inside one job** is 4 to 13 times more sensitive
-than comparing a PR against a baseline stored from an earlier job. The heavier the page, the
-bigger the gap.
+Under `simulate` the ratio drops below 1 (0.2-0.7): modelled metrics barely react to the machine,
+so a stored baseline is as good as a same-job one — at the price described in section 3.
 
-## 2. The cross-job noise is largely a hardware lottery
+## 2. Cross-job noise is mostly a hardware lottery
 
 Median metrics of the heavy page, `devtools`, by runner CPU:
 
@@ -31,64 +46,60 @@ Median metrics of the heavy page, `devtools`, by runner CPU:
 | AMD EPYC 9V74 | 1757 ms | 2330 ms | 378 ms |
 | AMD EPYC 7763 | 1804 ms | 2493 ms | 485 ms |
 
-The same lottery barely touches the light page (LCP 2250 vs 2247 ms): a page that does almost
-no work on the main thread is nearly insensitive to which machine it lands on. Sensitivity to
-the runner grows with the amount of JavaScript work, i.e. exactly where regressions matter.
+The light page barely moves between CPU models (LCP 2250 vs 2247 ms). Sensitivity to the runner
+grows with main-thread work, i.e. precisely where regressions matter.
 
 ## 3. `simulate` is stable but blind
 
-Under `simulate` the between-job CV of FCP/LCP collapses to 0.02-0.04%: Lantern re-estimates
-metrics from a model, so the hardware lottery disappears. The same modelling also hides real
-regressions — a delayed LCP image (`lcp-delay:800`) produces no change at all under `simulate`,
-while `devtools` shows +840 ms (see `protocol.md`).
+Between-job CV of FCP/LCP under `simulate` is 0.02-0.04%, because Lantern re-estimates metrics from
+a model and never sees the hardware. The same modelling hides real regressions: `lcp-delay:800`
+produces no change at all under `simulate`, while `devtools` shows +840 ms. Stability is bought
+with sensitivity.
 
-So the choice of throttling is not a detail: `simulate` buys stability at the price of
-sensitivity. Quantifying that trade-off belongs to RQ2.
+## 4. Sequential series raise 5x more false alarms than interleaved ones
 
-## 4. Sequential series produce false alarms, interleaved ones do not
+A/A jobs where two-sided Mann-Whitney reported a difference between "base" and "pr" at α=0.05,
+pooled over FCP, LCP and Speed Index, both pages, both throttling modes:
 
-Share of A/A jobs (no difference exists by construction) where Mann-Whitney reported a
-significant difference between "base" and "pr" at α=0.05:
+| Mode | Alarms | Checks | Rate |
+|---|---|---|---|
+| `abab` | 3 | 72 | **4.2%** |
+| `sequential` | 15 | 72 | **20.8%** |
 
-| Page | Throttling | Mode | FCP | LCP | SI |
-|---|---|---|---|---|---|
-| light | devtools | abab | 0/5 | 0/5 | 0/5 |
-| light | devtools | sequential | 1/5 | 2/5 | 1/5 |
-| light | simulate | abab | 0/5 | 0/5 | 0/5 |
-| light | simulate | sequential | 2/5 | 1/5 | 2/5 |
-| heavy | devtools | abab | 0/3 | 0/3 | 0/3 |
-| heavy | devtools | sequential | 1/3 | 1/3 | 1/3 |
+`abab` lands on the nominal 5%; `sequential` is four times above it. The same asymmetry shows in
+raw shifts: 10 of 72 sequential jobs move the median by more than 0.5%, against 1 of 72 for `abab`.
 
-This is the RQ3 hypothesis: when all base loads run first and all PR loads second, any drift of
-the machine during the series is attributed to the PR. Interleaving spreads it over both
-variants. The sample is far too small for a rate, but the direction is consistent across pages
-and throttling modes, and the magnitude (20-40% vs 0%) is large.
+**But the size of these false alarms is negligible.** Every alarm above is between -0.62% and
++0.54%, median -0.04%. With n=20 and a within-job CV of ~0.3%, the test resolves differences of
+0.2%, and a series that drifts by 0.2% is enough to trip it. The drift is mostly negative (the PR
+half of a sequential series tends to be slightly *faster*), i.e. the machine speeds up during the
+series rather than slowing down.
+
+Practical conclusion, and it belongs in RQ2: a p-value alone is not a decision rule. Pairing
+significance with a minimum effect size (say, 1%) removes every false alarm observed here without
+touching a real regression of the size anyone cares about. This is the argument for reporting a
+confidence interval of the effect (Hodges-Lehmann, as sitespeed.io does) instead of a bare verdict.
 
 ## 5. MDE (resampling of real A/A loads, Mann-Whitney, power 0.8)
 
 | Page | Throttling | Metric | n=5 | n=10 | n=20 |
 |---|---|---|---|---|---|
-| light | devtools | FCP/LCP | 1-2% | 1% | 1% |
-| heavy | devtools | LCP | 10% | 7.5% | 1% |
-| heavy | devtools | TBT | 3% | 2% | 2% |
-| heavy | simulate | TBT | 7.5% | 3% | 2% |
+| light | both | FCP/LCP | 1-2% | 1% | 1% |
+| heavy | devtools | FCP/LCP | 2-10% | 1-2% | 1% |
+| heavy | both | TBT | 5-7.5% | 2-3% | 2% |
 
-The false alarm rate of the same procedure at δ=0 stays within 0.034-0.060 against a nominal
-0.05, so the resampling is calibrated.
+The same procedure at δ=0 gives 0.034-0.060 against a nominal 0.05, so the resampling is
+calibrated. 1% is the lowest grid point, so "1%" means "1% or better"; a finer grid is needed.
 
-Caveat: 1% is the lowest point of the delta grid, so "1%" means "1% or better" and needs a
-finer grid once more data is in.
-
-## Threats specific to these numbers
-- 3-5 jobs per configuration, one day, one app family.
-- The injected effect is a multiplicative shift of every value; real regressions change the
-  shape of the distribution too.
-- CLS is non-zero on the heavy page but almost constant (0.154), so a relative MDE for it is
-  meaningless; it needs absolute effects.
-- TBT of the light page is zero in 557 of 560 loads; the three non-zero values all occur in the
-  first measured load of a job, which suggests one warm-up load is not always enough.
+## Open questions
+- **Warm-up.** TBT of the light page is zero in 557 of 560 loads; all three non-zero values occur
+  in the first measured load of a job. One warm-up load may not be enough. Changing it now would
+  start another protocol epoch — decide before the long collection.
+- CLS on the heavy page is non-zero but nearly constant (0.154), so it needs absolute effects
+  rather than relative ones.
+- Only `ubuntu-24.04`, one app family, injected effects are pure multiplicative shifts.
 
 ## Next
-Keep collecting until there are tens of jobs per configuration, then re-run
-`python -m perfgate_analysis.report` and turn sections 1, 3 and 4 into proper rates with
-confidence intervals.
+Collect until there are tens of jobs per configuration and per build, then re-run
+`python -m perfgate_analysis.report` and turn sections 1 and 4 into rates with confidence
+intervals.
