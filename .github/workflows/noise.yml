@@ -84,6 +84,8 @@ jobs:
         run: |
           id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.label }}-${{ matrix.page.app }}-${{ matrix.mode }}-${{ matrix.throttling }}"
           base="http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}"
+          # tree hash of the app package: changes exactly when the measured app changes
+          app_build=$(git ls-tree HEAD -- "apps/${{ matrix.page.pkg }}" | awk '{print substr($3,1,12)}')
           pnpm perfgate collect \
             --url "$base" \
             --pr-url "$base${{ matrix.pr_query }}" \
@@ -91,6 +93,7 @@ jobs:
             --mode "${{ matrix.mode }}" \
             --throttling "${{ matrix.throttling }}" \
             --app "${{ matrix.page.app }}" \
+            --app-build "$app_build" \
             --experiment "$id" \
             --out "results/$id.jsonl"
 

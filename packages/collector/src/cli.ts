@@ -19,6 +19,7 @@ Options:
   --experiment <id>    experiment id (default: generated)
   --out <file>         JSONL file to append to (default results/runs.jsonl)
   --warmup <n>         unrecorded warm-up loads per url (default 2, 0 disables)
+  --app-build <id>     fingerprint of the app sources (stored with every record)
 `;
 
 async function collect(argv: string[]) {
@@ -34,6 +35,7 @@ async function collect(argv: string[]) {
       experiment: { type: "string" },
       out: { type: "string", default: "results/runs.jsonl" },
       warmup: { type: "string", default: "2" },
+      "app-build": { type: "string" },
     },
     strict: true,
   });
@@ -79,6 +81,7 @@ async function collect(argv: string[]) {
         mode,
         throttling,
         warmup,
+        appBuild: values["app-build"],
         runIndex: slot.runIndex,
         order: slot.order,
         metrics: extractMetrics(lhr),
@@ -100,6 +103,7 @@ async function collect(argv: string[]) {
         mode,
         throttling,
         warmup,
+        appBuild: values["app-build"],
         runIndex: slot.runIndex,
         order: slot.order,
         metrics: { lcp: null, fcp: null, tbt: null, cls: null, si: null, ttfb: null },

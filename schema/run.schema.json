@@ -65,6 +65,9 @@
       "minimum": 0,
       "maximum": 9007199254740991
     },
+    "appBuild": {
+      "type": "string"
+    },
     "runIndex": {
       "type": "integer",
       "minimum": 0,

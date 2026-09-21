@@ -3,7 +3,8 @@
 ## Questions
 - **RQ1.** How noisy are lab metrics (FCP, LCP, TBT, CLS, Speed Index) on GitHub-hosted
   runners, and what is the smallest regression detectable with 5 / 10 / 20 loads per variant?
-- RQ2 (later). Which detection method gives the best false alarm / miss trade-off at a fixed CI budget?
+- **RQ2.** Which detection method gives the best false alarm / miss trade-off at a fixed CI budget?
+  First results in `rq2-methods.md`.
 - RQ3 (later). Does interleaving base and PR loads in one job (ABAB) reduce noise compared with sequential series?
 
 ## Setup

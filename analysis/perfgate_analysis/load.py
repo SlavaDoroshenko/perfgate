@@ -61,6 +61,7 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
                 "mode": r["mode"],
                 "throttling": r["throttling"],
                 "warmup": r.get("warmup"),
+                "app_build": r.get("appBuild"),
                 "run_index": r["runIndex"],
                 "order": r["order"],
                 "inject": f"{inject['type']}:{inject['size']:g}" if inject else None,
@@ -84,6 +85,8 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
     df["ok"] = df["error"].isna()
     # A/A experiment: no load in the whole series carries an injected regression
     df["is_aa"] = df.groupby("experiment")["inject"].transform(lambda s: s.isna().all())
+    # what makes two jobs comparable: the app fingerprint when present, the commit otherwise
+    df["epoch"] = df["app_build"].fillna(df["build"])
     return df
 
 

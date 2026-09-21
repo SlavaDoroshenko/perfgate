@@ -18,10 +18,11 @@ single-run thresholds.
 | `apps/demo-static` | static site demo (no framework) |
 | `apps/demo-ssr` | server-rendered Next.js demo |
 | `schema/run.schema.json` | JSON Schema of a run record, generated from zod |
-| `analysis/` | Python: noise, minimum detectable effect, false alarms |
+| `analysis/` | Python: noise, minimum detectable effect, detection methods |
 | `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |
 | `docs/protocol.md` | experiment protocol |
 | `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
+| `docs/rq2-methods.md` | comparison of ten detection rules |
 
 ## Analysis
 
