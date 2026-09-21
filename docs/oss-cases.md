@@ -38,25 +38,38 @@ Two fixes followed: relative asset urls, and a `failedRequests` count in every r
 fails to load its own script is not a fast page, and a bench that cannot tell the difference is
 not a bench. Any analysis should drop loads with `failed_requests > 0`.
 
-## First results (local, Apple M5, `devtools`, 5 pairs per case)
+## First results
 
-| Case | Metric | a (older) | b (newer) | Change | p |
-|---|---|---|---|---|---|
-| marked 9.1.6 → 18.0.13 | LCP | 1659 ms | 1737 ms | **+4.7%** | 0.008 |
-| marked 9.1.6 → 18.0.13 | TBT | 180 ms | 207 ms | **+15.1%** | 0.008 |
-| date-fns 2.30.0 → 4.4.0 | TBT | 97 ms | 80 ms | −17.5% | 0.008 |
-| chart.js 3.9.1 → 4.5.1 | TBT | 141 ms | 120 ms | −14.9% | 0.15 |
+On GitHub runners, 20 pairs of loads per case, `abab`, both throttling modes
+(run 35584462831, 240 loads, no failed loads, no failed requests):
 
-Three real upgrades, three different answers: one clear regression, one clear improvement, and one
-that five pairs of loads cannot separate from noise. That mix is the point — a detector has to be
-right in both directions and honest about the third case.
+| Case | Metric | `devtools` | `simulate` |
+|---|---|---|---|
+| marked 9.1.6 → 18.0.13 | LCP | **+5.3%** (p=1e-7) | **+12.3%** (p=7e-8) |
+| marked 9.1.6 → 18.0.13 | TBT | **+11.4%** (p=1e-4) | **+14.4%** (p=1e-6) |
+| chart.js 3.9.1 → 4.5.1 | TBT | −17.7% (p=7e-8) | −20.0% (p=1e-7) |
+| date-fns 2.30.0 → 4.4.0 | TBT | −16.5% (p=7e-8) | −25.0% (p=6e-3) |
+| all three | FCP | ±0.4%, not significant | ±0.1%, not significant |
 
-The marked case is a genuine find: a page that parses a large markdown document spends 15% more
-blocking time on version 18 than on version 9, and paints its largest element 4.7% later. Nothing
+Locally (Apple M5, 5 pairs) the same directions appeared, with chart.js not yet separable from
+noise at that sample size (p=0.15) — five pairs resolve a 15% difference only sometimes, twenty
+resolve it with certainty.
+
+Three real upgrades, three different answers: one clear regression, two clear improvements. That
+mix is the point — a detector has to be right in both directions.
+
+The marked case is a genuine find: a page that parses a large markdown document spends 11-14% more
+blocking time on version 18 than on version 9 and paints its largest element 5-12% later. Nothing
 about that is visible in a changelog.
 
-FCP moves in none of the cases, because in all three workloads the library runs after the first
-paint. A budget on FCP alone would have missed every one of them.
+Two observations for the other questions:
+
+- **FCP moves in none of the cases**, because in all three workloads the library runs after the
+  first paint. A budget on FCP alone would have missed every one of them.
+- **`simulate` reports larger effects than `devtools` here** (+12.3% vs +5.3% LCP for marked).
+  Lantern multiplies measured CPU time, so it amplifies main-thread differences — the same
+  modelling that made it blind to the timer-driven `lcp-delay` injection. Neither mode is
+  "conservative"; they are wrong in different directions.
 
 ## Planned: commit pairs
 
