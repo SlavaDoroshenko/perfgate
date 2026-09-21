@@ -11,10 +11,13 @@
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "schema": "tsx packages/collector/src/export-schema.ts"
+    "schema": "tsx packages/collector/src/export-schema.ts",
+    "oss:build": "node scripts/build-commit-pair.mjs",
+    "oss:serve": "sirv .oss-dist --host 127.0.0.1 --port 4177"
   },
   "devDependencies": {
     "@types/node": "^26.5.1",
+    "sirv-cli": "^3.0.1",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }

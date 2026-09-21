@@ -1,0 +1,46 @@
+[
+  {
+    "id": "phanpy-exclude-xmldom",
+    "repo": "https://github.com/cheeaun/phanpy.git",
+    "before": "edefb58a6e39",
+    "after": "c65eb5962515",
+    "install": "npm ci --no-audit --no-fund",
+    "build": "npm run build",
+    "dist": "dist",
+    "path": "index.html",
+    "note": "one line in vite.config.js excluding xmldom from the bundle: a change whose only effect is on what ships to the browser"
+  },
+  {
+    "id": "phanpy-may-to-june",
+    "repo": "https://github.com/cheeaun/phanpy.git",
+    "before": "2026.05.21.387a188",
+    "after": "2026.06.23.05dcc55",
+    "install": "npm ci --no-audit --no-fund",
+    "build": "npm run build",
+    "dist": "dist",
+    "path": "index.html",
+    "note": "Mastodon client, two dated release snapshots about a month apart"
+  },
+  {
+    "id": "phanpy-june-to-august",
+    "repo": "https://github.com/cheeaun/phanpy.git",
+    "before": "2026.06.23.05dcc55",
+    "after": "2026.08.08.e6a2887",
+    "install": "npm ci --no-audit --no-fund",
+    "build": "npm run build",
+    "dist": "dist",
+    "path": "index.html",
+    "note": "the following snapshot pair of the same app"
+  },
+  {
+    "id": "excalidraw-0.17.6-to-0.18.0",
+    "repo": "https://github.com/excalidraw/excalidraw.git",
+    "before": "v0.17.6",
+    "after": "v0.18.0",
+    "install": "yarn install --frozen-lockfile",
+    "build": "yarn build",
+    "dist": "excalidraw-app/build",
+    "path": "index.html",
+    "note": "a minor release of a drawing app, a year of changes apart"
+  }
+]
