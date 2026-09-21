@@ -48,12 +48,23 @@ jobs:
           chrome-version: ${{ env.CHROME_VERSION }}
           install-dependencies: true
 
+      - name: Fingerprint the case
+        id: fp
+        run: |
+          fp=$(python3 -c "
+          import hashlib, json
+          case = [c for c in json.load(open('oss/cases.json')) if c['id'] == '${{ matrix.case }}'][0]
+          print(hashlib.sha256(json.dumps(case, sort_keys=True).encode()).hexdigest()[:12])
+          ")
+          echo "hash=$fp" >> "$GITHUB_OUTPUT"
+
       - name: Cache the built pair
         id: pair
         uses: actions/cache@v4
         with:
           path: .oss-dist/${{ matrix.case }}
-          key: oss-${{ matrix.case }}-${{ hashFiles('oss/cases.json') }}
+          # keyed by this case only: editing another case must not force a rebuild here
+          key: oss-${{ matrix.case }}-${{ steps.fp.outputs.hash }}
 
       - name: Build both sides
         if: steps.pair.outputs.cache-hit != 'true'

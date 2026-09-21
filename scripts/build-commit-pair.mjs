@@ -69,7 +69,9 @@ for (const side of ["before", "after"]) {
 
   await rm(dest, { recursive: true, force: true });
   await mkdir(dest, { recursive: true });
-  await cp(resolve(dir, testCase.dist), dest, { recursive: true });
+  // a project may move its build output between the two refs, so dist can differ per side
+  const dist = typeof testCase.dist === "string" ? testCase.dist : testCase.dist[side];
+  await cp(resolve(dir, dist), dest, { recursive: true });
   process.stderr.write(`built ${testCase.id}/${side} (${ref})\n`);
 }
 
