@@ -37,13 +37,13 @@
     "repo": "https://github.com/excalidraw/excalidraw.git",
     "before": "v0.17.6",
     "after": "v0.18.0",
-    "install": "yarn install --frozen-lockfile",
-    "build": "yarn build",
+    "install": "npx -y yarn@1.22.22 install --frozen-lockfile",
+    "build": "npx -y yarn@1.22.22 build",
     "dist": {
       "before": "build",
       "after": "excalidraw-app/build"
     },
     "path": "index.html",
-    "note": "a minor release of a drawing app; the build output moved from build/ to excalidraw-app/build/ between the two tags"
+    "note": "a minor release of a drawing app; the build output moved from build/ to excalidraw-app/build/ between the two tags; requires Node 18-22 (CI uses 22), and yarn is pinned through npx"
   }
 ]

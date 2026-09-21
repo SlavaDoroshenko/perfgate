@@ -132,6 +132,11 @@ needs an absolute floor, like "ignore anything below 50 ms".
   and tried to run `yarn@pnpm@11.7.0`. Foreign checkouts now live outside this repository
   (`os.tmpdir()`), and the build runs with `COREPACK_ENABLE_STRICT=0`. A nested checkout inherits
   more from its host than it looks.
+- **Excalidraw needed three fixes before it built at all**: yarn pinned through `npx` (the case
+  must build on a machine that has no yarn), a different `dist` path per side (the app moved from
+  `build/` to `excalidraw-app/build/` between the two tags), and Node 18-22 (the tag predates
+  Node 24, so the pair builds in CI but not on a laptop running a newer Node). Reproducing somebody
+  else's application at a year-old tag is consistently harder than measuring it.
 - The first build of a pair failed with a bare exit code in the middle of somebody else's
   `npm ci`. The script now names the step, the command and the directory.
 - A local run produced 16 loads in a row with `CHROME_INTERSTITIAL_ERROR` because the static server
