@@ -70,14 +70,20 @@ jobs:
         if: steps.pair.outputs.cache-hit != 'true'
         run: node scripts/build-commit-pair.mjs --case ${{ matrix.case }}
 
-      - name: Serve
+      - name: Serve each side from its own root
+        # a real application is built with absolute asset urls ("/assets/..."), so it
+        # cannot be served from a subdirectory: each side gets its own port instead
         run: |
-          nohup pnpm oss:serve > server.log 2>&1 &
+          nohup pnpm exec sirv ".oss-dist/${{ matrix.case }}/before" --host 127.0.0.1 --port 4178 > before.log 2>&1 &
+          nohup pnpm exec sirv ".oss-dist/${{ matrix.case }}/after" --host 127.0.0.1 --port 4179 > after.log 2>&1 &
           for i in $(seq 1 60); do
-            curl -sf "http://127.0.0.1:4177/${{ matrix.case }}/before/index.html" > /dev/null && exit 0
+            if curl -sf "http://127.0.0.1:4178/index.html" > /dev/null \
+               && curl -sf "http://127.0.0.1:4179/index.html" > /dev/null; then
+              exit 0
+            fi
             sleep 1
           done
-          cat server.log
+          cat before.log after.log
           exit 1
 
       - name: Collect
@@ -87,8 +93,8 @@ jobs:
           id="${{ github.run_id }}-${{ github.run_attempt }}-commit-${{ matrix.case }}-${{ matrix.throttling }}"
           app_build=$(python3 -c "import json;c=[x for x in json.load(open('oss/cases.json')) if x['id']=='${{ matrix.case }}'][0];print(c['before'][:6]+'-'+c['after'][:6])")
           pnpm perfgate collect \
-            --url "http://127.0.0.1:4177/${{ matrix.case }}/before/index.html" \
-            --pr-url "http://127.0.0.1:4177/${{ matrix.case }}/after/index.html" \
+            --url "http://127.0.0.1:4178/index.html" \
+            --pr-url "http://127.0.0.1:4179/index.html" \
             --runs "$RUNS" \
             --mode abab \
             --throttling "${{ matrix.throttling }}" \

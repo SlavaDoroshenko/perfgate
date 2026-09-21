@@ -132,6 +132,11 @@ needs an absolute floor, like "ignore anything below 50 ms".
   and tried to run `yarn@pnpm@11.7.0`. Foreign checkouts now live outside this repository
   (`os.tmpdir()`), and the build runs with `COREPACK_ENABLE_STRICT=0`. A nested checkout inherits
   more from its host than it looks.
+- **A real application cannot be served from a subdirectory.** Excalidraw is built with absolute
+  asset urls (`/assets/...`), so serving it at `/<case>/before/` returned 404 for every asset and
+  all 40 loads came back as `NO_FCP` — the page painted nothing. Each side now gets its own port
+  (4178 and 4179) and is served from its own root. Note what worked: the measurement did not report
+  a fast blank page, it reported 40 failed loads and the job failed.
 - **Excalidraw needed three fixes before it built at all**: yarn pinned through `npx` (the case
   must build on a machine that has no yarn), a different `dist` path per side (the app moved from
   `build/` to `excalidraw-app/build/` between the two tags), and Node 18-22 (the tag predates
