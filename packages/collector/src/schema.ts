@@ -7,6 +7,7 @@ export const SCHEMA_VERSION = 1;
 export const Variant = z.enum(["base", "pr"]);
 export const Mode = z.enum(["sequential", "abab"]);
 export const Throttling = z.enum(["simulate", "devtools", "none"]);
+export const Label = z.enum(["aa", "injected", "vendor", "commit"]);
 
 export const Inject = z.object({
   type: z.string(),
@@ -53,11 +54,16 @@ export const Run = z.object({
   // fingerprint of the app sources this page was built from; metrics are only
   // comparable across jobs within the same fingerprint
   appBuild: z.string().optional(),
+  // what the series is: "aa" (same page twice), "injected" (synthetic regression),
+  // "vendor" (two library versions), "commit" (two commits of a real app)
+  label: z.enum(["aa", "injected", "vendor", "commit"]).optional(),
   runIndex: z.number().int().nonnegative(),
   // global position of this load within the series (0-based), for drift analysis
   order: z.number().int().nonnegative(),
   metrics: Metrics,
   benchmarkIndex: z.number().nullable(),
+  // requests that returned 4xx/5xx during the load; > 0 means the page was broken
+  failedRequests: z.number().int().nonnegative().nullable().optional(),
   error: z.string().nullable(),
   env: Env,
   gitSha: z.string().nullable(),
@@ -67,6 +73,7 @@ export const Run = z.object({
 export type Variant = z.infer<typeof Variant>;
 export type Mode = z.infer<typeof Mode>;
 export type Throttling = z.infer<typeof Throttling>;
+export type Label = z.infer<typeof Label>;
 export type Inject = z.infer<typeof Inject>;
 export type Metrics = z.infer<typeof Metrics>;
 export type Env = z.infer<typeof Env>;

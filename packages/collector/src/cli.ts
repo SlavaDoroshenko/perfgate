@@ -4,10 +4,16 @@ import { dirname } from "node:path";
 import { parseArgs } from "node:util";
 
 import { collectEnv, gitSha } from "./env.js";
-import { extractChromeVersion, extractError, extractMetrics, parseInject } from "./extract.js";
+import {
+  extractChromeVersion,
+  extractError,
+  extractFailedRequests,
+  extractMetrics,
+  parseInject,
+} from "./extract.js";
 import { measure } from "./lighthouse.js";
 import { planRuns } from "./plan.js";
-import { Mode, Run, SCHEMA_VERSION, Throttling } from "./schema.js";
+import { Label, Mode, Run, SCHEMA_VERSION, Throttling } from "./schema.js";
 
 const USAGE = `Usage: perfgate collect --url <base> [--pr-url <pr>] [options]
 
@@ -20,6 +26,7 @@ Options:
   --out <file>         JSONL file to append to (default results/runs.jsonl)
   --warmup <n>         unrecorded warm-up loads per url (default 2, 0 disables)
   --app-build <id>     fingerprint of the app sources (stored with every record)
+  --label <kind>       aa | injected | vendor | commit (what the two urls differ by)
 `;
 
 async function collect(argv: string[]) {
@@ -36,6 +43,7 @@ async function collect(argv: string[]) {
       out: { type: "string", default: "results/runs.jsonl" },
       warmup: { type: "string", default: "2" },
       "app-build": { type: "string" },
+      label: { type: "string" },
     },
     strict: true,
   });
@@ -46,6 +54,7 @@ async function collect(argv: string[]) {
   const runs = Number(values.runs);
   const warmup = Number(values.warmup);
   if (!Number.isInteger(warmup) || warmup < 0) throw new UsageError(`--warmup must be >= 0, got ${values.warmup}`);
+  const label = values.label === undefined ? undefined : Label.parse(values.label);
   const urls = { base: values.url, pr: values["pr-url"] };
   const experimentId =
     values.experiment ?? `${new Date().toISOString().replace(/[:.]/g, "-")}-${mode}-${throttling}`;
@@ -82,10 +91,12 @@ async function collect(argv: string[]) {
         throttling,
         warmup,
         appBuild: values["app-build"],
+        label,
         runIndex: slot.runIndex,
         order: slot.order,
         metrics: extractMetrics(lhr),
         benchmarkIndex: lhr.environment?.benchmarkIndex ?? null,
+        failedRequests: extractFailedRequests(lhr),
         error: extractError(lhr),
         env: { ...env, chromeVersion: extractChromeVersion(lhr), lighthouseVersion: lhr.lighthouseVersion ?? null },
         gitSha: sha,
@@ -104,10 +115,12 @@ async function collect(argv: string[]) {
         throttling,
         warmup,
         appBuild: values["app-build"],
+        label,
         runIndex: slot.runIndex,
         order: slot.order,
         metrics: { lcp: null, fcp: null, tbt: null, cls: null, si: null, ttfb: null },
         benchmarkIndex: null,
+        failedRequests: null,
         error: err instanceof Error ? err.message : String(err),
         env: { ...env, chromeVersion: null, lighthouseVersion: null },
         gitSha: sha,

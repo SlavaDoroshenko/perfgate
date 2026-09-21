@@ -6,7 +6,10 @@ export interface LhrLike {
   runtimeError?: { code?: string; message?: string };
   runWarnings?: string[];
   environment?: { hostUserAgent?: string; benchmarkIndex?: number };
-  audits: Record<string, { numericValue?: number } | undefined>;
+  audits: Record<
+    string,
+    { numericValue?: number; details?: { items?: { statusCode?: number }[] } } | undefined
+  >;
 }
 
 const AUDITS: Record<keyof Metrics, string> = {
@@ -41,6 +44,16 @@ export function extractChromeVersion(lhr: LhrLike): string | null {
 export function extractError(lhr: LhrLike): string | null {
   if (!lhr.runtimeError) return null;
   return [lhr.runtimeError.code, lhr.runtimeError.message].filter(Boolean).join(": ");
+}
+
+/**
+ * Requests the page failed to load. A page whose script 404s still produces metrics,
+ * so without this a broken build measures as a fast one.
+ */
+export function extractFailedRequests(lhr: LhrLike): number | null {
+  const items = lhr.audits["network-requests"]?.details?.items;
+  if (!items) return null;
+  return items.filter((r) => typeof r.statusCode === "number" && r.statusCode >= 400).length;
 }
 
 /** Parses `?inject=type:size`, e.g. `script-delay:200`. */

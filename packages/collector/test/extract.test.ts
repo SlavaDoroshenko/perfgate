@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { extractChromeVersion, extractError, extractMetrics, parseInject, type LhrLike } from "../src/extract.js";
+import {
+  extractChromeVersion,
+  extractError,
+  extractFailedRequests,
+  extractMetrics,
+  parseInject,
+  type LhrLike,
+} from "../src/extract.js";
 
 const lhr: LhrLike = {
   lighthouseVersion: "12.0.0",
@@ -41,6 +48,23 @@ describe("extractError", () => {
 
   it("joins code and message", () => {
     expect(extractError({ audits: {}, runtimeError: { code: "NO_FCP", message: "no paint" } })).toBe("NO_FCP: no paint");
+  });
+});
+
+describe("extractFailedRequests", () => {
+  it("counts 4xx and 5xx responses", () => {
+    const withRequests: LhrLike = {
+      audits: {
+        "network-requests": {
+          details: { items: [{ statusCode: 200 }, { statusCode: 404 }, { statusCode: 500 }] },
+        },
+      },
+    };
+    expect(extractFailedRequests(withRequests)).toBe(2);
+  });
+
+  it("returns null when the audit is absent", () => {
+    expect(extractFailedRequests({ audits: {} })).toBeNull();
   });
 });
 

@@ -1,0 +1,128 @@
+# Real changes, not synthetic ones: each job compares two published releases of a
+# third-party library on the same page. Data lands in the same `data` branch,
+# labelled "vendor" so it never enters the A/A false alarm statistics.
+name: oss
+
+on:
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: Loads per variant
+        default: "20"
+  schedule:
+    - cron: "37 3,15 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oss
+  cancel-in-progress: false
+
+env:
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: ${{ inputs.runs || '20' }}
+
+jobs:
+  collect:
+    name: ${{ matrix.case }} ${{ matrix.throttling }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [marked, chart, dates]
+        throttling: [devtools, simulate]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build both variants and serve
+        run: |
+          pnpm --filter vendor-bench build
+          nohup pnpm --filter vendor-bench preview > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf "http://127.0.0.1:4176/a/${{ matrix.case }}.html" > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+
+      - name: Collect
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          id="${{ github.run_id }}-${{ github.run_attempt }}-vendor-${{ matrix.case }}-${{ matrix.throttling }}"
+          # the pinned versions live in the package.json of vendor-bench, so its tree hash
+          # changes exactly when the compared releases change
+          app_build=$(git ls-tree HEAD -- apps/vendor-bench | awk '{print substr($3,1,12)}')
+          pnpm perfgate collect \
+            --url "http://127.0.0.1:4176/a/${{ matrix.case }}.html" \
+            --pr-url "http://127.0.0.1:4176/b/${{ matrix.case }}.html" \
+            --runs "$RUNS" \
+            --mode abab \
+            --throttling "${{ matrix.throttling }}" \
+            --app "vendor-${{ matrix.case }}" \
+            --app-build "$app_build" \
+            --label vendor \
+            --experiment "$id" \
+            --out "results/$id.jsonl"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runs-vendor-${{ matrix.case }}-${{ matrix.throttling }}
+          path: results/*.jsonl
+          retention-days: 7
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: runs-*
+          merge-multiple: true
+          path: incoming
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*.jsonl)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin data > /dev/null; then
+            git switch data
+          else
+            git switch --orphan data
+          fi
+
+          dest="raw/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f raw
+          git commit -m "data: oss run ${{ github.run_id }}"
+
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1

@@ -7,6 +7,7 @@ import json
 from collections.abc import Iterable
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from jsonschema import Draft202012Validator
 
@@ -62,11 +63,13 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
                 "throttling": r["throttling"],
                 "warmup": r.get("warmup"),
                 "app_build": r.get("appBuild"),
+                "label": r.get("label"),
                 "run_index": r["runIndex"],
                 "order": r["order"],
                 "inject": f"{inject['type']}:{inject['size']:g}" if inject else None,
                 "error": r["error"],
                 "benchmark_index": r["benchmarkIndex"],
+                "failed_requests": r.get("failedRequests"),
                 "runner": runner_kind(r["env"]),
                 "runner_image": r["env"]["runnerImage"],
                 "cpu_model": r["env"]["cpuModel"],
@@ -83,8 +86,13 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
     df = pd.DataFrame(rows)
     df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True)
     df["ok"] = df["error"].isna()
-    # A/A experiment: no load in the whole series carries an injected regression
-    df["is_aa"] = df.groupby("experiment")["inject"].transform(lambda s: s.isna().all())
+    # A/A experiment: explicitly labelled, or (for older data) no injected regression anywhere.
+    # Comparisons of two library versions or two commits carry no inject either, so the
+    # label is what keeps them out of the false alarm statistics.
+    by_inject = df.groupby("experiment")["inject"].transform(lambda s: s.isna().all())
+    labelled = df.groupby("experiment")["label"].transform(lambda s: s.notna().all() and s.iloc[0] == "aa")
+    has_label = df.groupby("experiment")["label"].transform(lambda s: s.notna().all())
+    df["is_aa"] = np.where(has_label, labelled, by_inject)
     # what makes two jobs comparable: the app fingerprint when present, the commit otherwise
     df["epoch"] = df["app_build"].fillna(df["build"])
     return df
