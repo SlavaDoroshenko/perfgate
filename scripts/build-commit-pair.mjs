@@ -32,9 +32,16 @@ if (!testCase) {
   process.exit(2);
 }
 
-const run = (cmd, cwd) => {
+const run = (cmd, cwd, step) => {
   process.stderr.write(`$ ${cmd}\n`);
-  execFileSync(cmd, { cwd, shell: true, stdio: "inherit", env: { ...process.env, CI: "1" } });
+  try {
+    execFileSync(cmd, { cwd, shell: true, stdio: "inherit", env: { ...process.env, CI: "1" } });
+  } catch (err) {
+    // building somebody else's project at an old ref is the fragile step: say which one broke
+    const code = /** @type {{status?: number}} */ (err).status;
+    console.error(`\n${testCase.id}: step "${step}" failed with exit code ${code}\n  command: ${cmd}\n  in: ${cwd}`);
+    process.exit(1);
+  }
 };
 
 for (const side of ["before", "after"]) {
@@ -45,11 +52,11 @@ for (const side of ["before", "after"]) {
   if (!existsSync(dir)) {
     await mkdir(dir, { recursive: true });
     // full history is not needed, but the ref must be reachable
-    run(`git clone --filter=blob:none ${testCase.repo} .`, dir);
+    run(`git clone --filter=blob:none ${testCase.repo} .`, dir, "clone");
   }
-  run(`git checkout --detach ${ref}`, dir);
-  run(testCase.install, dir);
-  run(testCase.build, dir);
+  run(`git checkout --detach ${ref}`, dir, "checkout");
+  run(testCase.install, dir, "install");
+  run(testCase.build, dir, "build");
 
   await rm(dest, { recursive: true, force: true });
   await mkdir(dest, { recursive: true });
