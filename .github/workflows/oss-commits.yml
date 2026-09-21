@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        case: [phanpy-exclude-xmldom, phanpy-may-to-june]
+        case: [phanpy-exclude-xmldom, phanpy-may-to-june, phanpy-june-to-august, excalidraw-0.17.6-to-0.18.0]
         throttling: [devtools, simulate]
     steps:
       - uses: actions/checkout@v7

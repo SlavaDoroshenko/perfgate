@@ -99,6 +99,10 @@ real consecutive versions without having to argue about which commit is interest
 | `phanpy-may-to-june` | TBT | +13.7% (p=0.03) | — |
 | `phanpy-exclude-xmldom` | FCP | −0.05% (p=0.91) | −0.01% (p=0.43) |
 | `phanpy-exclude-xmldom` | LCP | −0.05% (p=0.91) | +0.01% (p=0.62) |
+| `phanpy-exclude-xmldom` | TBT | −7.8% (p=0.52) | — |
+
+Locally, with 8 pairs on quieter hardware, the same case gives TBT 55 ms → 47 ms, **−14.2%**
+(p<0.001), with FCP and LCP unchanged (+0.01%, p=0.57).
 
 Locally (Apple M5, 5 pairs, `devtools`) the May→June pair measured +3.9% FCP and +3.1% LCP — the
 same answer from different hardware.
@@ -111,8 +115,15 @@ different runner types and under both throttling models. Over the same month the
 the page got slower.
 
 **Excluding xmldom from the bundle.** The one-line change removed 64 KB of JavaScript (4008 KB →
-3944 KB, −1.6%) and moved no metric at all: −0.05% on FCP with p=0.91. The module was evidently
-not on the critical path, so shipping less of it changed nothing a user would feel.
+3944 KB, −1.6%). Paint timings did not move at all — FCP +0.01% locally (p=0.57), −0.05% on the
+runners (p=0.91) — but blocking time did: **TBT −14.2% locally over 8 pairs (p<0.001)**, from 55 ms
+to 47 ms. On the runners the same direction appeared (−7.8%) but 10 pairs could not separate it
+from noise (p=0.52).
+
+So the change is real and it lands exactly where the mechanism says it should: less JavaScript to
+parse and execute shows up in the metric that measures parsing and execution, and nowhere else.
+A budget on LCP would have seen nothing. It also takes more loads than paint metrics need: TBT here
+is ~50 ms with a much larger relative spread, which is the same pattern as in `rq1-preliminary.md`.
 
 Taken together: shipped bytes and page load are related, but not the same measurement, and neither
 one substitutes for the other. A tool that only watches bundle size would have called the first
