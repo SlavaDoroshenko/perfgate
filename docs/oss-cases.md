@@ -90,52 +90,50 @@ Why these: both apps build from a plain `npm ci` / `yarn install` and a single b
 are real products rather than demos, and Phanpy publishes dated snapshots, which gives a supply of
 real consecutive versions without having to argue about which commit is interesting.
 
-### Results on the runners (10 pairs per case, both throttling modes)
+### Results on the runners (20 pairs per case, both throttling modes)
 
 | Case | Metric | `devtools` | `simulate` |
 |---|---|---|---|
-| `phanpy-may-to-june` | FCP | **+3.71%** (p=2e-4) | **+3.85%** (p=2e-4) |
-| `phanpy-may-to-june` | LCP | **+4.03%** (p=2e-4) | **+3.96%** (p=2e-4) |
-| `phanpy-may-to-june` | TBT | +13.7% (p=0.03) | — |
-| `phanpy-exclude-xmldom` | FCP | −0.05% (p=0.91) | −0.01% (p=0.43) |
-| `phanpy-exclude-xmldom` | LCP | −0.05% (p=0.91) | +0.01% (p=0.62) |
-| `phanpy-exclude-xmldom` | TBT | −7.8% (p=0.52) | — |
+| `phanpy-may-to-june` | FCP | **+3.84%** (p=7e-8) | **+3.83%** (p=7e-8) |
+| `phanpy-may-to-june` | LCP | **+4.15%** (p=7e-8) | **+3.95%** (p=7e-8) |
+| `phanpy-may-to-june` | TBT | +15.8% (p=2e-4) | +50% of 2 ms (p=9e-3) |
+| `phanpy-june-to-august` | LCP | **+0.87%** (p=3e-6) | +0.01% (p=0.46) |
+| `phanpy-june-to-august` | FCP | −0.14% (p=0.04) | +0.00% (p=0.56) |
+| `phanpy-june-to-august` | TBT | −5.5% (p=0.01) | +372% of 4.5 ms (p=6e-8) |
+| `phanpy-exclude-xmldom` | FCP / LCP | +0.02% (p=0.39) | −0.01% / +0.88% |
+| `phanpy-exclude-xmldom` | TBT | +6.8% (p=0.15) | 0.0% (p=0.30) |
 
-Locally, with 8 pairs on quieter hardware, the same case gives TBT 55 ms → 47 ms, **−14.2%**
-(p<0.001), with FCP and LCP unchanged (+0.01%, p=0.57).
+**May → June is a solid regression.** About 4% on both paint metrics, identical under both
+throttling models, reproduced on the runners and locally on an Apple M5. Over the same month the
+build output shrank from 12 MB to 10 MB, so a bundle-size check would have reported an improvement
+while the page got slower.
 
-Locally (Apple M5, 5 pairs, `devtools`) the May→June pair measured +3.9% FCP and +3.1% LCP — the
-same answer from different hardware.
+**June → August shows what 20 loads buy.** LCP moved by 0.87% — under a percent — and the test
+still separates it from noise with p=3e-6 (11343 ms → 11442 ms). That is the sensitivity promised
+by the MDE tables in `rq1-preliminary.md`, on a real application rather than a demo.
 
-### Both cases disagree with the bundle size, in opposite ways
+**The xmldom case did not replicate.** Locally, 8 pairs gave TBT 55 ms → 47 ms, −14.2% with
+p<0.001. On the runners, 20 pairs gave +6.8% with p=0.15 — the opposite sign, not significant.
+Paint metrics did not move in either place. So the honest statement is: removing 64 KB of
+JavaScript that was not on the critical path had no effect we can demonstrate, and the local
+result was a property of that machine rather than of the change. An effect that survives p<0.001
+on one laptop and disappears on other hardware is exactly the trap this whole project is about.
 
-**May → June.** A month of ordinary development made the app about 4% slower to paint, on two
-different runner types and under both throttling models. Over the same month the build output got
-*smaller* (12 MB → 10 MB on disk). A bundle-size check would have reported an improvement while
-the page got slower.
+**TBT under `simulate` is a few milliseconds, and relative framing lies.** June → August reports
++372% under `simulate` — that is 4.5 ms against 21.2 ms — while `devtools` reports −5.5% of 29 ms
+in the opposite direction. On a page where blocking time is near zero, the two throttling models
+disagree even about the sign. Relative thresholds on TBT are meaningless at that scale; this metric
+needs an absolute floor, like "ignore anything below 50 ms".
 
-**Excluding xmldom from the bundle.** The one-line change removed 64 KB of JavaScript (4008 KB →
-3944 KB, −1.6%). Paint timings did not move at all — FCP +0.01% locally (p=0.57), −0.05% on the
-runners (p=0.91) — but blocking time did: **TBT −14.2% locally over 8 pairs (p<0.001)**, from 55 ms
-to 47 ms. On the runners the same direction appeared (−7.8%) but 10 pairs could not separate it
-from noise (p=0.52).
+## What broke while setting this up
 
-So the change is real and it lands exactly where the mechanism says it should: less JavaScript to
-parse and execute shows up in the metric that measures parsing and execution, and nowhere else.
-A budget on LCP would have seen nothing. It also takes more loads than paint metrics need: TBT here
-is ~50 ms with a much larger relative spread, which is the same pattern as in `rq1-preliminary.md`.
-
-Taken together: shipped bytes and page load are related, but not the same measurement, and neither
-one substitutes for the other. A tool that only watches bundle size would have called the first
-case an improvement and the second one a win; the page says otherwise in both.
-
-### What broke while setting this up
-
-- The first attempt to build the xmldom pair failed with a bare exit code in the middle of
-  somebody else's `npm ci`. The script now names the step, the command and the directory when a
-  foreign build fails — with third-party code that is the difference between a five-minute fix and
-  an hour.
-- A local measurement run produced 16 loads in a row with `CHROME_INTERSTITIAL_ERROR`, because the
-  static server was not running. Every one of them was recorded as a failed load rather than as a
-  number, which is exactly what the `error` field is for. The CI job waits for the server to answer
-  before measuring, so this cannot happen there.
+- **The Excalidraw case failed, and it was our bug, not theirs.** At tag v0.17.6 the project had no
+  `packageManager` field yet, so corepack walked up the directory tree, found *our* repository root
+  and tried to run `yarn@pnpm@11.7.0`. Foreign checkouts now live outside this repository
+  (`os.tmpdir()`), and the build runs with `COREPACK_ENABLE_STRICT=0`. A nested checkout inherits
+  more from its host than it looks.
+- The first build of a pair failed with a bare exit code in the middle of somebody else's
+  `npm ci`. The script now names the step, the command and the directory.
+- A local run produced 16 loads in a row with `CHROME_INTERSTITIAL_ERROR` because the static server
+  was not running. All 16 were recorded as failed loads rather than as numbers. The CI job waits
+  for the server to answer before measuring.

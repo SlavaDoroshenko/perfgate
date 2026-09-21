@@ -7,12 +7,15 @@ import { execFileSync } from "node:child_process";
 import { cp, mkdir, readFile, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { parseArgs } from "node:util";
+import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 
 const { values } = parseArgs({
   options: {
     case: { type: "string" },
-    work: { type: "string", default: ".oss-work" },
+    // outside this repository on purpose: package managers walk up the directory tree,
+    // and a foreign checkout nested in our workspace picks up our own packageManager field
+    work: { type: "string", default: resolve(tmpdir(), "perfgate-oss-work") },
     out: { type: "string", default: ".oss-dist" },
     list: { type: "boolean", default: false },
   },
@@ -35,7 +38,13 @@ if (!testCase) {
 const run = (cmd, cwd, step) => {
   process.stderr.write(`$ ${cmd}\n`);
   try {
-    execFileSync(cmd, { cwd, shell: true, stdio: "inherit", env: { ...process.env, CI: "1" } });
+    execFileSync(cmd, {
+      cwd,
+      shell: true,
+      stdio: "inherit",
+      // a checkout from before corepack was common must not be forced through it
+      env: { ...process.env, CI: "1", COREPACK_ENABLE_STRICT: "0" },
+    });
   } catch (err) {
     // building somebody else's project at an old ref is the fragile step: say which one broke
     const code = /** @type {{status?: number}} */ (err).status;
@@ -46,7 +55,7 @@ const run = (cmd, cwd, step) => {
 
 for (const side of ["before", "after"]) {
   const ref = testCase[side];
-  const dir = resolve(root, values.work, testCase.id, side);
+  const dir = resolve(values.work, testCase.id, side);
   const dest = resolve(root, values.out, testCase.id, side);
 
   if (!existsSync(dir)) {
