@@ -14,11 +14,14 @@ single-run thresholds.
 | Path | What |
 |---|---|
 | `packages/collector` | CLI: repeated Lighthouse runs → JSONL, one line per page load |
-| `apps/demo-spa` | demo app, light (`/`) and heavy (`/heavy.html`) pages, with injectable regressions (`?inject=type:size`) |
+| `apps/demo-spa` | SPA demo: light (`/`) and heavy (`/heavy.html`) pages |
+| `apps/demo-static` | static site demo (no framework) |
+| `apps/demo-ssr` | server-rendered Next.js demo |
 | `schema/run.schema.json` | JSON Schema of a run record, generated from zod |
 | `analysis/` | Python: noise, minimum detectable effect, false alarms |
 | `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |
 | `docs/protocol.md` | experiment protocol |
+| `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
 
 ## Analysis
 

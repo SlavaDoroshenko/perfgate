@@ -1,0 +1,13 @@
+{
+  "name": "demo-static",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"process.stdout.write('demo-static: nothing to build\\n')\"",
+    "preview": "sirv public --host 127.0.0.1 --port 4175"
+  },
+  "devDependencies": {
+    "sirv-cli": "^3.0.1"
+  }
+}

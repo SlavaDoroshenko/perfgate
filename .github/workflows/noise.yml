@@ -1,4 +1,4 @@
-# Noise bench: repeated A/A measurements of the demo app on GitHub-hosted runners.
+# Noise bench: repeated A/A measurements of the demo apps on GitHub-hosted runners.
 # Raw JSONL is committed to the `data` branch (artifacts expire, the data must not).
 name: noise
 
@@ -36,17 +36,18 @@ jobs:
         throttling: [simulate, devtools]
         mode: [sequential, abab]
         page:
-          # light: minimal main-thread work; heavy: large DOM and post-paint computation
           # demo-spa keeps its name: renaming would split it from data already collected
-          - { app: demo-spa, path: "" }
-          - { app: demo-heavy, path: "heavy.html" }
+          - { app: demo-spa, pkg: demo-spa, script: preview, port: 4173, path: "" }
+          - { app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: "heavy.html" }
+          - { app: demo-static, pkg: demo-static, script: preview, port: 4175, path: "" }
+          - { app: demo-ssr, pkg: demo-ssr, script: start, port: 4174, path: "" }
         include:
           # sanity check: a known regression must be clearly visible.
           # devtools, because simulate (Lantern) re-estimates timings and hides some regressions
           - label: control
             throttling: devtools
             mode: abab
-            page: { app: demo-heavy, path: "heavy.html" }
+            page: { app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: "heavy.html" }
             pr_query: "?inject=script-delay:50"
     steps:
       - uses: actions/checkout@v7
@@ -66,15 +67,15 @@ jobs:
           chrome-version: ${{ env.CHROME_VERSION }}
           install-dependencies: true
 
-      - name: Build and serve demo app
+      - name: Build and serve the app
         run: |
-          pnpm --filter demo-spa build
-          nohup pnpm --filter demo-spa preview > preview.log 2>&1 &
-          for i in $(seq 1 30); do
-            curl -sf http://127.0.0.1:4173/ > /dev/null && exit 0
+          pnpm --filter ${{ matrix.page.pkg }} build
+          nohup pnpm --filter ${{ matrix.page.pkg }} ${{ matrix.page.script }} > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf "http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}" > /dev/null && exit 0
             sleep 1
           done
-          cat preview.log
+          cat server.log
           exit 1
 
       - name: Collect
@@ -82,9 +83,10 @@ jobs:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
           id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.label }}-${{ matrix.page.app }}-${{ matrix.mode }}-${{ matrix.throttling }}"
+          base="http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}"
           pnpm perfgate collect \
-            --url "http://127.0.0.1:4173/${{ matrix.page.path }}" \
-            --pr-url "http://127.0.0.1:4173/${{ matrix.page.path }}${{ matrix.pr_query }}" \
+            --url "$base" \
+            --pr-url "$base${{ matrix.pr_query }}" \
             --runs "$RUNS" \
             --mode "${{ matrix.mode }}" \
             --throttling "${{ matrix.throttling }}" \

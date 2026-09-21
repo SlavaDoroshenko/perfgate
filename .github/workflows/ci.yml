@@ -16,9 +16,10 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # build first: next generates next-env.d.ts that the ssr typecheck needs
+      - run: pnpm -r build
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm --filter demo-spa build
       - name: JSON Schema is up to date
         run: |
           pnpm schema

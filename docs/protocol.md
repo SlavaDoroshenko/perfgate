@@ -13,20 +13,32 @@
 | Browser | Chrome for Testing, pinned in `.github/workflows/noise.yml` |
 | Lighthouse | pinned by `pnpm-lock.yaml`, performance category only, default mobile config |
 | Node | 22 |
-| Apps | two pages of `apps/demo-spa`, production build served by `vite preview` on 127.0.0.1 (no network) |
+| Apps | four pages in three packages, production builds served on 127.0.0.1 (no network) |
 | Throttling | `simulate` (Lighthouse default, Lantern model) and `devtools` (applied CPU/network throttling) |
 | Schedule | 4 times a day, 01/07/13/19 UTC |
 
 ## Pages
-| Label | URL | What it is |
-|---|---|---|
-| `demo-spa` | `/` | light page: 60 cards, almost no main-thread work after paint |
-| `demo-heavy` | `/heavy.html` | heavy page: 400 cards, deterministic computation in 3 chunks after the first frame, late promo banner |
+| Label | App | URL | What it is |
+|---|---|---|---|
+| `demo-spa` | `apps/demo-spa` | `:4173/` | light SPA: 60 cards, almost no main-thread work after paint |
+| `demo-heavy` | `apps/demo-spa` | `:4173/heavy.html` | heavy SPA: 400 cards, deterministic computation in 3 chunks after the first frame, late promo banner |
+| `demo-static` | `apps/demo-static` | `:4175/` | static site: hand-written HTML/CSS article, no framework, one small script |
+| `demo-ssr` | `apps/demo-ssr` | `:4174/` | server-rendered Next.js shop, 120 cards, rendered per request (`force-dynamic`), hydration on the client |
+
+The four pages cover the range that matters for noise: a page that does almost nothing on the main
+thread, one that does a lot, a document-shaped static page, and a server-rendered app whose client
+cost is hydration rather than rendering. All four accept the same `?inject=type:size` regressions,
+with the same semantics (`script-delay` blocks before the first paint, `long-task` after the first
+frame, `layout-shift` inserts a banner after 300 ms, `lcp-delay` assigns the hero image src late).
+
+Locally observed baselines (`devtools`, Apple M5): static FCP ~1250 ms, LCP ~1800 ms, TBT 0,
+CLS 0.078; SSR FCP = LCP ~1230 ms, TBT 52-67 ms (hydration), CLS 0.078.
 
 The light page keeps TBT and CLS at exactly zero, which makes those metrics useless for a
 relative-effect analysis. The heavy page was added on 2026-09-16 for that reason: locally it
-measures TBT ≈ 340–420 ms and CLS ≈ 0.16–0.24, both with run-to-run variation. The light page is
+measures TBT ~340-420 ms and CLS ~0.16-0.24, both with run-to-run variation. The light page is
 kept unchanged as the low-work reference point, so noise can be compared between page weights.
+The static and SSR apps were added on 2026-09-21.
 
 Data collected before 2026-09-16 comes from smoke runs (5 loads per variant) and is kept only for
 sanity checks.
@@ -56,7 +68,10 @@ Each job is one experiment:
 A/A experiments use the same URL for base and PR. A control experiment adds
 `?inject=script-delay:50` to the PR URL and must be detected; it is excluded from noise statistics.
 
-## Injected regressions (`apps/demo-spa/src/inject.ts`)
+## Injected regressions
+Implemented per app: `apps/demo-spa/src/inject.ts`, `apps/demo-static/public/inject.js`,
+`apps/demo-ssr/app/inject.ts` + `Effects.tsx`.
+
 | Param | Effect | Main metric |
 |---|---|---|
 | `script-delay:<ms>` | blocking JS before first render | FCP, LCP |
@@ -94,7 +109,8 @@ LCP under `simulate` is also bimodal on this page (~1350 / ~1500 ms), i.e. the n
 - Runner hardware and images change over time: image version and CPU model are stored per load.
   This is not a formality — on the heavy page the median LCP differs by ~7% between CPU models
   (see `rq1-preliminary.md`), which is larger than most regressions worth catching.
-- One small SPA in this iteration; SSR and static apps are added in later iterations.
+- Four pages in three packages (SPA light/heavy, static site, SSR); all are synthetic demos rather
+  than production applications.
 - Multiplicative shift is an idealised regression; real injected regressions are measured separately.
 
 ## Reproducing

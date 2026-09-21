@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notes on measuring the web</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script>
+      // script-delay: blocking work before the first paint
+      (function () {
+        var p = (new URLSearchParams(location.search).get('inject') || '').split(':');
+        if (p[0] === 'script-delay') {
+          var end = performance.now() + Number(p[1] || 0);
+          while (performance.now() < end) {}
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <strong>Field notes</strong>
+      <nav><a href="#">Archive</a><a href="#">Method</a><a href="#">About</a></nav>
+    </header>
+    <main>
+      <img class="hero" id="hero" width="1200" height="480" alt="Measurement" />
+      <script>
+        // lcp-delay: the hero image src is assigned late
+        (function () {
+          var p = (new URLSearchParams(location.search).get('inject') || '').split(':');
+          var img = document.getElementById('hero');
+          var set = function () { img.src = '/hero.svg'; };
+          if (p[0] === 'lcp-delay') setTimeout(set, Number(p[1] || 0)); else set();
+        })();
+      </script>
+      <h1>What a page load actually costs</h1>
+      <p class="meta">Field notes · 12 minute read</p>
+      <p>A page load is not one event but a negotiation between the network, the parser and the
+      main thread. Each of the three can be the bottleneck, and which one wins changes with the
+      shape of the document, the size of the scripts and the machine underneath.</p>
+      <h2>The parser goes first</h2>
+      <p>Before anything is painted the parser must reach the end of the critical markup. A single
+      blocking script in the head is enough to hold the first paint for as long as it runs, which
+      is why measurement tools report the first contentful paint separately from the load event.</p>
+      <p>The cost is not constant. The same script takes different time on different hardware, and
+      on shared infrastructure that hardware is not known in advance.</p>
+      <figure>
+        <img src="/figure.svg" alt="Timeline" />
+        <figcaption>A load timeline, drawn from a trace rather than from a stopwatch.</figcaption>
+      </figure>
+      <h2>Then the main thread</h2>
+      <p>Work scheduled after the first frame does not move the first paint, but it does block
+      input. Tools account for this as blocking time: the part of every long task beyond fifty
+      milliseconds, summed over the window between the first paint and interactivity.</p>
+      <h2>And finally layout</h2>
+      <p>Content that arrives late moves what is already on screen. The metric for this is
+      unitless and, on a stable page, close to zero, which makes it a poor candidate for relative
+      comparisons and a good candidate for absolute thresholds.</p>
+      <table>
+        <tr><th>Phase</th><th>Bottleneck</th><th>Typical metric</th></tr>
+        <tr><td>Parse</td><td>Blocking scripts</td><td>First Contentful Paint</td></tr>
+        <tr><td>Render</td><td>Image and font delivery</td><td>Largest Contentful Paint</td></tr>
+        <tr><td>Interact</td><td>Long tasks</td><td>Total Blocking Time</td></tr>
+        <tr><td>Settle</td><td>Late content</td><td>Cumulative Layout Shift</td></tr>
+      </table>
+      <h2>Why one measurement is not a measurement</h2>
+      <p>Any of these numbers moves between runs on the same machine, and moves further between
+      machines. A threshold applied to a single run therefore answers a question nobody asked:
+      whether this particular load, on this particular machine, crossed a line.</p>
+    </main>
+    <footer>Written for the perfgate demo corpus. No trackers, no fonts, no frameworks.</footer>
+    <script src="/inject.js"></script>
+  </body>
+</html>

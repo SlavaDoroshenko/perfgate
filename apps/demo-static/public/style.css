@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; color: #1d2330; background: #fbfbf9; line-height: 1.6; }
+.banner { display: flex; align-items: center; justify-content: center; background: #f2c14e; font-weight: 700; font-family: system-ui, sans-serif; }
+header { padding: 16px 24px; background: #fff; border-bottom: 1px solid #e3e3e0; font-family: system-ui, sans-serif; }
+header nav { display: flex; gap: 16px; margin-top: 8px; font-size: 14px; }
+main { max-width: 720px; margin: 0 auto; padding: 16px; }
+.hero { display: block; width: 100%; height: auto; aspect-ratio: 5 / 2; border-radius: 12px; background: #d9dde3; }
+h1 { font-size: 34px; line-height: 1.2; margin: 24px 0 8px; }
+h2 { font-size: 22px; margin: 32px 0 8px; }
+.meta { color: #5b6270; font-size: 14px; font-family: system-ui, sans-serif; }
+figure { margin: 24px 0; }
+figure img { width: 100%; height: auto; aspect-ratio: 3 / 1; border-radius: 8px; background: #e7e9ec; }
+figcaption { font-size: 13px; color: #5b6270; font-family: system-ui, sans-serif; }
+table { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 14px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e3e3e0; }
+footer { max-width: 720px; margin: 48px auto 24px; padding: 16px; color: #5b6270; font-size: 14px; font-family: system-ui, sans-serif; }
