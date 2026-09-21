@@ -90,40 +90,54 @@ Why these: both apps build from a plain `npm ci` / `yarn install` and a single b
 are real products rather than demos, and Phanpy publishes dated snapshots, which gives a supply of
 real consecutive versions without having to argue about which commit is interesting.
 
-### Results on the runners (20 pairs per case, both throttling modes)
+### Results on the runners (20 pairs per case, run 35611098437)
 
 | Case | Metric | `devtools` | `simulate` |
 |---|---|---|---|
-| `phanpy-may-to-june` | FCP | **+3.84%** (p=7e-8) | **+3.83%** (p=7e-8) |
-| `phanpy-may-to-june` | LCP | **+4.15%** (p=7e-8) | **+3.95%** (p=7e-8) |
-| `phanpy-may-to-june` | TBT | +15.8% (p=2e-4) | +50% of 2 ms (p=9e-3) |
-| `phanpy-june-to-august` | LCP | **+0.87%** (p=3e-6) | +0.01% (p=0.46) |
-| `phanpy-june-to-august` | FCP | −0.14% (p=0.04) | +0.00% (p=0.56) |
-| `phanpy-june-to-august` | TBT | −5.5% (p=0.01) | +372% of 4.5 ms (p=6e-8) |
-| `phanpy-exclude-xmldom` | FCP / LCP | +0.02% (p=0.39) | −0.01% / +0.88% |
-| `phanpy-exclude-xmldom` | TBT | +6.8% (p=0.15) | 0.0% (p=0.30) |
+| `excalidraw-0.17.6-to-0.18.0` | FCP | **+32.1%** (9632 → 12728 ms) | **+56.0%** |
+| `excalidraw-0.17.6-to-0.18.0` | LCP | **+32.9%** (9968 → 13247 ms) | **+40.3%** |
+| `excalidraw-0.17.6-to-0.18.0` | TBT | **+162%** (113 → 298 ms) | +452% (20 → 113 ms) |
+| `phanpy-may-to-june` | FCP | **+3.91%** (p=3e-7) | +3.84% (p=7e-8) |
+| `phanpy-may-to-june` | LCP | **+4.26%** (p=7e-8) | +5.94% (p=7e-8) |
+| `phanpy-june-to-august` | FCP / LCP | −0.25% / −0.20% (p=0.3 / 0.1) | +0.01% / −0.75% |
+| `phanpy-exclude-xmldom` | FCP / LCP | −0.00% (p=0.62) | +0.01% / −0.01% |
 
-**May → June is a solid regression.** About 4% on both paint metrics, identical under both
-throttling models, reproduced on the runners and locally on an Apple M5. Over the same month the
-build output shrank from 12 MB to 10 MB, so a bundle-size check would have reported an improvement
-while the page got slower.
+**Excalidraw is the largest real regression in the corpus.** A year of development between two
+minor releases costs a third of the paint time — FCP 9.6 s → 12.7 s, LCP 10.0 s → 13.2 s — and
+almost triples blocking time, 113 ms → 298 ms. No synthetic injection in this project is that big.
+It is also the case where the two throttling models disagree most about *how* big: `simulate`
+reports +56% FCP where `devtools` reports +32%.
 
-**June → August shows what 20 loads buy.** LCP moved by 0.87% — under a percent — and the test
-still separates it from noise with p=3e-6 (11343 ms → 11442 ms). That is the sensitivity promised
-by the MDE tables in `rq1-preliminary.md`, on a real application rather than a demo.
+### The same comparison, measured twice
 
-**The xmldom case did not replicate.** Locally, 8 pairs gave TBT 55 ms → 47 ms, −14.2% with
-p<0.001. On the runners, 20 pairs gave +6.8% with p=0.15 — the opposite sign, not significant.
-Paint metrics did not move in either place. So the honest statement is: removing 64 KB of
-JavaScript that was not on the critical path had no effect we can demonstrate, and the local
-result was a property of that machine rather than of the change. An effect that survives p<0.001
-on one laptop and disappears on other hardware is exactly the trap this whole project is about.
+Two runs of the identical comparison, two hours apart, 20 pairs each, on whatever runner GitHub
+handed out:
 
-**TBT under `simulate` is a few milliseconds, and relative framing lies.** June → August reports
-+372% under `simulate` — that is 4.5 ms against 21.2 ms — while `devtools` reports −5.5% of 29 ms
-in the opposite direction. On a page where blocking time is near zero, the two throttling models
-disagree even about the sign. Relative thresholds on TBT are meaningless at that scale; this metric
-needs an absolute floor, like "ignore anything below 50 ms".
+| Case | Metric | run A (Intel Xeon / EPYC 7763) | run B (EPYC 9V45 / 9V74) | Replicates? |
+|---|---|---|---|---|
+| `phanpy-may-to-june` | FCP | +3.84% (p=7e-8) | +3.91% (p=3e-7) | yes |
+| `phanpy-may-to-june` | LCP | +4.15% (p=7e-8) | +4.26% (p=7e-8) | yes |
+| `phanpy-june-to-august` | LCP | **+0.87% (p=2.7e-6)** | **−0.20% (p=0.096)** | **no — sign flips** |
+| `phanpy-exclude-xmldom` | FCP | +0.02% (p=0.39) | −0.00% (p=0.62) | yes (nothing, both times) |
+
+This is the whole argument of the project in one table. A 4% regression reproduces on different
+hardware, two hours apart, under both throttling models, to within 0.1 percentage points. A 0.87%
+"regression" with p = 0.0000027 — a p-value that would pass any significance gate ever proposed —
+**changes sign on the next run**.
+
+The same pattern showed up in the xmldom case three times over: −14.2% TBT locally with p<0.001,
++6.8% (p=0.15) on the runners, +13.6% (p=0.03) on the next run. Three measurements, three answers,
+on a metric whose absolute value is 20-95 ms.
+
+Two conclusions, both of which belong in RQ2:
+
+1. **A p-value without a minimum effect size is not evidence of a regression.** The tests are
+   working correctly — they are answering "are these two samples from the same distribution", and
+   within one job the answer is genuinely "no". The question a CI gate needs answered is different:
+   "is this difference large enough to be a property of the code rather than of this machine".
+2. **Replication across jobs is the real test.** One job resolves 0.5%, but only a difference that
+   survives a second job on other hardware is a property of the change. That argues for a detector
+   that reports an interval and a history rather than a single verdict.
 
 ## What broke while setting this up
 
