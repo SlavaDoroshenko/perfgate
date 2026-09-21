@@ -56,7 +56,14 @@ describe("extractFailedRequests", () => {
     const withRequests: LhrLike = {
       audits: {
         "network-requests": {
-          details: { items: [{ statusCode: 200 }, { statusCode: 404 }, { statusCode: 500 }] },
+          details: {
+            items: [
+              { statusCode: 200, url: "http://x/app.js" },
+              { statusCode: 404, url: "http://x/missing.js" },
+              { statusCode: 500, url: "http://x/api" },
+              { statusCode: 404, url: "http://x/favicon.ico" },
+            ],
+          },
         },
       },
     };

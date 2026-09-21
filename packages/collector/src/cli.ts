@@ -132,7 +132,10 @@ async function collect(argv: string[]) {
     const m = run.metrics;
     log(
       `[${slot.order + 1}/${slots.length}] ${slot.variant}#${slot.runIndex} ` +
-        (run.error ? `ERROR ${run.error}` : `fcp=${fmt(m.fcp)} lcp=${fmt(m.lcp)} tbt=${fmt(m.tbt)} cls=${m.cls?.toFixed(3)}`),
+        (run.error
+          ? `ERROR ${run.error}`
+          : `fcp=${fmt(m.fcp)} lcp=${fmt(m.lcp)} tbt=${fmt(m.tbt)} cls=${m.cls?.toFixed(3)}` +
+            (run.failedRequests ? ` FAILED-REQUESTS=${run.failedRequests}` : "")),
     );
   }
 

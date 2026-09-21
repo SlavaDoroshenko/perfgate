@@ -8,7 +8,7 @@ export interface LhrLike {
   environment?: { hostUserAgent?: string; benchmarkIndex?: number };
   audits: Record<
     string,
-    { numericValue?: number; details?: { items?: { statusCode?: number }[] } } | undefined
+    { numericValue?: number; details?: { items?: { statusCode?: number; url?: string }[] } } | undefined
   >;
 }
 
@@ -53,7 +53,13 @@ export function extractError(lhr: LhrLike): string | null {
 export function extractFailedRequests(lhr: LhrLike): number | null {
   const items = lhr.audits["network-requests"]?.details?.items;
   if (!items) return null;
-  return items.filter((r) => typeof r.statusCode === "number" && r.statusCode >= 400).length;
+  return items.filter(
+    (r) =>
+      typeof r.statusCode === "number" &&
+      r.statusCode >= 400 &&
+      // the browser asks for a favicon on its own; a missing one is not a broken page
+      !(r.url ?? "").endsWith("/favicon.ico"),
+  ).length;
 }
 
 /** Parses `?inject=type:size`, e.g. `script-delay:200`. */
