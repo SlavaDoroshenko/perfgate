@@ -4,7 +4,10 @@ declare module "vendor:marked" {
   export const marked: { parse(src: string): string | Promise<string> };
 }
 declare module "vendor:chart" {
-  export const Chart: new (ctx: HTMLCanvasElement, config: unknown) => { update(): void };
+  export const Chart: {
+    new (ctx: HTMLCanvasElement, config: unknown): { update(): void };
+    register(...items: unknown[]): void;
+  };
   export const registerables: unknown[];
 }
 declare module "vendor:dates" {
