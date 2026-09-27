@@ -5,7 +5,10 @@
   runners, and what is the smallest regression detectable with 5 / 10 / 20 loads per variant?
 - **RQ2.** Which detection method gives the best false alarm / miss trade-off at a fixed CI budget?
   First results in `rq2-methods.md`.
-- RQ3 (later). Does interleaving base and PR loads in one job (ABAB) reduce noise compared with sequential series?
+- **RQ3.** Does interleaving base and PR loads in one job (ABAB) reduce false alarms compared with
+  sequential series? Answer in `rq3.md`: yes, 3-5x, at no cost.
+- History. How large a step in the main-branch history can change point detection find on shared
+  runners? First prototype in `history-cpd.md`.
 
 ## Setup
 | Item | Value |

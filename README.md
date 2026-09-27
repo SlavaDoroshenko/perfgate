@@ -7,7 +7,8 @@ thresholds either miss real regressions or fire on noise. perfgate measures how 
 they actually are, and compares base and PR builds with statistical tests instead of
 single-run thresholds.
 
-**Status:** early stage — measurement bench for noise and minimum detectable effect.
+**Status:** early stage — measurement bench and analysis (noise, minimum detectable effect,
+detection methods, run order, change points on history); the CI integration is not built yet.
 
 ## Layout
 
@@ -18,11 +19,13 @@ single-run thresholds.
 | `apps/demo-static` | static site demo (no framework) |
 | `apps/demo-ssr` | server-rendered Next.js demo |
 | `schema/run.schema.json` | JSON Schema of a run record, generated from zod |
-| `analysis/` | Python: noise, minimum detectable effect, detection methods |
+| `analysis/` | Python: noise, minimum detectable effect, detection methods, run order, change points |
 | `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |
 | `docs/protocol.md` | experiment protocol |
 | `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
 | `docs/rq2-methods.md` | comparison of ten detection rules |
+| `docs/rq3.md` | interleaved vs sequential series: false alarms per comparison and per PR |
+| `docs/history-cpd.md` | change point detection on the main-branch history, raw vs CPU-adjusted |
 
 ## Analysis
 
@@ -33,7 +36,8 @@ uv run python -m perfgate_analysis.report ../../perfgate-data/raw --out reports/
 ```
 
 Writes CSV tables (noise summary, within- vs between-job noise, power curves, MDE,
-A/A false alarms) and PNG figures.
+A/A false alarms) and PNG figures. Restrict to one protocol with `--warmup 2 --gha-only` and
+`--epoch <app build>`; the other reports (`report_rq2`, `rq3`, `history`) take the same filters.
 
 ## Quick start
 
