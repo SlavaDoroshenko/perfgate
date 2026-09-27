@@ -13,16 +13,8 @@ import pandas as pd
 
 from . import GROUP
 from .evaluate import EvalConfig, evaluate, evaluate_real_jobs, summarize
-from .load import load_runs
+from .load import filter_protocol, load_runs
 from .methods import default_methods
-
-
-def filter_protocol(df: pd.DataFrame, warmup: int | None, epochs: list[str] | None) -> pd.DataFrame:
-    if warmup is not None:
-        df = df[df["warmup"].fillna(1).astype(int) == warmup]
-    if epochs:
-        df = df[df["epoch"].astype(str).str.startswith(tuple(epochs))]
-    return df
 
 
 def plot_tradeoff(summary: pd.DataFrame, out: Path) -> None:

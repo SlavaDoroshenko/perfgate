@@ -33,7 +33,7 @@ def test_within_between_splits_builds():
     for r in records[len(records) // 2 :]:
         r["gitSha"] = "bbbbbbb2"
     wb = within_between(to_frame(records))
-    assert set(wb[wb["metric"] == "lcp"]["build"]) == {"aaaaaaa", "bbbbbbb"}
+    assert set(wb[wb["metric"] == "lcp"]["epoch"]) == {"aaaaaaa", "bbbbbbb"}
 
 
 def test_within_between():

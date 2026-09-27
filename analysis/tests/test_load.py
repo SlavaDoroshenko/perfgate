@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from perfgate_analysis.load import load_runs, runner_kind
+from perfgate_analysis.load import app_epoch, load_runs, runner_kind, tree_hash
 
 from .conftest import make_record
 
@@ -41,3 +41,19 @@ def test_rejects_invalid_record(tmp_path):
 def test_local_runner_kind():
     env = make_record()["env"] | {"ci": False, "runnerImage": None, "platform": "darwin", "cpuModel": "Apple M5"}
     assert runner_kind(env) == "local:darwin:Apple M5"
+
+
+def test_epoch_prefers_recorded_app_build():
+    assert app_epoch("demo-spa", "fa45447b5c39", "663e56d0") == "fa45447b5c39"
+
+
+def test_epoch_falls_back_to_commit_when_git_cannot_resolve():
+    assert app_epoch("demo-spa", None, "zzzzzzzzz") == "zzzzzzz"
+    assert app_epoch("oss-marked", None, "abcdef123") == "abcdef1"
+
+
+def test_commits_that_did_not_touch_the_app_share_an_epoch():
+    # 663e56d predates --app-build; df7fadf changed other packages only
+    if tree_hash("663e56d", "apps/demo-spa") is None:
+        pytest.skip("commit history not available (shallow clone)")
+    assert app_epoch("demo-heavy", None, "663e56d") == app_epoch("demo-spa", None, "df7fadf") == "fa45447b5c39"

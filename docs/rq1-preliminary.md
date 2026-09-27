@@ -1,12 +1,24 @@
-# RQ1: noise and detectability on GitHub runners (updated 2026-09-21)
+# RQ1: noise and detectability on GitHub runners (updated 2026-09-27)
 
-**Data: 2026-09-15 … 09-20, 7180 loads in 190 jobs, no failed loads.**
-GitHub-hosted `ubuntu-24.04`, Chrome 153.0.8010.47, Lighthouse 13.4.1, two pages of the demo app
-served from localhost, 4 scheduled runs a day.
+**Data: 2026-09-17 … 09-27, current protocol only: 21,530 loads in 551 jobs, no failed loads.**
+GitHub-hosted `ubuntu-24.04`, Chrome 153.0.8010.47, Lighthouse 13.4.1, four demo pages served
+from localhost, 4 scheduled runs a day. 40 A/A jobs per configuration for the two SPA pages,
+24 for the static and server-rendered pages (added on 2026-09-21).
 
-Unless stated otherwise, all numbers come from the **current protocol** — separate per-page builds
-(app source tree `fa45447`) and two warm-up loads — which covers **15 jobs per configuration**
-(8 configurations, 4800 loads).
+"Current protocol" = separate per-page builds and two warm-up loads. The app build is identified
+by the git tree hash of the app package (`fa45447b5c39` for both SPA pages, `12817a1ef4f9` static,
+`467c2a6f9f6c` SSR). Records written before `--app-build` existed carry only the commit; the
+loader resolves the commit to the same tree hash, so commits that did not touch the app share an
+epoch (`load.app_epoch`). The first version of this note grouped by commit and therefore saw
+only 15 jobs per configuration.
+
+Reproduce:
+
+```sh
+cd analysis
+uv run python -m perfgate_analysis.report ../../perfgate-data/raw --out reports/rq1 \
+  --warmup 2 --gha-only --epoch fa45447b5c39 --epoch 467c2a6f9f6c --epoch 12817a1ef4f9
+```
 
 ## 0. The measurement setup is part of the measurement
 
@@ -20,104 +32,103 @@ Three bundle epochs and two warm-up epochs exist in the data, and both matter:
 | warm-up | 1 → 2 loads | 2026-09-17 | first-load non-zero TBT on the light page: 2 of 28 jobs → 1 of 60 |
 
 Ignoring the build would have reported e2 as a 6.4% cross-job noise level — an artefact ~100x
-larger than the real one (0.04%). Every record therefore stores `gitSha` and `warmup`.
+larger than the real one (0.04%). Every record therefore stores `gitSha`, `appBuild` and `warmup`.
 
-## 1. Same-job comparison is 4-11x more sensitive than a stored baseline
+## 1. Same-job comparison is 2-10x more sensitive than a stored baseline
 
-Robust CV inside one job vs CV of job medians across 15 jobs:
+Robust CV inside one job vs CV of job medians across jobs (`devtools`, `abab`):
 
-| Page | Throttling | Metric | within job | between jobs | ratio |
-|---|---|---|---|---|---|
-| heavy | devtools | FCP | 0.41% | 2.11% | 5.2 |
-| heavy | devtools | LCP | 0.49% | 3.70% | 7.6 |
-| heavy | devtools | TBT | 1.77% | 13.6% | 7.7 |
-| heavy | simulate | TBT | 1.50% | 16.8% | 11.2 |
-| light | devtools | FCP | 0.34% | 1.59% | 4.6 |
-| light | devtools | LCP | 0.27% | 1.07% | 3.9 |
+| Page | Metric | within job | between jobs | ratio |
+|---|---|---|---|---|
+| heavy | FCP | 0.45% | 2.01% | 4.4 |
+| heavy | LCP | 0.63% | 3.91% | 6.2 |
+| heavy | TBT | 1.53% | 14.4% | 9.4 |
+| light | FCP | 0.35% | 1.65% | 4.7 |
+| light | LCP | 0.27% | 1.13% | 4.1 |
+| SSR | FCP / LCP | 0.41% | 1.01% | 2.5 |
+| SSR | TBT | 4.15% | 24.3% | 5.8 |
+| static | FCP | 0.39% | 0.66% | 1.7 |
 
-For FCP and LCP under `simulate` the ratio falls below 1 (0.4-0.5): modelled metrics barely react
-to the machine. TBT is the exception — it stays 11x worse across jobs even under `simulate`,
-because Lantern scales real CPU time rather than replacing it.
+Under `simulate` the ratio for FCP/LCP of the SPA and static pages falls below 1 (0.3-0.5):
+modelled metrics barely react to the machine. TBT is the exception — 7-11x worse across jobs even under `simulate`, because
+Lantern scales real CPU time rather than replacing it. The static page, which does almost no
+work on the main thread, is the one where a stored baseline costs least.
 
 ## 2. Cross-job noise is a hardware lottery, and it grows with page weight
 
-Medians by runner CPU, `devtools` (current protocol):
+Medians by runner CPU, `devtools`, all A/A loads:
 
-| CPU | heavy FCP | heavy LCP | heavy TBT | light LCP |
-|---|---|---|---|---|
-| AMD EPYC 9V45 | 1674 ms | 2198 ms | 281 ms | 2191 ms |
-| Intel Xeon 6973P-C | 1714 ms | 2254 ms | 328 ms | 2201 ms |
-| AMD EPYC 9V74 | 1751 ms | 2328 ms | 376 ms | 2253 ms |
-| Intel Xeon 8573C | 1738 ms | 2350 ms | 411 ms | 2233 ms |
-| Intel Xeon 8370C | 1781 ms | 2455 ms | 459 ms | 2245 ms |
-| AMD EPYC 7763 | 1791 ms | 2483 ms | 487 ms | 2247 ms |
+| CPU | jobs | heavy FCP | heavy LCP | heavy TBT | light LCP |
+|---|---|---|---|---|---|
+| AMD EPYC 9V45 | 12 | 1685 ms | 2210 ms | 291 ms | 2190 ms |
+| Intel Xeon 6973P-C | 6 | 1713 ms | 2250 ms | 325 ms | 2201 ms |
+| AMD EPYC 9V74 | 30 | 1782 ms | 2315 ms | 430 ms | 2248 ms |
+| Intel Xeon 8573C | 14 | 1747 ms | 2372 ms | 422 ms | 2234 ms |
+| Intel Xeon 8370C | 9 | 1782 ms | 2456 ms | 459 ms | 2242 ms |
+| AMD EPYC 7763 | 88 | 1791 ms | 2481 ms | 485 ms | 2248 ms |
 
-Spread across CPU models: heavy page LCP 13%, TBT 73%; light page LCP 2.8%. Half of all jobs land
-on EPYC 7763, the rest are spread over five other models — a PR compared against a baseline from a
-previous job is, half the time, compared against different hardware.
+Spread across CPU models: heavy page FCP 6%, LCP 12%, TBT 67%; light page LCP 2.6%. Over all
+A/A jobs, 52% landed on EPYC 7763, 24% on EPYC 9V74 and the rest on four other models - a PR
+compared against a baseline from a previous job is, about half the time, compared against
+different hardware. `history-cpd.md` shows what this costs a history-based detector and how much
+of it a per-CPU adjustment recovers.
 
-## 3. Sequential series raise more false alarms — but only where the machine is real
+## 3. Interleaving matters - see `rq3.md`
 
-Share of A/A jobs (no difference exists by construction) where two-sided Mann-Whitney reported a
-difference at α=0.05, pooled over FCP, LCP and Speed Index, 95% Wilson intervals:
+With 40 jobs per configuration the earlier hint is now clear: a sequential series (all base
+loads, then all PR loads) raises 3-5 times more A/A false alarms than an interleaved one, under
+both throttling modes. Details, job-level (PR-level) rates and the TBT case are in `rq3.md`.
 
-| Subset | `abab` | `sequential` | Fisher p |
-|---|---|---|---|
-| all | 3.9% [1.9, 7.8] | 8.3% [5.1, 13.3] | 0.122 |
-| `devtools` only | 5.6% [2.4, 12.4] | 16.7% [10.4, 25.7] | **0.031** |
-| `simulate` only | 2.2% [0.6, 7.7] | 0.0% [0.0, 4.1] | 0.497 |
+## 4. MDE (resampling of real A/A loads, Mann-Whitney, power 0.8, `abab`)
 
-`abab` sits on the nominal 5% everywhere. `sequential` triples the false alarm rate under
-`devtools`, where loads really execute and the machine can drift during the series; under
-`simulate` the effect vanishes, which is consistent with Lantern modelling the machine away.
-
-Two honest caveats:
-
-- **An earlier estimate on two days of data (20.8% vs 4.2%) did not survive more data.** With 15
-  jobs per configuration the gap is three-fold, not five-fold, and pooled over both throttling
-  modes it is not significant. This is the small-sample lesson, and it is why the collection runs
-  for weeks rather than days.
-- **The false alarms are statistically significant but practically tiny**: every one of them shifts
-  the median by between -0.58% and +0.71%. With n=20 and a within-job CV of ~0.3% the test resolves
-  differences of 0.2%. Pairing significance with a minimum effect size (e.g. 1%) removes all of
-  them. There is no systematic direction: median shift per job is within ±0.06% in every
-  configuration, so this is job-specific drift, not a bias of the design.
-
-## 4. MDE (resampling of real A/A loads, Mann-Whitney, power 0.8)
+The grid now starts at 0.25% (0.25 / 0.5 / 0.75 / 1 / 1.5 / 2 / 3 / 5 / 7.5 / 10 ... %), so the
+old "1% or better" floor is resolved:
 
 | Page | Throttling | Metric | n=5 | n=10 | n=20 |
 |---|---|---|---|---|---|
-| light | both | FCP/LCP | 1% | 1% | 1% |
-| heavy | devtools | FCP | 1% | 1% | 1% |
-| heavy | devtools | LCP | 3-5% | 1% | 1% |
-| heavy | both | TBT | 5-7.5% | 3-5% | 2-3% |
+| heavy | devtools | FCP | 1.5% | 0.75% | 0.5% |
+| heavy | devtools | LCP | 5% | 1.5% | 0.75% |
+| heavy | devtools | TBT | 5% | 3% | 2% |
+| heavy | simulate | FCP / LCP | 0.5-0.75% | ≤0.25% | ≤0.25% |
+| heavy | simulate | TBT | 7.5% | 3% | 2% |
+| light | devtools | FCP / LCP | 0.75-1% | 0.5-0.75% | 0.5% |
+| light | simulate | FCP / LCP | 1% | ≤0.25% | ≤0.25% |
+| SSR | devtools | FCP / LCP | 1% | 0.75% | 0.5% |
+| SSR | devtools | TBT | 10% | 7.5% | 5% |
+| SSR | simulate | LCP | 7.5% | 1.5% | 0.5% |
+| static | devtools | FCP / LCP | 1% | 0.5-0.75% | 0.5% |
+| static | simulate | FCP | ≤0.25% | ≤0.25% | ≤0.25% |
 
-The same procedure at δ=0 yields a median 0.044-0.049 against a nominal 0.05, so it is calibrated.
-1% is the lowest grid point, so "1%" means "1% or better"; a finer grid is needed to resolve it.
+Calibration: the same procedure at δ=0 yields 3.9-4.1% on average (max 6.4%) against a nominal
+5%. "≤0.25%" is the lowest grid point; under `simulate` FCP/LCP of the SPA and static pages are almost
+deterministic within a job (within-job CV 0.06-0.09%), so going lower measures Lantern, not the page.
+
+Two practical readings:
+- **Ten interleaved loads resolve 0.5-1.5% on FCP/LCP under `devtools`** on every page. That is
+  already below the effect sizes that matter to users; the limiting factor is not the test.
+- **TBT needs 3-10% at n=10.** It is the metric where the number of loads matters most, and the
+  server-rendered page (hydration cost of 50-70 ms) is the hardest case.
 
 ## 5. The control regression is detected, and shows where methods will break
 
-The control job injects `script-delay:50` into the PR url. Over 15 jobs:
+The control job injects `script-delay:50` into the PR url of the heavy page (`devtools`, `abab`).
+Over 40 jobs, one-sided Mann-Whitney at α=0.05, "gate" = significant and at least +1%:
 
-| Metric | Detected | Median effect | Range |
-|---|---|---|---|
-| FCP | 15/15 | +2.85% | +2.28% … +3.15% |
-| SI | 14/15 | +1.37% | +0.16% … +2.09% |
-| LCP | 13/15 | +1.94% | -4.99% … +2.66% |
+| Metric | Detected | With the 1% gate | Median effect | Range |
+|---|---|---|---|---|
+| FCP | 40/40 | 40/40 | +2.88% | +2.28% … +3.59% |
+| SI | 33/40 | 27/40 | +1.34% | -0.36% … +2.81% |
+| LCP | 29/40 | 27/40 | +1.76% | -5.86% … +2.71% |
+| TBT | 4/40 | 2/40 | -0.06% | -1.45% … +1.89% |
 
-The -4.99% job is instructive: LCP on the heavy page is multimodal (a job contains 3 distinct LCP
-levels on median, up to 5), and in that job the base half happened to sit on a high level while the
-PR half sat on a low one. A single-number comparison inverted. Multimodal metrics are exactly where
-the choice of method matters, and this belongs in RQ2.
+LCP on the heavy page is multimodal (a job contains 3 distinct LCP levels on median, up to 5):
+in the worst job the base half sat on a high level and the PR half on a low one and the
+comparison inverted (-5.9%). The regression is injected before the first paint, so TBT is not
+supposed to move - 4/40 detections are the false alarm rate of a one-sided test, as expected.
 
 ## Open items
-- CLS on the heavy page is non-zero but constant (0.154) — needs absolute effects, not relative.
-- Only `ubuntu-24.04`, one app family, injected effects are pure multiplicative shifts.
-- The 1% grid floor hides how much better than 1% FCP/LCP detection really is.
-
-## Reproducing
-```sh
-git fetch origin data && git worktree add ../perfgate-data data
-cd analysis
-uv run python -m perfgate_analysis.report ../../perfgate-data/raw --out reports/rq1
-```
+- CLS on the heavy page is non-zero but constant (0.154) — needs absolute effects, not relative
+  (the resampling "detects" any relative shift of a constant).
+- Only `ubuntu-24.04`, four demo pages, injected effects are pure multiplicative shifts.
+- Regressions of other types and sizes (long task → TBT, heavy image → LCP, layout shift → CLS)
+  are not yet collected in CI.

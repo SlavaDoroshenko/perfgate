@@ -4,14 +4,25 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 from collections.abc import Iterable
+from functools import cache
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from jsonschema import Draft202012Validator
 
-SCHEMA_PATH = Path(__file__).resolve().parents[2] / "schema" / "run.schema.json"
+REPO = Path(__file__).resolve().parents[2]
+SCHEMA_PATH = REPO / "schema" / "run.schema.json"
+
+# Package directory whose git tree hash identifies the measured build (see noise.yml, --app-build).
+APP_PACKAGES = {
+    "demo-spa": "apps/demo-spa",
+    "demo-heavy": "apps/demo-spa",
+    "demo-static": "apps/demo-static",
+    "demo-ssr": "apps/demo-ssr",
+}
 
 
 def _validator() -> Draft202012Validator:
@@ -46,6 +57,42 @@ def runner_kind(env: dict) -> str:
     if env.get("ci") and env.get("runnerImage"):
         return f"gha:{env['runnerImage'].split('-')[0]}"
     return f"local:{env['platform']}:{env['cpuModel']}"
+
+
+@cache
+def tree_hash(sha: str, path: str) -> str | None:
+    """12-char tree hash of `path` at commit `sha`, or None when git cannot resolve it."""
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(REPO), "ls-tree", sha, "--", path],
+            capture_output=True, text=True, check=True, timeout=10,
+        ).stdout.split()
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return out[2][:12] if len(out) >= 3 else None
+
+
+def app_epoch(app: str, app_build: str | None, git_sha: str | None) -> str:
+    """
+    What makes two jobs comparable. Records written before --app-build existed carry only the
+    commit; resolving it to the same tree hash keeps commits that did not touch the app together.
+    """
+    if app_build:
+        return app_build
+    if git_sha and app in APP_PACKAGES:
+        resolved = tree_hash(git_sha, APP_PACKAGES[app])
+        if resolved:
+            return resolved
+    return (git_sha or "unknown")[:7]
+
+
+def filter_protocol(df: pd.DataFrame, warmup: int | None, epochs: list[str] | None) -> pd.DataFrame:
+    """Keep jobs of one measurement protocol: warm-up count and app build (prefix match)."""
+    if warmup is not None:
+        df = df[df["warmup"].fillna(1).astype(int) == warmup]
+    if epochs:
+        df = df[df["epoch"].astype(str).str.startswith(tuple(epochs))]
+    return df
 
 
 def to_frame(records: list[dict]) -> pd.DataFrame:
@@ -93,8 +140,12 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
     labelled = df.groupby("experiment")["label"].transform(lambda s: s.notna().all() and s.iloc[0] == "aa")
     has_label = df.groupby("experiment")["label"].transform(lambda s: s.notna().all())
     df["is_aa"] = np.where(has_label, labelled, by_inject)
-    # what makes two jobs comparable: the app fingerprint when present, the commit otherwise
-    df["epoch"] = df["app_build"].fillna(df["build"])
+    keys = df[["app", "app_build", "git_sha"]].drop_duplicates()
+    epochs = {
+        (a, b, g): app_epoch(a, None if pd.isna(b) else b, g)
+        for a, b, g in keys.itertuples(index=False)
+    }
+    df["epoch"] = [epochs[k] for k in zip(df["app"], df["app_build"], df["git_sha"])]
     return df
 
 

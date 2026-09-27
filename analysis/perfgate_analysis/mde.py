@@ -20,7 +20,8 @@ from scipy.stats import mannwhitneyu
 
 from . import GROUP, METRICS
 
-DELTAS = np.array([0.0, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1, 0.15, 0.2, 0.3, 0.5])
+# below 1% in quarter steps: the same-job comparison resolves FCP/LCP shifts under 1%
+DELTAS = np.array([0.0, 0.0025, 0.005, 0.0075, 0.01, 0.015, 0.02, 0.03, 0.05, 0.075, 0.1, 0.15, 0.2, 0.3, 0.5])
 SAMPLE_SIZES = (5, 10, 20)
 
 

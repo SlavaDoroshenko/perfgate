@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from . import GROUP, METRICS
-from .load import load_runs
+from .load import filter_protocol, load_runs
 from .mde import PowerConfig, aa_false_alarms, mde_table, power_table
 from .noise import failure_rate, long_metrics, summarize, within_between
 
@@ -82,11 +82,16 @@ def main() -> None:
     parser.add_argument("paths", nargs="+", help="JSONL files or directories")
     parser.add_argument("--out", default="reports/rq1")
     parser.add_argument("--reps", type=int, default=1000)
+    parser.add_argument("--warmup", type=int, default=None, help="keep only jobs with this warm-up count")
+    parser.add_argument("--epoch", action="append", help="keep only these app builds (prefix match)")
+    parser.add_argument("--gha-only", action="store_true", help="drop local measurements")
     args = parser.parse_args()
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    df = load_runs(args.paths)
+    df = filter_protocol(load_runs(args.paths), args.warmup, args.epoch)
+    if args.gha_only:
+        df = df[df["runner"].str.startswith("gha:")]
     if df.empty:
         raise SystemExit("no records found")
     print(f"{len(df)} runs, {df['experiment'].nunique()} experiments")
