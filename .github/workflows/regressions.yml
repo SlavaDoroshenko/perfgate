@@ -1,0 +1,166 @@
+# Regression bench: synthetic regressions of known relative size (2/5/10/25%) and of
+# different kinds, measured on the runners exactly like the A/A jobs of noise.yml.
+# Gives the miss rate (power) of every detection rule on real CI noise, not on resampling.
+#
+# Injectors take absolute sizes (ms, px), so the sizes below are calibrated on the medians
+# of demo-heavy, devtools throttling, 26-27.09.2026: FCP 1790 ms, LCP 2475 ms, TBT 485 ms,
+# CLS 0.154 at the default 64 px banner. `pct` is the nominal target; the effect actually
+# reached is taken from the data (median PR / median base), since TBT and LCP are not
+# strictly additive in the injected time.
+name: regressions
+
+on:
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: Loads per variant
+        default: "20"
+  schedule:
+    # between the noise (x:17), oss (3:37, 15:37) and oss-commits (5:47) runs
+    - cron: "47 4,10,16,22 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regressions
+  cancel-in-progress: false
+
+env:
+  # pinned so that browser updates do not show up as regressions in the data
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: ${{ inputs.runs || '20' }}
+
+jobs:
+  collect:
+    name: ${{ matrix.reg.type }} ${{ matrix.reg.pct }}%
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        # devtools + abab: the setting of the control job in noise.yml
+        # (simulate re-estimates timings and hides part of an injected regression)
+        throttling: [devtools]
+        mode: [abab]
+        page:
+          - { app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: "heavy.html" }
+        reg:
+          # blocking JS before the first render → FCP (and LCP); 1790 ms × pct
+          - { type: script-delay, pct: 2, size: 36 }
+          - { type: script-delay, pct: 5, size: 90 }
+          - { type: script-delay, pct: 10, size: 179 }
+          - { type: script-delay, pct: 25, size: 448 }
+          # one extra task after the first frame adds size − 50 ms to TBT; 50 + 485 ms × pct
+          - { type: long-task, pct: 2, size: 60 }
+          - { type: long-task, pct: 5, size: 74 }
+          - { type: long-task, pct: 10, size: 99 }
+          - { type: long-task, pct: 25, size: 171 }
+          # hero image requested later → LCP; 2475 ms × pct
+          - { type: lcp-delay, pct: 2, size: 50 }
+          - { type: lcp-delay, pct: 5, size: 124 }
+          - { type: lcp-delay, pct: 10, size: 248 }
+          - { type: lcp-delay, pct: 25, size: 619 }
+          # taller late banner (64 px by default) → CLS, roughly proportional to its height
+          - { type: layout-shift, pct: 2, size: 65.28 }
+          - { type: layout-shift, pct: 5, size: 67.2 }
+          - { type: layout-shift, pct: 10, size: 70.4 }
+          - { type: layout-shift, pct: 25, size: 80 }
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build and serve the app
+        run: |
+          pnpm --filter ${{ matrix.page.pkg }} build
+          nohup pnpm --filter ${{ matrix.page.pkg }} ${{ matrix.page.script }} > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf "http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}" > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+
+      - name: Collect
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          id="${{ github.run_id }}-${{ github.run_attempt }}-injected-${{ matrix.page.app }}-${{ matrix.reg.type }}-${{ matrix.reg.pct }}-${{ matrix.mode }}-${{ matrix.throttling }}"
+          base="http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}"
+          # tree hash of the app package: changes exactly when the measured app changes
+          app_build=$(git ls-tree HEAD -- "apps/${{ matrix.page.pkg }}" | awk '{print substr($3,1,12)}')
+          pnpm perfgate collect \
+            --url "$base" \
+            --pr-url "$base?inject=${{ matrix.reg.type }}:${{ matrix.reg.size }}" \
+            --runs "$RUNS" \
+            --mode "${{ matrix.mode }}" \
+            --throttling "${{ matrix.throttling }}" \
+            --app "${{ matrix.page.app }}" \
+            --label injected \
+            --app-build "$app_build" \
+            --experiment "$id" \
+            --out "results/$id.jsonl"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runs-${{ matrix.reg.type }}-${{ matrix.reg.pct }}
+          path: results/*.jsonl
+          retention-days: 7
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: runs-*
+          merge-multiple: true
+          path: incoming
+
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*.jsonl)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin data > /dev/null; then
+            git switch data
+          else
+            git switch --orphan data
+          fi
+
+          dest="raw/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f raw
+          git commit -m "data: regressions run ${{ github.run_id }}"
+
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1
