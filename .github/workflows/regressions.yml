@@ -3,10 +3,9 @@
 # Gives the miss rate (power) of every detection rule on real CI noise, not on resampling.
 #
 # Injectors take absolute sizes (ms, px), so the sizes below are calibrated on the medians
-# of demo-heavy, devtools throttling, 26-27.09.2026: FCP 1790 ms, LCP 2475 ms, TBT 485 ms,
-# CLS 0.154 at the default 64 px banner. `pct` is the nominal target; the effect actually
-# reached is taken from the data (median PR / median base), since TBT and LCP are not
-# strictly additive in the injected time.
+# of 26-27.09.2026 (devtools throttling) and checked by a first run on 28.09. `pct` is the
+# nominal target; the effect actually reached is taken from the data (median PR / median
+# base), since TBT is not additive in the injected time.
 name: regressions
 
 on:
@@ -33,7 +32,7 @@ env:
 
 jobs:
   collect:
-    name: ${{ matrix.reg.type }} ${{ matrix.reg.pct }}%
+    name: ${{ matrix.reg.type }} ${{ matrix.reg.pct }}% ${{ matrix.reg.app }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     strategy:
@@ -43,29 +42,33 @@ jobs:
         # (simulate re-estimates timings and hides part of an injected regression)
         throttling: [devtools]
         mode: [abab]
+        # both pages are built from the demo-spa package
         page:
-          - { app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: "heavy.html" }
+          - { pkg: demo-spa, script: preview, port: 4173 }
         reg:
-          # blocking JS before the first render → FCP (and LCP); 1790 ms × pct
-          - { type: script-delay, pct: 2, size: 36 }
-          - { type: script-delay, pct: 5, size: 90 }
-          - { type: script-delay, pct: 10, size: 179 }
-          - { type: script-delay, pct: 25, size: 448 }
-          # one extra task after the first frame adds size − 50 ms to TBT; 50 + 485 ms × pct
-          - { type: long-task, pct: 2, size: 60 }
-          - { type: long-task, pct: 5, size: 74 }
-          - { type: long-task, pct: 10, size: 99 }
-          - { type: long-task, pct: 25, size: 171 }
-          # hero image requested later → LCP; 2475 ms × pct
-          - { type: lcp-delay, pct: 2, size: 50 }
-          - { type: lcp-delay, pct: 5, size: 124 }
-          - { type: lcp-delay, pct: 10, size: 248 }
-          - { type: lcp-delay, pct: 25, size: 619 }
-          # taller late banner (64 px by default) → CLS, roughly proportional to its height
-          - { type: layout-shift, pct: 2, size: 65.28 }
-          - { type: layout-shift, pct: 5, size: 67.2 }
-          - { type: layout-shift, pct: 10, size: 70.4 }
-          - { type: layout-shift, pct: 25, size: 80 }
+          # blocking JS before the first render → FCP (and LCP); heavy FCP 1790 ms × pct
+          - { type: script-delay, pct: 2, size: 36, app: demo-heavy, path: heavy.html }
+          - { type: script-delay, pct: 5, size: 90, app: demo-heavy, path: heavy.html }
+          - { type: script-delay, pct: 10, size: 179, app: demo-heavy, path: heavy.html }
+          - { type: script-delay, pct: 25, size: 448, app: demo-heavy, path: heavy.html }
+          # one extra task after the first frame adds size − 50 ms to TBT; 50 + heavy TBT 485 ms × pct
+          - { type: long-task, pct: 2, size: 60, app: demo-heavy, path: heavy.html }
+          - { type: long-task, pct: 5, size: 74, app: demo-heavy, path: heavy.html }
+          - { type: long-task, pct: 10, size: 99, app: demo-heavy, path: heavy.html }
+          - { type: long-task, pct: 25, size: 171, app: demo-heavy, path: heavy.html }
+          # hero image requested later → LCP. On the light page: on the heavy one the timer
+          # waits behind the post-paint long tasks, so any delay turned into +24-28% LCP.
+          # Light LCP 2243 ms × pct
+          - { type: lcp-delay, pct: 2, size: 45, app: demo-spa, path: "" }
+          - { type: lcp-delay, pct: 5, size: 112, app: demo-spa, path: "" }
+          - { type: lcp-delay, pct: 10, size: 224, app: demo-spa, path: "" }
+          - { type: lcp-delay, pct: 25, size: 561, app: demo-spa, path: "" }
+          # taller late banner (64 px by default) → CLS. CLS grows by half the relative
+          # height change (+25% height gave +12.6% CLS), so the height step is 2 × pct
+          - { type: layout-shift, pct: 2, size: 66.56, app: demo-heavy, path: heavy.html }
+          - { type: layout-shift, pct: 5, size: 70.4, app: demo-heavy, path: heavy.html }
+          - { type: layout-shift, pct: 10, size: 76.8, app: demo-heavy, path: heavy.html }
+          - { type: layout-shift, pct: 25, size: 96, app: demo-heavy, path: heavy.html }
     steps:
       - uses: actions/checkout@v7
 
@@ -89,7 +92,7 @@ jobs:
           pnpm --filter ${{ matrix.page.pkg }} build
           nohup pnpm --filter ${{ matrix.page.pkg }} ${{ matrix.page.script }} > server.log 2>&1 &
           for i in $(seq 1 60); do
-            curl -sf "http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}" > /dev/null && exit 0
+            curl -sf "http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.reg.path }}" > /dev/null && exit 0
             sleep 1
           done
           cat server.log
@@ -99,8 +102,8 @@ jobs:
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
-          id="${{ github.run_id }}-${{ github.run_attempt }}-injected-${{ matrix.page.app }}-${{ matrix.reg.type }}-${{ matrix.reg.pct }}-${{ matrix.mode }}-${{ matrix.throttling }}"
-          base="http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.page.path }}"
+          id="${{ github.run_id }}-${{ github.run_attempt }}-injected-${{ matrix.reg.app }}-${{ matrix.reg.type }}-${{ matrix.reg.pct }}-${{ matrix.mode }}-${{ matrix.throttling }}"
+          base="http://127.0.0.1:${{ matrix.page.port }}/${{ matrix.reg.path }}"
           # tree hash of the app package: changes exactly when the measured app changes
           app_build=$(git ls-tree HEAD -- "apps/${{ matrix.page.pkg }}" | awk '{print substr($3,1,12)}')
           pnpm perfgate collect \
@@ -109,7 +112,7 @@ jobs:
             --runs "$RUNS" \
             --mode "${{ matrix.mode }}" \
             --throttling "${{ matrix.throttling }}" \
-            --app "${{ matrix.page.app }}" \
+            --app "${{ matrix.reg.app }}" \
             --label injected \
             --app-build "$app_build" \
             --experiment "$id" \
@@ -118,7 +121,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: runs-${{ matrix.reg.type }}-${{ matrix.reg.pct }}
+          name: runs-${{ matrix.reg.type }}-${{ matrix.reg.pct }}-${{ matrix.reg.app }}
           path: results/*.jsonl
           retention-days: 7
           if-no-files-found: warn
