@@ -40,14 +40,22 @@ Robust CV inside one job vs CV of job medians across jobs (`devtools`, `abab`):
 
 | Page | Metric | within job | between jobs | ratio |
 |---|---|---|---|---|
-| heavy | FCP | 0.45% | 2.01% | 4.4 |
-| heavy | LCP | 0.63% | 3.91% | 6.2 |
-| heavy | TBT | 1.53% | 14.4% | 9.4 |
-| light | FCP | 0.35% | 1.65% | 4.7 |
-| light | LCP | 0.27% | 1.13% | 4.1 |
-| SSR | FCP / LCP | 0.41% | 1.01% | 2.5 |
-| SSR | TBT | 4.15% | 24.3% | 5.8 |
-| static | FCP | 0.39% | 0.66% | 1.7 |
+| heavy | FCP | 0.46% | 2.27% | 4.9 |
+| heavy | LCP | 0.64% | 4.21% | 6.6 |
+| heavy | TBT | 1.70% | 15.9% | 9.4 |
+| light | FCP | 0.34% | 1.57% | 4.6 |
+| light | LCP | 0.28% | 1.08% | 3.9 |
+| SSR | FCP / LCP | 0.40% | 0.89% | 2.2 |
+| SSR | TBT | 4.45% | 19.7% | 4.4 |
+| static | FCP | 0.40% | 0.76% | 1.9 |
+| static | LCP | 0.40% | 0.50% | 1.3 |
+
+Recomputed on 2026-10-05 (67 jobs per SPA configuration, 51 for static/SSR): the ratios moved by
+less than one unit against 27.09 (40/24 jobs), and the n=10 and n=20 columns of the MDE table in
+section 4 did not change by more than one grid step - RQ1 has converged for the sample sizes the
+tool will use. The n=5 column is not stable under `simulate`: on the light page it went from 1% to
+3-5% (FCP/LCP), on the heavy page LCP from 0.5-0.75% to 3% - with five loads a single outlier
+decides, which is one more reason not to go below ten.
 
 Under `simulate` the ratio for FCP/LCP of the SPA and static pages falls below 1 (0.3-0.5):
 modelled metrics barely react to the machine. TBT is the exception — 7-11x worse across jobs even under `simulate`, because
@@ -127,8 +135,10 @@ comparison inverted (-5.9%). The regression is injected before the first paint, 
 supposed to move - 4/40 detections are the false alarm rate of a one-sided test, as expected.
 
 ## Open items
-- CLS on the heavy page is non-zero but constant (0.154) — needs absolute effects, not relative
-  (the resampling "detects" any relative shift of a constant).
-- Only `ubuntu-24.04`, four demo pages, injected effects are pure multiplicative shifts.
-- Regressions of other types and sizes (long task → TBT, heavy image → LCP, layout shift → CLS)
-  are not yet collected in CI.
+- Only `ubuntu-24.04`, four demo pages, injected effects are shifts, not changes of shape.
+- A laptop as the runner: `scripts/local-aa.sh` collects A/A jobs on a local machine with this
+  protocol; the reports group them as a separate runner.
+
+Closed since: CLS is judged in absolute units, and regressions of four kinds and four sizes are
+measured on the runners - both in `power.md`. CLS on the heavy page is not constant but two-valued
+(0.154 or 0.231, a race between the late banner and the first paint).
