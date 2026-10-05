@@ -67,3 +67,13 @@ def test_pr_level_counts_jobs_not_metrics():
     assert len(pr) == 20
     summary = pr_summary(pr, ["throttling"]).set_index("mode")
     assert summary.loc["sequential", "any_holm"] > summary.loc["abab", "any_holm"]
+
+
+def test_benjamini_hochberg_is_between_raw_and_holm():
+    from perfgate_analysis.rq3 import benjamini_hochberg, holm
+
+    p = np.array([0.02, 0.03, 0.04, 0.045])
+    assert benjamini_hochberg(p).all()  # 0.045 <= 0.05 * 4/4: all rejected
+    assert not holm(p).any()  # 0.02 > 0.05/4
+    assert not benjamini_hochberg(np.array([0.2, 0.5, 0.9])).any()
+    assert list(benjamini_hochberg(np.array([0.001, 0.5, 0.012]))) == [True, False, True]

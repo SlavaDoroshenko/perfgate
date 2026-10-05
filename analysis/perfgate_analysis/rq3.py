@@ -45,14 +45,23 @@ def wilson(k: int, n: int, level: float = 0.95) -> tuple[float, float]:
     return max(0.0, centre - half), min(1.0, centre + half)
 
 
-def job_stats(df: pd.DataFrame, metrics: tuple[str, ...] = METRICS) -> pd.DataFrame:
-    """One row per (A/A job, metric)."""
+def job_stats(df: pd.DataFrame, metrics: tuple[str, ...] = METRICS, loads: int | None = None) -> pd.DataFrame:
+    """
+    One row per (A/A job, metric). With `loads`, a contiguous window of `loads` loads per
+    variant - what a shorter job would have measured, keeping its order: the first pairs of an
+    abab series, and the last base loads with the first PR loads of a sequential one.
+    """
     rows = []
     clean = df[df["ok"] & df["is_aa"]]
     for (*key, exp), g in clean.groupby([*GROUP, "experiment"]):
         g = g.sort_values("order")
         for metric in metrics:
             m = g.dropna(subset=[metric])
+            if loads is not None:
+                pos = m.groupby("variant").cumcount()
+                from_end = m.groupby("variant").cumcount(ascending=False)
+                tail = (m["variant"] == "base") & (m["mode"] == "sequential")
+                m = m[np.where(tail, from_end, pos) < loads]
             base = m.loc[m["variant"] == "base", metric].to_numpy(float)
             pr = m.loc[m["variant"] == "pr", metric].to_numpy(float)
             if len(base) < 5 or len(pr) < 5 or np.median(base) == 0:
@@ -115,10 +124,24 @@ def holm(p: np.ndarray, alpha: float = ALPHA) -> np.ndarray:
     return reject
 
 
+def benjamini_hochberg(p: np.ndarray, alpha: float = ALPHA) -> np.ndarray:
+    """Benjamini-Hochberg step-up: which of the p-values are rejected at false discovery rate alpha."""
+    m = len(p)
+    order = np.argsort(p)
+    passed = np.nonzero(p[order] <= alpha * np.arange(1, m + 1) / m)[0]
+    reject = np.zeros(m, dtype=bool)
+    if len(passed):
+        reject[order[: passed[-1] + 1]] = True
+    return reject
+
+
 def pr_level(jobs: pd.DataFrame) -> pd.DataFrame:
     """
     What a pull request sees: one verdict per job over all its metrics. A job raises an alarm if
-    any metric is flagged - without correction, with Holm, and with Holm plus the 1% minimum effect.
+    any metric is flagged - without correction, with Holm, with Holm plus the 1% minimum effect,
+    and with Benjamini-Hochberg (with and without the gate). On an A/A job every alarm is false,
+    so for the "any alarm" verdict BH controls the same family-wise rate as Holm, only with
+    more power when several metrics move together - which is the case BH is here to measure.
     Metrics of one job are correlated, so this is also the honest unit for comparing the modes.
     """
     rows = []
@@ -126,6 +149,7 @@ def pr_level(jobs: pd.DataFrame) -> pd.DataFrame:
         p = g["p"].to_numpy()
         big = g["effect"].abs().to_numpy() > MIN_EFFECT
         h = holm(p)
+        bh = benjamini_hochberg(p)
         rows.append(
             {
                 **dict(zip(GROUP, key)),
@@ -134,6 +158,8 @@ def pr_level(jobs: pd.DataFrame) -> pd.DataFrame:
                 "any_raw": bool((p < ALPHA).any()),
                 "any_holm": bool(h.any()),
                 "any_holm_gate": bool((h & big).any()),
+                "any_bh": bool(bh.any()),
+                "any_bh_gate": bool((bh & big).any()),
             }
         )
     return pd.DataFrame(rows)
@@ -144,7 +170,7 @@ def pr_summary(pr: pd.DataFrame, by: list[str]) -> pd.DataFrame:
     for key, g in pr.groupby([*by, "mode"]):
         n = len(g)
         row = {**dict(zip([*by, "mode"], key if isinstance(key, tuple) else (key,))), "jobs": n}
-        for col in ("any_raw", "any_holm", "any_holm_gate"):
+        for col in ("any_raw", "any_holm", "any_holm_gate", "any_bh", "any_bh_gate"):
             k = int(g[col].sum())
             lo, hi = wilson(k, n)
             row |= {col: k / n, f"{col}_lo": lo, f"{col}_hi": hi}
@@ -231,13 +257,14 @@ def main() -> None:
     parser.add_argument("--out", default="reports/rq3")
     parser.add_argument("--warmup", type=int, default=None)
     parser.add_argument("--epoch", action="append")
+    parser.add_argument("--loads", type=int, default=None, help="use only the first N loads of each variant")
     args = parser.parse_args()
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     df = filter_protocol(load_runs(args.paths), args.warmup, args.epoch)
     df = df[df["runner"].str.startswith("gha:")]
-    jobs = job_stats(df)
+    jobs = job_stats(df, loads=args.loads)
     if jobs.empty:
         raise SystemExit("no A/A jobs after filtering")
     stable = jobs[jobs["metric"] != "tbt"]
