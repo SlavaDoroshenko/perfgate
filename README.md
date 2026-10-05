@@ -25,6 +25,7 @@ detection methods, run order, change points on history); the CI integration is n
 | `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
 | `docs/rq2-methods.md` | comparison of ten detection rules |
 | `docs/rq3.md` | interleaved vs sequential series: false alarms per comparison and per PR |
+| `docs/power.md` | detection rate on real jobs with regressions of known kind and size |
 | `docs/history-cpd.md` | change point detection on the main-branch history, raw vs CPU-adjusted |
 
 ## Analysis
@@ -37,7 +38,7 @@ uv run python -m perfgate_analysis.report ../../perfgate-data/raw --out reports/
 
 Writes CSV tables (noise summary, within- vs between-job noise, power curves, MDE,
 A/A false alarms) and PNG figures. Restrict to one protocol with `--warmup 2 --gha-only` and
-`--epoch <app build>`; the other reports (`report_rq2`, `rq3`, `history`) take the same filters.
+`--epoch <app build>`; the other reports (`report_rq2`, `rq3`, `power`, `history`) take the same filters.
 
 ## Quick start
 
