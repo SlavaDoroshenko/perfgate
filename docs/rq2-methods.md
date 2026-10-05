@@ -1,4 +1,4 @@
-# RQ2: which detection rule to use (first results, 2026-09-21)
+# RQ2: which detection rule to use (first results 2026-09-21, recomputed 2026-10-05)
 
 Ten rules compared on **identical** comparisons: every method sees the same resampled draws of
 real A/A loads from the same jobs, so the differences come from the rule, not from the draw.
@@ -73,6 +73,40 @@ Applied to the actual base/PR labels of each job, keeping the run order (120 A/A
 The 5% budget — a common default — misses the real regression entirely on every metric. The 2%
 budget catches it on FCP but only 40% of the time on LCP, where the tests reach 73-87%.
 
+## Recomputed on 2026-10-05: eleven rules, 1426 jobs
+
+Same harness on data up to 05.10 (56.5 thousand loads, 1426 jobs, both run orders, four pages),
+with an eleventh rule: Brunner-Munzel, a rank test that does not assume both samples have the same
+shape. 10 loads per variant, median over configurations:
+
+| Rule | FCP: false alarms / MDE | LCP: false alarms / MDE | TBT: false alarms / MDE |
+|---|---|---|---|
+| Mann-Whitney | 4.7% / 1.0% | 4.7% / 0.75% | 4.6% / 5.25% |
+| Brunner-Munzel | 5.3% / 1.0% | 5.3% / 0.5% | 4.9% / 5.25% |
+| Welch t | 4.4% / 1.0% | 3.5% / 1.5% | 4.3% / 5.0% |
+| bootstrap CI | 3.5% / 1.0% | 3.0% / 0.75% | 2.8% / 5.0% |
+| **MWU & >1%** | **0.05% / 2.0%** | **0.09% / 2.0%** | 4.3% / 5.25% |
+| bootstrap CI & >1% | 0.0% / 2.0% | 0.0% / 2.0% | **0.75% / 5.0%** |
+| median >2% | 0.0% / 3.0% | 0.05% / 3.0% | 10.0% / 4.0% |
+| median >5% | 0.0% / 7.5% | 0.0% / 7.5% | 2.5% / 7.5% |
+| single-run >2% (1 load) | 2.0% / 3.0% | 5.8% / 3.0% | **28.6%** / 6.25% |
+
+What changed against 21.09:
+
+- The ranking did not move. The MDE of the bare tests on FCP rose from 0.5% to 1.0% because the
+  pool now holds more `devtools` jobs of the heavy page, the noisiest stable configuration.
+- **Brunner-Munzel is Mann-Whitney with slightly more false alarms** (5.3% vs 4.7% at the same
+  MDE). Pure shifts, which is what resampling produces, are the case where both tests coincide;
+  the bench of real regressions (`power.md`) agrees. It stays as the candidate for regressions that
+  change the shape of the distribution, which neither experiment injects yet.
+- **On TBT the 1% gate is too low**: TBT moves by several percent between identical builds, so
+  MWU & >1% keeps 4.3% false alarms. The bootstrap interval with the same gate is the only rule
+  that keeps TBT below 1% at an MDE of 5%. A per-metric margin (1% for paint timings, 5% for TBT)
+  is the simpler fix and is what the tool will use.
+
+Detection of real injected regressions (2-25%, four kinds, 409 jobs) is in `power.md`; it
+replaces the single control job of the table above.
+
 ## Current recommendation
 
 For a page like these, on a shared GitHub runner:
@@ -82,12 +116,14 @@ For a page like these, on a shared GitHub runner:
 - Report the bootstrap confidence interval of the effect next to the verdict: "LCP +2.4%
   [+1.1%, +3.6%]" is actionable, "failed" is not.
 - Do not use a single load per variant if the metric involves main-thread work.
+- Per-metric minimum effect: 1% on FCP/LCP/SI, about 5% on TBT, absolute 0.005-0.01 on CLS
+  (`power.md`, §3).
 - Budgets are not a replacement for a comparison; a 5% budget is a smoke alarm in another building.
 
 ## Caveats
 - The resampled effect is a pure multiplicative shift; real regressions also change the shape of
-  the distribution. The control jobs are the check against that, and there is only one injection
-  type so far.
+  the distribution. `power.md` checks four kinds of real injected regressions; all four are
+  still shifts rather than changes of shape.
 - TBT statistics come from two pages only (heavy SPA and SSR); the light and static pages have TBT
   at exactly zero.
 - Everything is measured on `ubuntu-24.04` with these four demo pages.
