@@ -1,8 +1,12 @@
 import numpy as np
+import pytest
 
 from perfgate_analysis.methods import (
     bootstrap_ratio,
+    brunner_munzel,
+    cliffs_delta,
     default_methods,
+    hodges_lehmann,
     mann_whitney,
     significant_and_large,
     single_run,
@@ -52,3 +56,28 @@ def test_zero_baseline_never_flags():
 def test_methods_have_unique_names():
     names = [m.name for m in default_methods()]
     assert len(names) == len(set(names))
+
+
+def test_brunner_munzel_is_calibrated_and_detects_separated_samples():
+    rng = np.random.default_rng(3)
+    base = rng.normal(1000, 30, size=(2000, 10))
+    pr = rng.normal(1000, 30, size=(2000, 10))
+    assert 0.02 < brunner_munzel()(base, pr).mean() < 0.09
+    # fully separated: no variance, no p-value, but clearly slower
+    assert brunner_munzel()(np.full((1, 5), 1.0), np.full((1, 5), 2.0))[0]
+    assert not brunner_munzel()(np.full((1, 5), 2.0), np.full((1, 5), 1.0))[0]
+
+
+def test_brunner_munzel_sees_a_change_of_shape():
+    # same median, PR sometimes much slower: the long task that fires in a third of the loads
+    rng = np.random.default_rng(4)
+    base = rng.normal(1000, 20, size=(500, 20))
+    pr = rng.normal(1000, 20, size=(500, 20)) + (rng.random((500, 20)) < 0.4) * 300
+    assert brunner_munzel()(base, pr).mean() > 0.5
+
+
+def test_effect_sizes():
+    base = np.array([[100.0, 101, 102, 103]])
+    assert cliffs_delta(base, base + 10)[0] == 1.0
+    assert cliffs_delta(base, base)[0] == 0.0
+    assert hodges_lehmann(base, base * 1.0 + 5)[0] == pytest.approx(5 / 101.5)

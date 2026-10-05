@@ -9,11 +9,12 @@ on identical draws, which keeps the comparison between methods fair.
 
 from __future__ import annotations
 
+import warnings
 from collections.abc import Callable
 from dataclasses import dataclass
 
 import numpy as np
-from scipy.stats import mannwhitneyu, ttest_ind
+from scipy.stats import brunnermunzel, mannwhitneyu, ttest_ind
 
 Detector = Callable[[np.ndarray, np.ndarray], np.ndarray]
 
@@ -65,6 +66,45 @@ def mann_whitney(alpha: float = 0.05) -> Method:
         return np.nan_to_num(p, nan=1.0) < alpha
 
     return Method(f"Mann-Whitney α={alpha}", detect)
+
+
+def superiority(base: np.ndarray, pr: np.ndarray) -> np.ndarray:
+    """P(PR load > base load) + P(tie) / 2 per row: the effect Brunner-Munzel tests, 0.5 = no shift."""
+    base, pr = np.atleast_2d(base), np.atleast_2d(pr)
+    diff = pr[:, :, None] - base[:, None, :]
+    return np.mean(diff > 0, axis=(1, 2)) + 0.5 * np.mean(diff == 0, axis=(1, 2))
+
+
+def cliffs_delta(base: np.ndarray, pr: np.ndarray) -> np.ndarray:
+    """Cliff's delta in [-1, 1]: how often PR loads are slower minus how often faster (Mozilla PerfCompare)."""
+    return 2 * superiority(base, pr) - 1
+
+
+def hodges_lehmann(base: np.ndarray, pr: np.ndarray) -> np.ndarray:
+    """Hodges-Lehmann shift relative to the base median: median of all PR - base differences."""
+    base, pr = np.atleast_2d(base), np.atleast_2d(pr)
+    shift = np.median((pr[:, :, None] - base[:, None, :]).reshape(len(pr), -1), axis=1)
+    b = np.median(base, axis=1)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        return np.where(b > 0, shift / np.where(b > 0, b, 1), np.nan)
+
+
+def brunner_munzel(alpha: float = 0.05) -> Method:
+    """
+    Rank test that, unlike Mann-Whitney, does not assume both samples have the same shape:
+    a regression that widens the distribution (a long task that fires only sometimes) is what
+    it is built for. Fully separated samples have zero variance and no p-value, but they are
+    the clearest possible shift, so they count as detected.
+    """
+
+    def detect(base: np.ndarray, pr: np.ndarray) -> np.ndarray:
+        with np.errstate(divide="ignore", invalid="ignore"), warnings.catch_warnings():
+            warnings.simplefilter("ignore", RuntimeWarning)
+            p = brunnermunzel(pr, base, alternative="greater", axis=1).pvalue
+        separated = superiority(base, pr) == 1.0
+        return np.where(np.isnan(p), separated, p < alpha)
+
+    return Method(f"Brunner-Munzel α={alpha}", detect)
 
 
 def welch_t(alpha: float = 0.05) -> Method:
@@ -122,7 +162,7 @@ def bootstrap_ratio(alpha: float = 0.05, min_effect: float = 0.0, boots: int = 4
 
 
 def default_methods() -> list[Method]:
-    """The set compared in RQ2: naive rules, the tests in use today, and the combined rule."""
+    """The set compared in RQ2: naive rules, the tests in use today, the combined rule and Brunner-Munzel."""
     return [
         single_run(0.02),
         single_run(0.05),
@@ -134,4 +174,5 @@ def default_methods() -> list[Method]:
         significant_and_large(min_effect=0.02),
         bootstrap_ratio(),
         bootstrap_ratio(min_effect=0.01),
+        brunner_munzel(),
     ]
