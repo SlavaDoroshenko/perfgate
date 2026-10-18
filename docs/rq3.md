@@ -1,5 +1,8 @@
 # RQ3: interleaved (abab) vs sequential series (updated 2026-10-05)
 
+Latest results: [18 October snapshot](research-2026-10-18.md), now including complete
+four-page suites. The tables below are the 5 October sample.
+
 **Question.** Both modes spend exactly the same loads: `sequential` measures all base loads and
 then all PR loads, `abab` alternates them. Does the order change how often an A/A comparison
 (no difference by construction) is reported as a regression?
@@ -51,7 +54,7 @@ them on these metrics.
 
 ## 2. TBT: where the gate does not save the sequential design
 
-| Throttling | Mode | Comp| Throttling | Mode | Comparisons | False alarms | Gate fires |
+| Throttling | Mode | Comparisons | False alarms | Gate fires |
 |---|---|---|---|---|
 | devtools | abab | 118 | 0.0% [0.0, 3.2] | **0.0%** |
 | devtools | sequential | 117 | 19.7% [13.5, 27.8] | **17.9%** |
@@ -84,7 +87,7 @@ Four conclusions for the tool:
    at least one alarm even with `abab`, against 3-4% per comparison. Holm brings it back to 1.3-1.7%.
 2. **Holm + a 1% minimum effect + `abab` gave one false alarm on 472 A/A PRs (0.2%).** The same
    rule with a sequential series fires on 7.2% (`devtools`) and 2.5% (`simulate`) of PRs.
-3. **Benjamini-Hochberg is the wrong correction for the merge verdict.** For "is anything
+3. **Holm is the more conservative choice for the merge verdict.** For "is anything
    slower?" on a PR it lets through roughly twice as many alarms as Holm (3.0% vs 1.7%) - it
    controls the share of false discoveries among the flagged metrics, not the chance that a PR
    is blocked at all. With the 1% gate the two are identical. Holm stays the rule for the

@@ -1,5 +1,9 @@
 # History: change point detection on the main branch (prototype 2026-09-27, online version 2026-10-05)
 
+Latest evaluation: [18 October snapshot](research-2026-10-18.md), with guarded
+benchmark adjustment, common permutations and 20/40-job windows. This remains a
+research prototype; the observed false-alarm rates do not yet justify automatic blocking.
+
 **Why a second level.** The same-job comparison answers "did this PR make the page slower".
 It is blind to two things: a slow creep (ten PRs of +0.5% each pass every gate, the page is 5%
 slower) and a regression merged without the check. Both show up only in the history of the main

@@ -1,0 +1,10 @@
+case,repeat,runs,warmup_per_variant,order,sitespeed_version,node,platform,cpu,github_run,chrome,app_build,measured_at,sitespeed_seconds,lighthouse_seconds
+aa,1,10,2,"['sitespeed', 'lighthouse']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:29.182Z,297.700961076,439.807916014
+aa,2,10,2,"['lighthouse', 'sitespeed']",42.9.0,v22.23.3,linux,AMD EPYC 9V74 80-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:40:41.085Z,278.5628279410001,429.092566638
+aa,3,10,2,"['sitespeed', 'lighthouse']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:28.484Z,300.450626373,440.792814249
+fcp2,1,10,2,"['sitespeed', 'lighthouse']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:08.660Z,298.12583753699994,440.460004622
+fcp2,2,10,2,"['lighthouse', 'sitespeed']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:07.109Z,296.14673696899996,438.572979574
+fcp2,3,10,2,"['sitespeed', 'lighthouse']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:06.925Z,298.007705186,441.18430561800005
+tbt10,1,10,2,"['sitespeed', 'lighthouse']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:04.451Z,297.848530916,440.74608952100004
+tbt10,2,10,2,"['lighthouse', 'sitespeed']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:13.214Z,296.234598472,440.060255021
+tbt10,3,10,2,"['sitespeed', 'lighthouse']",42.9.0,v22.23.3,linux,AMD EPYC 7763 64-Core Processor,39149657629,153.0.0.0,fa45447b5c39,2026-10-18T17:41:06.379Z,298.18460414199996,440.799669332

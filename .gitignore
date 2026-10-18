@@ -8,7 +8,7 @@ coverage/
 .DS_Store
 
 # local measurement output (CI data lives in the `data` branch)
-results/
+/results/
 *.jsonl
 
 # python

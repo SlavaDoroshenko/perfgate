@@ -1,0 +1,11 @@
+app,runner,throttling,mode,epoch,metric,experiments,within_robust_cv,between_cv_of_medians
+demo-heavy,gha:ubuntu24,devtools,abab,fa45447b5c39,cls,109,0.0,0.06534060764368234
+demo-heavy,gha:ubuntu24,devtools,abab,fa45447b5c39,fcp,109,0.004404761379055864,0.022674162274924352
+demo-heavy,gha:ubuntu24,devtools,abab,fa45447b5c39,lcp,109,0.005761160252400243,0.042039522964301364
+demo-heavy,gha:ubuntu24,devtools,abab,fa45447b5c39,si,109,0.004816242555495398,0.030254406344583464
+demo-heavy,gha:ubuntu24,devtools,abab,fa45447b5c39,tbt,109,0.016931512746751892,0.16521490661632365
+demo-heavy,local:darwin:Apple M5,devtools,abab,fa45447b5c39,cls,3,0.0,0.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fa45447b5c39,fcp,3,0.004874581712548627,0.003228678468623619
+demo-heavy,local:darwin:Apple M5,devtools,abab,fa45447b5c39,lcp,3,0.003710129017408295,0.004489571272781403
+demo-heavy,local:darwin:Apple M5,devtools,abab,fa45447b5c39,si,3,0.0032504247739106604,0.0036866816710100277
+demo-heavy,local:darwin:Apple M5,devtools,abab,fa45447b5c39,tbt,3,0.010927178497258598,0.0025760873631890183

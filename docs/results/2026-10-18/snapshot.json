@@ -1,0 +1,22 @@
+{
+  "data_sha": "103b1363befd1cb62a6a03cab41641fc1cbb74f5",
+  "epochs": [
+    "fa45447b5c39",
+    "467c2a6f9f6c",
+    "12817a1ef4f9"
+  ],
+  "warmup": 2,
+  "from": "2026-09-17 12:35:49.150000+00:00",
+  "through": "2026-10-18 16:44:30.894000+00:00",
+  "loads": 113250,
+  "jobs": 2844,
+  "invalid_loads": 0,
+  "sections": [
+    "rq1",
+    "rq2",
+    "rq3",
+    "power",
+    "history"
+  ],
+  "analysis_commit": "7f592b8"
+}

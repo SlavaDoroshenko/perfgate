@@ -1,5 +1,8 @@
 # RQ1: noise and detectability on GitHub runners (updated 2026-09-27)
 
+Latest results: [18 October snapshot](research-2026-10-18.md). The dated tables below
+document earlier samples and are retained for comparison.
+
 **Data: 2026-09-17 … 09-27, current protocol only: 21,530 loads in 551 jobs, no failed loads.**
 GitHub-hosted `ubuntu-24.04`, Chrome 153.0.8010.47, Lighthouse 13.4.1, four demo pages served
 from localhost, 4 scheduled runs a day. 40 A/A jobs per configuration for the two SPA pages,

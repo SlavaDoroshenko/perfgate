@@ -1,0 +1,7 @@
+app,runner,throttling,mode,metric,n,false_alarm_rate,mde
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.05045871559633028,0.0075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.045871559633027525,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.04220183486238532,0.03
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.03992015968063872,0.01
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.04291417165668663,0.0075
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.043912175648702596,0.02

@@ -1,5 +1,8 @@
 # Power on real CI noise: regressions of known kind and size (2026-10-05)
 
+Latest results: [18 October snapshot](research-2026-10-18.md), with 1,096 calibrated
+regression jobs. The tables below retain the earlier 409-job sample.
+
 RQ2 estimated power by shifting resampled A/A loads. This is the check that resampling cannot
 replace: real jobs on GitHub runners, where the PR build carries a synthetic regression of
 2/5/10/25% and every rule sees the job exactly as it was measured, run order included.

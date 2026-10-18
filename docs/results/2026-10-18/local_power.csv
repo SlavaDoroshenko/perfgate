@@ -1,0 +1,91 @@
+app,runner,throttling,mode,metric,n,delta,power
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.0,0.05045871559633028
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.0025,0.29724770642201837
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.005,0.6541284403669725
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.0075,0.8605504587155963
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.01,0.9522935779816514
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.015,0.9889908256880734
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.02,0.9963302752293578
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.03,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.05,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.075,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.1,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.15,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.2,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.3,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,0.5,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.0,0.03992015968063872
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.0025,0.19261477045908185
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.005,0.469061876247505
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.0075,0.7894211576846307
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.01,0.9231536926147704
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.015,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.02,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.03,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.05,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.075,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.1,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.15,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.2,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.3,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,fcp,10,0.5,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.0,0.045871559633027525
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.0025,0.22385321100917432
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.005,0.5128440366972477
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.0075,0.708256880733945
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.01,0.8165137614678899
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.015,0.8908256880733945
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.02,0.9119266055045872
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.03,0.9192660550458716
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.05,0.9211009174311927
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.075,0.9495412844036697
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.1,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.15,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.2,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.3,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,0.5,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.0,0.04291417165668663
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.0025,0.23353293413173654
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.005,0.5518962075848304
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.0075,0.8493013972055888
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.01,0.9900199600798403
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.015,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.02,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.03,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.05,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.075,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.1,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.15,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.2,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.3,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,lcp,10,0.5,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.0,0.04220183486238532
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.0025,0.08440366972477065
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.005,0.14311926605504588
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.0075,0.21926605504587157
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.01,0.3155963302752294
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.015,0.5211009174311927
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.02,0.6889908256880733
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.03,0.8550458715596331
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.05,0.9458715596330275
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.075,0.9825688073394495
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.1,0.9926605504587156
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.15,0.998165137614679
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.2,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.3,1.0
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,0.5,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.0,0.043912175648702596
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.0025,0.08882235528942116
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.005,0.16766467065868262
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.0075,0.25449101796407186
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.01,0.3812375249500998
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.015,0.6317365269461078
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.02,0.8163672654690619
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.03,0.9570858283433133
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.05,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.075,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.1,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.15,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.2,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.3,1.0
+demo-heavy,local:darwin:Apple M5,devtools,abab,tbt,10,0.5,1.0

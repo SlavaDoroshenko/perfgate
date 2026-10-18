@@ -1,0 +1,24 @@
+{
+  "analysis_commit": "0b8848c3fe2dac25eb6b7a53a63d1b309c50f512",
+  "main_data_sha": "103b1363befd1cb62a6a03cab41641fc1cbb74f5",
+  "pilot_data_sha": "ed9f2072af867ae38be02097fffb6d84b89a5917",
+  "sitespeed": {
+    "workflow_run": 39149657629,
+    "jobs": 9,
+    "loads_per_tool": 180,
+    "path": "comparisons/sitespeed/39149657629"
+  },
+  "local": {
+    "jobs": 3,
+    "loads": 60,
+    "matched_ci_jobs": 109,
+    "matched_ci_loads": 2180,
+    "path": "raw/local/2026-10-18"
+  },
+  "oss_extension": {
+    "workflow_run": 39148631091,
+    "jobs": 16,
+    "loads": 640,
+    "source_data_sha": "52d2602176e307728521f80cc275889926d872ba"
+  }
+}

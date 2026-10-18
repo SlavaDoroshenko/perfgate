@@ -56,6 +56,42 @@ its cached file sizes match the new files. All 22 pages passed on 18 October.
 The extension also supplies an inline favicon and a valid GIF in the sanitization
 fixture. Its new app-build fingerprint keeps it separate from the original corpus.
 
+### First measured extension run
+
+[Run 39148631091](https://github.com/SlavaDoroshenko/perfgate/actions/runs/39148631091)
+completed all 16 collection jobs: **640 loads, zero failed loads or reported failed
+requests**, 20 loads per release and throttling mode. The raw records are stored by
+the workflow on the `data` branch. The [per-job CSV](results/2026-10-18/oss_libraries.csv)
+includes effect sizes, two-sided p-values, CPU and the app fingerprint.
+
+Observed TBT changes under `devtools`:
+
+| Upgrade | TBT change |
+|---|---:|
+| Immer | −25.6% |
+| jQuery | −3.4% |
+| Luxon | −59.7% |
+| DOMPurify | −10.0% |
+| Vue template compilation | −8.6% |
+| Vue reactivity | −68.4% |
+| YAML | −91.5% |
+| Zod | −37.2% |
+
+These are **improvements on deliberately API-heavy workloads**, not estimates of
+whole-application upgrade effects. There is one job per case and throttling mode
+so far; daily replication must establish stability across machines. A small effect
+such as jQuery's −3.4% also falls below the proposed 5% TBT reporting margin.
+The Vue compilation case has +28.3% LCP under `simulate` while its TBT improves;
+metrics and throttling modes can disagree, so reporting only the headline TBT
+change would hide an important part of the result.
+
+To reproduce the table from the run artifacts:
+
+```sh
+cd analysis
+uv run python -m perfgate_analysis.oss_report /path/to/downloaded/artifacts --out reports/oss_libraries.csv
+```
+
 ## A lesson from the first attempt
 
 The first run of this bench measured nothing at all. The pages are served from `/a/` and `/b/`,
@@ -80,8 +116,8 @@ On GitHub runners, 20 pairs of loads per case, `abab`, both throttling modes
 | all three | FCP | ±0.4%, not significant | ±0.1%, not significant |
 
 Locally (Apple M5, 5 pairs) the same directions appeared, with chart.js not yet separable from
-noise at that sample size (p=0.15) — five pairs resolve a 15% difference only sometimes, twenty
-resolve it with certainty.
+noise at that sample size (p=0.15). The twenty-pair CI sample detected the difference;
+these observations do not establish detection probabilities for either sample size.
 
 Three real upgrades, three different answers: one clear regression, two clear improvements. That
 mix is the point — a detector has to be right in both directions.
@@ -150,7 +186,7 @@ handed out:
 
 This is the whole argument of the project in one table. A 4% regression reproduces on different
 hardware, two hours apart, under both throttling models, to within 0.1 percentage points. A 0.87%
-"regression" with p = 0.0000027 — a p-value that would pass any significance gate ever proposed —
+"regression" with p = 0.0000027 — below an unadjusted 0.05 significance threshold —
 **changes sign on the next run**.
 
 The same pattern showed up in the xmldom case three times over: −14.2% TBT locally with p<0.001,
@@ -159,13 +195,12 @@ on a metric whose absolute value is 20-95 ms.
 
 Two conclusions, both of which belong in RQ2:
 
-1. **A p-value without a minimum effect size is not evidence of a regression.** The tests are
-   working correctly — they are answering "are these two samples from the same distribution", and
-   within one job the answer is genuinely "no". The question a CI gate needs answered is different:
-   "is this difference large enough to be a property of the code rather than of this machine".
-2. **Replication across jobs is the real test.** One job resolves 0.5%, but only a difference that
-   survives a second job on other hardware is a property of the change. That argues for a detector
-   that reports an interval and a history rather than a single verdict.
+1. **A small p-value alone does not establish a practically important code regression.**
+   Minimum effect sizes help avoid blocking on negligible changes, but neither a margin nor
+   significance proves that an observed difference was caused by the code.
+2. **Replication across jobs tests stability.** Repeating a result on other hardware strengthens
+   the evidence and exposes sign reversals. Two jobs still do not establish generality; report
+   uncertainty and the scope of the sampled workloads alongside the verdict.
 
 ## What broke while setting this up
 

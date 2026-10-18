@@ -10,6 +10,14 @@ single-run thresholds.
 **Status:** early stage — measurement bench and analysis (noise, minimum detectable effect,
 detection methods, run order, change points on history); the CI integration is not built yet.
 
+The [18 October research snapshot](docs/research-2026-10-18.md) refreshes the RQ reports
+on 113,250 loads / 2,844 jobs, including 1,096 calibrated regression jobs and four-page
+CI checks. The [sitespeed comparison](docs/sitespeed.md) runs the actual competing
+collector and compare plugin. This is a research bench; `perfgate compare`, PR
+comments and the history dashboard remain later milestones.
+The [roadmap](docs/roadmap.md) separates completed experiments from remaining
+replication and the December–February user-facing MVP.
+
 ## Layout
 
 | Path | What |
@@ -23,7 +31,7 @@ detection methods, run order, change points on history); the CI integration is n
 | `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |
 | `docs/protocol.md` | experiment protocol |
 | `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
-| `docs/rq2-methods.md` | comparison of ten detection rules |
+| `docs/rq2-methods.md` | comparison of eleven detection rules |
 | `docs/rq3.md` | interleaved vs sequential series: false alarms per comparison and per PR |
 | `docs/power.md` | detection rate on real jobs with regressions of known kind and size |
 | `docs/history-cpd.md` | change point detection on the main-branch history, raw vs CPU-adjusted |

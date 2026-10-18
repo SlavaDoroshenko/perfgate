@@ -1,5 +1,8 @@
 # RQ2: which detection rule to use (first results 2026-09-21, recomputed 2026-10-05)
 
+Latest results: [18 October snapshot](research-2026-10-18.md), including a correction
+to how capped bootstrap replicates are selected. Tables below are historical.
+
 Ten rules compared on **identical** comparisons: every method sees the same resampled draws of
 real A/A loads from the same jobs, so the differences come from the rule, not from the draw.
 Data: current protocol (separate per-page builds, two warm-up loads), 15 jobs per configuration,
@@ -111,8 +114,9 @@ replaces the single control job of the table above.
 
 For a page like these, on a shared GitHub runner:
 
-- **10 loads per variant, interleaved (`abab`), Mann-Whitney plus a minimum effect of 1%.**
-  Zero false alarms in 120 A/A jobs, catches the control regression on FCP in all 15 jobs.
+- **10 loads per variant, interleaved (`abab`), Mann-Whitney plus a per-metric margin.**
+  Use Holm across all page × metric hypotheses for a single PR decision. The original
+  zero-alarm result was a finite sample; the current observed rates are in the latest snapshot.
 - Report the bootstrap confidence interval of the effect next to the verdict: "LCP +2.4%
   [+1.1%, +3.6%]" is actionable, "failed" is not.
 - Do not use a single load per variant if the metric involves main-thread work.
