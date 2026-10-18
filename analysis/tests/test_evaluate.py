@@ -44,3 +44,16 @@ def test_real_jobs_split_aa_and_control():
     assert set(out["kind"]) == {"control"}
     assert out["flagged"].all()
     assert np.isclose(out["effect"].median(), 0.1, atol=0.03)
+
+
+def test_capped_method_samples_both_early_and_late_jobs():
+    from perfgate_analysis.methods import Method
+
+    df = frame()
+    experiments = sorted(df.experiment.unique())
+    df["lcp"] = np.where(df.experiment.isin(experiments[:3]), 100.0, 200.0)
+    probe = Method("probe", lambda base, pr: base.mean(axis=1) > 150, max_reps=20)
+    result = evaluate(df, methods=[probe], metrics=("lcp",), sizes=(10,),
+                      deltas=np.array([0.0]), cfg=EvalConfig(reps=600))
+    assert result.iloc[0]["reps"] == 20
+    assert 0.1 < result.iloc[0]["rate"] < 0.9

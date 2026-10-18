@@ -136,15 +136,20 @@ def welch_split(x: np.ndarray, min_size: int) -> float:
     """
     x = np.asarray(x, dtype=float)
     n = len(x)
-    best = 0.0
-    for k in range(max(min_size, 2), n - max(min_size, 2) + 1):
-        a, b = x[:k], x[k:]
-        se = np.sqrt(a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b))
-        if se > 0:
-            best = max(best, abs(b.mean() - a.mean()) / se)
-        elif a.mean() != b.mean():
-            best = float("inf")
-    return best
+    # Centre first to avoid cancellation in the prefix-sum variances of almost
+    # constant millisecond timings. Evaluate all candidate splits together.
+    centred = x - x.mean()
+    sums = np.r_[0.0, centred.cumsum()]
+    squares = np.r_[0.0, np.square(centred).cumsum()]
+    k = np.arange(max(min_size, 2), n - max(min_size, 2) + 1)
+    other = n - k
+    va = np.maximum(0, (squares[k] - sums[k] ** 2 / k) / (k - 1))
+    vb = np.maximum(0, (squares[n] - squares[k] - (sums[n] - sums[k]) ** 2 / other) / (other - 1))
+    se = np.sqrt(va / k + vb / other)
+    diff = np.abs((sums[n] - sums[k]) / other - sums[k] / k)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        score = np.where(se > 0, diff / se, np.where(diff > 0, np.inf, 0.0))
+    return float(score.max())
 
 
 # Perfherder's default threshold on the t-statistic
@@ -204,20 +209,26 @@ def online_rates(
     jump = np.r_[np.zeros(half), np.ones(cfg.window - half)]
     rows = []
     starts = range(train, len(s) - cfg.window + 1)
+    windows = []
+    for i in starts:
+        w, past = s.iloc[i:i + cfg.window], s.iloc[:i]
+        raw = w["value"].to_numpy(float)
+        adjusted = {"raw": raw, "cpu-past": past_adjusted(w, raw, past, "cpu"),
+                    "bench-past": past_adjusted(w, raw, past, "bench"),
+                    "bench-guarded": past_adjusted(w, raw, past, "bench-guarded")}
+        windows.append((adjusted, int(rng.integers(0, 2**32))))
     for shape, profile in (("step", jump), ("ramp", ramp)):
         for step in steps:
             hits: dict[tuple[str, str], int] = {}
-            for i in starts:
-                w, past = s.iloc[i : i + cfg.window], s.iloc[:i]
-                raw = w["value"].to_numpy(float) * (1 + step * profile)
-                for series, values in (
-                    ("raw", raw),
-                    ("cpu-past", past_adjusted(w, raw, past, "cpu")),
-                    ("bench-past", past_adjusted(w, raw, past, "bench")),
-                    ("bench-guarded", past_adjusted(w, raw, past, "bench-guarded")),
-                ):
+            for adjusted, seed in windows:
+                for series, baseline in adjusted.items():
+                    # Adjustment is a multiplicative factor learned entirely before
+                    # this window, so it commutes with the injected step/ramp.
+                    values = baseline * (1 + step * profile)
                     found = {
-                        "e-divisive": e_divisive(values, cfg, rng)[1] < cfg.alpha,
+                        # Identical permutations for every method/shape/effect in this
+                        # window: differences cannot come from a different random draw.
+                        "e-divisive": e_divisive(values, cfg, np.random.default_rng(seed))[1] < cfg.alpha,
                         "mozilla-t": welch_split(values, cfg.min_size) >= MOZILLA_T,
                     }
                     for detector, f in found.items():

@@ -98,3 +98,23 @@ def test_welch_finds_noise_free_step():
     from perfgate_analysis.history import welch_split
 
     assert np.isinf(welch_split(np.r_[np.ones(10), np.full(10, 2.0)], 4))
+
+
+def test_vectorized_welch_matches_direct_variances():
+    from perfgate_analysis.history import welch_split
+
+    x = 1e6 + np.random.default_rng(18).normal(size=40)
+    expected = max(abs(x[:k].mean() - x[k:].mean()) /
+                   np.sqrt(x[:k].var(ddof=1) / k + x[k:].var(ddof=1) / (len(x) - k))
+                   for k in range(4, len(x) - 3))
+    assert np.isclose(welch_split(x, 4), expected, rtol=1e-7)
+
+
+def test_online_zero_effect_is_identical_for_step_and_ramp():
+    from perfgate_analysis.history import online_rates
+
+    rng = np.random.default_rng(42)
+    s = pd.DataFrame({"value": rng.normal(100, 1, 35), "bench": rng.normal(2000, 20, 35), "cpu_model": "x"})
+    rates = pd.DataFrame(online_rates(s, np.array([0.0]), CpdConfig(permutations=19), rng))
+    table = rates.pivot(index=["series", "detector"], columns="shape", values="rate")
+    assert (table["step"] == table["ramp"]).all()

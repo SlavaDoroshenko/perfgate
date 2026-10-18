@@ -2,6 +2,7 @@
 # A/A jobs on this machine with the protocol of noise.yml, for the laptop vs runner comparison.
 #
 #   scripts/local-aa.sh [rounds] [runs]      # default: 6 rounds, 20 loads per variant
+#   THROTTLINGS=devtools MODES=abab scripts/local-aa.sh 3 10
 #
 # One round = demo-spa and demo-heavy × devtools/simulate × abab/sequential = 8 jobs,
 # about 15 minutes. Run it on an idle machine on mains power, with other apps closed:
@@ -12,6 +13,18 @@ set -euo pipefail
 
 rounds="${1:-6}"
 runs="${2:-20}"
+read -r -a throttlings <<< "${THROTTLINGS:-devtools simulate}"
+read -r -a modes <<< "${MODES:-abab sequential}"
+read -r -a pages <<< "${PAGES:-demo-spa demo-heavy}"
+for value in "${throttlings[@]}"; do
+  case "$value" in devtools|simulate) ;; *) echo "invalid throttling: $value" >&2; exit 1 ;; esac
+done
+for value in "${modes[@]}"; do
+  case "$value" in abab|sequential) ;; *) echo "invalid mode: $value" >&2; exit 1 ;; esac
+done
+for value in "${pages[@]}"; do
+  case "$value" in demo-spa|demo-heavy) ;; *) echo "invalid page: $value" >&2; exit 1 ;; esac
+done
 root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$root"
 
@@ -38,11 +51,11 @@ fi
 command -v caffeinate > /dev/null && caffeinate -i -w $$ &
 
 for round in $(seq 1 "$rounds"); do
-  for page in "demo-spa|" "demo-heavy|heavy.html"; do
-    app="${page%%|*}"
-    path="${page#*|}"
-    for throttling in devtools simulate; do
-      for mode in abab sequential; do
+  for app in "${pages[@]}"; do
+    path=""
+    [ "$app" = demo-heavy ] && path="heavy.html"
+    for throttling in "${throttlings[@]}"; do
+      for mode in "${modes[@]}"; do
         id="local-$(date -u +%Y%m%dT%H%M%S)-aa-$app-$mode-$throttling"
         echo "round $round/$rounds: $id"
         base="http://127.0.0.1:4173/$path"

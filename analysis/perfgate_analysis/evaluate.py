@@ -71,10 +71,14 @@ def evaluate(
                 # a metric that is constant at zero cannot be shifted multiplicatively
                 if np.median(base) == 0:
                     continue
+                # Expensive bootstrap rules use fewer replicates. Select those across
+                # the whole job pool: taking a prefix silently favoured the oldest jobs.
+                capped_order = np.random.default_rng(cfg.seed + 1).permutation(len(base))
                 for delta in deltas:
                     shifted = pr * (1 + delta)
                     for m in methods:
-                        b, p = (base, shifted) if m.max_reps is None else (base[: m.max_reps], shifted[: m.max_reps])
+                        selected = capped_order[:m.max_reps] if m.max_reps is not None else slice(None)
+                        b, p = base[selected], shifted[selected]
                         rows.append(
                             {
                                 **dict(zip(GROUP, key)),
