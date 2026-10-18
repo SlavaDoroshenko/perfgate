@@ -1,0 +1,20 @@
+{
+  "case": "fcp2",
+  "repeat": 2,
+  "runs": 10,
+  "warmup_per_variant": 2,
+  "order": [
+    "lighthouse",
+    "sitespeed"
+  ],
+  "sitespeed_version": "42.9.0",
+  "node": "v22.23.3",
+  "platform": "linux",
+  "cpu": "AMD EPYC 7763 64-Core Processor",
+  "github_run": "39149657629",
+  "chrome": "153.0.0.0",
+  "app_build": "fa45447b5c39",
+  "measured_at": "2026-10-18T17:41:07.109Z",
+  "lighthouse_seconds": 438.572979574,
+  "sitespeed_seconds": 296.14673696899996
+}

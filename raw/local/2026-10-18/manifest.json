@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-18",
+  "jobs": 3,
+  "loads": 60,
+  "failed_loads": 0,
+  "failed_requests": 0,
+  "app_build": "fa45447b5c39",
+  "chrome_binary_version": "153.0.8010.47",
+  "environment": {
+    "chromeVersion": "153.0.0.0",
+    "lighthouseVersion": "13.4.1",
+    "nodeVersion": "v24.16.0",
+    "platform": "darwin",
+    "osRelease": "27.0.0",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "totalMemMb": 24576,
+    "ci": false,
+    "runnerImage": null,
+    "runnerName": null
+  },
+  "code_commits": [
+    "0b8848c3fe2dac25eb6b7a53a63d1b309c50f512",
+    "69ebe47143ab019247acf1528afe11be8245926d"
+  ],
+  "first": "2026-10-18T17:33:00.096Z",
+  "last": "2026-10-18T17:52:25.552Z",
+  "sha256": {
+    "local-20261018T173146-aa-demo-heavy-abab-devtools.jsonl": "3648f640717eb7eb8c43918035174caec6c01014ea3470274f8cd72a8e1cdc06",
+    "local-20261018T173847-aa-demo-heavy-abab-devtools.jsonl": "08cdb81f7547ac33f50e999a08576cee9a8b11f43792bd53827800c84fe317fe",
+    "local-20261018T174546-aa-demo-heavy-abab-devtools.jsonl": "b86d43fbe2ca561c9257f2db3815dcc652993e2cb53a70bcee2f8f89b971cd52"
+  },
+  "conditions": "Ordinary macOS desktop session; no concurrent perfgate reports, builds or tests; background desktop applications remained open.",
+  "wrapper_exit_code": 127,
+  "wrapper_note": "All three collector processes completed 20 loads with zero failures. The shell script was edited during execution and its final status-print line failed after collection (l: command not found). Records were subsequently schema-validated and checked for completeness; no measurement command failed."
+}
