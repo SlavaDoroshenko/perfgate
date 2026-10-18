@@ -1,0 +1,18 @@
+{
+  "browsertime": {
+    "browser": "chrome",
+    "headless": true,
+    "video": false,
+    "visualMetrics": false,
+    "chrome": {
+      "CPUThrottlingRate": 4,
+      "collectLongTasks": true,
+      "mobileEmulation": {
+        "deviceMetrics": { "width": 412, "height": 823, "pixelRatio": 1.75, "mobile": true, "touch": true },
+        "userAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36"
+      }
+    }
+  },
+  "plugins": { "add": ["compare"], "remove": ["coach", "screenshot"] },
+  "compare": { "id": "bench", "testType": "mannwhitneyu", "alternative": "greater" }
+}

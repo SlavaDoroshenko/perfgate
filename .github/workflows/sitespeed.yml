@@ -1,0 +1,66 @@
+name: sitespeed
+
+on:
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: Measured loads per variant and tool
+        default: "10"
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    name: ${{ matrix.case }} repeat ${{ matrix.repeat }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [aa, fcp2, tbt10]
+        repeat: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: astral-sh/setup-uv@v10.1.0
+      - run: uv sync --locked --directory analysis
+      - run: npm ci --prefix scripts/sitespeed --no-audit --no-fund
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: "153.0.8010.47"
+          install-dependencies: true
+      - name: Serve the fixed demo build
+        run: |
+          pnpm --filter demo-spa build
+          nohup pnpm --filter demo-spa preview > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4173/heavy.html > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+      - name: Measure both tools on the same runner
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+          PYTHON: ${{ github.workspace }}/analysis/.venv/bin/python
+          RUNS: ${{ inputs.runs }}
+          CASE: ${{ matrix.case }}
+          REPEAT: ${{ matrix.repeat }}
+        run: node scripts/sitespeed/run.mjs
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: sitespeed-${{ matrix.case }}-${{ matrix.repeat }}
+          path: |
+            results/sitespeed/**/metadata.json
+            results/sitespeed/**/compare.json
+            results/sitespeed/**/lighthouse.jsonl
+          retention-days: 90
+          if-no-files-found: error
