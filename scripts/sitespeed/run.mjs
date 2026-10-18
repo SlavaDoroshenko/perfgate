@@ -1,7 +1,7 @@
 // Run both actual collectors sequentially on the same machine and app build.
 // Use RUNS=10, CASE=aa|fcp2|tbt10, REPEAT=1..3, CHROME_PATH and PYTHON.
 import { spawnSync } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import os from 'node:os';
 
@@ -19,6 +19,7 @@ const script = resolve(import.meta.dirname, 'throttle.mjs');
 const config = resolve(import.meta.dirname, 'config.json');
 const capture = resolve(import.meta.dirname, 'capture.mjs');
 await mkdir(out, { recursive: true });
+if ((await readdir(out)).length) throw new Error('RESULT_DIR must be empty; use a new directory for each comparison');
 await mkdir(`${out}/baseline`, { recursive: true });
 const times = {};
 function run(command, args, env = {}) {

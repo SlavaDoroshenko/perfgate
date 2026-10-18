@@ -5,7 +5,7 @@
 #   THROTTLINGS=devtools MODES=abab scripts/local-aa.sh 3 10
 #
 # One round = demo-spa and demo-heavy × devtools/simulate × abab/sequential = 8 jobs,
-# about 15 minutes. Run it on an idle machine on mains power, with other apps closed:
+# duration depends on the number of loads. Run on mains power with other apps closed:
 # the point is to measure the laptop, not what else it is doing. Records go to
 # results/local/<date>/ with the same schema as the CI data, so every report picks them up
 # as a separate runner (`local:<platform>:<cpu>`).
@@ -13,6 +13,10 @@ set -euo pipefail
 
 rounds="${1:-6}"
 runs="${2:-20}"
+if [[ ! "$rounds" =~ ^[1-9][0-9]*$ || ! "$runs" =~ ^[1-9][0-9]*$ ]]; then
+  echo "rounds and runs must be positive integers" >&2
+  exit 1
+fi
 read -r -a throttlings <<< "${THROTTLINGS:-devtools simulate}"
 read -r -a modes <<< "${MODES:-abab sequential}"
 read -r -a pages <<< "${PAGES:-demo-spa demo-heavy}"
@@ -35,10 +39,12 @@ pnpm --filter demo-spa build
 pnpm --filter demo-spa preview > /tmp/perfgate-local-preview.log 2>&1 &
 server=$!
 trap 'kill $server 2>/dev/null || true' EXIT
+ready=false
 for _ in $(seq 1 60); do
-  curl -sf http://127.0.0.1:4173/ > /dev/null && break
+  if curl -sf http://127.0.0.1:4173/ > /dev/null; then ready=true; break; fi
   sleep 1
 done
+if [ "$ready" != true ]; then cat /tmp/perfgate-local-preview.log >&2; exit 1; fi
 
 # tree hash of the app package, as in CI: local and CI jobs of the same build share an epoch
 app_build=$(git ls-tree HEAD -- apps/demo-spa | awk '{print substr($3,1,12)}')
