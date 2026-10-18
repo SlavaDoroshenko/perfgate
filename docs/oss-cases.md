@@ -13,7 +13,7 @@ built into the same page with the same build tooling. Compared with building two
 third-party application, this removes the part that breaks most often — somebody else's install
 and build — while keeping the part that matters: real code written by a real team.
 
-`apps/vendor-bench` builds three workloads twice, once against an older release ("a") and once
+`apps/vendor-bench` builds eleven workloads twice, once against an older release ("a") and once
 against a newer one ("b"):
 
 | Case | Library | a | b | What the page does |
@@ -27,6 +27,34 @@ comparison, exactly like a base/PR pair. Records carry `label: vendor`, so these
 enter the A/A false alarm statistics.
 
 Collected by `.github/workflows/oss.yml`, twice a day, `abab`, both throttling modes.
+
+## Extended corpus (2026-10-18)
+
+Eight more release comparisons are collected by `oss-libs.yml` once a day (20 loads
+per variant, `abab`, both throttling modes). Together with the four application commit
+pairs below, the corpus contains 15 cases. These upgrades are not labelled regressions:
+the measurements must establish whether they improve, worsen or preserve performance.
+
+| Case | Before → after | Workload |
+|---|---|---|
+| zod | 3.24.4 → 4.0.17 | validate 4,000 nested records five times |
+| vue-compile | 3.3.13 → 3.4.38 | compile and mount a 1,500-section template |
+| vue-reactive | 3.4.38 → 3.5.43 | read and update a reactive array of 20,000 rows |
+| immer | 10.1.3 → 11.1.21 | 120 immutable updates to a list of 2,000 items |
+| yaml | 2.7.1 → 2.8.0 | parse 500 services referencing 100 shared anchors |
+| luxon | 2.2.0 → 2.3.0 | serialize 6,000 timestamps in four formats |
+| jquery | 3.7.1 → 4.0.0 | create 1,500 table rows with data and handlers |
+| purify | 3.4.9 → 3.4.10 | sanitize 1,500 HTML blocks with unsafe attributes |
+
+Versions are pinned through npm aliases and `pnpm-lock.yaml`. The workloads amplify
+particular API operations; their effect sizes are not claims about arbitrary sites.
+`node scripts/check-vendor.mjs` checks both releases of every page for runtime/network
+errors, broken images, non-empty content and equivalent rendered text. Run it after
+building and starting `vendor-bench preview`; restart the server after rebuilding so
+its cached file sizes match the new files. All 22 pages passed on 18 October.
+
+The extension also supplies an inline favicon and a valid GIF in the sanitization
+fixture. Its new app-build fingerprint keeps it separate from the original corpus.
 
 ## A lesson from the first attempt
 
