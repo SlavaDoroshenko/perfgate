@@ -30,7 +30,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: astral-sh/setup-uv@v10.1.0
       - run: uv sync --locked --directory analysis
-      - run: npm ci --prefix scripts/sitespeed --no-audit --no-fund
+      # npm 10 misreads extraneous platform packages in sitespeed's published shrinkwrap.
+      # Keep the installer aligned with the one used to generate and validate the lock.
+      - run: npx --yes npm@11.13.0 ci --prefix scripts/sitespeed --no-audit --no-fund
       - uses: browser-actions/setup-chrome@v2
         id: chrome
         with:

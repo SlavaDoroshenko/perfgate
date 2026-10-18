@@ -42,7 +42,7 @@ experiment stage.
 Build and serve `demo-spa`, then:
 
 ```sh
-npm ci --prefix scripts/sitespeed
+npx --yes npm@11.13.0 ci --prefix scripts/sitespeed
 uv sync --locked --directory analysis
 PYTHON="$PWD/analysis/.venv/bin/python" \
   CHROME_PATH=/path/to/chrome RUNS=10 CASE=fcp2 REPEAT=1 \

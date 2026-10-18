@@ -3,6 +3,7 @@
     "sitespeed.io": "42.9.0"
   },
   "private": true,
+  "packageManager": "npm@11.13.0",
   "description": "Pinned sitespeed.io comparator for the research bench",
   "name": "perfgate-sitespeed-bench",
   "version": "0.0.0"
