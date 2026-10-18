@@ -22,7 +22,9 @@ collector and ordering differences are part of it, not a controlled comparison o
 statistical tests alone.
 
 CPU throttling is 4×, screen emulation is 412×823 at DPR 1.75 with the Lighthouse
-mobile UA. `throttle.mjs` applies Lighthouse's request-level DevTools latency and
+mobile UA. Chrome uses the same `--no-sandbox` and `--disable-gpu` flags as the
+existing Lighthouse collector (the former is needed on Ubuntu hosted runners).
+`throttle.mjs` applies Lighthouse's request-level DevTools latency and
 throughput before navigation. No video, visual metrics or profiling run is enabled.
 The screenshot and observer overheads of the tools still differ. Their TBT
 collection windows also differ; absolute TBT values are not interchangeable.

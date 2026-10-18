@@ -5,6 +5,7 @@
     "video": false,
     "visualMetrics": false,
     "chrome": {
+      "args": ["--no-sandbox", "--disable-gpu"],
       "CPUThrottlingRate": 4,
       "collectLongTasks": true,
       "mobileEmulation": {
