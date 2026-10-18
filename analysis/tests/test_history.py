@@ -61,3 +61,40 @@ def test_mozilla_t_sees_a_step_and_not_noise():
     rng = np.random.default_rng(6)
     assert welch_split(np.r_[rng.normal(100, 1, 10), rng.normal(110, 1, 10)], 4) > MOZILLA_T
     assert welch_split(rng.normal(100, 1, 20), 4) < MOZILLA_T
+
+
+def test_batched_permutations_match_reference():
+    from perfgate_analysis.history import _energy_split
+
+    x = np.random.default_rng(9).normal(size=20)
+    seed = 123
+    k, q = _energy_split(x, CFG.min_size)
+    rng = np.random.default_rng(seed)
+    exceed = sum(_energy_split(rng.permutation(x), CFG.min_size)[1] >= q for _ in range(CFG.permutations))
+    assert e_divisive(x, CFG, np.random.default_rng(seed)) == (k, (exceed + 1) / (CFG.permutations + 1))
+
+
+def test_guarded_adjustment_leaves_cpu_independent_metric_alone():
+    from perfgate_analysis.history import past_adjusted
+
+    past = pd.DataFrame({"bench": np.geomspace(1000, 3000, 40), "value": np.full(40, 100.0)})
+    window = pd.DataFrame({"bench": [1000.0, 3000.0, 0.0, np.nan]})
+    values = np.array([100.0, 101.0, 102.0, 103.0])
+    assert np.allclose(past_adjusted(window, values, past, "bench-guarded"), values / 100)
+
+
+def test_guarded_adjustment_preserves_new_regression():
+    from perfgate_analysis.history import past_adjusted
+
+    bench = np.linspace(1000, 3000, 40)
+    past = pd.DataFrame({"bench": bench, "value": 2e6 / bench})
+    window = pd.DataFrame({"bench": [1500.0, 2500.0]})
+    base = 2e6 / window["bench"].to_numpy()
+    adjusted = past_adjusted(window, base * [1.0, 1.1], past, "bench-guarded")
+    assert np.isclose(adjusted[1] / adjusted[0], 1.1)
+
+
+def test_welch_finds_noise_free_step():
+    from perfgate_analysis.history import welch_split
+
+    assert np.isinf(welch_split(np.r_[np.ones(10), np.full(10, 2.0)], 4))

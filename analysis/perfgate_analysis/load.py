@@ -132,7 +132,9 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
         )
     df = pd.DataFrame(rows)
     df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True)
-    df["ok"] = df["error"].isna()
+    # A page with a missing asset can look faster than a working page. Older records
+    # did not carry this count; keep them, but never accept a known failed request.
+    df["ok"] = df["error"].isna() & df["failed_requests"].fillna(0).eq(0)
     # A/A experiment: explicitly labelled, or (for older data) no injected regression anywhere.
     # Comparisons of two library versions or two commits carry no inject either, so the
     # label is what keeps them out of the false alarm statistics.

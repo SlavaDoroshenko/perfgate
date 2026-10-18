@@ -31,6 +31,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.stats import linregress
 
 from .load import filter_protocol, load_runs
 
@@ -93,7 +94,20 @@ def e_divisive(x: np.ndarray, cfg: CpdConfig, rng: np.random.Generator) -> tuple
     """Location of the most likely change point and its permutation p-value."""
     x = np.asarray(x, dtype=float)
     k, q = _energy_split(x, cfg.min_size)
-    exceed = sum(_energy_split(rng.permutation(x), cfg.min_size)[1] >= q for _ in range(cfg.permutations))
+    # Evaluate the same permutations in a batch; long histories otherwise spend most
+    # of their time constructing tiny distance matrices in Python.
+    draws = np.array([rng.permutation(x) for _ in range(cfg.permutations)])
+    n = len(x)
+    d = np.abs(draws[:, :, None] - draws[:, None, :])
+    sums = np.zeros((cfg.permutations, n + 1, n + 1))
+    sums[:, 1:, 1:] = d.cumsum(1).cumsum(2)
+    splits = np.arange(max(cfg.min_size, 2), n - max(cfg.min_size, 2) + 1)
+    m, l = splits, n - splits
+    a = sums[:, splits, splits]
+    between = sums[:, splits, n] - a
+    b = sums[:, n, n, None] - sums[:, splits, n] - sums[:, n, splits] + a
+    scores = (m * l / n) * (2 * between / (m * l) - a / (m * (m - 1)) - b / (l * (l - 1)))
+    exceed = int(np.sum(scores.max(axis=1) >= q))
     return k, (exceed + 1) / (cfg.permutations + 1)
 
 
@@ -128,6 +142,8 @@ def welch_split(x: np.ndarray, min_size: int) -> float:
         se = np.sqrt(a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b))
         if se > 0:
             best = max(best, abs(b.mean() - a.mean()) / se)
+        elif a.mean() != b.mean():
+            best = float("inf")
     return best
 
 
@@ -150,13 +166,22 @@ def past_adjusted(window: pd.DataFrame, values: np.ndarray, past: pd.DataFrame, 
             for c in window["cpu_model"]
         ]
         return values / np.asarray(typical, dtype=float)
-    if how == "bench":
-        ok = past[(past["bench"] > 0) & (past["value"] > 0)]
+    if how in ("bench", "bench-guarded"):
+        ok = past[(past["bench"] > 0) & (past["value"] > 0)
+                  & np.isfinite(past["bench"]) & np.isfinite(past["value"])]
         x, y = np.log(ok["bench"].to_numpy(float)), np.log(ok["value"].to_numpy(float))
-        slope = np.polyfit(x, y, 1)[0] if len(ok) >= min_jobs and np.ptp(x) > 0 else 0.0
+        slope = 0.0
+        if len(ok) >= min_jobs and np.ptp(x) > 0:
+            fit = linregress(x, y)
+            if how == "bench" or (len(ok) >= 12 and fit.pvalue < 0.05):
+                slope = fit.slope
         centre = np.median(x) if len(x) else 0.0
-        bench = np.log(window["bench"].to_numpy(float))
-        return values / np.exp(slope * (bench - centre)) / np.median(ok["value"]) if len(ok) else values
+        bench = window["bench"].to_numpy(float)
+        valid = np.isfinite(bench) & (bench > 0)
+        # Missing scores mean no adjustment for that job, never NaN or infinite metrics.
+        log_bench = np.full(len(bench), centre)
+        log_bench[valid] = np.log(bench[valid])
+        return values / np.exp(slope * (log_bench - centre)) / np.median(ok["value"]) if len(ok) else values
     raise ValueError(how)
 
 
@@ -189,6 +214,7 @@ def online_rates(
                     ("raw", raw),
                     ("cpu-past", past_adjusted(w, raw, past, "cpu")),
                     ("bench-past", past_adjusted(w, raw, past, "bench")),
+                    ("bench-guarded", past_adjusted(w, raw, past, "bench-guarded")),
                 ):
                     found = {
                         "e-divisive": e_divisive(values, cfg, rng)[1] < cfg.alpha,

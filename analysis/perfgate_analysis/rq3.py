@@ -188,6 +188,33 @@ def pr_summary(pr: pd.DataFrame, by: list[str]) -> pd.DataFrame:
     return out.merge(pd.DataFrame(tests), on=by, how="left") if tests else out
 
 
+def suite_level(jobs: pd.DataFrame, pages: tuple[str, ...] = ("demo-spa", "demo-heavy", "demo-static", "demo-ssr")) -> pd.DataFrame:
+    """A four-page CI check: group page jobs from the same workflow run and attempt.
+
+    These pages ran on separate runners, as a matrix check would. Require every page
+    and its expected metrics; an incomplete suite must not look like a quiet suite.
+    Apply corrections once over all page × metric hypotheses, not once per page.
+    """
+    data = jobs[jobs["app"].isin(pages)].copy()
+    data["suite"] = data["experiment"].str.extract(r"^(\d+-\d+)-", expand=False)
+    rows = []
+    for (suite, runner, mode, throttling), g in data.groupby(["suite", "runner", "mode", "throttling"]):
+        if set(g["app"]) != set(pages) or g.groupby("app")["experiment"].nunique().max() != 1:
+            continue
+        if any(set(g.loc[g["app"] == app, "metric"]) !=
+               ({"fcp", "lcp", "si", "tbt"} if app in ("demo-heavy", "demo-ssr") else {"fcp", "lcp", "si"})
+               for app in pages):
+            continue
+        p = g["p"].to_numpy()
+        large = g["effect"].abs().to_numpy() > MIN_EFFECT
+        h, bh = holm(p), benjamini_hochberg(p)
+        rows.append({"suite": suite, "runner": runner, "mode": mode, "throttling": throttling,
+                     "pages": len(pages), "metrics": len(g), "any_raw": bool((p < ALPHA).any()),
+                     "any_holm": bool(h.any()), "any_holm_gate": bool((h & large).any()),
+                     "any_bh": bool(bh.any()), "any_bh_gate": bool((bh & large).any())})
+    return pd.DataFrame(rows)
+
+
 def compare_modes(jobs: pd.DataFrame, by: list[str]) -> pd.DataFrame:
     """sequential vs abab: Fisher test on false alarms, Brown-Forsythe test on effect spread."""
     rows = []
@@ -280,6 +307,10 @@ def main() -> None:
     tables["pr_jobs"] = pr
     tables["pr_level"] = pr_summary(pr, ["throttling"])
     tables["pr_level_app"] = pr_summary(pr, ["app", "throttling"])
+    suites = suite_level(jobs)
+    if not suites.empty:
+        tables["suite_jobs"] = suites
+        tables["suite_level"] = pr_summary(suites, ["throttling"])
     for name, t in tables.items():
         t.to_csv(out / f"{name}.csv", index=False)
     plot_effects(jobs, out)

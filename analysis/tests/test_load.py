@@ -43,6 +43,15 @@ def test_local_runner_kind():
     assert runner_kind(env) == "local:darwin:Apple M5"
 
 
+def test_missing_asset_is_not_a_valid_measurement(tmp_path):
+    write_jsonl(tmp_path / "a.jsonl", [
+        make_record(failedRequests=1),
+        make_record(failedRequests=0),
+        make_record(),  # older protocol, no network failure count
+    ])
+    assert load_runs([tmp_path])["ok"].tolist() == [False, True, True]
+
+
 def test_epoch_prefers_recorded_app_build():
     assert app_epoch("demo-spa", "fa45447b5c39", "663e56d0") == "fa45447b5c39"
 

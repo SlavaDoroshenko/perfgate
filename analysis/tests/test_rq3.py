@@ -77,3 +77,24 @@ def test_benjamini_hochberg_is_between_raw_and_holm():
     assert not holm(p).any()  # 0.02 > 0.05/4
     assert not benjamini_hochberg(np.array([0.2, 0.5, 0.9])).any()
     assert list(benjamini_hochberg(np.array([0.001, 0.5, 0.012]))) == [True, False, True]
+
+
+def test_suite_corrects_across_pages_and_drops_incomplete_runs():
+    import pandas as pd
+    from perfgate_analysis.rq3 import suite_level
+
+    rows = []
+    for run in ("123-1", "124-1"):
+        for app in ("demo-spa", "demo-heavy", "demo-static", "demo-ssr"):
+            if run == "124-1" and app == "demo-ssr":
+                continue
+            metrics = ("fcp", "lcp", "si", "tbt") if app in ("demo-heavy", "demo-ssr") else ("fcp", "lcp", "si")
+            for metric in metrics:
+                rows.append({"experiment": f"{run}-aa-{app}-abab-devtools", "app": app, "metric": metric,
+                             "runner": "gha:ubuntu24", "mode": "abab", "throttling": "devtools",
+                             "p": 0.01 if (app, metric) == ("demo-spa", "fcp") else 0.9, "effect": 0.02})
+    suites = suite_level(pd.DataFrame(rows))
+    assert len(suites) == 1
+    assert suites.iloc[0]["metrics"] == 14
+    assert suites.iloc[0]["any_raw"]
+    assert not suites.iloc[0]["any_holm"]  # 0.01 passes per page, but not across 14 hypotheses
