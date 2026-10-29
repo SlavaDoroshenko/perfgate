@@ -1,0 +1,41 @@
+{
+  "repo": "<repository>",
+  "base": "c91deb072204fe440e50ffd529deecb7128b1845",
+  "pr": "c91deb072204fe440e50ffd529deecb7128b1845",
+  "config": {
+    "install": [
+      "pnpm",
+      "install",
+      "--frozen-lockfile"
+    ],
+    "build": [
+      "pnpm",
+      "--filter",
+      "demo-spa",
+      "build"
+    ],
+    "start": [
+      "pnpm",
+      "exec",
+      "sirv",
+      "apps/demo-spa/dist",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "path": "/heavy.html",
+    "readyPath": "/heavy.html",
+    "app": "demo-heavy",
+    "startupTimeoutMs": 60000,
+    "buildTimeoutMs": 600000
+  },
+  "timings": {
+    "base_install_seconds": 5.673353666,
+    "base_build_seconds": 1.8686624170000004,
+    "pr_install_seconds": 5.342336042000001,
+    "pr_build_seconds": 1.785144292000001
+  },
+  "total_seconds": 466.133352583,
+  "cleanup_issues": []
+}

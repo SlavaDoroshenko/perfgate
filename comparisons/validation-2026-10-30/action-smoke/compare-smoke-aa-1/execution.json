@@ -1,0 +1,8 @@
+{
+  "measured": true,
+  "collector_exit": 0,
+  "collection_seconds": 440.358255292,
+  "analysis_seconds": 1.4708953640000546,
+  "total_seconds": 441.829159623,
+  "input": "/home/runner/work/_temp/perfgate-l4rri4p8/runs.jsonl"
+}

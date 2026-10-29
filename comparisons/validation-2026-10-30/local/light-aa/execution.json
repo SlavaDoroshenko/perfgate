@@ -1,0 +1,8 @@
+{
+  "measured": true,
+  "collector_exit": 0,
+  "collection_seconds": 432.64697054199996,
+  "analysis_seconds": 1.3284654169999994,
+  "total_seconds": 433.975442375,
+  "input": "<repository>/results/local-mvp-2026-10-30/light-aa/runs.jsonl"
+}

@@ -1,0 +1,8 @@
+{
+  "measured": true,
+  "collector_exit": 0,
+  "collection_seconds": 441.95958158400003,
+  "analysis_seconds": 1.3582186249999795,
+  "total_seconds": 443.31780654199997,
+  "input": "<repository>/results/local-mvp-2026-10-30/heavy-regression/runs.jsonl"
+}

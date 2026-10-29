@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-10-29T23:21:04Z",
+  "browser": "Google Chrome for Testing 153.0.8010.47",
+  "app_build": "fa45447b5c39",
+  "kind": "local session pilot and end-to-end verification, not confirmatory CI validation",
+  "jobs": [
+    {
+      "name": "light-aa",
+      "exit": 0,
+      "status": "no_regression_detected",
+      "seconds": 436.914150917
+    },
+    {
+      "name": "heavy-aa",
+      "exit": 0,
+      "status": "no_regression_detected",
+      "seconds": 444.57323999999994
+    },
+    {
+      "name": "heavy-regression",
+      "exit": 1,
+      "status": "regression",
+      "seconds": 446.298822125
+    }
+  ]
+}

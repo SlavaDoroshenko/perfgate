@@ -1,0 +1,8 @@
+{
+  "measured": true,
+  "collector_exit": 0,
+  "collection_seconds": 441.07281322200004,
+  "analysis_seconds": 1.382032481000002,
+  "total_seconds": 442.45485322700006,
+  "input": "/home/runner/work/_temp/perfgate-hRkMUhyp/runs.jsonl"
+}

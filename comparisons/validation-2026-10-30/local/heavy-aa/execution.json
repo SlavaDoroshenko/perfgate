@@ -1,0 +1,8 @@
+{
+  "measured": true,
+  "collector_exit": 0,
+  "collection_seconds": 440.282681125,
+  "analysis_seconds": 1.3306893329999876,
+  "total_seconds": 441.61337754199997,
+  "input": "<repository>/results/local-mvp-2026-10-30/heavy-aa/runs.jsonl"
+}
