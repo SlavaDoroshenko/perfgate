@@ -11,7 +11,9 @@ single-run thresholds.
 `perfgate compare` measures two running URLs or analyzes a saved experiment;
 `perfgate compare-refs` builds two Git refs in isolated worktrees and compares them.
 The root composite Action wraps URL comparison, artifacts and a job summary.
-The Action still needs hosted-CI validation. The history dashboard is not built yet.
+The Action passed hosted A/A and injected-regression checks. Local URL and Git-ref
+checks also passed; see [validation results](docs/validation-2026-10-30.md).
+The history dashboard is not built yet.
 
 See [comparison usage and policy](docs/compare.md), [roadmap](docs/roadmap.md), and
 [research completion criteria](docs/research-completion.md). The candidate gate is

@@ -2,7 +2,8 @@
 
 A completed empirical study is required alongside the working product. Completion
 criteria and prospective validation are specified in [research-completion.md](research-completion.md).
-Changes below are implemented in the local working branch unless explicitly published.
+Implementation is published in draft PR #1; validation and raw-data archive are
+recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 
 ## Completed foundations
 
@@ -30,11 +31,15 @@ Changes below are implemented in the local working branch unless explicitly publ
 
 ## Immediate validation and integration
 
-- Finish fresh local end-to-end checks and record their limitations.
-- Publish/review the implementation, then exercise the Action in hosted CI and on
-  an external project; add a separate trusted PR-comment integration.
-- Freeze the candidate before confirmatory acquisition; collect and evaluate the
-  required later A/A and injected cases without tuning on that holdout.
+- Completed: local URL and isolated Git-ref checks (80 loads), hosted Action
+  A/A/injected checks, and the first post-freeze CI pilot (1,320 loads / 33 jobs).
+- Review the published implementation and exercise it on an external project;
+  add a separate trusted PR-comment integration.
+- Diagnose the nominal +25% layout-shift injection: its measured CLS effect was
+  only +0.25% in the first pilot. Preserve the failed calibration as evidence;
+  do not tune the frozen detector to it.
+- Continue the required later A/A and injected cohorts without tuning on that
+  holdout. One quiet A/A suite is insufficient to establish its false-alarm rate.
 - Add measured rare-stall browser scenarios. The simulated median-gate weakness
   must be investigated before making claims about arbitrary regression shapes.
 - Compare same-load and same-time budgets using newly recorded durations.
