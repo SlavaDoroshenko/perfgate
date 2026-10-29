@@ -11,7 +11,8 @@ from pathlib import Path
 
 from . import evaluate, history, mde, noise, power, report, report_rq2, rq3
 from .load import filter_protocol, load_runs
-from .methods import default_methods
+from .methods import default_methods, permutation_mean
+from .quality import valid_comparisons
 
 EPOCHS = ["fa45447b5c39", "467c2a6f9f6c", "12817a1ef4f9"]
 
@@ -30,6 +31,7 @@ def main() -> None:
     parser.add_argument("data", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--sections", default="rq1,rq2,rq3,power,history")
+    parser.add_argument("--experimental-methods", action="store_true", help="also compare the exploratory permutation-mean rule")
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     data_sha = subprocess.check_output(["git", "-C", str(args.data.resolve().parent), "rev-parse", "HEAD"], text=True).strip()
@@ -39,10 +41,15 @@ def main() -> None:
     metadata = {"data_sha": data_sha, "epochs": EPOCHS, "warmup": 2,
                 "from": str(df.timestamp.min()), "through": str(df.timestamp.max()),
                 "loads": len(df), "jobs": int(df.experiment.nunique()),
-                "invalid_loads": int((~df.ok).sum()), "sections": args.sections.split(",")}
+                "invalid_loads": int((~df.ok).sum()), "sections": args.sections.split(","),
+                "experimental_methods": args.experimental_methods}
     (args.out / "snapshot.json").write_text(json.dumps(metadata, indent=2) + "\n")
     print(json.dumps(metadata), flush=True)
-    methods = default_methods()
+    _, exclusions = valid_comparisons(df, ("fcp", "lcp", "tbt", "cls", "si"))
+    exclusions.to_csv(args.out / "excluded_jobs.csv", index=False)
+    metadata["excluded_jobs"] = len(exclusions)
+    (args.out / "snapshot.json").write_text(json.dumps(metadata, indent=2) + "\n")
+    methods = default_methods() + ([permutation_mean()] if args.experimental_methods else [])
     for section in args.sections.split(","):
         print(f"computing {section}", flush=True)
         if section == "rq1":

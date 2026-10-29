@@ -13,9 +13,15 @@ import {
 } from "./extract.js";
 import { measure } from "./lighthouse.js";
 import { planRuns } from "./plan.js";
+import { measurementIssues } from "./quality.js";
+import { compare } from "./compare.js";
+import { compareRefs } from "./compare-refs.js";
 import { Label, Mode, Run, SCHEMA_VERSION, Throttling } from "./schema.js";
 
 const USAGE = `Usage: perfgate collect --url <base> [--pr-url <pr>] [options]
+       perfgate compare --url <base> --pr-url <pr> --out <new directory> [--runs 10|20]
+       perfgate compare --input <JSONL> --out <new directory> [--runs 10|20]
+       perfgate compare-refs --base-ref <ref> --pr-ref <ref> --config <JSON> --out <new directory>
 
 Options:
   --runs <n>           measured loads per variant (default 10)
@@ -66,17 +72,31 @@ async function collect(argv: string[]) {
 
   // one warm-up load is not always enough: the first measured load of a job used to be
   // the only one with non-zero TBT on an otherwise idle page
+  let warmupErrors = 0;
+  const warmupStarted = performance.now();
   for (let i = 0; i < warmup; i++) {
     for (const url of [urls.base, urls.pr].filter((u): u is string => Boolean(u))) {
       log(`warm-up ${i + 1}/${warmup} ${url}`);
-      await measure(url, throttling).catch((err: unknown) => log(`warm-up failed: ${String(err)}`));
+      try {
+        const result = await measure(url, throttling);
+        if (extractError(result) || extractFailedRequests(result) !== 0 ||
+            Object.entries(extractMetrics(result)).some(([key, value]) => key !== "ttfb" && value == null)) {
+          warmupErrors++;
+          log("warm-up failed validation");
+        }
+      } catch (err) {
+        warmupErrors++;
+        log(`warm-up failed: ${String(err)}`);
+      }
     }
   }
 
+  const warmupDurationMs = performance.now() - warmupStarted;
   let failed = 0;
   for (const slot of slots) {
     const url = slot.variant === "base" ? urls.base : urls.pr!;
     const timestamp = new Date().toISOString();
+    const measurementStarted = performance.now();
     let run: Run;
     try {
       const lhr = await measure(url, throttling);
@@ -127,7 +147,11 @@ async function collect(argv: string[]) {
         timestamp,
       };
     }
-    if (run.error) failed++;
+    run.plannedRuns = runs;
+    run.warmupErrors = warmupErrors;
+    run.durationMs = performance.now() - measurementStarted;
+    run.warmupDurationMs = warmupDurationMs;
+    if (measurementIssues(run).length) failed++;
     await appendFile(values.out, JSON.stringify(Run.parse(run)) + "\n");
     const m = run.metrics;
     log(
@@ -140,7 +164,7 @@ async function collect(argv: string[]) {
   }
 
   log(`done: ${slots.length} runs, ${failed} failed → ${values.out}`);
-  if (failed === slots.length) process.exitCode = 1;
+  if (failed > 0 || warmupErrors > 0) process.exitCode = 2;
 }
 
 class UsageError extends Error {}
@@ -152,6 +176,10 @@ async function main() {
   const [command, ...rest] = process.argv.slice(2);
   try {
     if (command === "collect") return await collect(rest);
+    if (command === "compare" || command === "compare-refs") {
+      try { return await (command === "compare" ? compare(rest) : compareRefs(rest)); }
+      catch (err) { log(String(err)); process.exitCode = 3; return; }
+    }
     if (command === undefined || command === "--help" || command === "-h") {
       process.stdout.write(USAGE);
       return;
