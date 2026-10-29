@@ -11,6 +11,10 @@ name: regressions
 on:
   workflow_dispatch:
     inputs:
+      store:
+        description: Archive to the shared data branch (disable for isolated research pilots)
+        type: boolean
+        default: true
       runs:
         description: Loads per variant
         default: "20"
@@ -22,7 +26,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: regressions
+  group: ${{ github.event_name == 'workflow_dispatch' && inputs.store == false && format('regressions-pilot-{0}', github.ref) || 'regressions' }}
   cancel-in-progress: false
 
 env:
@@ -123,12 +127,12 @@ jobs:
         with:
           name: runs-${{ matrix.reg.type }}-${{ matrix.reg.pct }}-${{ matrix.reg.app }}
           path: results/*.jsonl
-          retention-days: 7
+          retention-days: ${{ github.event_name == 'workflow_dispatch' && inputs.store == false && 90 || 7 }}
           if-no-files-found: warn
 
   store:
     needs: collect
-    if: always()
+    if: always() && (github.event_name != 'workflow_dispatch' || inputs.store)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
