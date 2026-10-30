@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { stallIndices, stallEvidence } from './tail-protocol.mjs';
 test('fixed sparse schedule has exactly three distinct positions and replays by seed', () => {
   const slots = stallIndices('rare', 20, 2026103001);
+  assert.deepEqual(slots, [2, 12, 14]);
+  assert.deepEqual(stallIndices('rare', 20, 2026103002), [9, 18, 19]);
   assert.equal(slots.length, 3); assert.equal(new Set(slots).size, 3);
   assert.deepEqual(slots, stallIndices('rare', 20, 2026103001));
   assert.notDeepEqual(slots, stallIndices('rare', 20, 2026103002));

@@ -20,6 +20,7 @@ jobs:
       - run: pnpm -r build
       - run: pnpm typecheck
       - run: pnpm test
+      - run: node --test scripts/tail-protocol.test.mjs
       - name: JSON Schema is up to date
         run: |
           pnpm schema
@@ -36,3 +37,4 @@ jobs:
       - uses: astral-sh/setup-uv@v10.1.0
       - run: uv sync --locked
       - run: uv run pytest
+      - run: uv run pytest ../scripts/tests
