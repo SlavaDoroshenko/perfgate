@@ -15,6 +15,9 @@ The Action passed hosted A/A and injected-regression checks. Local URL and Git-r
 checks also passed; see [validation results](docs/validation-2026-10-30.md).
 A [trace-based CLS investigation](docs/cls-diagnosis-2026-10-30.md) documents how
 mixed layout shifts can mask an injected effect in the sample median.
+A [measured rare-stall pilot](docs/tail-browser-results-2026-10-30.md) found a
+limitation: mean TBT increased 22–33% while the median stayed nearly unchanged,
+and the current gate missed those three sparse-regression series.
 The history dashboard is not built yet.
 
 See [comparison usage and policy](docs/compare.md), [roadmap](docs/roadmap.md), and

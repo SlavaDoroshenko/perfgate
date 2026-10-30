@@ -41,8 +41,12 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
   Use separately labelled calibration controls in subsequent experiments.
 - Continue the required later A/A and injected cohorts without tuning on that
   holdout. One quiet A/A suite is insufficient to establish its false-alarm rate.
-- Add measured rare-stall browser scenarios. The simulated median-gate weakness
-  must be investigated before making claims about arbitrary regression shapes.
+- Completed: [measured rare-stall pilot](tail-browser-results-2026-10-30.md),
+  seven jobs / 280 measured loads. The gate misses the three sparse cases while
+  their mean TBT rises 22–33%; both dense and A/A controls behave as expected.
+- Predeclare a mean/tail endpoint study with sufficient null controls and familywise
+  error handling before changing the product gate. Improve paint-anchored treatment
+  timing in a separately versioned fixture; retain the original pilot outcomes.
 - Compare same-load and same-time budgets using newly recorded durations.
 
 ## Research work still required

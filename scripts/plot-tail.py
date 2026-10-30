@@ -35,7 +35,7 @@ for ax, (directory, m) in zip(axes.flat, series):
     if stalled:
         ax.scatter([r['runIndex'] + 1.08 for r in stalled], [r['metrics']['tbt'] for r in stalled], s=70, marker='x', color='#8b1742', label='assigned stall')
     ax.set(xlabel='Alternating pair index', ylabel='TBT (ms)', xticks=[1, 5, 10, 15, 20])
-    ax.grid(axis='y', alpha=.2); ax.legend(fontsize=7, loc='upper right')
+    ax.grid(axis='y', alpha=.2); ax.legend(fontsize=7, loc='center right')
 for ax in axes.flat[len(series):]: ax.set_visible(False)
 fig.suptitle('Fixed rare-stall browser pilot: all measured observations\n20 loads per variant; rare = 3 assigned 800 ms stalls; jobs are not pooled', fontsize=12)
 fig.savefig(a.out / 'observations.png', dpi=160); fig.savefig(a.out / 'observations.svg'); plt.close(fig)
