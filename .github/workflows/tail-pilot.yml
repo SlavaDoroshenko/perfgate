@@ -1,0 +1,81 @@
+name: tail-pilot
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'experiments/rare-stalls/**'
+      - 'scripts/*tail*'
+      - 'docs/protocols/tail-browser-pilot-2026-10-30.json'
+      - '.github/workflows/tail-pilot.yml'
+permissions:
+  contents: read
+jobs:
+  select:
+    runs-on: ubuntu-24.04
+    outputs:
+      collect: ${{ steps.select.outputs.collect }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - id: select
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          # Avoid starting six lengthy jobs for ordinary documentation follow-ups.
+          if [ "$EVENT" = workflow_dispatch ] || git log -1 --format=%s | grep -Fq '[tail-pilot]'; then
+            echo 'collect=true' >> "$GITHUB_OUTPUT"
+          fi
+  collect:
+    needs: select
+    if: needs.select.outputs.collect == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        condition: [aa, rare, dense]
+        seed: [2026103001, 2026103002]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: pnpm install --frozen-lockfile
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: '153.0.8010.47'
+          install-dependencies: true
+      - name: Build and serve the separate fixture
+        run: |
+          pnpm --filter demo-spa build
+          pnpm --filter @perfgate/collector build
+          node scripts/prepare-tail-fixture.mjs
+          node --test scripts/tail-protocol.test.mjs
+          nohup pnpm --filter demo-spa preview > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4173/tail-heavy.html > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+      - name: Collect the fixed pilot series
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          mkdir -p results
+          node scripts/collect-tail.mjs \
+            --url http://127.0.0.1:4173/tail-heavy.html \
+            --out results/job --condition '${{ matrix.condition }}' --seed '${{ matrix.seed }}' \
+            --experiment '${{ github.run_id }}-${{ github.run_attempt }}-tail-${{ matrix.condition }}-${{ matrix.seed }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: tail-${{ matrix.condition }}-${{ matrix.seed }}
+          path: results/
+          retention-days: 90
+          if-no-files-found: error

@@ -1,0 +1,14 @@
+{
+  "policy": "browser-candidate-2026-10-30",
+  "data_sha": "ca37c17640a0a9aa821c0dd35d827a9695dab94d",
+  "through": "2026-10-29 21:40:12.876000+00:00",
+  "after": null,
+  "analysis": "retrospective unless independently frozen before data collection",
+  "source_sha256": {
+    "gate_evaluation.py": "865ce336c75d1105b27e4918c5aa4bb3ac5a956972556217f8adc92d96d9d026",
+    "compare.py": "9273b11e8b02bcbdbcf269a091a24ceca8d0f23279f61fc675d5b475729449a9",
+    "quality.py": "b85871c1d695d35aa3e76b077e43937af1f840fadcbb17839ee35c1c89dc761c"
+  },
+  "bootstrap_reps_for_unused_intervals": 99,
+  "network_unknown_legacy_allowed": true
+}

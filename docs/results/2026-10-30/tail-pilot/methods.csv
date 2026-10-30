@@ -1,0 +1,85 @@
+experiment,condition,seed,method,detected
+41035614668-1-tail-aa-2026103001,aa,2026103001,single-run >2%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,single-run >5%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,median >2%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,median >5%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,Welch t α=0.05,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,Mann-Whitney α=0.05,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,MWU α=0.05 & >1%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,MWU α=0.05 & >2%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,bootstrap CI α=0.05,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,bootstrap CI α=0.05 & >1%,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,Brunner-Munzel α=0.05,False
+41035614668-1-tail-aa-2026103001,aa,2026103001,permutation mean α=0.05,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,single-run >2%,True
+41035614668-1-tail-aa-2026103002,aa,2026103002,single-run >5%,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,median >2%,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,median >5%,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,Welch t α=0.05,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,Mann-Whitney α=0.05,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,MWU α=0.05 & >1%,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,MWU α=0.05 & >2%,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,bootstrap CI α=0.05,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,bootstrap CI α=0.05 & >1%,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,Brunner-Munzel α=0.05,False
+41035614668-1-tail-aa-2026103002,aa,2026103002,permutation mean α=0.05,False
+41035614668-1-tail-dense-2026103001,dense,2026103001,single-run >2%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,single-run >5%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,median >2%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,median >5%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,Welch t α=0.05,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,Mann-Whitney α=0.05,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,MWU α=0.05 & >1%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,MWU α=0.05 & >2%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,bootstrap CI α=0.05,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,bootstrap CI α=0.05 & >1%,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,Brunner-Munzel α=0.05,True
+41035614668-1-tail-dense-2026103001,dense,2026103001,permutation mean α=0.05,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,single-run >2%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,single-run >5%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,median >2%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,median >5%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,Welch t α=0.05,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,Mann-Whitney α=0.05,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,MWU α=0.05 & >1%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,MWU α=0.05 & >2%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,bootstrap CI α=0.05,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,bootstrap CI α=0.05 & >1%,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,Brunner-Munzel α=0.05,True
+41035614668-1-tail-dense-2026103002,dense,2026103002,permutation mean α=0.05,True
+41035614668-1-tail-rare-2026103001,rare,2026103001,single-run >2%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,single-run >5%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,median >2%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,median >5%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,Welch t α=0.05,True
+41035614668-1-tail-rare-2026103001,rare,2026103001,Mann-Whitney α=0.05,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,MWU α=0.05 & >1%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,MWU α=0.05 & >2%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,bootstrap CI α=0.05,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,bootstrap CI α=0.05 & >1%,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,Brunner-Munzel α=0.05,False
+41035614668-1-tail-rare-2026103001,rare,2026103001,permutation mean α=0.05,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,single-run >2%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,single-run >5%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,median >2%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,median >5%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,Welch t α=0.05,True
+41035614668-1-tail-rare-2026103002,rare,2026103002,Mann-Whitney α=0.05,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,MWU α=0.05 & >1%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,MWU α=0.05 & >2%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,bootstrap CI α=0.05,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,bootstrap CI α=0.05 & >1%,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,Brunner-Munzel α=0.05,False
+41035614668-1-tail-rare-2026103002,rare,2026103002,permutation mean α=0.05,False
+local-tail-rare-2026103001,rare,2026103001,single-run >2%,False
+local-tail-rare-2026103001,rare,2026103001,single-run >5%,False
+local-tail-rare-2026103001,rare,2026103001,median >2%,False
+local-tail-rare-2026103001,rare,2026103001,median >5%,False
+local-tail-rare-2026103001,rare,2026103001,Welch t α=0.05,True
+local-tail-rare-2026103001,rare,2026103001,Mann-Whitney α=0.05,False
+local-tail-rare-2026103001,rare,2026103001,MWU α=0.05 & >1%,False
+local-tail-rare-2026103001,rare,2026103001,MWU α=0.05 & >2%,False
+local-tail-rare-2026103001,rare,2026103001,bootstrap CI α=0.05,False
+local-tail-rare-2026103001,rare,2026103001,bootstrap CI α=0.05 & >1%,False
+local-tail-rare-2026103001,rare,2026103001,Brunner-Munzel α=0.05,False
+local-tail-rare-2026103001,rare,2026103001,permutation mean α=0.05,False

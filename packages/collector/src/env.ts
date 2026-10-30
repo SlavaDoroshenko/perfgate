@@ -6,7 +6,15 @@ import type { Env } from "./schema.js";
 export function collectEnv(): Omit<Env, "chromeVersion" | "lighthouseVersion"> {
   const cpus = os.cpus();
   const e = process.env;
+  let chromeBinaryVersion: string | null = null;
+  if (e.CHROME_PATH) {
+    try {
+      chromeBinaryVersion = execFileSync(e.CHROME_PATH, ["--version"], { encoding: "utf8", timeout: 10000,
+        stdio: ["ignore", "pipe", "ignore"] }).match(/\d+\.\d+\.\d+\.\d+/)?.[0] ?? null;
+    } catch { /* The audit still records its user-agent version if no binary version is available. */ }
+  }
   return {
+    chromeBinaryVersion,
     nodeVersion: process.version,
     platform: os.platform(),
     osRelease: os.release(),

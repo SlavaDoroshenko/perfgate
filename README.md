@@ -7,16 +7,24 @@ thresholds either miss real regressions or fire on noise. perfgate measures how 
 they actually are, and compares base and PR builds with statistical tests instead of
 single-run thresholds.
 
-**Status:** early stage — measurement bench and analysis (noise, minimum detectable effect,
-detection methods, run order, change points on history); the CI integration is not built yet.
+**Status:** measurement bench and research analysis, plus a candidate comparison MVP.
+`perfgate compare` measures two running URLs or analyzes a saved experiment;
+`perfgate compare-refs` builds two Git refs in isolated worktrees and compares them.
+The root composite Action wraps URL comparison, artifacts and a job summary.
+The Action passed hosted A/A and injected-regression checks. Local URL and Git-ref
+checks also passed; see [validation results](docs/validation-2026-10-30.md).
+A [trace-based CLS investigation](docs/cls-diagnosis-2026-10-30.md) documents how
+mixed layout shifts can mask an injected effect in the sample median.
+A [measured rare-stall pilot](docs/tail-browser-results-2026-10-30.md) found a
+limitation: mean TBT increased 22–33% while the median stayed nearly unchanged,
+and the current gate missed those three sparse-regression series.
+The history dashboard is not built yet.
 
-The [18 October research snapshot](docs/research-2026-10-18.md) refreshes the RQ reports
-on 113,250 loads / 2,844 jobs, including 1,096 calibrated regression jobs and four-page
-CI checks. The [sitespeed comparison](docs/sitespeed.md) runs the actual competing
-collector and compare plugin. This is a research bench; `perfgate compare`, PR
-comments and the history dashboard remain later milestones.
-The [roadmap](docs/roadmap.md) separates completed experiments from remaining
-replication and the December–February user-facing MVP.
+See [comparison usage and policy](docs/compare.md), [roadmap](docs/roadmap.md), and
+[research completion criteria](docs/research-completion.md). The candidate gate is
+not yet prospectively calibrated; no detected regression is not proof of equivalence.
+The dated [18 October research snapshot](docs/research-2026-10-18.md) remains an
+immutable historical report, not a count of all subsequently collected data.
 
 ## Layout
 

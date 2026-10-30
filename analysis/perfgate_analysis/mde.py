@@ -16,6 +16,8 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+
+from .quality import valid_comparisons
 from scipy.stats import mannwhitneyu
 
 from . import GROUP, METRICS
@@ -69,7 +71,7 @@ def mde_from_curve(power: np.ndarray, deltas: np.ndarray = DELTAS, target: float
 
 
 def _aa_experiments(df: pd.DataFrame, metric: str) -> dict[tuple, list[np.ndarray]]:
-    clean = df[df["ok"] & df["is_aa"]].dropna(subset=[metric])
+    clean, _ = valid_comparisons(df[df["is_aa"]], (metric,))
     out: dict[tuple, list[np.ndarray]] = {}
     for key, g in clean.groupby(GROUP):
         out[key] = [e[metric].to_numpy() for _, e in g.groupby("experiment")]
@@ -114,7 +116,7 @@ def aa_false_alarms(df: pd.DataFrame, metrics: list[str] = METRICS, alpha: float
     """
     rows = []
     for metric in metrics:
-        clean = df[df["ok"] & df["is_aa"]].dropna(subset=[metric])
+        clean, _ = valid_comparisons(df[df["is_aa"]], (metric,))
         for key, g in clean.groupby(GROUP):
             p_values = []
             for _, e in g.groupby("experiment"):
