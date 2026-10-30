@@ -1,5 +1,10 @@
 name: cls-diagnosis
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/cls-diagnosis.yml'
+      - 'scripts/diagnose-cls.mjs'
+      - 'scripts/prepare-cls-control.mjs'
   workflow_dispatch:
 permissions:
   contents: read
