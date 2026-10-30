@@ -1,0 +1,135 @@
+{
+  "index": 0,
+  "variant": "pr",
+  "expected": true,
+  "evidence": {
+    "expected": true,
+    "durationMs": 800.205,
+    "marks": [
+      {
+        "args": {
+          "data": {
+            "callTime": 112611298103,
+            "navigationId": "107C8717B009E9D3495763DF5D1CD90B",
+            "sampleTraceId": 2361356861639508,
+            "startTime": 1187.399999991059
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-ready",
+        "ph": "I",
+        "pid": 38748,
+        "s": "t",
+        "tid": 2793270,
+        "ts": 112611298080,
+        "tts": 2038210
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 112612633103,
+            "navigationId": "107C8717B009E9D3495763DF5D1CD90B",
+            "sampleTraceId": 2361356861639983,
+            "startTime": 2522.399999991059
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-stall-start",
+        "ph": "I",
+        "pid": 38748,
+        "s": "t",
+        "tid": 2793270,
+        "ts": 112612633102,
+        "tts": 3096070
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 112613433312,
+            "navigationId": "107C8717B009E9D3495763DF5D1CD90B",
+            "sampleTraceId": 2361356861639949,
+            "startTime": 3322.59999999404
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-stall-end",
+        "ph": "I",
+        "pid": 38748,
+        "s": "t",
+        "tid": 2793270,
+        "ts": 112613433307,
+        "tts": 3896524
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 112613433391,
+            "navigationId": "107C8717B009E9D3495763DF5D1CD90B",
+            "sampleTraceId": 2361356861639948,
+            "startTime": 3322.59999999404
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-done",
+        "ph": "I",
+        "pid": 38748,
+        "s": "t",
+        "tid": 2793270,
+        "ts": 112613433380,
+        "tts": 3896573
+      }
+    ],
+    "issues": []
+  },
+  "issues": [],
+  "record": {
+    "schemaVersion": 1,
+    "experimentId": "tail-instrument-smoke",
+    "app": "tail-heavy",
+    "variant": "pr",
+    "url": "http://127.0.0.1:4187/tail-heavy.html?stall=1&stall_ms=800",
+    "inject": {
+      "type": "tail-stall",
+      "size": 800
+    },
+    "mode": "abab",
+    "throttling": "devtools",
+    "warmup": 0,
+    "warmupErrors": 0,
+    "plannedRuns": 2,
+    "durationMs": 18928.840959,
+    "warmupDurationMs": 0.0009580000000823929,
+    "appBuild": "6275653e9bfb7f722672aecc411d3e2d259128102bf483058bf11b0765cf91d7",
+    "label": "injected",
+    "runIndex": 0,
+    "order": 1,
+    "metrics": {
+      "lcp": 3344.39,
+      "fcp": 2527.572,
+      "tbt": 1091.1459999999997,
+      "cls": 0.15722860699251184,
+      "si": 2656,
+      "ttfb": 1
+    },
+    "benchmarkIndex": 2285,
+    "failedRequests": 0,
+    "error": null,
+    "env": {
+      "chromeVersion": "153.0.0.0",
+      "chromeBinaryVersion": "153.0.8010.47",
+      "lighthouseVersion": "13.4.1",
+      "nodeVersion": "v24.16.0",
+      "platform": "darwin",
+      "osRelease": "27.0.0",
+      "arch": "arm64",
+      "cpuModel": "Apple M5",
+      "cpuCount": 10,
+      "totalMemMb": 24576,
+      "ci": false,
+      "runnerImage": null,
+      "runnerName": null
+    },
+    "gitSha": "92fd60fb852e89ae95317b3cc30bd1bebd1048eb",
+    "timestamp": "2026-10-30T09:38:42.146Z"
+  }
+}

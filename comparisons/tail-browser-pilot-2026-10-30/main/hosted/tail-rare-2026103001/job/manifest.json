@@ -1,0 +1,50 @@
+{
+  "protocol": "tail-browser-pilot-2026-10-30",
+  "experiment": "41035614668-1-tail-rare-2026103001",
+  "condition": "rare",
+  "seed": 2026103001,
+  "runs": 20,
+  "warmup": 2,
+  "stall_ms": 800,
+  "selected_indices": [
+    2,
+    12,
+    14
+  ],
+  "acquisition_role": "pilot",
+  "freeze_sha256": "ce207a0eaf99bea801645e2992d7d9c9d140652e02b63b237c6c28172c57bcb7",
+  "interpretation": "fixed 15% contamination, not iid Bernoulli sampling; exploratory pilot, not power estimation",
+  "source": "744bde1863d885b164e7c0b85dbb841a7177d39a",
+  "source_sha256": {
+    "scripts/collect-tail.mjs": "84b9d06d74abfaa519f8c4c157636d762b33c0ac08d845de7ce1f1c28165ddc2",
+    "scripts/tail-protocol.mjs": "ecbeead38bb65b27d6fa6f4d243deb7abc745d7487df2564892679ce8f0cd389",
+    "scripts/prepare-tail-fixture.mjs": "c9e5b99a07730214ef811a0adbc0a07c4fc0d715fb5f59c51ed7316b648393e7",
+    "experiments/rare-stalls/probe.js": "0f1efaaeba866b131044f9e3aa69c326c96cffb37df557b40c28758cf462b1db",
+    "pnpm-lock.yaml": "54621b2a11406d3ea1e971a74e81ab400b2ee125bd75e3fb0225bca51931d98b"
+  },
+  "fixture_sha256": {
+    "tail-heavy.html": "9bc6df587eb4db002f059b93379eec50106699c1d80ba7954319e002bac4f1ca",
+    "tail-probe.js": "0f1efaaeba866b131044f9e3aa69c326c96cffb37df557b40c28758cf462b1db",
+    "assets-heavy/heavy-BTlTD8-R.css": "7bba42738796f3505921cadbbc3d39b4f64b70b3486cface058cd1e7f448bebf",
+    "assets-heavy/heavy-DZCtVll3.js": "a4e9fa75d44aebc59542ef956f0f0be5ff809c34781572facbe0a773b88d8653"
+  },
+  "app_build": "6275653e9bfb7f722672aecc411d3e2d259128102bf483058bf11b0765cf91d7",
+  "started": "2026-10-30T09:45:04.116Z",
+  "completed_slots": 44,
+  "failures": [],
+  "env": {
+    "chromeBinaryVersion": "153.0.8010.47",
+    "nodeVersion": "v22.23.4",
+    "platform": "linux",
+    "osRelease": "7.0.0-1017-azure",
+    "arch": "x64",
+    "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+    "cpuCount": 4,
+    "totalMemMb": 15984,
+    "ci": true,
+    "runnerImage": "ubuntu24-20261026.354.1",
+    "runnerName": "GitHub Actions 1000007160"
+  },
+  "finished": "2026-10-30T09:58:07.249Z",
+  "warmup_errors": 0
+}

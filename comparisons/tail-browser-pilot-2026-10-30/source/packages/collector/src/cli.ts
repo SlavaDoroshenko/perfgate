@@ -1,0 +1,198 @@
+#!/usr/bin/env node
+import { appendFile, mkdir } from "node:fs/promises";
+import { dirname } from "node:path";
+import { parseArgs } from "node:util";
+
+import { collectEnv, gitSha } from "./env.js";
+import {
+  extractChromeVersion,
+  extractError,
+  extractFailedRequests,
+  extractMetrics,
+  parseInject,
+} from "./extract.js";
+import { measure } from "./lighthouse.js";
+import { planRuns } from "./plan.js";
+import { measurementIssues } from "./quality.js";
+import { compare } from "./compare.js";
+import { compareRefs } from "./compare-refs.js";
+import { Label, Mode, Run, SCHEMA_VERSION, Throttling } from "./schema.js";
+
+const USAGE = `Usage: perfgate collect --url <base> [--pr-url <pr>] [options]
+       perfgate compare --url <base> --pr-url <pr> --out <new directory> [--runs 10|20]
+       perfgate compare --input <JSONL> --out <new directory> [--runs 10|20]
+       perfgate compare-refs --base-ref <ref> --pr-ref <ref> --config <JSON> --out <new directory>
+
+Options:
+  --runs <n>           measured loads per variant (default 10)
+  --mode <m>           sequential | abab (default abab)
+  --throttling <t>     simulate | devtools | none (default simulate)
+  --app <name>         app label stored with each run (default "app")
+  --experiment <id>    experiment id (default: generated)
+  --out <file>         JSONL file to append to (default results/runs.jsonl)
+  --warmup <n>         unrecorded warm-up loads per url (default 2, 0 disables)
+  --app-build <id>     fingerprint of the app sources (stored with every record)
+  --label <kind>       aa | injected | vendor | commit (what the two urls differ by)
+`;
+
+async function collect(argv: string[]) {
+  const { values } = parseArgs({
+    args: argv,
+    options: {
+      url: { type: "string" },
+      "pr-url": { type: "string" },
+      runs: { type: "string", default: "10" },
+      mode: { type: "string", default: "abab" },
+      throttling: { type: "string", default: "simulate" },
+      app: { type: "string", default: "app" },
+      experiment: { type: "string" },
+      out: { type: "string", default: "results/runs.jsonl" },
+      warmup: { type: "string", default: "2" },
+      "app-build": { type: "string" },
+      label: { type: "string" },
+    },
+    strict: true,
+  });
+
+  if (!values.url) throw new UsageError("--url is required");
+  const mode = Mode.parse(values.mode);
+  const throttling = Throttling.parse(values.throttling);
+  const runs = Number(values.runs);
+  const warmup = Number(values.warmup);
+  if (!Number.isInteger(warmup) || warmup < 0) throw new UsageError(`--warmup must be >= 0, got ${values.warmup}`);
+  const label = values.label === undefined ? undefined : Label.parse(values.label);
+  const urls = { base: values.url, pr: values["pr-url"] };
+  const experimentId =
+    values.experiment ?? `${new Date().toISOString().replace(/[:.]/g, "-")}-${mode}-${throttling}`;
+
+  const slots = planRuns(runs, mode, Boolean(urls.pr));
+  const env = collectEnv();
+  const sha = gitSha();
+  await mkdir(dirname(values.out), { recursive: true });
+
+  // one warm-up load is not always enough: the first measured load of a job used to be
+  // the only one with non-zero TBT on an otherwise idle page
+  let warmupErrors = 0;
+  const warmupStarted = performance.now();
+  for (let i = 0; i < warmup; i++) {
+    for (const url of [urls.base, urls.pr].filter((u): u is string => Boolean(u))) {
+      log(`warm-up ${i + 1}/${warmup} ${url}`);
+      try {
+        const result = await measure(url, throttling);
+        if (extractError(result) || extractFailedRequests(result) !== 0 ||
+            Object.entries(extractMetrics(result)).some(([key, value]) => key !== "ttfb" && value == null)) {
+          warmupErrors++;
+          log("warm-up failed validation");
+        }
+      } catch (err) {
+        warmupErrors++;
+        log(`warm-up failed: ${String(err)}`);
+      }
+    }
+  }
+
+  const warmupDurationMs = performance.now() - warmupStarted;
+  let failed = 0;
+  for (const slot of slots) {
+    const url = slot.variant === "base" ? urls.base : urls.pr!;
+    const timestamp = new Date().toISOString();
+    const measurementStarted = performance.now();
+    let run: Run;
+    try {
+      const lhr = await measure(url, throttling);
+      run = {
+        schemaVersion: SCHEMA_VERSION,
+        experimentId,
+        app: values.app,
+        variant: slot.variant,
+        url,
+        inject: parseInject(url),
+        mode,
+        throttling,
+        warmup,
+        appBuild: values["app-build"],
+        label,
+        runIndex: slot.runIndex,
+        order: slot.order,
+        metrics: extractMetrics(lhr),
+        benchmarkIndex: lhr.environment?.benchmarkIndex ?? null,
+        failedRequests: extractFailedRequests(lhr),
+        error: extractError(lhr),
+        env: { ...env, chromeVersion: extractChromeVersion(lhr), lighthouseVersion: lhr.lighthouseVersion ?? null },
+        gitSha: sha,
+        timestamp,
+      };
+    } catch (err) {
+      // a crashed load is still recorded, so failure rate is visible in the data
+      run = {
+        schemaVersion: SCHEMA_VERSION,
+        experimentId,
+        app: values.app,
+        variant: slot.variant,
+        url,
+        inject: parseInject(url),
+        mode,
+        throttling,
+        warmup,
+        appBuild: values["app-build"],
+        label,
+        runIndex: slot.runIndex,
+        order: slot.order,
+        metrics: { lcp: null, fcp: null, tbt: null, cls: null, si: null, ttfb: null },
+        benchmarkIndex: null,
+        failedRequests: null,
+        error: err instanceof Error ? err.message : String(err),
+        env: { ...env, chromeVersion: null, lighthouseVersion: null },
+        gitSha: sha,
+        timestamp,
+      };
+    }
+    run.plannedRuns = runs;
+    run.warmupErrors = warmupErrors;
+    run.durationMs = performance.now() - measurementStarted;
+    run.warmupDurationMs = warmupDurationMs;
+    if (measurementIssues(run).length) failed++;
+    await appendFile(values.out, JSON.stringify(Run.parse(run)) + "\n");
+    const m = run.metrics;
+    log(
+      `[${slot.order + 1}/${slots.length}] ${slot.variant}#${slot.runIndex} ` +
+        (run.error
+          ? `ERROR ${run.error}`
+          : `fcp=${fmt(m.fcp)} lcp=${fmt(m.lcp)} tbt=${fmt(m.tbt)} cls=${m.cls?.toFixed(3)}` +
+            (run.failedRequests ? ` FAILED-REQUESTS=${run.failedRequests}` : "")),
+    );
+  }
+
+  log(`done: ${slots.length} runs, ${failed} failed → ${values.out}`);
+  if (failed > 0 || warmupErrors > 0) process.exitCode = 2;
+}
+
+class UsageError extends Error {}
+
+const fmt = (v: number | null) => (v === null ? "-" : `${Math.round(v)}ms`);
+const log = (msg: string) => process.stderr.write(msg + "\n");
+
+async function main() {
+  const [command, ...rest] = process.argv.slice(2);
+  try {
+    if (command === "collect") return await collect(rest);
+    if (command === "compare" || command === "compare-refs") {
+      try { return await (command === "compare" ? compare(rest) : compareRefs(rest)); }
+      catch (err) { log(String(err)); process.exitCode = 3; return; }
+    }
+    if (command === undefined || command === "--help" || command === "-h") {
+      process.stdout.write(USAGE);
+      return;
+    }
+    throw new UsageError(`unknown command "${command}"`);
+  } catch (err) {
+    if (err instanceof UsageError) {
+      log(`${err.message}\n\n${USAGE}`);
+      process.exitCode = 2;
+      return;
+    }
+    throw err;
+  }
+}
+
+await main();

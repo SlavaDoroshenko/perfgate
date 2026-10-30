@@ -1,0 +1,135 @@
+{
+  "index": 12,
+  "variant": "pr",
+  "expected": true,
+  "evidence": {
+    "expected": true,
+    "durationMs": 800.422,
+    "marks": [
+      {
+        "args": {
+          "data": {
+            "callTime": 577303907,
+            "navigationId": "2BF128AED6F9460DDF9B58B7FEF3DD86",
+            "sampleTraceId": 3526273991019065,
+            "startTime": 1185.5
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-ready",
+        "ph": "I",
+        "pid": 8054,
+        "s": "t",
+        "tid": 8054,
+        "ts": 577303882,
+        "tts": 2119146
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 577864914,
+            "navigationId": "2BF128AED6F9460DDF9B58B7FEF3DD86",
+            "sampleTraceId": 3526273991019373,
+            "startTime": 1746.5
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-stall-start",
+        "ph": "I",
+        "pid": 8054,
+        "s": "t",
+        "tid": 8054,
+        "ts": 577864911,
+        "tts": 2593926
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 578665336,
+            "navigationId": "2BF128AED6F9460DDF9B58B7FEF3DD86",
+            "sampleTraceId": 3526273991019706,
+            "startTime": 2547
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-stall-end",
+        "ph": "I",
+        "pid": 8054,
+        "s": "t",
+        "tid": 8054,
+        "ts": 578665333,
+        "tts": 3394714
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 578665441,
+            "navigationId": "2BF128AED6F9460DDF9B58B7FEF3DD86",
+            "sampleTraceId": 3526273991019705,
+            "startTime": 2547.099999999977
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-done",
+        "ph": "I",
+        "pid": 8054,
+        "s": "t",
+        "tid": 8054,
+        "ts": 578665438,
+        "tts": 3394756
+      }
+    ],
+    "issues": []
+  },
+  "issues": [],
+  "record": {
+    "schemaVersion": 1,
+    "experimentId": "41035614668-1-tail-rare-2026103001",
+    "app": "tail-heavy",
+    "variant": "pr",
+    "url": "http://127.0.0.1:4173/tail-heavy.html?stall=1&stall_ms=800",
+    "inject": {
+      "type": "tail-stall",
+      "size": 800
+    },
+    "mode": "abab",
+    "throttling": "devtools",
+    "warmup": 2,
+    "warmupErrors": 0,
+    "plannedRuns": 20,
+    "durationMs": 18596.526997000037,
+    "warmupDurationMs": 73547.924995,
+    "appBuild": "6275653e9bfb7f722672aecc411d3e2d259128102bf483058bf11b0765cf91d7",
+    "label": "injected",
+    "runIndex": 12,
+    "order": 25,
+    "metrics": {
+      "lcp": 2569.781,
+      "fcp": 1752.568,
+      "tbt": 1137.5840000000005,
+      "cls": 0.15446296071546706,
+      "si": 2092,
+      "ttfb": 1
+    },
+    "benchmarkIndex": 2877.5,
+    "failedRequests": 0,
+    "error": null,
+    "env": {
+      "chromeVersion": "153.0.0.0",
+      "chromeBinaryVersion": "153.0.8010.47",
+      "lighthouseVersion": "13.4.1",
+      "nodeVersion": "v22.23.4",
+      "platform": "linux",
+      "osRelease": "7.0.0-1017-azure",
+      "arch": "x64",
+      "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+      "cpuCount": 4,
+      "totalMemMb": 15984,
+      "ci": true,
+      "runnerImage": "ubuntu24-20261026.354.1",
+      "runnerName": "GitHub Actions 1000007160"
+    },
+    "gitSha": "744bde1863d885b164e7c0b85dbb841a7177d39a",
+    "timestamp": "2026-10-30T09:53:41.037Z"
+  }
+}

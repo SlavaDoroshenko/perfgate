@@ -1,0 +1,96 @@
+{
+  "index": 16,
+  "variant": "base",
+  "expected": false,
+  "evidence": {
+    "expected": false,
+    "durationMs": null,
+    "marks": [
+      {
+        "args": {
+          "data": {
+            "callTime": 113612928136,
+            "navigationId": "0F45278952E547351469CABF556D7FD8",
+            "sampleTraceId": 8418796517315770,
+            "startTime": 1200.899999991059
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-ready",
+        "ph": "I",
+        "pid": 44346,
+        "s": "t",
+        "tid": 2834639,
+        "ts": 113612928112,
+        "tts": 2122162
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 113614280907,
+            "navigationId": "0F45278952E547351469CABF556D7FD8",
+            "sampleTraceId": 8418796517315237,
+            "startTime": 2553.70000000298
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-done",
+        "ph": "I",
+        "pid": 44346,
+        "s": "t",
+        "tid": 2834639,
+        "ts": 113614280906,
+        "tts": 3194217
+      }
+    ],
+    "issues": []
+  },
+  "issues": [],
+  "record": {
+    "schemaVersion": 1,
+    "experimentId": "local-tail-rare-2026103001",
+    "app": "tail-heavy",
+    "variant": "base",
+    "url": "http://127.0.0.1:4187/tail-heavy.html?stall=0&stall_ms=800",
+    "inject": null,
+    "mode": "abab",
+    "throttling": "devtools",
+    "warmup": 2,
+    "warmupErrors": 0,
+    "plannedRuns": 20,
+    "durationMs": 18125.858791999985,
+    "warmupDurationMs": 72881.4785,
+    "appBuild": "6275653e9bfb7f722672aecc411d3e2d259128102bf483058bf11b0765cf91d7",
+    "label": "injected",
+    "runIndex": 16,
+    "order": 32,
+    "metrics": {
+      "lcp": 3103.061,
+      "fcp": 2559.871,
+      "tbt": 346.294999984741,
+      "cls": 0.23661845822240057,
+      "si": 2425,
+      "ttfb": 1
+    },
+    "benchmarkIndex": 2283,
+    "failedRequests": 0,
+    "error": null,
+    "env": {
+      "chromeVersion": "153.0.0.0",
+      "chromeBinaryVersion": "153.0.8010.47",
+      "lighthouseVersion": "13.4.1",
+      "nodeVersion": "v24.16.0",
+      "platform": "darwin",
+      "osRelease": "27.0.0",
+      "arch": "arm64",
+      "cpuModel": "Apple M5",
+      "cpuCount": 10,
+      "totalMemMb": 24576,
+      "ci": false,
+      "runnerImage": null,
+      "runnerName": null
+    },
+    "gitSha": "d1b45e890a2eeacc17aa4d12c1caaa8681aa0abd",
+    "timestamp": "2026-10-30T09:55:23.659Z"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "protocol": "tail-browser-pilot-2026-10-30",
+  "experiment": "tail-instrument-smoke",
+  "condition": "dense",
+  "seed": 2026103001,
+  "runs": 2,
+  "warmup": 0,
+  "stall_ms": 800,
+  "selected_indices": [
+    0,
+    1
+  ],
+  "interpretation": "fixed 15% contamination, not iid Bernoulli sampling; exploratory pilot, not power estimation",
+  "source": "92fd60fb852e89ae95317b3cc30bd1bebd1048eb",
+  "source_sha256": {
+    "scripts/collect-tail.mjs": "ea71072f3b4509632e8592c93b570b5ad4a8da9730446b958475bbce2e5db6ec",
+    "scripts/tail-protocol.mjs": "ecbeead38bb65b27d6fa6f4d243deb7abc745d7487df2564892679ce8f0cd389",
+    "scripts/prepare-tail-fixture.mjs": "c9e5b99a07730214ef811a0adbc0a07c4fc0d715fb5f59c51ed7316b648393e7",
+    "experiments/rare-stalls/probe.js": "0f1efaaeba866b131044f9e3aa69c326c96cffb37df557b40c28758cf462b1db",
+    "pnpm-lock.yaml": "54621b2a11406d3ea1e971a74e81ab400b2ee125bd75e3fb0225bca51931d98b"
+  },
+  "fixture_sha256": {
+    "tail-heavy.html": "9bc6df587eb4db002f059b93379eec50106699c1d80ba7954319e002bac4f1ca",
+    "tail-probe.js": "0f1efaaeba866b131044f9e3aa69c326c96cffb37df557b40c28758cf462b1db",
+    "assets-heavy/heavy-BTlTD8-R.css": "7bba42738796f3505921cadbbc3d39b4f64b70b3486cface058cd1e7f448bebf",
+    "assets-heavy/heavy-DZCtVll3.js": "a4e9fa75d44aebc59542ef956f0f0be5ff809c34781572facbe0a773b88d8653"
+  },
+  "app_build": "6275653e9bfb7f722672aecc411d3e2d259128102bf483058bf11b0765cf91d7",
+  "started": "2026-10-30T09:38:23.470Z",
+  "completed_slots": 4,
+  "failures": [],
+  "env": {
+    "chromeBinaryVersion": "153.0.8010.47",
+    "nodeVersion": "v24.16.0",
+    "platform": "darwin",
+    "osRelease": "27.0.0",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "totalMemMb": 24576,
+    "ci": false,
+    "runnerImage": null,
+    "runnerName": null
+  },
+  "finished": "2026-10-30T09:39:38.033Z",
+  "warmup_errors": 0
+}

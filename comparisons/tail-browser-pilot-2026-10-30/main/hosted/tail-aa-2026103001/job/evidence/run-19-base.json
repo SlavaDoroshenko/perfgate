@@ -1,0 +1,96 @@
+{
+  "index": 19,
+  "variant": "base",
+  "expected": false,
+  "evidence": {
+    "expected": false,
+    "durationMs": null,
+    "marks": [
+      {
+        "args": {
+          "data": {
+            "callTime": 822219637,
+            "navigationId": "FD506225D64EF053BC35135757D4A46F",
+            "sampleTraceId": 6505718689253305,
+            "startTime": 1195.79999999993
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-ready",
+        "ph": "I",
+        "pid": 10513,
+        "s": "t",
+        "tid": 10513,
+        "ts": 822219615,
+        "tts": 2043721
+      },
+      {
+        "args": {
+          "data": {
+            "callTime": 822838547,
+            "navigationId": "FD506225D64EF053BC35135757D4A46F",
+            "sampleTraceId": 6505718689251704,
+            "startTime": 1814.79999999993
+          }
+        },
+        "cat": "blink.user_timing",
+        "name": "perfgate-tail-done",
+        "ph": "I",
+        "pid": 10513,
+        "s": "t",
+        "tid": 10513,
+        "ts": 822838545,
+        "tts": 2576831
+      }
+    ],
+    "issues": []
+  },
+  "issues": [],
+  "record": {
+    "schemaVersion": 1,
+    "experimentId": "41035614668-1-tail-aa-2026103001",
+    "app": "tail-heavy",
+    "variant": "base",
+    "url": "http://127.0.0.1:4173/tail-heavy.html?stall=0&stall_ms=800",
+    "inject": null,
+    "mode": "abab",
+    "throttling": "devtools",
+    "warmup": 2,
+    "warmupErrors": 0,
+    "plannedRuns": 20,
+    "durationMs": 18102.92848599993,
+    "warmupDurationMs": 74185.56687000001,
+    "appBuild": "6275653e9bfb7f722672aecc411d3e2d259128102bf483058bf11b0765cf91d7",
+    "label": "aa",
+    "runIndex": 19,
+    "order": 38,
+    "metrics": {
+      "lcp": 2314.907,
+      "fcp": 1820.745,
+      "tbt": 489.46599999999967,
+      "cls": 0.15446296071546706,
+      "si": 1912,
+      "ttfb": 1
+    },
+    "benchmarkIndex": 2449,
+    "failedRequests": 0,
+    "error": null,
+    "env": {
+      "chromeVersion": "153.0.0.0",
+      "chromeBinaryVersion": "153.0.8010.47",
+      "lighthouseVersion": "13.4.1",
+      "nodeVersion": "v22.23.4",
+      "platform": "linux",
+      "osRelease": "7.0.0-1017-azure",
+      "arch": "x64",
+      "cpuModel": "AMD EPYC 7763 64-Core Processor",
+      "cpuCount": 4,
+      "totalMemMb": 15984,
+      "ci": true,
+      "runnerImage": "ubuntu24-20261026.354.1",
+      "runnerName": "GitHub Actions 1000007163"
+    },
+    "gitSha": "744bde1863d885b164e7c0b85dbb841a7177d39a",
+    "timestamp": "2026-10-30T09:57:55.374Z"
+  }
+}
