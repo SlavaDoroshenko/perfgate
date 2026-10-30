@@ -1,0 +1,47 @@
+{
+  "purpose": "exploratory CLS trace diagnosis, not confirmatory gate evaluation",
+  "source": "a935a57d5ffe19b4f4e035d2d3b3650b143f9d60",
+  "chrome": "Google Chrome for Testing 153.0.8010.47",
+  "complete": true,
+  "pairs_planned": 4,
+  "variants": {
+    "base": {
+      "n": 4,
+      "median": 0.15446296071546706,
+      "mean": 0.14434302387675335,
+      "min": 0.11398321336061218,
+      "max": 0.15446296071546706,
+      "values_rounded_9dp": {
+        "0.113983213": 1,
+        "0.154462961": 3
+      }
+    },
+    "pr": {
+      "n": 4,
+      "median": 0.19334509923308554,
+      "mean": 0.1832251623943718,
+      "min": 0.15286535187823064,
+      "max": 0.19334509923308554,
+      "values_rounded_9dp": {
+        "0.152865352": 1,
+        "0.193345099": 3
+      }
+    }
+  },
+  "observed_median_absolute_difference": 0.038882138517618486,
+  "observed_median_relative_difference": 0.251724674559634,
+  "input_sha256": {
+    "warmup-2-base.json": "5ae5aee4ad6ee52a2a01ff116581da4c090d2079e66ac1621417b9ba11ed0fca",
+    "warmup-2-pr.json": "40f37b665a7761b45bfadfdc083ad08dedf9ac237531585dc371ba0107fd77f6",
+    "warmup-1-base.json": "0d049b8ffbcf6daf4b8b5771991aa9804c1bdedf6459c9fbf666ece2fba4c034",
+    "warmup-1-pr.json": "00db6292451e670705cb5c75131d6c369f2a0bf314be24812be0104d3ec98d73",
+    "run-0-base.json": "bff465444249814dc4c7fe4bc57172a5d39259cd6912e56d21110210a5c11220",
+    "run-0-pr.json": "27b2b5df70df845cf56d3351336d5bd5a95551e5e614aa28ad6e29571183d5f1",
+    "run-1-base.json": "12c4354ecfc9361e0a5b6121b1d49252ec9608a66bcd512e55e654ebd3909090",
+    "run-1-pr.json": "576767e249344c12703df51f1357c6731379d99cd925cfb91eaa7fd8ce92e5eb",
+    "run-2-base.json": "dc390db683c7ffa02cce86f22487d11cad8610581ceec1441a981c30761a43bf",
+    "run-2-pr.json": "c2e5051f85727ac356ff9ba9bd0c33686b6af8b1b03ed5a876feef4e5932583f",
+    "run-3-base.json": "318584cd1bf83983682d079babf2bd9555c4fb20070a9ca7f65bd7c8135bcc8c",
+    "run-3-pr.json": "0c65189ad4a4f60ae2fa7d59229d55f30b1441865248af3d8b3a35699b9927e2"
+  }
+}

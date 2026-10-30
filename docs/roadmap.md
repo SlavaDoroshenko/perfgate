@@ -35,9 +35,10 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
   A/A/injected checks, and the first post-freeze CI pilot (1,320 loads / 33 jobs).
 - Review the published implementation and exercise it on an external project;
   add a separate trusted PR-comment integration.
-- Diagnose the nominal +25% layout-shift injection: its measured CLS effect was
-  only +0.25% in the first pilot. Preserve the failed calibration as evidence;
-  do not tune the frozen detector to it.
+- Completed: [CLS trace diagnosis](cls-diagnosis-2026-10-30.md) and a separate
+  reserved-layout control. Mixed layout shifts and mode occupancy can mask the
+  banner effect in the median; preserve this limitation of the original workload.
+  Use separately labelled calibration controls in subsequent experiments.
 - Continue the required later A/A and injected cohorts without tuning on that
   holdout. One quiet A/A suite is insufficient to establish its false-alarm rate.
 - Add measured rare-stall browser scenarios. The simulated median-gate weakness

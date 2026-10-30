@@ -58,8 +58,10 @@ Each cell represents one job per nominal level, not a power estimate. The +5%
 long-task case raises a page alarm through LCP, while TBT rises only 3.82%, below
 its 5% relative margin. Do not count this as successful TBT detection.
 The nominal +25% layout-shift job measures only +0.25% CLS (+0.000491 absolute):
-it fails to realize the intended treatment. This requires injector/calibration
-investigation, not a detector threshold change. The +2% CLS effect is below the
+this aggregate effect does not establish that the injector itself failed.
+Subsequent [trace diagnosis](cls-diagnosis-2026-10-30.md) found two CLS modes whose
+changing occupancy can mask the banner effect in the median. The original gate
+outcome is retained; no detector threshold was changed. The +2% CLS effect is below the
 absolute 0.005 margin; the +5% case exceeds the margin but is not significant after
 correction in this job. Retain all outcomes, including these limitations.
 
@@ -70,8 +72,9 @@ with scripts/summarize-pilot.py and the archived prospective directory.
 
 ## Next research steps
 
-1. Diagnose injection realization, especially CLS; distinguish nominal treatment,
-   observed target effect, target detection and any-metric detection throughout.
+1. Incorporate the [CLS trace diagnosis](cls-diagnosis-2026-10-30.md): distinguish
+   nominal treatment, multimodal observed effects, target detection and any-metric
+   detection. Use a separately labelled controlled workload for further calibration.
 2. Continue the predeclared independent cohorts (200 full A/A suites and 100 jobs
    per primary injected case), reporting interval estimates and exclusions.
 3. Measure rare-stall browser scenarios and compare both equal-load and equal-time

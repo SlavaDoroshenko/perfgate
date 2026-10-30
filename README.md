@@ -13,6 +13,8 @@ single-run thresholds.
 The root composite Action wraps URL comparison, artifacts and a job summary.
 The Action passed hosted A/A and injected-regression checks. Local URL and Git-ref
 checks also passed; see [validation results](docs/validation-2026-10-30.md).
+A [trace-based CLS investigation](docs/cls-diagnosis-2026-10-30.md) documents how
+mixed layout shifts can mask an injected effect in the sample median.
 The history dashboard is not built yet.
 
 See [comparison usage and policy](docs/compare.md), [roadmap](docs/roadmap.md), and

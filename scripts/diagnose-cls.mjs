@@ -20,6 +20,11 @@ if (!values.url || !values["pr-url"] || !values.out || !Number.isInteger(pairs) 
     !Number.isInteger(warmup) || warmup < 0 || !process.env.CHROME_PATH) {
   throw new Error("Required: --url URL --pr-url URL --out NEW_DIR; positive --pairs, nonnegative --warmup and CHROME_PATH");
 }
+for (const url of [values.url, values["pr-url"]]) {
+  const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+  if (!response.ok) throw new Error(`Readiness failed: HTTP ${response.status} for ${url}`);
+  await response.arrayBuffer();
+}
 const out = resolve(values.out);
 await mkdir(out); // Refuse to overwrite an existing experiment.
 const manifest = {
@@ -54,6 +59,10 @@ for (let index = -warmup; index < pairs; index++) {
       manifest.runs.push({ file: `${prefix}.json`, index, variant, cls: row.cls });
       await writeFile(`${out}/manifest.json`, JSON.stringify(manifest, null, 2) + "\n");
       console.log(prefix, "CLS", row.cls, "shifts", shifts.map(e => e.args.data?.score));
+    } catch (error) {
+      manifest.failure = { index, variant, timestamp: new Date().toISOString(), error: String(error) };
+      await writeFile(`${out}/manifest.json`, JSON.stringify(manifest, null, 2) + "\n");
+      throw error;
     } finally { await chrome.kill(); }
   }
 }
