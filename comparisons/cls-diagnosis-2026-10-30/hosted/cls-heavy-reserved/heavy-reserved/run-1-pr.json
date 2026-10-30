@@ -1,0 +1,229 @@
+{
+  "index": 1,
+  "variant": "pr",
+  "url": "http://127.0.0.1:4173/heavy-reserved.html?inject=layout-shift:96",
+  "timestamp": "2026-10-30T05:42:58.525Z",
+  "cls": 0.1166464155528554,
+  "fcp": 1786.822,
+  "lcp": 2484.478,
+  "tbt": 493.2820000000004,
+  "shifts": [
+    {
+      "args": {
+        "data": {
+          "cumulative_score": 0.1166464155528554,
+          "frame_max_distance": 96,
+          "had_recent_input": false,
+          "impacted_nodes": [
+            {
+              "new_rect": [
+                0,
+                167,
+                412,
+                656
+              ],
+              "node_id": 82,
+              "old_rect": [
+                0,
+                71,
+                412,
+                752
+              ]
+            },
+            {
+              "new_rect": [
+                0,
+                96,
+                412,
+                71
+              ],
+              "node_id": 81,
+              "old_rect": [
+                0,
+                0,
+                412,
+                71
+              ]
+            }
+          ],
+          "is_main_frame": true,
+          "last_input_timestamp": 1182.599999999977,
+          "overall_max_distance": 96,
+          "region_rects": [
+            [
+              0,
+              0,
+              412,
+              823
+            ]
+          ],
+          "score": 0.1166464155528554,
+          "weighted_score_delta": 0.1166464155528554
+        },
+        "frame": "E274EB58FD0EB8F48E0C3ABF027313BB"
+      },
+      "cat": "loading",
+      "name": "LayoutShift",
+      "ph": "I",
+      "pid": 4405,
+      "s": "t",
+      "tid": 4405,
+      "ts": 302865130,
+      "tts": 3367328
+    }
+  ],
+  "traceElements": [
+    {
+      "node": {
+        "lhId": "page-0-IMG",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,0,IMG",
+        "selector": "body > div#root > main > img.hero",
+        "boundingRect": {
+          "top": 183,
+          "bottom": 335,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 152
+        },
+        "snippet": "<img class=\"hero\" width=\"1200\" height=\"480\" alt=\"Autumn sale\" src=\"/hero.svg\">",
+        "nodeLabel": "Autumn sale"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 72
+    },
+    {
+      "node": {
+        "lhId": "page-1-MAIN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN",
+        "selector": "body > div#root > main",
+        "boundingRect": {
+          "top": 167,
+          "bottom": 169771,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 169604
+        },
+        "snippet": "<main>",
+        "nodeLabel": "Sales overview\nSegment 1\n110.07\np95 596.7 · max 695.9\nSegment 2\n551.31\np95 889.…"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 82
+    },
+    {
+      "node": {
+        "lhId": "page-2-HEADER",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,1,HEADER",
+        "selector": "body > div#root > header.header",
+        "boundingRect": {
+          "top": 96,
+          "bottom": 167,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 71
+        },
+        "snippet": "<header class=\"header\">",
+        "nodeLabel": "Demo shop — analytics\nOverview\nCatalog\nReports"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 81
+    },
+    {
+      "node": {
+        "lhId": "page-3-META",
+        "devtoolsNodePath": "1,HTML,0,HEAD,1,META",
+        "selector": "head > meta",
+        "boundingRect": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0,
+          "width": 0,
+          "height": 0
+        },
+        "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+        "nodeLabel": "head > meta"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 4
+    },
+    {
+      "node": {
+        "lhId": "page-4-UL",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,5,UL",
+        "selector": "body > div#root > main > ul.grid",
+        "boundingRect": {
+          "top": 780,
+          "bottom": 169739,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 168959
+        },
+        "snippet": "<ul class=\"grid\">",
+        "nodeLabel": "Classic Jacket\n\nCarefully made, ships in two days. Free returns within a month.…"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 7
+    },
+    {
+      "node": {
+        "lhId": "page-5-SPAN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,3,UL,0,LI,0,SPAN",
+        "selector": "main > ul.stats > li > span.stat-label",
+        "boundingRect": {
+          "top": 520,
+          "bottom": 534,
+          "left": 28,
+          "right": 188,
+          "width": 160,
+          "height": 14
+        },
+        "snippet": "<span class=\"stat-label\">",
+        "nodeLabel": "Segment 1"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 67
+    },
+    {
+      "node": {
+        "lhId": "page-6-svg",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,2,svg",
+        "selector": "body > div#root > main > svg.chart",
+        "boundingRect": {
+          "top": 416,
+          "bottom": 492,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 76
+        },
+        "snippet": "<svg class=\"chart\" viewBox=\"0 0 600 120\" width=\"600\" height=\"120\" role=\"img\" aria-label=\"Sales trend\">",
+        "nodeLabel": "Sales trend"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 66
+    },
+    {
+      "node": {
+        "lhId": "page-1-MAIN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN",
+        "selector": "body > div#root > main",
+        "boundingRect": {
+          "top": 167,
+          "bottom": 169771,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 169604
+        },
+        "snippet": "<main>",
+        "nodeLabel": "Sales overview\nSegment 1\n110.07\np95 596.7 · max 695.9\nSegment 2\n551.31\np95 889.…"
+      },
+      "traceEventType": "layout-shift",
+      "nodeId": 82
+    }
+  ]
+}

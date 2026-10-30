@@ -1,0 +1,424 @@
+{
+  "index": 1,
+  "variant": "base",
+  "url": "http://127.0.0.1:4186/heavy.html",
+  "timestamp": "2026-10-30T05:40:14.248Z",
+  "cls": 0.15722860699251184,
+  "fcp": 2553.65,
+  "lcp": 3114.103,
+  "tbt": 354.4380000000001,
+  "shifts": [
+    {
+      "args": {
+        "data": {
+          "cumulative_score": 0.04220776563430827,
+          "frame_max_distance": 84,
+          "had_recent_input": false,
+          "impacted_nodes": [
+            {
+              "new_rect": [
+                16,
+                566,
+                380,
+                257
+              ],
+              "node_id": 7,
+              "old_rect": [
+                16,
+                482,
+                380,
+                341
+              ]
+            },
+            {
+              "new_rect": [
+                16,
+                518,
+                380,
+                28
+              ],
+              "node_id": 14,
+              "old_rect": [
+                16,
+                434,
+                380,
+                28
+              ]
+            }
+          ],
+          "is_main_frame": true,
+          "last_input_timestamp": 1191,
+          "overall_max_distance": 84,
+          "region_rects": [
+            [
+              16,
+              434,
+              380,
+              28
+            ],
+            [
+              16,
+              482,
+              380,
+              341
+            ]
+          ],
+          "score": 0.04220776563430827,
+          "weighted_score_delta": 0.04220776563430827
+        },
+        "frame": "089DB0D0067DF857113BBC19116DE622"
+      },
+      "cat": "loading",
+      "name": "LayoutShift",
+      "ph": "I",
+      "pid": 2794,
+      "s": "t",
+      "tid": 2569809,
+      "ts": 98286903635,
+      "tts": 3390128
+    },
+    {
+      "args": {
+        "data": {
+          "cumulative_score": 0.07946432995727493,
+          "frame_max_distance": 96,
+          "had_recent_input": false,
+          "impacted_nodes": [
+            {
+              "new_rect": [
+                16,
+                662,
+                380,
+                161
+              ],
+              "node_id": 7,
+              "old_rect": [
+                16,
+                566,
+                380,
+                257
+              ]
+            },
+            {
+              "new_rect": [
+                16,
+                614,
+                380,
+                28
+              ],
+              "node_id": 14,
+              "old_rect": [
+                16,
+                518,
+                380,
+                28
+              ]
+            }
+          ],
+          "is_main_frame": true,
+          "last_input_timestamp": 1191,
+          "overall_max_distance": 96,
+          "region_rects": [
+            [
+              16,
+              518,
+              380,
+              28
+            ],
+            [
+              16,
+              566,
+              380,
+              257
+            ]
+          ],
+          "score": 0.03725656432296665,
+          "weighted_score_delta": 0.03725656432296665
+        },
+        "frame": "089DB0D0067DF857113BBC19116DE622"
+      },
+      "cat": "loading",
+      "name": "LayoutShift",
+      "ph": "I",
+      "pid": 2794,
+      "s": "t",
+      "tid": 2569809,
+      "ts": 98287296254,
+      "tts": 3782945
+    },
+    {
+      "args": {
+        "data": {
+          "cumulative_score": 0.1572286069925118,
+          "frame_max_distance": 64,
+          "had_recent_input": false,
+          "impacted_nodes": [
+            {
+              "new_rect": [
+                0,
+                133,
+                412,
+                690
+              ],
+              "node_id": 82,
+              "old_rect": [
+                0,
+                69,
+                412,
+                754
+              ]
+            },
+            {
+              "new_rect": [
+                0,
+                64,
+                412,
+                69
+              ],
+              "node_id": 81,
+              "old_rect": [
+                0,
+                0,
+                412,
+                69
+              ]
+            }
+          ],
+          "is_main_frame": true,
+          "last_input_timestamp": 1191,
+          "overall_max_distance": 96,
+          "region_rects": [
+            [
+              0,
+              0,
+              412,
+              823
+            ]
+          ],
+          "score": 0.07776427703523693,
+          "weighted_score_delta": 0.07776427703523693
+        },
+        "frame": "089DB0D0067DF857113BBC19116DE622"
+      },
+      "cat": "loading",
+      "name": "LayoutShift",
+      "ph": "I",
+      "pid": 2794,
+      "s": "t",
+      "tid": 2569809,
+      "ts": 98287325155,
+      "tts": 3811624
+    }
+  ],
+  "traceElements": [
+    {
+      "node": {
+        "lhId": "page-0-IMG",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,0,IMG",
+        "selector": "body > div#root > main > img.hero",
+        "boundingRect": {
+          "top": 149,
+          "bottom": 301,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 152
+        },
+        "snippet": "<img class=\"hero\" width=\"1200\" height=\"480\" alt=\"Autumn sale\" src=\"/hero.svg\">",
+        "nodeLabel": "Autumn sale"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 72
+    },
+    {
+      "node": {
+        "lhId": "page-1-UL",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,5,UL",
+        "selector": "body > div#root > main > ul.grid",
+        "boundingRect": {
+          "top": 726,
+          "bottom": 170485,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 169759
+        },
+        "snippet": "<ul class=\"grid\">",
+        "nodeLabel": "Classic Jacket\n\nCarefully made, ships in two days. Free returns within a month.…"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 7
+    },
+    {
+      "node": {
+        "lhId": "page-2-H2",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,4,H2",
+        "selector": "body > div#root > main > h2",
+        "boundingRect": {
+          "top": 678,
+          "bottom": 706,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 28
+        },
+        "snippet": "<h2>",
+        "nodeLabel": "Catalog"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 14
+    },
+    {
+      "node": {
+        "lhId": "page-3-MAIN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN",
+        "selector": "body > div#root > main",
+        "boundingRect": {
+          "top": 133,
+          "bottom": 170517,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 170384
+        },
+        "snippet": "<main>",
+        "nodeLabel": "Sales overview\nSegment 1\n110.07\np95 596.7 · max 695.9\nSegment 2\n551.31\np95 889.…"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 82
+    },
+    {
+      "node": {
+        "lhId": "page-4-HEADER",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,1,HEADER",
+        "selector": "body > div#root > header.header",
+        "boundingRect": {
+          "top": 64,
+          "bottom": 133,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 69
+        },
+        "snippet": "<header class=\"header\">",
+        "nodeLabel": "Demo shop — analytics\nOverview\nCatalog\nReports"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 81
+    },
+    {
+      "node": {
+        "lhId": "page-5-META",
+        "devtoolsNodePath": "1,HTML,0,HEAD,1,META",
+        "selector": "head > meta",
+        "boundingRect": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0,
+          "width": 0,
+          "height": 0
+        },
+        "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+        "nodeLabel": "head > meta"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 4
+    },
+    {
+      "node": {
+        "lhId": "page-6-SPAN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,3,UL,0,LI,0,SPAN",
+        "selector": "main > ul.stats > li > span.stat-label",
+        "boundingRect": {
+          "top": 486,
+          "bottom": 501,
+          "left": 28,
+          "right": 188,
+          "width": 160,
+          "height": 15
+        },
+        "snippet": "<span class=\"stat-label\">",
+        "nodeLabel": "Segment 1"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 67
+    },
+    {
+      "node": {
+        "lhId": "page-7-svg",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,2,svg",
+        "selector": "body > div#root > main > svg.chart",
+        "boundingRect": {
+          "top": 382,
+          "bottom": 458,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 76
+        },
+        "snippet": "<svg class=\"chart\" viewBox=\"0 0 600 120\" width=\"600\" height=\"120\" role=\"img\" aria-label=\"Sales trend\">",
+        "nodeLabel": "Sales trend"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 66
+    },
+    {
+      "node": {
+        "lhId": "page-3-MAIN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN",
+        "selector": "body > div#root > main",
+        "boundingRect": {
+          "top": 133,
+          "bottom": 170517,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 170384
+        },
+        "snippet": "<main>",
+        "nodeLabel": "Sales overview\nSegment 1\n110.07\np95 596.7 · max 695.9\nSegment 2\n551.31\np95 889.…"
+      },
+      "traceEventType": "layout-shift",
+      "nodeId": 82
+    },
+    {
+      "node": {
+        "lhId": "page-1-UL",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,5,UL",
+        "selector": "body > div#root > main > ul.grid",
+        "boundingRect": {
+          "top": 726,
+          "bottom": 170485,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 169759
+        },
+        "snippet": "<ul class=\"grid\">",
+        "nodeLabel": "Classic Jacket\n\nCarefully made, ships in two days. Free returns within a month.…"
+      },
+      "traceEventType": "layout-shift",
+      "nodeId": 7
+    },
+    {
+      "node": {
+        "lhId": "page-1-UL",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,5,UL",
+        "selector": "body > div#root > main > ul.grid",
+        "boundingRect": {
+          "top": 726,
+          "bottom": 170485,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 169759
+        },
+        "snippet": "<ul class=\"grid\">",
+        "nodeLabel": "Classic Jacket\n\nCarefully made, ships in two days. Free returns within a month.…"
+      },
+      "traceEventType": "layout-shift",
+      "nodeId": 7
+    }
+  ]
+}

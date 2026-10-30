@@ -1,0 +1,336 @@
+{
+  "index": -1,
+  "variant": "pr",
+  "url": "http://127.0.0.1:4186/heavy.html?inject=layout-shift:96",
+  "timestamp": "2026-10-30T05:39:19.554Z",
+  "cls": 0.2755005967400191,
+  "fcp": 2552.983,
+  "lcp": 3114.956,
+  "tbt": 352.43700000000035,
+  "shifts": [
+    {
+      "args": {
+        "data": {
+          "cumulative_score": 0.04220776563430827,
+          "frame_max_distance": 84,
+          "had_recent_input": false,
+          "impacted_nodes": [
+            {
+              "new_rect": [
+                16,
+                566,
+                380,
+                257
+              ],
+              "node_id": 7,
+              "old_rect": [
+                16,
+                482,
+                380,
+                341
+              ]
+            },
+            {
+              "new_rect": [
+                16,
+                518,
+                380,
+                28
+              ],
+              "node_id": 14,
+              "old_rect": [
+                16,
+                434,
+                380,
+                28
+              ]
+            }
+          ],
+          "is_main_frame": true,
+          "last_input_timestamp": 1200.5,
+          "overall_max_distance": 84,
+          "region_rects": [
+            [
+              16,
+              434,
+              380,
+              28
+            ],
+            [
+              16,
+              482,
+              380,
+              341
+            ]
+          ],
+          "score": 0.04220776563430827,
+          "weighted_score_delta": 0.04220776563430827
+        },
+        "frame": "5EEFA66E4382781EB6ED4E3AE66F7EA3"
+      },
+      "cat": "loading",
+      "name": "LayoutShift",
+      "ph": "I",
+      "pid": 2525,
+      "s": "t",
+      "tid": 2567648,
+      "ts": 98232164041,
+      "tts": 3365880
+    },
+    {
+      "args": {
+        "data": {
+          "cumulative_score": 0.2755005967400191,
+          "frame_max_distance": 192,
+          "had_recent_input": false,
+          "impacted_nodes": [
+            {
+              "new_rect": [
+                0,
+                165,
+                412,
+                658
+              ],
+              "node_id": 76,
+              "old_rect": [
+                0,
+                69,
+                412,
+                754
+              ]
+            },
+            {
+              "new_rect": [
+                0,
+                96,
+                412,
+                69
+              ],
+              "node_id": 75,
+              "old_rect": [
+                0,
+                0,
+                412,
+                69
+              ]
+            }
+          ],
+          "is_main_frame": true,
+          "last_input_timestamp": 1200.5,
+          "overall_max_distance": 192,
+          "region_rects": [
+            [
+              0,
+              0,
+              412,
+              823
+            ]
+          ],
+          "score": 0.2332928311057108,
+          "weighted_score_delta": 0.2332928311057108
+        },
+        "frame": "5EEFA66E4382781EB6ED4E3AE66F7EA3"
+      },
+      "cat": "loading",
+      "name": "LayoutShift",
+      "ph": "I",
+      "pid": 2525,
+      "s": "t",
+      "tid": 2567648,
+      "ts": 98232569717,
+      "tts": 3771208
+    }
+  ],
+  "traceElements": [
+    {
+      "node": {
+        "lhId": "page-0-IMG",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,0,IMG",
+        "selector": "body > div#root > main > img.hero",
+        "boundingRect": {
+          "top": 181,
+          "bottom": 333,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 152
+        },
+        "snippet": "<img class=\"hero\" width=\"1200\" height=\"480\" alt=\"Autumn sale\" src=\"/hero.svg\">",
+        "nodeLabel": "Autumn sale"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 72
+    },
+    {
+      "node": {
+        "lhId": "page-1-UL",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,5,UL",
+        "selector": "body > div#root > main > ul.grid",
+        "boundingRect": {
+          "top": 758,
+          "bottom": 170517,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 169759
+        },
+        "snippet": "<ul class=\"grid\">",
+        "nodeLabel": "Classic Jacket\n\nCarefully made, ships in two days. Free returns within a month.…"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 7
+    },
+    {
+      "node": {
+        "lhId": "page-2-H2",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,4,H2",
+        "selector": "body > div#root > main > h2",
+        "boundingRect": {
+          "top": 710,
+          "bottom": 738,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 28
+        },
+        "snippet": "<h2>",
+        "nodeLabel": "Catalog"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 14
+    },
+    {
+      "node": {
+        "lhId": "page-3-MAIN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN",
+        "selector": "body > div#root > main",
+        "boundingRect": {
+          "top": 165,
+          "bottom": 170549,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 170384
+        },
+        "snippet": "<main>",
+        "nodeLabel": "Sales overview\nSegment 1\n110.07\np95 596.7 · max 695.9\nSegment 2\n551.31\np95 889.…"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 76
+    },
+    {
+      "node": {
+        "lhId": "page-4-HEADER",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,1,HEADER",
+        "selector": "body > div#root > header.header",
+        "boundingRect": {
+          "top": 96,
+          "bottom": 165,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 69
+        },
+        "snippet": "<header class=\"header\">",
+        "nodeLabel": "Demo shop — analytics\nOverview\nCatalog\nReports"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 75
+    },
+    {
+      "node": {
+        "lhId": "page-5-META",
+        "devtoolsNodePath": "1,HTML,0,HEAD,1,META",
+        "selector": "head > meta",
+        "boundingRect": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0,
+          "width": 0,
+          "height": 0
+        },
+        "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+        "nodeLabel": "head > meta"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 4
+    },
+    {
+      "node": {
+        "lhId": "page-6-SPAN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,3,UL,0,LI,0,SPAN",
+        "selector": "main > ul.stats > li > span.stat-label",
+        "boundingRect": {
+          "top": 518,
+          "bottom": 533,
+          "left": 28,
+          "right": 188,
+          "width": 160,
+          "height": 15
+        },
+        "snippet": "<span class=\"stat-label\">",
+        "nodeLabel": "Segment 1"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 67
+    },
+    {
+      "node": {
+        "lhId": "page-7-svg",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,2,svg",
+        "selector": "body > div#root > main > svg.chart",
+        "boundingRect": {
+          "top": 414,
+          "bottom": 490,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 76
+        },
+        "snippet": "<svg class=\"chart\" viewBox=\"0 0 600 120\" width=\"600\" height=\"120\" role=\"img\" aria-label=\"Sales trend\">",
+        "nodeLabel": "Sales trend"
+      },
+      "traceEventType": "trace-engine",
+      "nodeId": 66
+    },
+    {
+      "node": {
+        "lhId": "page-3-MAIN",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN",
+        "selector": "body > div#root > main",
+        "boundingRect": {
+          "top": 165,
+          "bottom": 170549,
+          "left": 0,
+          "right": 412,
+          "width": 412,
+          "height": 170384
+        },
+        "snippet": "<main>",
+        "nodeLabel": "Sales overview\nSegment 1\n110.07\np95 596.7 · max 695.9\nSegment 2\n551.31\np95 889.…"
+      },
+      "traceEventType": "layout-shift",
+      "nodeId": 76
+    },
+    {
+      "node": {
+        "lhId": "page-1-UL",
+        "devtoolsNodePath": "1,HTML,1,BODY,0,DIV,2,MAIN,5,UL",
+        "selector": "body > div#root > main > ul.grid",
+        "boundingRect": {
+          "top": 758,
+          "bottom": 170517,
+          "left": 16,
+          "right": 396,
+          "width": 380,
+          "height": 169759
+        },
+        "snippet": "<ul class=\"grid\">",
+        "nodeLabel": "Classic Jacket\n\nCarefully made, ships in two days. Free returns within a month.…"
+      },
+      "traceEventType": "layout-shift",
+      "nodeId": 7
+    }
+  ]
+}

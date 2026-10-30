@@ -1,0 +1,84 @@
+{
+  "purpose": "exploratory CLS trace diagnosis, not confirmatory gate evaluation",
+  "source": "a935a57d5ffe19b4f4e035d2d3b3650b143f9d60",
+  "chrome": "Google Chrome for Testing 153.0.8010.47",
+  "script_sha256": "816780f8f7897ba4a70c11f0405f430be221987641557f9d6d4fd80f48dbbc55",
+  "pairs": 4,
+  "warmup": 2,
+  "started": "2026-10-30T05:40:33.015Z",
+  "runs": [
+    {
+      "file": "warmup-2-base.json",
+      "index": -2,
+      "variant": "base",
+      "cls": 0.07776427703523693
+    },
+    {
+      "file": "warmup-2-pr.json",
+      "index": -2,
+      "variant": "pr",
+      "cls": 0.1166464155528554
+    },
+    {
+      "file": "warmup-1-base.json",
+      "index": -1,
+      "variant": "base",
+      "cls": 0.07776427703523693
+    },
+    {
+      "file": "warmup-1-pr.json",
+      "index": -1,
+      "variant": "pr",
+      "cls": 0.1166464155528554
+    },
+    {
+      "file": "run-0-base.json",
+      "index": 0,
+      "variant": "base",
+      "cls": 0.07776427703523693
+    },
+    {
+      "file": "run-0-pr.json",
+      "index": 0,
+      "variant": "pr",
+      "cls": 0.1166464155528554
+    },
+    {
+      "file": "run-1-base.json",
+      "index": 1,
+      "variant": "base",
+      "cls": 0.07776427703523693
+    },
+    {
+      "file": "run-1-pr.json",
+      "index": 1,
+      "variant": "pr",
+      "cls": 0.1166464155528554
+    },
+    {
+      "file": "run-2-base.json",
+      "index": 2,
+      "variant": "base",
+      "cls": 0.07776427703523693
+    },
+    {
+      "file": "run-2-pr.json",
+      "index": 2,
+      "variant": "pr",
+      "cls": 0.1166464155528554
+    },
+    {
+      "file": "run-3-base.json",
+      "index": 3,
+      "variant": "base",
+      "cls": 0.07776427703523693
+    },
+    {
+      "file": "run-3-pr.json",
+      "index": 3,
+      "variant": "pr",
+      "cls": 0.1166464155528554
+    }
+  ],
+  "finished": "2026-10-30T05:44:10.869Z"
+}
