@@ -1,0 +1,54 @@
+name: cls-diagnosis
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  trace:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        page: [heavy, heavy-reserved]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: pnpm install --frozen-lockfile
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: '153.0.8010.47'
+          install-dependencies: true
+      - name: Build original and diagnostic control
+        run: |
+          pnpm --filter demo-spa build
+          node scripts/prepare-cls-control.mjs
+          mkdir -p results/fixture
+          cp apps/demo-spa/dist/heavy*.html results/fixture/
+          sha256sum apps/demo-spa/dist/assets-heavy/* > results/fixture/assets.sha256
+          nohup pnpm --filter demo-spa preview > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4173/heavy.html > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+      - name: Capture exploratory traces
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          node scripts/diagnose-cls.mjs \
+            --url 'http://127.0.0.1:4173/${{ matrix.page }}.html' \
+            --pr-url 'http://127.0.0.1:4173/${{ matrix.page }}.html?inject=layout-shift:96' \
+            --pairs 4 --warmup 2 --out 'results/${{ matrix.page }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: cls-${{ matrix.page }}
+          path: results/
+          retention-days: 90
+          if-no-files-found: error
