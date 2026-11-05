@@ -1,4 +1,4 @@
-# Roadmap, updated 30 October 2026
+# Roadmap, updated 5 November 2026
 
 A completed empirical study is required alongside the working product. Completion
 criteria and prospective validation are specified in [research-completion.md](research-completion.md).
@@ -34,7 +34,7 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 - Completed: local URL and isolated Git-ref checks (80 loads), hosted Action
   A/A/injected checks, and the first post-freeze CI pilot (1,320 loads / 33 jobs).
 - Review the published implementation and exercise it on an external project;
-  add a separate trusted PR-comment integration.
+  observe the trusted PR-comment integration on hosted CI.
 - Completed: [CLS trace diagnosis](cls-diagnosis-2026-10-30.md) and a separate
   reserved-layout control. Mixed layout shifts and mode occupancy can mask the
   banner effect in the median; preserve this limitation of the original workload.
@@ -49,6 +49,19 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
   timing in a separately versioned fixture; retain the original pilot outcomes.
 - Compare same-load and same-time budgets using newly recorded durations.
 
+## Implemented on 5 November
+
+- Two-stage pull request comment: measurement stays in the read-only
+  `pull_request` job; a `workflow_run` job validates and escapes the artifact and
+  updates one sticky comment ([pr-comments.md](pr-comments.md)). Hosted
+  end-to-end run pending (requires the workflow on the default branch).
+- Docker image with pinned Chrome for Testing, offline installation notes and a
+  native-x86 smoke workflow ([docker.md](docker.md)). Built locally; the live
+  pinned-browser check awaits hosted CI because amd64 emulation cannot run Chrome.
+- GitLab include template with merge request notes ([gitlab.md](gitlab.md)),
+  exercised with gitlab-ci-local only; GitLab CE validation still required.
+- [User guide](user-guide.md) with verdict interpretation and limitations.
+
 ## Research work still required
 
 - More sitespeed repetitions with balanced tool order, stored raw data and explicit
@@ -62,8 +75,8 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 ## Product work after the first verified integration
 
 - Persistent history and a small dashboard; history warnings advisory initially.
-- Docker packaging and documented autonomous/offline installation.
-- GitLab template, MR integration and self-hosted validation.
+- Docker packaging: hosted x86-64 smoke run of the pinned-browser image.
+- GitLab: self-hosted CE validation of the template and merge request notes.
 - Deployment pilot and completed-system comparison against fixed thresholds.
 
 ## Future scope

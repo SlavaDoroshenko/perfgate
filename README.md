@@ -18,7 +18,13 @@ mixed layout shifts can mask an injected effect in the sample median.
 A [measured rare-stall pilot](docs/tail-browser-results-2026-10-30.md) found a
 limitation: mean TBT increased 22–33% while the median stayed nearly unchanged,
 and the current gate missed those three sparse-regression series.
+Results can be published as one sticky pull request comment through a separate
+trusted workflow ([PR comments](docs/pr-comments.md)) or as a GitLab merge request
+note ([GitLab template](docs/gitlab.md)). A [Docker image](docs/docker.md) with
+the pinned Chrome supports offline installation.
 The history dashboard is not built yet.
+
+Start with the [user guide](docs/user-guide.md).
 
 See [comparison usage and policy](docs/compare.md), [roadmap](docs/roadmap.md), and
 [research completion criteria](docs/research-completion.md). The candidate gate is
@@ -36,6 +42,11 @@ immutable historical report, not a count of all subsequently collected data.
 | `apps/demo-ssr` | server-rendered Next.js demo |
 | `schema/run.schema.json` | JSON Schema of a run record, generated from zod |
 | `analysis/` | Python: noise, minimum detectable effect, detection methods, run order, change points |
+| `action.yml`, `comment/action.yml` | GitHub Actions: measure two URLs; publish the PR comment |
+| `scripts/comment/` | comment renderer and GitHub/GitLab publisher (untrusted-input safe) |
+| `Dockerfile`, `docker/` | measurement image with pinned Chrome for Testing |
+| `ci/gitlab/` | GitLab CI include template |
+| `examples/` | compare-refs config and external-project GitHub workflows |
 | `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |
 | `docs/protocol.md` | experiment protocol |
 | `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
