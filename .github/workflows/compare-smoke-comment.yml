@@ -1,0 +1,24 @@
+# Trusted second stage for compare-smoke: publishes its A/A and injected-regression
+# reports as one sticky pull request comment. Runs only from the default branch.
+name: compare-smoke-comment
+on:
+  workflow_run:
+    workflows: [compare-smoke]
+    types: [completed]
+permissions:
+  actions: read
+  pull-requests: write
+jobs:
+  comment:
+    if: github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      # Default-branch checkout only, for the local action; never the PR head.
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./comment
+        with:
+          artifact-pattern: compare-smoke-*-${{ github.event.workflow_run.run_attempt }}
+          comment-key: compare-smoke

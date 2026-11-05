@@ -20,7 +20,7 @@ jobs:
       - run: pnpm -r build
       - run: pnpm typecheck
       - run: pnpm test
-      - run: node --test scripts/tail-protocol.test.mjs
+      - run: node --test scripts/tail-protocol.test.mjs scripts/comment/render.test.mjs scripts/comment/publish.test.mjs
       - name: JSON Schema is up to date
         run: |
           pnpm schema

@@ -1,0 +1,56 @@
+# Stage 1 of 2: measure. Copy to .github/workflows/perfgate.yml in your project.
+#
+# Runs pull request code, so it gets a read-only token and no secrets (GitHub does
+# not pass secrets to pull_request runs from forks). It never comments itself:
+# it uploads the report as an artifact, and perfgate-comment.yml publishes it.
+# The job fails on a detected regression (exit 1) or invalid measurements (exit 2),
+# so make this job a required status check if regressions should block merging.
+#
+# Adapt the build/start step to your project. Replace <perfgate-commit> with a
+# reviewed full commit SHA of SlavaDoroshenko/perfgate.
+name: perfgate
+on:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: perfgate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: pr
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Build and start base (4173) and PR (4174)
+        run: |
+          for side in base pr; do
+            (cd "$side" && npm ci && npm run build)
+          done
+          (cd base && nohup npx --no-install vite preview --host 127.0.0.1 --port 4173 --strictPort > ../base.log 2>&1 &)
+          (cd pr && nohup npx --no-install vite preview --host 127.0.0.1 --port 4174 --strictPort > ../pr.log 2>&1 &)
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              curl -fsS "http://127.0.0.1:$port/" > /dev/null && break
+              if [ "$i" = 60 ]; then cat base.log pr.log; exit 1; fi
+              sleep 1
+            done
+          done
+      # Artifact name perfgate-<attempt>; the comment workflow downloads it.
+      - uses: SlavaDoroshenko/perfgate@<perfgate-commit>
+        with:
+          base-url: http://127.0.0.1:4173/
+          pr-url: http://127.0.0.1:4174/
+          runs: '20'
+          app: home
