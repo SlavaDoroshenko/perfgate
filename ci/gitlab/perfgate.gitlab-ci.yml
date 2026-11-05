@@ -1,0 +1,94 @@
+# perfgate for GitLab merge requests. Include this file and set PERFGATE_IMAGE
+# (an image built from this repository's Dockerfile, pushed to a registry your
+# runners can pull from). See docs/gitlab.md.
+#
+#   include:
+#     - remote: https://raw.githubusercontent.com/SlavaDoroshenko/perfgate/<commit>/ci/gitlab/perfgate.gitlab-ci.yml
+#   variables:
+#     PERFGATE_IMAGE: registry.example.com/tools/perfgate@sha256:<digest>
+#     PERFGATE_REFS_CONFIG: perfgate-refs.json   # or PERFGATE_BASE_URL/PERFGATE_PR_URL
+#
+# Two modes:
+#   * refs (PERFGATE_REFS_CONFIG set): perfgate compare-refs builds the merge
+#     request's diff base and head commits in isolated worktrees and compares them;
+#   * URLs: extend the `perfgate` job with a before_script that builds and starts
+#     both versions, then set PERFGATE_BASE_URL and PERFGATE_PR_URL.
+#
+# The measuring job fails with exit 1 on a detected regression and 2 on invalid
+# measurements. `perfgate-comment` then creates or updates one merge request note
+# when PERFGATE_GITLAB_TOKEN is available; without it the note is skipped.
+
+variables:
+  PERFGATE_IMAGE: ''
+  PERFGATE_RUNS: '20'
+  PERFGATE_APP: web
+  PERFGATE_REFS_CONFIG: ''
+  PERFGATE_BASE_URL: ''
+  PERFGATE_PR_URL: ''
+  PERFGATE_COMMENT_KEY: default
+
+.perfgate-rules:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+perfgate:
+  extends: .perfgate-rules
+  image:
+    name: $PERFGATE_IMAGE
+    entrypoint: ['']
+  variables:
+    GIT_DEPTH: '0' # compare-refs needs the merge request's base commit
+  timeout: 1h
+  script:
+    - test -n "$PERFGATE_IMAGE" || { echo "set PERFGATE_IMAGE"; exit 3; }
+    - mkdir -p perfgate
+    - echo "PERFGATE_RUN_URL=$CI_JOB_URL" > perfgate.env
+    - echo "PERFGATE_ARTIFACT_URL=$CI_JOB_URL/artifacts/browse/perfgate" >> perfgate.env
+    - status=0
+    - |
+      if [ -n "$PERFGATE_REFS_CONFIG" ]; then
+        git config --global --add safe.directory "$CI_PROJECT_DIR"
+        base="${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_MERGE_REQUEST_TARGET_BRANCH_SHA}"
+        perfgate compare-refs --repo "$CI_PROJECT_DIR" --base-ref "$base" --pr-ref "$CI_COMMIT_SHA" \
+          --config "$PERFGATE_REFS_CONFIG" --runs "$PERFGATE_RUNS" --out "perfgate/$PERFGATE_APP" || status=$?
+      else
+        perfgate compare --url "$PERFGATE_BASE_URL" --pr-url "$PERFGATE_PR_URL" --runs "$PERFGATE_RUNS" \
+          --app "$PERFGATE_APP" --out "perfgate/$PERFGATE_APP" || status=$?
+      fi
+    - echo "PERFGATE_EXIT=$status" >> perfgate.env
+    - find perfgate -name comparison.md -exec cat {} \;
+    - exit "$status"
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths:
+      - perfgate/
+    reports:
+      dotenv: perfgate.env
+
+perfgate-comment:
+  stage: .post
+  image:
+    name: $PERFGATE_IMAGE
+    entrypoint: ['']
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+  needs:
+    - job: perfgate
+      artifacts: true
+  variables:
+    GIT_STRATEGY: none # never checks out or runs merge request code
+  # Scope PERFGATE_GITLAB_TOKEN to this environment so the measuring job does
+  # not receive it (see docs/gitlab.md for what this does and does not protect).
+  environment:
+    name: perfgate-comment
+    action: access
+  script:
+    - |
+      if [ -z "${PERFGATE_GITLAB_TOKEN:-}" ]; then
+        echo "PERFGATE_GITLAB_TOKEN is not available; rendering without posting"
+        perfgate comment render --reports perfgate --key "$PERFGATE_COMMENT_KEY" --run-url "${PERFGATE_RUN_URL:-$CI_PIPELINE_URL}"
+        exit 0
+      fi
+    - perfgate comment gitlab --reports perfgate --key "$PERFGATE_COMMENT_KEY"
