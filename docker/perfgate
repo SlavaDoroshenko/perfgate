@@ -1,0 +1,11 @@
+#!/bin/sh
+# perfgate entry point inside the container image.
+#   perfgate collect|compare|compare-refs ...   collector CLI (compiled JavaScript)
+#   perfgate comment render|github|gitlab ...    pull/merge request comment
+set -e
+root="${PERFGATE_HOME:-/opt/perfgate}"
+if [ "$1" = comment ]; then
+  shift
+  exec node "$root/scripts/comment/cli.mjs" "$@"
+fi
+exec node "$root/packages/collector/dist/cli.js" "$@"

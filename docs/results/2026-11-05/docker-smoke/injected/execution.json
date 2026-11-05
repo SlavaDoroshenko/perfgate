@@ -1,0 +1,8 @@
+{
+  "measured": true,
+  "collector_exit": 0,
+  "collection_seconds": 427.02391811300004,
+  "analysis_seconds": 0.49916059099999255,
+  "total_seconds": 427.52308295500006,
+  "input": "/work/live-arm64/runs.jsonl"
+}

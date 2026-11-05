@@ -1,0 +1,67 @@
+# Builds the perfgate image natively on x86-64 and runs a same-page A/A and an
+# injected-delay comparison inside it against the demo SPA served on the runner.
+name: docker-smoke
+on:
+  pull_request:
+    paths:
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'docker/**'
+      - 'packages/collector/**'
+      - 'analysis/**'
+      - '.github/workflows/docker-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Build image
+        run: docker build --platform linux/amd64 -t perfgate:ci .
+      - name: Pinned browser
+        run: docker run --rm --entrypoint cat perfgate:ci /opt/perfgate/chrome-version.txt | grep -F 153.0.8010.47
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Build and serve the demo page
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter demo-spa build
+          nohup pnpm --filter demo-spa preview > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4173/heavy.html > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+      - name: A/A and injected comparisons in the container
+        run: |
+          mkdir -p reports
+          run() {
+            set +e
+            docker run --rm --network host --shm-size=2g -v "$PWD/reports:/work" perfgate:ci \
+              compare --url http://127.0.0.1:4173/heavy.html --pr-url "http://127.0.0.1:4173/heavy.html$2" \
+              --runs 10 --app demo-heavy --out "/work/perfgate-$1"
+            echo $?
+          }
+          aa=$(run aa '' | tail -1)
+          injected=$(run injected '?inject=script-delay:179' | tail -1)
+          echo "A/A exit $aa, injected exit $injected"
+          test "$aa" = 0 && test "$injected" = 1
+      - name: Render the comment from the container reports
+        if: always()
+        run: |
+          docker run --rm -v "$PWD/reports:/work" perfgate:ci comment render --reports /work --out /work/comment.md
+          cat reports/comment.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: docker-smoke-${{ github.run_attempt }}
+          path: reports
+          retention-days: 30
