@@ -1,0 +1,132 @@
+# LCP waterfall diagnosis: sixteen same-commit Phanpy jobs with per-load LCP subparts and
+# request timings (scripts/diagnose-lcp.mjs). The ~140 ms side offset of the 6 November
+# pilot appeared in about one job in nine; this is enough jobs to catch it with a trace.
+# Exploratory: runs the research branch head, not the frozen sources.
+name: external-lcp-trace
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: external-lcp-trace
+  cancel-in-progress: false
+
+env:
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: "20"
+  REPO: https://github.com/cheeaun/phanpy.git
+
+jobs:
+  collect:
+    name: trace ${{ matrix.rep }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        rep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        pair:
+          - { id: aa-624fa08bde02, before: 624fa08bde02, after: 624fa08bde02, note: "A/A: same commit built twice" }
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: research/comparison-mvp
+
+      - name: Register the pair
+        run: |
+          python3 - <<'EOF'
+          import json
+          cases = json.load(open("oss/cases.json"))
+          cases.append({"id": "pilot-phanpy-${{ matrix.pair.id }}", "repo": "${{ env.REPO }}",
+                        "before": "${{ matrix.pair.before }}", "after": "${{ matrix.pair.after }}",
+                        "install": "npm ci --no-audit --no-fund", "build": "npm run build",
+                        "dist": "dist", "path": "index.html"})
+          json.dump(cases, open("oss/cases.json", "w"), indent=2)
+          EOF
+
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build both sides
+        run: node scripts/build-commit-pair.mjs --case pilot-phanpy-${{ matrix.pair.id }}
+
+      - name: Serve each side from its own root
+        run: |
+          d=".oss-dist/pilot-phanpy-${{ matrix.pair.id }}"
+          nohup pnpm exec sirv "$d/before" --host 127.0.0.1 --port 4178 > before.log 2>&1 &
+          nohup pnpm exec sirv "$d/after" --host 127.0.0.1 --port 4179 > after.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:4178/index.html" > /dev/null \
+               && curl -sf "http://127.0.0.1:4179/index.html" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat before.log after.log
+          exit 1
+
+      - name: Trace
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          id="${{ github.run_id }}-${{ github.run_attempt }}-lcp-trace-${{ matrix.rep }}"
+          mkdir -p results
+          node scripts/diagnose-lcp.mjs \
+            --url "http://127.0.0.1:4178/index.html" \
+            --pr-url "http://127.0.0.1:4179/index.html" \
+            --runs "$RUNS" --warmup 2 --out "results/$id"
+          echo "${{ runner.name }} $(grep -m1 'model name' /proc/cpuinfo)" > "results/$id/runner.txt"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: trace-${{ matrix.rep }}
+          path: results/
+          retention-days: 30
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: trace-*
+          merge-multiple: true
+          path: incoming
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch data
+          dest="pilot/lcp-trace/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp -r "${files[@]}" "$dest/"
+          git add -f pilot
+          git commit -m "data: LCP trace run ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1
