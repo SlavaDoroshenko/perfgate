@@ -1,0 +1,166 @@
+# External pilot: replay consecutive real changes of a third-party application through
+# the frozen candidate, as if each had been a pull request. Phanpy (Mastodon client)
+# commits to main directly, so each commit against its first parent stands for one PR.
+# Two same-commit pairs, built independently, are the A/A controls. Nobody knows in
+# advance which changes make the page slower: the pilot measures how often each rule
+# would have blocked a merge, not detection power.
+name: external-pilot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: external-pilot
+  cancel-in-progress: false
+
+env:
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: "20"
+  SOURCE_SHA: 30ca8339a7c1767ebe062378c893ac1d2adf93ae
+  FREEZE: docs/protocols/browser-candidate-2026-10-30.json
+  REPO: https://github.com/cheeaun/phanpy.git
+
+jobs:
+  collect:
+    name: ${{ matrix.pair.id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        pair:
+          # chosen on 6 November 2026 from the 40 latest app-code commits of main:
+          # all five dependency upgrades and seven feature/style changes, oldest first
+          - { id: c9fec8f171d8, before: 56974a0c0340, after: c9fec8f171d8, note: "Tweaked animations for heart and bookmark" }
+          - { id: 51223533d456, before: c9fec8f171d8, after: 51223533d456, note: "Upgrade deps" }
+          - { id: 91986a904f17, before: bb2c7ea3874d, after: 91986a904f17, note: "Revamp whole icons logic" }
+          - { id: 6b624bbdfb79, before: e339cdee8fdf, after: 6b624bbdfb79, note: "Prune deleted posts from cache" }
+          - { id: 96e1f7849ca1, before: 5c35c1239369, after: 96e1f7849ca1, note: "Upgrade deps" }
+          - { id: 3f3b7bac65ee, before: 96e1f7849ca1, after: 3f3b7bac65ee, note: "Just use text instead of DOM's innerText" }
+          - { id: a7362255bb93, before: 3f3b7bac65ee, after: a7362255bb93, note: "Upgrade deps" }
+          - { id: 94aa84626b33, before: 1c575bbbda73, after: 94aa84626b33, note: "Time format setting" }
+          - { id: 97075b296bc7, before: 94aa84626b33, after: 97075b296bc7, note: "Upgrade deps" }
+          - { id: cd3d877d62f1, before: 97075b296bc7, after: cd3d877d62f1, note: "New carousel dots style" }
+          - { id: ef350aab29e8, before: 056d8afcf907, after: ef350aab29e8, note: "Link card restyle" }
+          - { id: 624fa08bde02, before: 52426d21a60f, after: 624fa08bde02, note: "Upgrade deps" }
+          - { id: aa-91986a904f17, before: 91986a904f17, after: 91986a904f17, note: "A/A: same commit built twice" }
+          - { id: aa-624fa08bde02, before: 624fa08bde02, after: 624fa08bde02, note: "A/A: same commit built twice" }
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+
+      - name: Check frozen sources
+        run: |
+          python3 - <<'EOF'
+          import hashlib, json, os
+          freeze = json.load(open(os.environ["FREEZE"]))
+          bad = [n for n, d in freeze["source_sha256"].items()
+                 if hashlib.sha256(open(n, "rb").read()).hexdigest() != d]
+          if bad:
+              raise SystemExit(f"frozen sources changed: {bad}")
+          EOF
+
+      - name: Register the pair
+        run: |
+          python3 - <<'EOF'
+          import json
+          cases = json.load(open("oss/cases.json"))
+          cases.append({"id": "pilot-phanpy-${{ matrix.pair.id }}", "repo": "${{ env.REPO }}",
+                        "before": "${{ matrix.pair.before }}", "after": "${{ matrix.pair.after }}",
+                        "install": "npm ci --no-audit --no-fund", "build": "npm run build",
+                        "dist": "dist", "path": "index.html"})
+          json.dump(cases, open("oss/cases.json", "w"), indent=2)
+          EOF
+
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build both sides
+        run: node scripts/build-commit-pair.mjs --case pilot-phanpy-${{ matrix.pair.id }}
+
+      - name: Serve each side from its own root
+        run: |
+          d=".oss-dist/pilot-phanpy-${{ matrix.pair.id }}"
+          nohup pnpm exec sirv "$d/before" --host 127.0.0.1 --port 4178 > before.log 2>&1 &
+          nohup pnpm exec sirv "$d/after" --host 127.0.0.1 --port 4179 > after.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:4178/index.html" > /dev/null \
+               && curl -sf "http://127.0.0.1:4179/index.html" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat before.log after.log
+          exit 1
+
+      - name: Collect
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          id="${{ github.run_id }}-${{ github.run_attempt }}-pilot-phanpy-${{ matrix.pair.id }}-abab-devtools"
+          pnpm perfgate collect \
+            --url "http://127.0.0.1:4178/index.html" \
+            --pr-url "http://127.0.0.1:4179/index.html" \
+            --runs "$RUNS" \
+            --mode abab \
+            --throttling devtools \
+            --app "pilot-phanpy" \
+            --app-build "${{ matrix.pair.before }}-${{ matrix.pair.after }}" \
+            --label commit \
+            --experiment "$id" \
+            --out "results/$id.jsonl"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runs-pilot-${{ matrix.pair.id }}
+          path: results/*.jsonl
+          retention-days: 30
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: runs-*
+          merge-multiple: true
+          path: incoming
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*.jsonl)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch data
+          dest="pilot/external-phanpy/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f pilot
+          git commit -m "data: external pilot run ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1
