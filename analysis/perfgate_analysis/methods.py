@@ -14,7 +14,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 import numpy as np
-from scipy.stats import brunnermunzel, mannwhitneyu, ttest_ind
+from scipy.stats import brunnermunzel, mannwhitneyu, ttest_ind, permutation_test
 
 Detector = Callable[[np.ndarray, np.ndarray], np.ndarray]
 
@@ -151,7 +151,16 @@ def bootstrap_ratio(alpha: float = 0.05, min_effect: float = 0.0, boots: int = 4
             with np.errstate(divide="ignore", invalid="ignore"):
                 # a zero baseline has no ratio: treat it as "no regression detected"
                 ratio = np.where(mb > 0, mp / np.where(mb > 0, mb, 1) - 1, -np.inf)
-            out[start : start + chunk] = np.percentile(ratio, 100 * alpha, axis=1) > min_effect
+            # Interpolating -inf with -inf produces NaN in numpy.percentile. Such
+            # undefined-baseline draws must conservatively keep the bound at -inf.
+            ordered = np.sort(ratio, axis=1)
+            position = (boots - 1) * alpha
+            lower, upper = int(np.floor(position)), int(np.ceil(position))
+            lo, hi = ordered[:, lower], ordered[:, upper]
+            bound = np.full(k, -np.inf)
+            finite = np.isfinite(lo) & np.isfinite(hi)
+            bound[finite] = lo[finite] + (hi[finite] - lo[finite]) * (position - lower)
+            out[start : start + chunk] = bound > min_effect
         return out
 
     return Method(
@@ -176,3 +185,20 @@ def default_methods() -> list[Method]:
         bootstrap_ratio(min_effect=0.01),
         brunner_munzel(),
     ]
+
+
+def permutation_mean(alpha: float = .05, permutations: int = 999, seed: int = 20261030) -> Method:
+    """Exploratory mean-shift test. Null: exchangeable observations from the same distribution.
+
+    Sensitive to stalls that may leave the median unchanged. Not a general equal-means
+    test under heteroscedasticity, and not valid for arbitrary temporal dependence.
+    Kept outside default_methods so historical comparisons remain identifiable.
+    """
+    def detect(base: np.ndarray, pr: np.ndarray) -> np.ndarray:
+        def statistic(p, b, axis):
+            return np.mean(p, axis=axis) - np.mean(b, axis=axis)
+        result = permutation_test((pr, base), statistic, permutation_type="independent",
+                                  vectorized=True, axis=1, alternative="greater",
+                                  n_resamples=permutations, batch=32, rng=np.random.default_rng(seed))
+        return result.pvalue < alpha
+    return Method(f"permutation mean α={alpha}", detect, max_reps=200)

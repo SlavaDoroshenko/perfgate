@@ -1,0 +1,14 @@
+**/node_modules
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/dist
+**/.next
+.git
+.claude
+.oss-dist
+results
+analysis/reports
+docs/results
+*.jsonl
+*.log

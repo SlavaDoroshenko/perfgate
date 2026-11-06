@@ -1,0 +1,25 @@
+# Stage 2 of 2: comment. Copy to .github/workflows/perfgate-comment.yml.
+#
+# workflow_run jobs run the workflow file from the default branch with a token
+# that can write, even for fork pull requests. This job therefore never checks out
+# or executes pull request code: it downloads the report artifact, validates and
+# escapes it, finds the pull request from the event payload (not from the
+# artifact) and creates or updates one sticky comment.
+#
+# GitHub only triggers workflow_run from workflow files on the default branch;
+# merge this file before expecting comments.
+name: perfgate comment
+on:
+  workflow_run:
+    workflows: [perfgate] # the `name:` of the measuring workflow
+    types: [completed]
+permissions:
+  actions: read        # download artifacts of the measuring run
+  pull-requests: write # create/update the comment
+jobs:
+  comment:
+    if: github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: SlavaDoroshenko/perfgate/comment@<perfgate-commit>

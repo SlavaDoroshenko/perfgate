@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "policy": "browser-candidate-2026-10-30",
+  "status": "invalid",
+  "runs_per_variant": 20,
+  "alpha": 0.05,
+  "correction": "holm",
+  "metrics": [],
+  "issues": [
+    "exp-0: failed audit or network request"
+  ],
+  "limitations": [
+    "Candidate policy; prospective validation is pending.",
+    "No detected regression is not proof of equivalence.",
+    "Bootstrap intervals are pointwise and assume independent loads; they do not determine the verdict."
+  ]
+}

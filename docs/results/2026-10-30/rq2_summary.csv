@@ -1,0 +1,1321 @@
+app,runner,throttling,mode,metric,n,loads,method,false_alarm_rate,mde
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >2%,0.025714285714285714,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >5%,0.0038095238095238095,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,Brunner-Munzel α=0.05,0.054285714285714284,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >1%,0.002857142857142857,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,Mann-Whitney α=0.05,0.05333333333333334,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,Welch t α=0.05,0.04285714285714286,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05,0.05,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,5,5,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >2%,0.023010546500479387,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >5%,0.0028763183125599234,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,Brunner-Munzel α=0.05,0.045062320230105465,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >1%,0.0028763183125599234,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,Mann-Whitney α=0.05,0.037392138063279005,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,Welch t α=0.05,0.04218600191754554,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05,0.045,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,10,10,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >2%,0.019175455417066157,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >5%,0.003835091083413231,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,Brunner-Munzel α=0.05,0.059443911792905084,0.005
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,Mann-Whitney α=0.05,0.05465004793863854,0.005
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,Welch t α=0.05,0.06040268456375839,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05,0.06,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,fcp,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >2%,0.08952380952380952,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >5%,0.06476190476190476,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,Brunner-Munzel α=0.05,0.049523809523809526,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >1%,0.015238095238095238,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >2%,0.008571428571428572,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,Mann-Whitney α=0.05,0.04380952380952381,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,Welch t α=0.05,0.037142857142857144,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05,0.015,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.005,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,median >2%,0.0419047619047619,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,5,5,median >5%,0.04,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >2%,0.07861936720997123,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >5%,0.058485139022051776,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,Brunner-Munzel α=0.05,0.053691275167785234,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >1%,0.010546500479386385,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >2%,0.005752636625119847,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,Mann-Whitney α=0.05,0.04985618408437201,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,Welch t α=0.05,0.046021093000958774,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05,0.025,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,median >2%,0.03451581975071908,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,10,10,median >5%,0.016299137104506232,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >2%,0.08916586768935762,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >5%,0.06423777564717162,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,Brunner-Munzel α=0.05,0.06615532118887824,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >1%,0.00862895493767977,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >2%,0.007670182166826462,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,Mann-Whitney α=0.05,0.06519654841802493,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,Welch t α=0.05,0.05177372962607862,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05,0.07,0.01
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,median >2%,0.031639501438159155,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,lcp,20,20,median >5%,0.015340364333652923,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,1,single-run >2%,0.24571428571428572,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,1,single-run >5%,0.1,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,Brunner-Munzel α=0.05,0.040952380952380955,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,MWU α=0.05 & >1%,0.03238095238095238,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,MWU α=0.05 & >2%,0.015238095238095238,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,Mann-Whitney α=0.05,0.0380952380952381,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,Welch t α=0.05,0.039047619047619046,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,bootstrap CI α=0.05,0.03,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,bootstrap CI α=0.05 & >1%,0.005,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,median >2%,0.10095238095238095,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,5,5,median >5%,0.02,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,1,single-run >2%,0.2473633748801534,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,1,single-run >5%,0.06903163950143816,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,Brunner-Munzel α=0.05,0.062320230105465,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,MWU α=0.05 & >1%,0.04122722914669223,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,MWU α=0.05 & >2%,0.020134228187919462,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,Mann-Whitney α=0.05,0.05177372962607862,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,Welch t α=0.05,0.0488974113135187,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,bootstrap CI α=0.05,0.03,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,bootstrap CI α=0.05 & >1%,0.01,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,median >2%,0.059443911792905084,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,10,10,median >5%,0.006711409395973154,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,1,single-run >2%,0.24544582933844677,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,1,single-run >5%,0.07190795781399809,0.075
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,Brunner-Munzel α=0.05,0.06711409395973154,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,MWU α=0.05 & >1%,0.037392138063279005,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,MWU α=0.05 & >2%,0.007670182166826462,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,Mann-Whitney α=0.05,0.062320230105465,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,Welch t α=0.05,0.05560882070949185,0.02
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,bootstrap CI α=0.05,0.035,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,bootstrap CI α=0.05 & >1%,0.0,0.05
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,median >2%,0.02205177372962608,0.03
+demo-heavy,gha:ubuntu24,devtools,abab,tbt,20,20,median >5%,0.0028763183125599234,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >2%,0.014381591562799617,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >5%,0.0009587727708533077,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.05656759348034516,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >1%,0.003835091083413231,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0009587727708533077,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,Mann-Whitney α=0.05,0.0488974113135187,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,Welch t α=0.05,0.04314477468839885,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05,0.04,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,median >2%,0.0019175455417066154,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >2%,0.019305019305019305,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >5%,0.0028957528957528956,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.0472972972972973,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0009652509652509653,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,Mann-Whitney α=0.05,0.0444015444015444,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,Welch t α=0.05,0.0444015444015444,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05,0.05,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >2%,0.02702702702702703,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >5%,0.003861003861003861,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.05405405405405406,0.005
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,Mann-Whitney α=0.05,0.05501930501930502,0.005
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,Welch t α=0.05,0.05115830115830116,0.005
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05,0.035,0.005
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >2%,0.08820709491850431,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >5%,0.07190795781399809,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.052732502396931925,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >1%,0.013422818791946308,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >2%,0.004793863854266539,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,Mann-Whitney α=0.05,0.045062320230105465,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,Welch t α=0.05,0.028763183125599234,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05,0.04,0.1
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.1
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,median >2%,0.030680728667305847,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,5,5,median >5%,0.027804410354745925,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >2%,0.08494208494208494,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >5%,0.06756756756756757,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.055984555984555984,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >1%,0.009652509652509652,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >2%,0.008687258687258687,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,Mann-Whitney α=0.05,0.05019305019305019,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,Welch t α=0.05,0.03861003861003861,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05,0.06,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,median >2%,0.02702702702702703,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,10,10,median >5%,0.008687258687258687,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >2%,0.08783783783783784,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >5%,0.06467181467181467,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.052123552123552123,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >1%,0.006756756756756757,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >2%,0.005791505791505791,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,Mann-Whitney α=0.05,0.04922779922779923,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,Welch t α=0.05,0.03861003861003861,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05,0.045,0.01
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,median >2%,0.0222007722007722,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,lcp,20,20,median >5%,0.013513513513513514,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,1,single-run >2%,0.23777564717162034,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,1,single-run >5%,0.08245445829338446,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,Brunner-Munzel α=0.05,0.046021093000958774,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,MWU α=0.05 & >1%,0.03547459252157239,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,MWU α=0.05 & >2%,0.01821668264621285,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,Mann-Whitney α=0.05,0.04410354745925216,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,Welch t α=0.05,0.032598274209012464,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,bootstrap CI α=0.05,0.045,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,bootstrap CI α=0.05 & >1%,0.015,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,median >2%,0.09587727708533078,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,5,5,median >5%,0.01725790987535954,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,1,single-run >2%,0.23166023166023167,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,1,single-run >5%,0.06467181467181467,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,Brunner-Munzel α=0.05,0.04633204633204633,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,MWU α=0.05 & >1%,0.027992277992277992,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,MWU α=0.05 & >2%,0.009652509652509652,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,Mann-Whitney α=0.05,0.03957528957528957,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,Welch t α=0.05,0.04343629343629344,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,bootstrap CI α=0.05,0.055,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,bootstrap CI α=0.05 & >1%,0.005,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,median >2%,0.03667953667953668,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,10,10,median >5%,0.0028957528957528956,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,1,single-run >2%,0.22393822393822393,0.05
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,1,single-run >5%,0.07335907335907337,0.075
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,Brunner-Munzel α=0.05,0.04826254826254826,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,MWU α=0.05 & >1%,0.029922779922779922,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,MWU α=0.05 & >2%,0.003861003861003861,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,Mann-Whitney α=0.05,0.0472972972972973,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,Welch t α=0.05,0.0472972972972973,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,bootstrap CI α=0.05,0.04,0.02
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,median >2%,0.017374517374517374,0.03
+demo-heavy,gha:ubuntu24,devtools,sequential,tbt,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >2%,0.04857142857142857,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,Brunner-Munzel α=0.05,0.05047619047619047,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,Mann-Whitney α=0.05,0.04666666666666667,0.01
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,Welch t α=0.05,0.021904761904761906,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05,0.01,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,median >2%,0.0038095238095238095,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,5,5,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >2%,0.06423777564717162,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >5%,0.0009587727708533077,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,Brunner-Munzel α=0.05,0.032598274209012464,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,Mann-Whitney α=0.05,0.028763183125599234,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,Welch t α=0.05,0.015340364333652923,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05,0.025,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,10,10,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >2%,0.04793863854266539,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >5%,0.0019175455417066154,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,Brunner-Munzel α=0.05,0.05081495685522531,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,Mann-Whitney α=0.05,0.05177372962607862,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,Welch t α=0.05,0.04122722914669223,0.01
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05,0.03,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,fcp,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >2%,0.05333333333333334,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >5%,0.004761904761904762,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,Brunner-Munzel α=0.05,0.05333333333333334,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,Mann-Whitney α=0.05,0.05142857142857143,0.01
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,Welch t α=0.05,0.025714285714285714,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05,0.005,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,median >2%,0.004761904761904762,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,5,5,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >2%,0.0728667305848514,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >5%,0.009587727708533078,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,Brunner-Munzel α=0.05,0.031639501438159155,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,Mann-Whitney α=0.05,0.029721955896452542,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,Welch t α=0.05,0.016299137104506232,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05,0.02,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,median >2%,0.0019175455417066154,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,10,10,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >2%,0.053691275167785234,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >5%,0.006711409395973154,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,Brunner-Munzel α=0.05,0.05081495685522531,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,Mann-Whitney α=0.05,0.052732502396931925,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,Welch t α=0.05,0.03451581975071908,0.01
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05,0.03,0.005
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,lcp,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,1,single-run >2%,0.24952380952380954,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,1,single-run >5%,0.10476190476190476,0.1
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,Brunner-Munzel α=0.05,0.06285714285714286,0.1
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,MWU α=0.05 & >1%,0.049523809523809526,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,MWU α=0.05 & >2%,0.02666666666666667,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,Mann-Whitney α=0.05,0.054285714285714284,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,Welch t α=0.05,0.04380952380952381,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,bootstrap CI α=0.05,0.05,0.1
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,bootstrap CI α=0.05 & >1%,0.02,0.1
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,median >2%,0.09142857142857143,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,5,5,median >5%,0.025714285714285714,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,1,single-run >2%,0.23202301054650049,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,1,single-run >5%,0.0977948226270374,0.1
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,Brunner-Munzel α=0.05,0.05752636625119847,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,MWU α=0.05 & >1%,0.04122722914669223,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,MWU α=0.05 & >2%,0.015340364333652923,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,Mann-Whitney α=0.05,0.0488974113135187,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,Welch t α=0.05,0.04314477468839885,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,bootstrap CI α=0.05,0.04,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,bootstrap CI α=0.05 & >1%,0.01,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,median >2%,0.0488974113135187,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,10,10,median >5%,0.012464046021093002,0.075
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,1,single-run >2%,0.23298178331735378,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,1,single-run >5%,0.0977948226270374,0.1
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,Brunner-Munzel α=0.05,0.061361457334611694,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,MWU α=0.05 & >1%,0.039309683604985615,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,MWU α=0.05 & >2%,0.013422818791946308,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,Mann-Whitney α=0.05,0.059443911792905084,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,Welch t α=0.05,0.04793863854266539,0.05
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,bootstrap CI α=0.05,0.04,0.02
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,median >2%,0.024928092042186004,0.03
+demo-heavy,gha:ubuntu24,simulate,abab,tbt,20,20,median >5%,0.0019175455417066154,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >2%,0.054285714285714284,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.06380952380952382,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0019047619047619048,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,Mann-Whitney α=0.05,0.06,0.01
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,Welch t α=0.05,0.025714285714285714,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05,0.035,0.01
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,median >2%,0.007619047619047619,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >2%,0.04218600191754554,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.04697986577181208,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,Mann-Whitney α=0.05,0.040268456375838924,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,Welch t α=0.05,0.02588686481303931,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05,0.03,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >2%,0.04985618408437201,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.052732502396931925,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,Mann-Whitney α=0.05,0.0488974113135187,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,Welch t α=0.05,0.03355704697986577,0.01
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05,0.05,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >2%,0.06,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >5%,0.006666666666666667,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.06857142857142857,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >2%,0.0019047619047619048,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,Mann-Whitney α=0.05,0.06380952380952382,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,Welch t α=0.05,0.02761904761904762,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05,0.045,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,median >2%,0.007619047619047619,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,5,5,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >2%,0.045062320230105465,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >5%,0.004793863854266539,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.04122722914669223,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,Mann-Whitney α=0.05,0.03547459252157239,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,Welch t α=0.05,0.023010546500479387,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05,0.03,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,10,10,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >2%,0.05560882070949185,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >5%,0.006711409395973154,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.04793863854266539,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,Mann-Whitney α=0.05,0.046021093000958774,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,Welch t α=0.05,0.030680728667305847,0.01
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05,0.045,0.005
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,median >2%,0.0,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,lcp,20,20,median >5%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,1,single-run >2%,0.25047619047619046,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,1,single-run >5%,0.10857142857142857,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,Brunner-Munzel α=0.05,0.04857142857142857,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,MWU α=0.05 & >1%,0.040952380952380955,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,MWU α=0.05 & >2%,0.023809523809523808,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,Mann-Whitney α=0.05,0.04666666666666667,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,Welch t α=0.05,0.037142857142857144,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,bootstrap CI α=0.05,0.045,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,bootstrap CI α=0.05 & >1%,0.01,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,median >2%,0.11333333333333333,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,5,5,median >5%,0.023809523809523808,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,1,single-run >2%,0.2588686481303931,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,1,single-run >5%,0.11888782358581017,0.1
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,Brunner-Munzel α=0.05,0.04410354745925216,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,MWU α=0.05 & >1%,0.03355704697986577,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,MWU α=0.05 & >2%,0.015340364333652923,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,Mann-Whitney α=0.05,0.039309683604985615,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,Welch t α=0.05,0.030680728667305847,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,bootstrap CI α=0.05,0.04,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,bootstrap CI α=0.05 & >1%,0.0,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,median >2%,0.04793863854266539,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,10,10,median >5%,0.00862895493767977,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,1,single-run >2%,0.25599232981783315,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,1,single-run >5%,0.12272291466922339,0.075
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,Brunner-Munzel α=0.05,0.05081495685522531,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,MWU α=0.05 & >1%,0.03451581975071908,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,MWU α=0.05 & >2%,0.009587727708533078,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,Mann-Whitney α=0.05,0.05081495685522531,0.02
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,Welch t α=0.05,0.045062320230105465,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,bootstrap CI α=0.05,0.035,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,bootstrap CI α=0.05 & >1%,0.0,0.05
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,median >2%,0.023010546500479387,0.03
+demo-heavy,gha:ubuntu24,simulate,sequential,tbt,20,20,median >5%,0.004793863854266539,0.075
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >2%,0.015238095238095238,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,Brunner-Munzel α=0.05,0.040952380952380955,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,Mann-Whitney α=0.05,0.04,0.01
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,Welch t α=0.05,0.035238095238095235,0.01
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05,0.03,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,median >2%,0.0019047619047619048,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >2%,0.015340364333652923,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,Brunner-Munzel α=0.05,0.05560882070949185,0.01
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >1%,0.003835091083413231,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,Mann-Whitney α=0.05,0.0488974113135187,0.01
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,Welch t α=0.05,0.053691275167785234,0.01
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05,0.035,0.01
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,median >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >2%,0.020134228187919462,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >5%,0.0019175455417066154,0.075
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,Brunner-Munzel α=0.05,0.05560882070949185,0.005
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,Mann-Whitney α=0.05,0.053691275167785234,0.005
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,Welch t α=0.05,0.04697986577181208,0.005
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05,0.03,0.005
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,fcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >2%,0.005714285714285714,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,Brunner-Munzel α=0.05,0.05142857142857143,0.01
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.02
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,Mann-Whitney α=0.05,0.04666666666666667,0.01
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,Welch t α=0.05,0.037142857142857144,0.01
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05,0.025,0.01
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >2%,0.003835091083413231,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,Brunner-Munzel α=0.05,0.05177372962607862,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >1%,0.0009587727708533077,0.02
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,Mann-Whitney α=0.05,0.04793863854266539,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,Welch t α=0.05,0.05656759348034516,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05,0.02,0.01
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,median >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >2%,0.011505273250239693,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >5%,0.0009587727708533077,0.075
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,Brunner-Munzel α=0.05,0.046021093000958774,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,Mann-Whitney α=0.05,0.04122722914669223,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,Welch t α=0.05,0.04410354745925216,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05,0.035,0.005
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,abab,lcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >2%,0.013333333333333334,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >5%,0.0009523809523809524,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.04857142857142857,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >1%,0.005714285714285714,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,Mann-Whitney α=0.05,0.05047619047619047,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,Welch t α=0.05,0.045714285714285714,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05,0.03,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >2%,0.009587727708533078,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.039309683604985615,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0019175455417066154,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,Mann-Whitney α=0.05,0.0364333652924257,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,Welch t α=0.05,0.038350910834132314,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05,0.03,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,median >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >2%,0.010546500479386385,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.05081495685522531,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0009587727708533077,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,Mann-Whitney α=0.05,0.0488974113135187,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,Welch t α=0.05,0.05081495685522531,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05,0.015,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >2%,0.004761904761904762,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >5%,0.0009523809523809524,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.047619047619047616,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,Mann-Whitney α=0.05,0.04476190476190476,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,Welch t α=0.05,0.045714285714285714,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05,0.03,0.01
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >2%,0.0019175455417066154,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.045062320230105465,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >1%,0.0019175455417066154,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,Mann-Whitney α=0.05,0.04122722914669223,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,Welch t α=0.05,0.04218600191754554,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05,0.035,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >2%,0.003835091083413231,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.046021093000958774,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,Mann-Whitney α=0.05,0.04410354745925216,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,Welch t α=0.05,0.046021093000958774,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05,0.04,0.005
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,devtools,sequential,lcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >2%,0.054285714285714284,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,Brunner-Munzel α=0.05,0.04857142857142857,0.05
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >1%,0.0009523809523809524,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >2%,0.0009523809523809524,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,Mann-Whitney α=0.05,0.037142857142857144,0.01
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,Welch t α=0.05,0.01904761904761905,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05,0.03,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,median >2%,0.006666666666666667,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >2%,0.05656759348034516,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >5%,0.0009587727708533077,0.075
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,Brunner-Munzel α=0.05,0.05081495685522531,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,Mann-Whitney α=0.05,0.04410354745925216,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,Welch t α=0.05,0.02205177372962608,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05,0.045,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >2%,0.04793863854266539,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >5%,0.0028763183125599234,0.075
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,Brunner-Munzel α=0.05,0.040268456375838924,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,Mann-Whitney α=0.05,0.038350910834132314,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,Welch t α=0.05,0.04122722914669223,0.01
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05,0.03,0.005
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,fcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >2%,0.054285714285714284,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,Brunner-Munzel α=0.05,0.049523809523809526,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >1%,0.0009523809523809524,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >2%,0.0009523809523809524,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,Mann-Whitney α=0.05,0.039047619047619046,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,Welch t α=0.05,0.023809523809523808,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05,0.03,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,median >2%,0.006666666666666667,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >2%,0.05656759348034516,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,Brunner-Munzel α=0.05,0.0488974113135187,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,Mann-Whitney α=0.05,0.04218600191754554,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,Welch t α=0.05,0.027804410354745925,0.01
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05,0.035,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >2%,0.04793863854266539,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >5%,0.0009587727708533077,0.075
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,Brunner-Munzel α=0.05,0.04122722914669223,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,Mann-Whitney α=0.05,0.038350910834132314,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,Welch t α=0.05,0.0364333652924257,0.01
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05,0.025,0.005
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,median >2%,0.0,0.03
+demo-spa,gha:ubuntu24,simulate,abab,lcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >2%,0.06,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >5%,0.0019047619047619048,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.06476190476190476,0.05
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0019047619047619048,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,Mann-Whitney α=0.05,0.05523809523809524,0.01
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,Welch t α=0.05,0.029523809523809525,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05,0.045,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,median >2%,0.004761904761904762,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >2%,0.05465004793863854,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >5%,0.0009587727708533077,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.045062320230105465,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0009587727708533077,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,Mann-Whitney α=0.05,0.037392138063279005,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,Welch t α=0.05,0.02109300095877277,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05,0.015,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,median >2%,0.0019175455417066154,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >2%,0.052732502396931925,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >5%,0.0009587727708533077,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.05656759348034516,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0019175455417066154,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,Mann-Whitney α=0.05,0.053691275167785234,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,Welch t α=0.05,0.038350910834132314,0.01
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05,0.045,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,median >2%,0.0019175455417066154,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >2%,0.06095238095238095,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >5%,0.0009523809523809524,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.06666666666666667,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >1%,0.0019047619047619048,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >2%,0.0019047619047619048,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,Mann-Whitney α=0.05,0.058095238095238096,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,Welch t α=0.05,0.035238095238095235,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05,0.055,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,median >2%,0.004761904761904762,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,5,5,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >2%,0.05560882070949185,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >5%,0.0019175455417066154,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.04410354745925216,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >1%,0.0009587727708533077,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,Mann-Whitney α=0.05,0.037392138063279005,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,Welch t α=0.05,0.020134228187919462,0.01
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05,0.015,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,median >2%,0.0019175455417066154,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,10,10,median >5%,0.0,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >2%,0.053691275167785234,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >5%,0.0009587727708533077,0.075
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.05177372962607862,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >1%,0.0019175455417066154,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0009587727708533077,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,Mann-Whitney α=0.05,0.04793863854266539,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,Welch t α=0.05,0.030680728667305847,0.01
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05,0.05,0.005
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,median >2%,0.0019175455417066154,0.03
+demo-spa,gha:ubuntu24,simulate,sequential,lcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >2%,0.013059701492537313,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >5%,0.0018656716417910447,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,Brunner-Munzel α=0.05,0.06436567164179105,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >1%,0.0046641791044776115,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,Mann-Whitney α=0.05,0.061567164179104475,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,Welch t α=0.05,0.055970149253731345,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05,0.025,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,5,5,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >2%,0.013157894736842105,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >5%,0.002819548872180451,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,Brunner-Munzel α=0.05,0.05169172932330827,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >1%,0.0018796992481203006,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,Mann-Whitney α=0.05,0.044172932330827065,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,Welch t α=0.05,0.05075187969924812,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05,0.055,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,10,10,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >2%,0.012218045112781954,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >5%,0.0018796992481203006,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,Brunner-Munzel α=0.05,0.05733082706766917,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,Mann-Whitney α=0.05,0.05639097744360902,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,Welch t α=0.05,0.046992481203007516,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05,0.065,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,fcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >2%,0.014925373134328358,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >5%,0.002798507462686567,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,Brunner-Munzel α=0.05,0.06343283582089553,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >1%,0.0046641791044776115,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,Mann-Whitney α=0.05,0.06063432835820896,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,Welch t α=0.05,0.054104477611940295,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05,0.025,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,5,5,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >2%,0.014097744360902255,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >5%,0.002819548872180451,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,Brunner-Munzel α=0.05,0.05075187969924812,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >1%,0.0018796992481203006,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,Mann-Whitney α=0.05,0.043233082706766915,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,Welch t α=0.05,0.05075187969924812,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05,0.055,0.01
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,10,10,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >2%,0.012218045112781954,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >5%,0.0018796992481203006,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,Brunner-Munzel α=0.05,0.05827067669172932,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,Mann-Whitney α=0.05,0.05733082706766917,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,Welch t α=0.05,0.047932330827067667,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05,0.065,0.005
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,abab,lcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,1,single-run >2%,0.394589552238806,0.1
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,1,single-run >5%,0.23973880597014927,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,Brunner-Munzel α=0.05,0.04477611940298507,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,MWU α=0.05 & >1%,0.049440298507462684,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,MWU α=0.05 & >2%,0.048507462686567165,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,Mann-Whitney α=0.05,0.049440298507462684,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,Welch t α=0.05,0.041044776119402986,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,bootstrap CI α=0.05,0.025,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,bootstrap CI α=0.05 & >1%,0.015,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,median >2%,0.28824626865671643,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,5,5,median >5%,0.10541044776119403,0.1
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,1,single-run >2%,0.3890977443609023,0.1
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,1,single-run >5%,0.2575187969924812,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,Brunner-Munzel α=0.05,0.05545112781954887,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,MWU α=0.05 & >1%,0.046992481203007516,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,MWU α=0.05 & >2%,0.046052631578947366,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,Mann-Whitney α=0.05,0.047932330827067667,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,Welch t α=0.05,0.05075187969924812,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,bootstrap CI α=0.05,0.065,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,bootstrap CI α=0.05 & >1%,0.035,0.1
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,median >2%,0.22556390977443608,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,10,10,median >5%,0.05639097744360902,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,1,single-run >2%,0.39285714285714285,0.1
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,1,single-run >5%,0.25,0.15
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,Brunner-Munzel α=0.05,0.046992481203007516,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,MWU α=0.05 & >1%,0.043233082706766915,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,MWU α=0.05 & >2%,0.03383458646616541,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,Mann-Whitney α=0.05,0.043233082706766915,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,Welch t α=0.05,0.03759398496240601,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,bootstrap CI α=0.05,0.04,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,bootstrap CI α=0.05 & >1%,0.01,0.075
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,median >2%,0.14191729323308272,0.05
+demo-ssr,gha:ubuntu24,devtools,abab,tbt,20,20,median >5%,0.03195488721804511,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >2%,0.016791044776119403,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >5%,0.0065298507462686565,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.049440298507462684,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >1%,0.002798507462686567,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,Mann-Whitney α=0.05,0.051305970149253734,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,Welch t α=0.05,0.041044776119402986,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05,0.02,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >2%,0.013157894736842105,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >5%,0.007518796992481203,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.05075187969924812,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0009398496240601503,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,Mann-Whitney α=0.05,0.044172932330827065,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,Welch t α=0.05,0.04981203007518797,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05,0.05,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >2%,0.016917293233082706,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >5%,0.004699248120300752,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.06015037593984962,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,Mann-Whitney α=0.05,0.05263157894736842,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,Welch t α=0.05,0.05451127819548872,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05,0.055,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >2%,0.01585820895522388,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >5%,0.0065298507462686565,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.048507462686567165,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >1%,0.002798507462686567,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,Mann-Whitney α=0.05,0.05037313432835821,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,Welch t α=0.05,0.041044776119402986,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05,0.02,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,5,5,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >2%,0.013157894736842105,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >5%,0.007518796992481203,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.05075187969924812,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >1%,0.0009398496240601503,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,Mann-Whitney α=0.05,0.044172932330827065,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,Welch t α=0.05,0.04981203007518797,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05,0.05,0.01
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,10,10,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >2%,0.017857142857142856,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >5%,0.004699248120300752,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.06109022556390977,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,Mann-Whitney α=0.05,0.05357142857142857,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,Welch t α=0.05,0.05451127819548872,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05,0.055,0.005
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,devtools,sequential,lcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,1,single-run >2%,0.375,0.1
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,1,single-run >5%,0.23414179104477612,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,Brunner-Munzel α=0.05,0.05037313432835821,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,MWU α=0.05 & >1%,0.04197761194029851,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,MWU α=0.05 & >2%,0.041044776119402986,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,Mann-Whitney α=0.05,0.04291044776119403,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,Welch t α=0.05,0.03917910447761194,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,bootstrap CI α=0.05,0.025,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,bootstrap CI α=0.05 & >1%,0.02,0.2
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,median >2%,0.27705223880597013,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,5,5,median >5%,0.11100746268656717,0.1
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,1,single-run >2%,0.3994360902255639,0.1
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,1,single-run >5%,0.26597744360902253,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,Brunner-Munzel α=0.05,0.044172932330827065,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,MWU α=0.05 & >1%,0.03759398496240601,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,MWU α=0.05 & >2%,0.03571428571428571,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,Mann-Whitney α=0.05,0.03759398496240601,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,Welch t α=0.05,0.041353383458646614,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,bootstrap CI α=0.05,0.04,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,bootstrap CI α=0.05 & >1%,0.025,0.1
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,median >2%,0.24718045112781956,0.05
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,10,10,median >5%,0.05733082706766917,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,1,single-run >2%,0.39285714285714285,0.1
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,1,single-run >5%,0.23778195488721804,0.15
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,Brunner-Munzel α=0.05,0.045112781954887216,0.05
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,MWU α=0.05 & >1%,0.045112781954887216,0.05
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,MWU α=0.05 & >2%,0.039473684210526314,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,Mann-Whitney α=0.05,0.045112781954887216,0.05
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,Welch t α=0.05,0.047932330827067667,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,bootstrap CI α=0.05,0.04,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,bootstrap CI α=0.05 & >1%,0.01,0.075
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,median >2%,0.16447368421052633,0.05
+demo-ssr,gha:ubuntu24,devtools,sequential,tbt,20,20,median >5%,0.03383458646616541,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >2%,0.025186567164179104,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >5%,0.0009328358208955224,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,Brunner-Munzel α=0.05,0.05317164179104478,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >1%,0.0018656716417910447,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,Mann-Whitney α=0.05,0.049440298507462684,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,Welch t α=0.05,0.036380597014925374,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05,0.055,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,median >2%,0.0018656716417910447,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,5,5,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >2%,0.03383458646616541,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >5%,0.0037593984962406013,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,Brunner-Munzel α=0.05,0.05357142857142857,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,Mann-Whitney α=0.05,0.046052631578947366,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,Welch t α=0.05,0.03195488721804511,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05,0.015,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,10,10,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >2%,0.03101503759398496,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,Brunner-Munzel α=0.05,0.05169172932330827,0.005
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,Mann-Whitney α=0.05,0.04981203007518797,0.005
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,Welch t α=0.05,0.044172932330827065,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05,0.025,0.005
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,fcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >2%,0.16417910447761194,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >5%,0.0960820895522388,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,Brunner-Munzel α=0.05,0.05783582089552239,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >1%,0.01958955223880597,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >2%,0.012126865671641791,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,Mann-Whitney α=0.05,0.055970149253731345,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,Welch t α=0.05,0.007462686567164179,0.2
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05,0.025,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,median >2%,0.036380597014925374,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,5,5,median >5%,0.0065298507462686565,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >2%,0.16635338345864661,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >5%,0.10244360902255639,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,Brunner-Munzel α=0.05,0.05827067669172932,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >1%,0.010338345864661654,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >2%,0.0037593984962406013,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,Mann-Whitney α=0.05,0.05451127819548872,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,Welch t α=0.05,0.020676691729323307,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05,0.05,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,median >2%,0.010338345864661654,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,10,10,median >5%,0.0009398496240601503,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >2%,0.15319548872180452,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >5%,0.08834586466165413,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,Brunner-Munzel α=0.05,0.05451127819548872,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,Mann-Whitney α=0.05,0.05263157894736842,0.005
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,Welch t α=0.05,0.02913533834586466,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05,0.02,0.01
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,abab,lcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,1,single-run >2%,0.3162313432835821,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,1,single-run >5%,0.19309701492537312,0.15
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,Brunner-Munzel α=0.05,0.03917910447761194,
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,MWU α=0.05 & >1%,0.028917910447761194,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,MWU α=0.05 & >2%,0.027052238805970148,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,Mann-Whitney α=0.05,0.030783582089552237,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,Welch t α=0.05,0.029850746268656716,
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,bootstrap CI α=0.05,0.0,
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,bootstrap CI α=0.05 & >1%,0.0,
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,median >2%,0.24440298507462688,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,5,5,median >5%,0.125,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,1,single-run >2%,0.3233082706766917,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,1,single-run >5%,0.18796992481203006,0.15
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,Brunner-Munzel α=0.05,0.04981203007518797,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,MWU α=0.05 & >1%,0.041353383458646614,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,MWU α=0.05 & >2%,0.03383458646616541,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,Mann-Whitney α=0.05,0.043233082706766915,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,Welch t α=0.05,0.039473684210526314,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,bootstrap CI α=0.05,0.015,
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,bootstrap CI α=0.05 & >1%,0.005,
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,median >2%,0.18984962406015038,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,10,10,median >5%,0.10338345864661654,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,1,single-run >2%,0.31860902255639095,0.1
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,1,single-run >5%,0.18139097744360902,0.15
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,Brunner-Munzel α=0.05,0.046052631578947366,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,MWU α=0.05 & >1%,0.041353383458646614,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,MWU α=0.05 & >2%,0.023496240601503758,0.075
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,Mann-Whitney α=0.05,0.044172932330827065,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,Welch t α=0.05,0.03477443609022556,0.15
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,bootstrap CI α=0.05,0.01,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,bootstrap CI α=0.05 & >1%,0.01,0.3
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,median >2%,0.13533834586466165,0.05
+demo-ssr,gha:ubuntu24,simulate,abab,tbt,20,20,median >5%,0.07800751879699248,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >2%,0.03544776119402985,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >5%,0.0018656716417910447,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.061567164179104475,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >1%,0.0009328358208955224,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,Mann-Whitney α=0.05,0.05037313432835821,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,Welch t α=0.05,0.03544776119402985,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05,0.04,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,median >2%,0.0009328358208955224,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >2%,0.046992481203007516,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >5%,0.0018796992481203006,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.05169172932330827,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,Mann-Whitney α=0.05,0.042293233082706765,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,Welch t α=0.05,0.045112781954887216,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05,0.035,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >2%,0.03571428571428571,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >5%,0.0037593984962406013,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.046992481203007516,0.005
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,Mann-Whitney α=0.05,0.045112781954887216,0.005
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,Welch t α=0.05,0.05169172932330827,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05,0.045,0.005
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >2%,0.146455223880597,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >5%,0.08488805970149253,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.04197761194029851,0.3
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >1%,0.010261194029850746,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >2%,0.007462686567164179,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,Mann-Whitney α=0.05,0.036380597014925374,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,Welch t α=0.05,0.013992537313432836,0.2
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,median >2%,0.036380597014925374,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,5,5,median >5%,0.008395522388059701,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >2%,0.15695488721804512,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >5%,0.09962406015037593,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.047932330827067667,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >1%,0.012218045112781954,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0037593984962406013,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,Mann-Whitney α=0.05,0.041353383458646614,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,Welch t α=0.05,0.02725563909774436,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05,0.035,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,median >2%,0.009398496240601503,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,10,10,median >5%,0.0018796992481203006,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >2%,0.16353383458646617,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >5%,0.09398496240601503,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.046992481203007516,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >1%,0.005639097744360902,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0009398496240601503,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,Mann-Whitney α=0.05,0.044172932330827065,0.005
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,Welch t α=0.05,0.03665413533834586,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05,0.01,0.01
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,median >2%,0.0009398496240601503,0.03
+demo-ssr,gha:ubuntu24,simulate,sequential,lcp,20,20,median >5%,0.0,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,1,single-run >2%,0.3414179104477612,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,1,single-run >5%,0.22388059701492538,0.15
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,Brunner-Munzel α=0.05,0.05970149253731343,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,MWU α=0.05 & >1%,0.03917910447761194,0.3
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,MWU α=0.05 & >2%,0.03264925373134328,0.3
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,Mann-Whitney α=0.05,0.03917910447761194,0.3
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,Welch t α=0.05,0.04197761194029851,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,bootstrap CI α=0.05,0.035,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,bootstrap CI α=0.05 & >1%,0.015,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,median >2%,0.2658582089552239,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,5,5,median >5%,0.12686567164179105,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,1,single-run >2%,0.34774436090225563,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,1,single-run >5%,0.2161654135338346,0.15
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,Brunner-Munzel α=0.05,0.04981203007518797,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,MWU α=0.05 & >1%,0.041353383458646614,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,MWU α=0.05 & >2%,0.03571428571428571,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,Mann-Whitney α=0.05,0.042293233082706765,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,Welch t α=0.05,0.03383458646616541,0.3
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,bootstrap CI α=0.05,0.035,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,bootstrap CI α=0.05 & >1%,0.015,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,median >2%,0.20300751879699247,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,10,10,median >5%,0.09210526315789473,0.075
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,1,single-run >2%,0.37781954887218044,0.1
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,1,single-run >5%,0.2274436090225564,0.15
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,Brunner-Munzel α=0.05,0.046992481203007516,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,MWU α=0.05 & >1%,0.046052631578947366,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,MWU α=0.05 & >2%,0.03007518796992481,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,Mann-Whitney α=0.05,0.046992481203007516,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,Welch t α=0.05,0.03571428571428571,0.2
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,bootstrap CI α=0.05,0.04,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,bootstrap CI α=0.05 & >1%,0.02,
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,median >2%,0.15319548872180452,0.05
+demo-ssr,gha:ubuntu24,simulate,sequential,tbt,20,20,median >5%,0.08364661654135339,0.075
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >2%,0.009328358208955223,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,1,single-run >5%,0.0018656716417910447,0.075
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,Brunner-Munzel α=0.05,0.05317164179104478,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >1%,0.007462686567164179,0.02
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,Mann-Whitney α=0.05,0.05037313432835821,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,Welch t α=0.05,0.049440298507462684,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05,0.045,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >2%,0.012218045112781954,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,1,single-run >5%,0.004699248120300752,0.075
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,Brunner-Munzel α=0.05,0.03853383458646616,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,Mann-Whitney α=0.05,0.03383458646616541,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,Welch t α=0.05,0.03853383458646616,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05,0.045,0.01
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >2%,0.012218045112781954,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,1,single-run >5%,0.0037593984962406013,0.075
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,Brunner-Munzel α=0.05,0.05733082706766917,0.005
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,Mann-Whitney α=0.05,0.05451127819548872,0.005
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,Welch t α=0.05,0.06296992481203008,0.005
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05,0.035,0.005
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,fcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >2%,0.005597014925373134,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,1,single-run >5%,0.0009328358208955224,0.075
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,Brunner-Munzel α=0.05,0.07369402985074627,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >1%,0.002798507462686567,0.02
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,Mann-Whitney α=0.05,0.06623134328358209,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,Welch t α=0.05,0.05783582089552239,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05,0.045,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >2%,0.006578947368421052,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,1,single-run >5%,0.0037593984962406013,0.075
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,Brunner-Munzel α=0.05,0.03759398496240601,0.005
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,Mann-Whitney α=0.05,0.03289473684210526,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,Welch t α=0.05,0.03289473684210526,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05,0.04,0.01
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >2%,0.005639097744360902,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,1,single-run >5%,0.0018796992481203006,0.075
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,Brunner-Munzel α=0.05,0.05263157894736842,0.005
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,Mann-Whitney α=0.05,0.05169172932330827,0.005
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,Welch t α=0.05,0.05263157894736842,0.005
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05,0.05,0.005
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,abab,lcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >2%,0.009328358208955223,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,1,single-run >5%,0.0037313432835820895,0.075
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.04197761194029851,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >1%,0.0009328358208955224,0.02
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,Mann-Whitney α=0.05,0.04291044776119403,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,Welch t α=0.05,0.03731343283582089,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05,0.035,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >2%,0.010338345864661654,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,1,single-run >5%,0.006578947368421052,0.075
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.046992481203007516,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,Mann-Whitney α=0.05,0.042293233082706765,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,Welch t α=0.05,0.047932330827067667,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05,0.045,0.01
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >2%,0.007518796992481203,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,1,single-run >5%,0.002819548872180451,0.075
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.046052631578947366,0.005
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,Mann-Whitney α=0.05,0.044172932330827065,0.005
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,Welch t α=0.05,0.043233082706766915,0.005
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05,0.035,0.005
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >2%,0.0037313432835820895,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,1,single-run >5%,0.0037313432835820895,0.075
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.049440298507462684,0.01
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,Mann-Whitney α=0.05,0.04477611940298507,0.01
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,Welch t α=0.05,0.04291044776119403,0.01
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05,0.025,0.01
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >2%,0.007518796992481203,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,1,single-run >5%,0.004699248120300752,0.075
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.05169172932330827,0.005
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,Mann-Whitney α=0.05,0.046992481203007516,0.005
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,Welch t α=0.05,0.04887218045112782,0.01
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05,0.045,0.01
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >2%,0.0037593984962406013,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.05733082706766917,0.005
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,Mann-Whitney α=0.05,0.05545112781954887,0.005
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,Welch t α=0.05,0.04887218045112782,0.005
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05,0.045,0.005
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,devtools,sequential,lcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,Brunner-Munzel α=0.05,0.04477611940298507,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,Mann-Whitney α=0.05,0.04197761194029851,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,Welch t α=0.05,0.03451492537313433,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05,0.045,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,Brunner-Munzel α=0.05,0.05169172932330827,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,Mann-Whitney α=0.05,0.044172932330827065,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,Welch t α=0.05,0.04887218045112782,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05,0.05,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,Brunner-Munzel α=0.05,0.046992481203007516,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,Mann-Whitney α=0.05,0.045112781954887216,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,Welch t α=0.05,0.041353383458646614,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05,0.04,0.005
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,fcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >2%,0.07929104477611941,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,1,single-run >5%,0.01958955223880597,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,Brunner-Munzel α=0.05,0.041044776119402986,0.05
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >1%,0.0037313432835820895,0.05
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,MWU α=0.05 & >2%,0.0037313432835820895,0.05
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,Mann-Whitney α=0.05,0.03451492537313433,0.05
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,Welch t α=0.05,0.017723880597014924,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05,0.035,0.05
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,median >2%,0.011194029850746268,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >2%,0.07988721804511278,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,1,single-run >5%,0.015037593984962405,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,Brunner-Munzel α=0.05,0.046052631578947366,0.005
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >1%,0.0018796992481203006,0.02
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,MWU α=0.05 & >2%,0.0018796992481203006,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,Mann-Whitney α=0.05,0.039473684210526314,0.005
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,Welch t α=0.05,0.03477443609022556,0.02
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05,0.045,0.005
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,median >2%,0.006578947368421052,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >2%,0.08364661654135339,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,1,single-run >5%,0.016917293233082706,0.075
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,Brunner-Munzel α=0.05,0.04887218045112782,0.005
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,Mann-Whitney α=0.05,0.046992481203007516,0.005
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,Welch t α=0.05,0.043233082706766915,0.02
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05,0.03,0.005
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,abab,lcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,Brunner-Munzel α=0.05,0.055970149253731345,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,Mann-Whitney α=0.05,0.05783582089552239,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,Welch t α=0.05,0.05317164179104478,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05,0.045,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,Brunner-Munzel α=0.05,0.05075187969924812,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,Mann-Whitney α=0.05,0.046052631578947366,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,Welch t α=0.05,0.046992481203007516,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05,0.055,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,1,single-run >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,Brunner-Munzel α=0.05,0.044172932330827065,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,Mann-Whitney α=0.05,0.042293233082706765,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,Welch t α=0.05,0.044172932330827065,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05,0.04,0.005
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,median >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,fcp,20,20,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >2%,0.06063432835820896,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,1,single-run >5%,0.012126865671641791,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,Brunner-Munzel α=0.05,0.05223880597014925,0.05
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >1%,0.0009328358208955224,0.05
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,MWU α=0.05 & >2%,0.0009328358208955224,0.05
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,Mann-Whitney α=0.05,0.048507462686567165,0.05
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,Welch t α=0.05,0.03451492537313433,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05,0.035,0.05
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,bootstrap CI α=0.05 & >1%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,median >2%,0.013992537313432836,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,5,5,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >2%,0.08364661654135339,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,1,single-run >5%,0.02725563909774436,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,Brunner-Munzel α=0.05,0.05545112781954887,0.005
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >1%,0.0009398496240601503,0.02
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,MWU α=0.05 & >2%,0.0009398496240601503,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,Mann-Whitney α=0.05,0.046992481203007516,0.005
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,Welch t α=0.05,0.03477443609022556,0.02
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05,0.05,0.005
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,median >2%,0.011278195488721804,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,10,10,median >5%,0.0,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >2%,0.06484962406015038,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,1,single-run >5%,0.015037593984962405,0.075
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,Brunner-Munzel α=0.05,0.044172932330827065,0.005
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,MWU α=0.05 & >2%,0.0,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,Mann-Whitney α=0.05,0.040413533834586464,0.005
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,Welch t α=0.05,0.03759398496240601,0.02
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05,0.03,0.005
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,bootstrap CI α=0.05 & >1%,0.0,0.02
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,median >2%,0.006578947368421052,0.03
+demo-static,gha:ubuntu24,simulate,sequential,lcp,20,20,median >5%,0.0,0.075

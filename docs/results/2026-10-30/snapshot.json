@@ -1,0 +1,21 @@
+{
+  "data_sha": "ca37c17640a0a9aa821c0dd35d827a9695dab94d",
+  "epochs": [
+    "fa45447b5c39",
+    "467c2a6f9f6c",
+    "12817a1ef4f9"
+  ],
+  "warmup": 2,
+  "from": "2026-09-17 12:35:49.150000+00:00",
+  "through": "2026-10-29 21:40:12.876000+00:00",
+  "loads": 166690,
+  "jobs": 4180,
+  "invalid_loads": 1,
+  "sections": [
+    "rq1",
+    "rq2",
+    "rq3",
+    "power"
+  ],
+  "excluded_jobs": 1
+}

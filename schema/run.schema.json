@@ -65,6 +65,24 @@
       "minimum": 0,
       "maximum": 9007199254740991
     },
+    "warmupErrors": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "plannedRuns": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "durationMs": {
+      "type": "number",
+      "minimum": 0
+    },
+    "warmupDurationMs": {
+      "type": "number",
+      "minimum": 0
+    },
     "appBuild": {
       "type": "string"
     },
@@ -165,6 +183,12 @@
       "type": "object",
       "properties": {
         "chromeVersion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "chromeBinaryVersion": {
           "type": [
             "string",
             "null"

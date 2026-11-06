@@ -1,0 +1,45 @@
+{
+  "purpose": "exploratory CLS trace diagnosis, not confirmatory gate evaluation",
+  "source": "f2be44577aae9e412fa083a8acd24ead77b14a10",
+  "chrome": "Google Chrome for Testing 153.0.8010.47",
+  "complete": true,
+  "pairs_planned": 4,
+  "variants": {
+    "base": {
+      "n": 4,
+      "median": 0.07776427703523693,
+      "mean": 0.07776427703523693,
+      "min": 0.07776427703523693,
+      "max": 0.07776427703523693,
+      "values_rounded_9dp": {
+        "0.077764277": 4
+      }
+    },
+    "pr": {
+      "n": 4,
+      "median": 0.1166464155528554,
+      "mean": 0.1166464155528554,
+      "min": 0.1166464155528554,
+      "max": 0.1166464155528554,
+      "values_rounded_9dp": {
+        "0.116646416": 4
+      }
+    }
+  },
+  "observed_median_absolute_difference": 0.03888213851761847,
+  "observed_median_relative_difference": 0.5,
+  "input_sha256": {
+    "warmup-2-base.json": "233343e99feaa800a20413186664e55415eb8f00edc21c845f2fbfa1c163079a",
+    "warmup-2-pr.json": "fc637d2f35886c5a88e65e618a5739291d34b457690379ccd2433e9c44ac1640",
+    "warmup-1-base.json": "1bd9e2542ace7751643e4246dd44768d213c702e1fc9ae20935368466046e85b",
+    "warmup-1-pr.json": "56a9d69c0430ae2b6c54cc3bd66f502c9991a04434456f81e139c504c77df37a",
+    "run-0-base.json": "691e786fb28f205be2c0f6811942faed61895483f70829f4ce982937d72836ad",
+    "run-0-pr.json": "a4688b95172b3c1dc6b90c4fb53fa815c70f3360e44603ab8c8f657305b06d29",
+    "run-1-base.json": "665a831995ed76cb0cee92bc28c0f821e66bd14d27ae20307f75db9c07e8421c",
+    "run-1-pr.json": "2a87e562e2cc7809bb511a2f777ba5750b517fe92a272924b9963d861feca0b6",
+    "run-2-base.json": "eb71f52d36ecadfc31e6d58bb63bfe0c0ccd1a3c1e72075b860abba8478f1560",
+    "run-2-pr.json": "10ac835a000fec5360b4be45b4f74406511eccdeff016e3249c52bc5f9473144",
+    "run-3-base.json": "2dddde7167cf83337efe5fe110d821fa7dbba9bd01b8ea13e7e966f0c89b8d74",
+    "run-3-pr.json": "8b521f7e58a0fe474dea4d210d8006035f6679e961eabea3396366af345f4ec8"
+  }
+}

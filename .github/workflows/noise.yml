@@ -5,6 +5,10 @@ name: noise
 on:
   workflow_dispatch:
     inputs:
+      store:
+        description: Archive to the shared data branch (disable for isolated research pilots)
+        type: boolean
+        default: true
       runs:
         description: Loads per variant
         default: "20"
@@ -16,7 +20,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: noise
+  group: ${{ github.event_name == 'workflow_dispatch' && inputs.store == false && format('noise-pilot-{0}', github.ref) || 'noise' }}
   cancel-in-progress: false
 
 env:
@@ -102,12 +106,12 @@ jobs:
         with:
           name: runs-${{ matrix.label }}-${{ matrix.page.app }}-${{ matrix.mode }}-${{ matrix.throttling }}
           path: results/*.jsonl
-          retention-days: 7
+          retention-days: ${{ github.event_name == 'workflow_dispatch' && inputs.store == false && 90 || 7 }}
           if-no-files-found: warn
 
   store:
     needs: collect
-    if: always()
+    if: always() && (github.event_name != 'workflow_dispatch' || inputs.store)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7

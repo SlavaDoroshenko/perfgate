@@ -109,6 +109,10 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
                 "mode": r["mode"],
                 "throttling": r["throttling"],
                 "warmup": r.get("warmup"),
+                "warmup_errors": r.get("warmupErrors"),
+                "planned_runs": r.get("plannedRuns"),
+                "duration_ms": r.get("durationMs"),
+                "warmup_duration_ms": r.get("warmupDurationMs"),
                 "app_build": r.get("appBuild"),
                 "label": r.get("label"),
                 "run_index": r["runIndex"],
@@ -121,6 +125,7 @@ def to_frame(records: list[dict]) -> pd.DataFrame:
                 "runner_image": r["env"]["runnerImage"],
                 "cpu_model": r["env"]["cpuModel"],
                 "chrome": r["env"]["chromeVersion"],
+                "chrome_binary": r["env"].get("chromeBinaryVersion"),
                 "lighthouse": r["env"]["lighthouseVersion"],
                 "git_sha": r["gitSha"],
                 # short commit id: the built bundle differs between commits, so metrics

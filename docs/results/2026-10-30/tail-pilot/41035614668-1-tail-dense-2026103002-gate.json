@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "policy": "browser-candidate-2026-10-30",
+  "status": "regression",
+  "runs_per_variant": 20,
+  "alpha": 0.05,
+  "correction": "holm",
+  "metrics": [
+    {
+      "name": "tail-heavy/fcp",
+      "unit": "ms",
+      "n": 20,
+      "base_median": 1819.025,
+      "pr_median": 1821.9185,
+      "absolute_effect": 2.8934999999999036,
+      "relative_effect": 0.0015906873187558738,
+      "absolute_effect_interval": [
+        -4.324074999999811,
+        12.013550000000146
+      ],
+      "interval_level": 0.95,
+      "margin_absolute": 18.190250000000002,
+      "above_margin": false,
+      "p": 0.32768071950519584,
+      "holm_rejected": false,
+      "regression": false
+    },
+    {
+      "name": "tail-heavy/lcp",
+      "unit": "ms",
+      "n": 20,
+      "base_median": 2330.5775000000003,
+      "pr_median": 2641.252,
+      "absolute_effect": 310.6744999999996,
+      "relative_effect": 0.13330365542446007,
+      "absolute_effect_interval": [
+        132.64267500000028,
+        321.8836249999996
+      ],
+      "interval_level": 0.95,
+      "margin_absolute": 23.305775000000004,
+      "above_margin": true,
+      "p": 3.3978075640866785e-08,
+      "holm_rejected": true,
+      "regression": true
+    },
+    {
+      "name": "tail-heavy/tbt",
+      "unit": "ms",
+      "n": 20,
+      "base_median": 490.06149999997024,
+      "pr_median": 1233.9785,
+      "absolute_effect": 743.9170000000297,
+      "relative_effect": 1.5180074337610174,
+      "absolute_effect_interval": [
+        735.0288750000002,
+        750.0128749999993
+      ],
+      "interval_level": 0.95,
+      "margin_absolute": 24.503074999998514,
+      "above_margin": true,
+      "p": 3.3978075640866785e-08,
+      "holm_rejected": true,
+      "regression": true
+    },
+    {
+      "name": "tail-heavy/cls",
+      "unit": "unitless",
+      "n": 20,
+      "base_median": 0.15446296071546706,
+      "pr_median": 0.15446296071546706,
+      "absolute_effect": 0.0,
+      "relative_effect": 0.0,
+      "absolute_effect_interval": [
+        0.0,
+        0.0
+      ],
+      "interval_level": 0.95,
+      "margin_absolute": 0.005,
+      "above_margin": false,
+      "p": 0.8531409436241041,
+      "holm_rejected": false,
+      "regression": false
+    }
+  ],
+  "issues": [],
+  "limitations": [
+    "Candidate policy; prospective validation is pending.",
+    "No detected regression is not proof of equivalence.",
+    "Bootstrap intervals are pointwise and assume independent loads; they do not determine the verdict."
+  ]
+}

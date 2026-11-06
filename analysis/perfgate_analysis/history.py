@@ -31,6 +31,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+from .quality import valid_comparisons
 from scipy.stats import linregress
 
 from .load import filter_protocol, load_runs
@@ -51,7 +53,8 @@ class CpdConfig:
 
 def job_series(df: pd.DataFrame, metric: str) -> pd.DataFrame:
     """One row per A/A job: time, CPU model and the median of its base loads."""
-    clean = df[df["ok"] & df["is_aa"] & (df["variant"] == "base")].dropna(subset=[metric])
+    clean, _ = valid_comparisons(df[df["is_aa"]], (metric,))
+    clean = clean[clean["variant"] == "base"]
     rows = (
         clean.groupby([*SERIES_KEY, "epoch", "experiment"])
         .agg(

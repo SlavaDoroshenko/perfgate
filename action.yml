@@ -1,0 +1,81 @@
+name: perfgate browser comparison
+description: Compare two running web application URLs using repeated Lighthouse measurements.
+inputs:
+  base-url:
+    description: URL of the already running baseline application
+    required: true
+  pr-url:
+    description: URL of the already running changed application
+    required: true
+  runs:
+    description: Measured loads per variant (10 or 20)
+    default: '20'
+  app:
+    description: Page identifier
+    default: web
+  artifact-name:
+    description: Unique artifact name within this workflow run
+    default: perfgate
+outputs:
+  report-directory:
+    description: Directory containing raw data, comparison JSON/Markdown and timing
+    value: ${{ steps.compare.outputs.directory }}
+  verdict:
+    description: no_regression_detected, regression, invalid, or error
+    value: ${{ steps.compare.outputs.verdict }}
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v6
+      with:
+        version: 11.7.0
+    - uses: actions/setup-node@v7
+      with:
+        node-version: '22'
+    - uses: astral-sh/setup-uv@v10.1.0
+    - uses: browser-actions/setup-chrome@v2
+      id: chrome
+      with:
+        chrome-version: '153.0.8010.47'
+        install-dependencies: true
+    - name: Install pinned dependencies
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        pnpm install --frozen-lockfile
+        uv sync --locked --directory analysis
+    - name: Compare URLs
+      id: compare
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      env:
+        BASE_URL: ${{ inputs.base-url }}
+        PR_URL: ${{ inputs.pr-url }}
+        RUNS: ${{ inputs.runs }}
+        APP: ${{ inputs.app }}
+        CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+      run: |
+        report_dir=$(mktemp -d "$RUNNER_TEMP/perfgate-XXXXXXXX")
+        set +e
+        pnpm perfgate compare --url "$BASE_URL" --pr-url "$PR_URL" --runs "$RUNS" --app "$APP" --out "$report_dir"
+        code=$?
+        set -e
+        echo "code=$code" >> "$GITHUB_OUTPUT"
+        echo "directory=$report_dir" >> "$GITHUB_OUTPUT"
+        verdict=error
+        if [ -f "$report_dir/comparison.json" ]; then
+          verdict=$(node -e 'const fs=require("fs"); console.log(JSON.parse(fs.readFileSync(process.argv[1],"utf8")).status)' "$report_dir/comparison.json")
+        fi
+        echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
+        if [ -f "$report_dir/comparison.md" ]; then cat "$report_dir/comparison.md" >> "$GITHUB_STEP_SUMMARY"; fi
+    - uses: actions/upload-artifact@v7
+      if: always() && steps.compare.outputs.directory != ''
+      with:
+        name: ${{ inputs.artifact-name }}-${{ github.run_attempt }}
+        path: ${{ steps.compare.outputs.directory }}
+        retention-days: 30
+    - name: Apply comparison exit code
+      shell: bash
+      env:
+        RESULT_CODE: ${{ steps.compare.outputs.code }}
+      run: exit "${RESULT_CODE:-3}"

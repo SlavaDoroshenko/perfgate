@@ -1,0 +1,7 @@
+{
+  "seed": 20261030,
+  "reps": 500,
+  "type": "exploratory simulated data",
+  "paired_draws_across_methods": true,
+  "not_browser_measurements": true
+}

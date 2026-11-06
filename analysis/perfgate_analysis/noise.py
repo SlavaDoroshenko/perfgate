@@ -5,6 +5,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from .quality import valid_comparisons
+
 from . import GROUP, METRICS
 
 
@@ -27,7 +29,7 @@ def cv(x: np.ndarray) -> float:
 
 def long_metrics(df: pd.DataFrame) -> pd.DataFrame:
     """Clean successful A/A loads in long format: one row per (load, metric)."""
-    clean = df[df["ok"] & df["is_aa"]]
+    clean, _ = valid_comparisons(df[df["is_aa"]], METRICS)
     return clean.melt(
         id_vars=[*GROUP, "epoch", "experiment", "variant", "order", "timestamp"],
         value_vars=METRICS,

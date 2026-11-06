@@ -26,6 +26,7 @@ export const Metrics = z.object({
 
 export const Env = z.object({
   chromeVersion: z.string().nullable(),
+  chromeBinaryVersion: z.string().nullable().optional(),
   lighthouseVersion: z.string().nullable(),
   nodeVersion: z.string(),
   platform: z.string(),
@@ -51,6 +52,10 @@ export const Run = z.object({
   throttling: Throttling,
   // unrecorded loads before the series; optional, absent in data collected before 2026-09-17
   warmup: z.number().int().nonnegative().optional(),
+  warmupErrors: z.number().int().nonnegative().optional(),
+  plannedRuns: z.number().int().positive().optional(),
+  durationMs: z.number().nonnegative().optional(),
+  warmupDurationMs: z.number().nonnegative().optional(),
   // fingerprint of the app sources this page was built from; metrics are only
   // comparable across jobs within the same fingerprint
   appBuild: z.string().optional(),

@@ -1,0 +1,8 @@
+{
+  "install": ["pnpm", "install", "--frozen-lockfile"],
+  "build": ["pnpm", "--filter", "demo-spa", "build"],
+  "start": ["pnpm", "exec", "sirv", "apps/demo-spa/dist", "--host", "127.0.0.1", "--port", "{port}"],
+  "path": "/heavy.html",
+  "readyPath": "/heavy.html",
+  "app": "demo-heavy"
+}

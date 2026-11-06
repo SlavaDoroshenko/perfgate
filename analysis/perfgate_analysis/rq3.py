@@ -24,6 +24,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+from .quality import valid_comparisons
 from scipy.stats import fisher_exact, levene, mannwhitneyu, norm, spearmanr
 
 from . import GROUP
@@ -52,7 +54,7 @@ def job_stats(df: pd.DataFrame, metrics: tuple[str, ...] = METRICS, loads: int |
     abab series, and the last base loads with the first PR loads of a sequential one.
     """
     rows = []
-    clean = df[df["ok"] & df["is_aa"]]
+    clean, _ = valid_comparisons(df[df["is_aa"]], metrics, min_runs=loads or 5)
     for (*key, exp), g in clean.groupby([*GROUP, "experiment"]):
         g = g.sort_values("order")
         for metric in metrics:

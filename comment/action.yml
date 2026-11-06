@@ -1,0 +1,62 @@
+name: perfgate pull request comment
+description: >
+  Publish or update one sticky pull request comment from perfgate reports uploaded
+  by another workflow. Use only in a workflow_run job; it never executes the
+  measured pull request code and treats the downloaded reports as untrusted data.
+inputs:
+  github-token:
+    description: Token with pull-requests write and actions read permissions
+    default: ${{ github.token }}
+  artifact-pattern:
+    description: >
+      Glob of artifact names that contain perfgate report directories. The default
+      matches the root action's artifacts from the latest attempt of the measuring run.
+    default: perfgate*-${{ github.event.workflow_run.run_attempt }}
+  comment-key:
+    description: Distinguishes several perfgate comments on one pull request
+    default: default
+  dry-run:
+    description: Render and print the comment without posting it
+    default: 'false'
+outputs:
+  status:
+    description: regression, no_regression_detected or inconclusive (empty when skipped)
+    value: ${{ steps.comment.outputs.status }}
+runs:
+  using: composite
+  steps:
+    - name: Check trigger
+      shell: bash
+      env:
+        EVENT_NAME: ${{ github.event_name }}
+      run: |
+        if [ "$EVENT_NAME" != workflow_run ]; then
+          echo "::error::perfgate/comment must run on workflow_run, not $EVENT_NAME"
+          exit 1
+        fi
+    - uses: actions/setup-node@v7
+      with:
+        node-version: '22'
+    - name: Download reports
+      uses: actions/download-artifact@v8
+      continue-on-error: true
+      with:
+        run-id: ${{ github.event.workflow_run.id }}
+        github-token: ${{ inputs.github-token }}
+        pattern: ${{ inputs.artifact-pattern }}
+        path: ${{ runner.temp }}/perfgate-reports
+    - name: Render and publish comment
+      id: comment
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        REPORTS: ${{ runner.temp }}/perfgate-reports
+        KEY: ${{ inputs.comment-key }}
+        DRY_RUN: ${{ inputs.dry-run }}
+        SCRIPT: ${{ github.action_path }}/../scripts/comment/cli.mjs
+      run: |
+        mkdir -p "$REPORTS"
+        args=(github --reports "$REPORTS" --key "$KEY" --out "$RUNNER_TEMP/perfgate-comment.md")
+        if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
+        node "$SCRIPT" "${args[@]}"
+        if [ -f "$RUNNER_TEMP/perfgate-comment.md" ]; then cat "$RUNNER_TEMP/perfgate-comment.md" >> "$GITHUB_STEP_SUMMARY"; fi

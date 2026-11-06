@@ -1,0 +1,5 @@
+case,loads,status
+light-aa,20,no_regression_detected
+heavy-aa,20,no_regression_detected
+heavy-regression,20,regression
+refs-aa,20,no_regression_detected

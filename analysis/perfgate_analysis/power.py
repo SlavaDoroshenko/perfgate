@@ -30,6 +30,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from .quality import valid_comparisons
+
 from .load import filter_protocol, load_runs
 from .methods import Method, cliffs_delta, default_methods, hodges_lehmann, mann_whitney
 from .rq3 import wilson
@@ -49,9 +51,12 @@ NOMINAL = {
 SIZES = (5, 10, 20)
 
 
-def injected_jobs(df: pd.DataFrame) -> pd.DataFrame:
+def injected_jobs(df: pd.DataFrame, include_invalid: bool = False) -> pd.DataFrame:
     """Loads of the regression bench at its current calibration, with kind and nominal size."""
-    ok = df[df["ok"] & (df["label"] == "injected")].copy()
+    ok = df[df["label"] == "injected"]
+    if not include_invalid:
+        ok, _ = valid_comparisons(ok, tuple(TARGET.values()))
+    ok = ok.copy()
     inj = ok.groupby("experiment")["inject"].transform(lambda s: s.dropna().iloc[0] if s.notna().any() else None)
     ok["kind"] = inj.str.split(":").str[0]
     ok["size"] = inj.str.split(":").str[1].astype(float)
@@ -69,13 +74,16 @@ def injected_jobs(df: pd.DataFrame) -> pd.DataFrame:
 def aa_jobs_like(df: pd.DataFrame, injected: pd.DataFrame) -> pd.DataFrame:
     """A/A loads of the pages, runner, mode and throttling the bench uses."""
     cfg = injected[["app", "runner", "throttling", "mode"]].drop_duplicates()
-    aa = df[df["ok"] & df["is_aa"]]
+    aa, _ = valid_comparisons(df[df["is_aa"]], tuple(TARGET.values()))
     return aa.merge(cfg, on=["app", "runner", "throttling", "mode"])
 
 
 def _series(g: pd.DataFrame, metric: str, k: int | None) -> tuple[np.ndarray, np.ndarray] | None:
     """First k base and PR loads of one job, in run order."""
-    g = g.sort_values("order").dropna(subset=[metric])
+    from .quality import comparison_issues
+    if comparison_issues(g, (metric,), min_runs=k or 2):
+        return None
+    g = g.sort_values("order")
     b = g.loc[g["variant"] == "base", metric].to_numpy(float)
     p = g.loc[g["variant"] == "pr", metric].to_numpy(float)
     k = min(len(b), len(p)) if k is None else k

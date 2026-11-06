@@ -1,0 +1,13 @@
+file,index,variant,ordinal,since_first_shift_ms,score,recent_input,max_distance,movements
+warmup-2-base.json,-2,base,0,0.0,0.07776427703523693,False,64,"[{""selector"": ""body > div#root > main"", ""dy"": 64, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 64, ""dx"": 0}]"
+warmup-2-pr.json,-2,pr,0,0.0,0.1166464155528554,False,96,"[{""selector"": ""body > div#root > main"", ""dy"": 96, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 96, ""dx"": 0}]"
+warmup-1-base.json,-1,base,0,0.0,0.07776427703523693,False,64,"[{""selector"": ""body > div#root > main"", ""dy"": 64, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 64, ""dx"": 0}]"
+warmup-1-pr.json,-1,pr,0,0.0,0.1166464155528554,False,96,"[{""selector"": ""body > div#root > main"", ""dy"": 96, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 96, ""dx"": 0}]"
+run-0-base.json,0,base,0,0.0,0.07776427703523693,False,64,"[{""selector"": ""body > div#root > main"", ""dy"": 64, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 64, ""dx"": 0}]"
+run-0-pr.json,0,pr,0,0.0,0.1166464155528554,False,96,"[{""selector"": ""body > div#root > main"", ""dy"": 96, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 96, ""dx"": 0}]"
+run-1-base.json,1,base,0,0.0,0.07776427703523693,False,64,"[{""selector"": ""body > div#root > main"", ""dy"": 64, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 64, ""dx"": 0}]"
+run-1-pr.json,1,pr,0,0.0,0.1166464155528554,False,96,"[{""selector"": ""body > div#root > main"", ""dy"": 96, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 96, ""dx"": 0}]"
+run-2-base.json,2,base,0,0.0,0.07776427703523693,False,64,"[{""selector"": ""body > div#root > main"", ""dy"": 64, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 64, ""dx"": 0}]"
+run-2-pr.json,2,pr,0,0.0,0.1166464155528554,False,96,"[{""selector"": ""body > div#root > main"", ""dy"": 96, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 96, ""dx"": 0}]"
+run-3-base.json,3,base,0,0.0,0.07776427703523693,False,64,"[{""selector"": ""body > div#root > main"", ""dy"": 64, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 64, ""dx"": 0}]"
+run-3-pr.json,3,pr,0,0.0,0.1166464155528554,False,96,"[{""selector"": ""body > div#root > main"", ""dy"": 96, ""dx"": 0}, {""selector"": ""body > div#root > header.header"", ""dy"": 96, ""dx"": 0}]"

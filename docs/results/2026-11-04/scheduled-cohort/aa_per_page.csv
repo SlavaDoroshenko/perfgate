@@ -1,0 +1,5 @@
+app,jobs,alarms
+demo-heavy,15,0
+demo-spa,15,0
+demo-ssr,15,0
+demo-static,15,0

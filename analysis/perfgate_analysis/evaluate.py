@@ -14,6 +14,8 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
+from .quality import valid_comparisons
+
 from . import GROUP
 from .methods import Method, default_methods
 
@@ -30,7 +32,7 @@ class EvalConfig:
 
 def aa_experiments(df: pd.DataFrame, metric: str) -> dict[tuple, list[np.ndarray]]:
     """Clean A/A loads of one metric, grouped by configuration and job."""
-    clean = df[df["ok"] & df["is_aa"]].dropna(subset=[metric])
+    clean, _ = valid_comparisons(df[df["is_aa"]], (metric,))
     return {
         key: [e[metric].to_numpy() for _, e in g.groupby("experiment")]
         for key, g in clean.groupby(GROUP)
@@ -122,7 +124,7 @@ def evaluate_real_jobs(
     """
     methods = methods or default_methods()
     rows = []
-    ok = df[df["ok"]]
+    ok, _ = valid_comparisons(df, metrics)
     for (*key, exp, is_aa), g in ok.groupby([*GROUP, "experiment", "is_aa"]):
         for metric in metrics:
             b = g[g["variant"] == "base"][metric].dropna().to_numpy()

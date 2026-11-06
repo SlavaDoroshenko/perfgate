@@ -1,0 +1,59 @@
+name: compare-smoke
+on:
+  pull_request:
+    paths:
+      - 'action.yml'
+      - 'packages/collector/**'
+      - 'analysis/**'
+      - 'schema/**'
+      - '.github/workflows/compare-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - case: aa
+            query: ''
+            expected: no_regression_detected
+          - case: regression
+            query: '?inject=script-delay:179'
+            expected: regression
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: pnpm install --frozen-lockfile
+      - name: Build and start fixture
+        run: |
+          pnpm --filter demo-spa build
+          nohup pnpm --filter demo-spa preview > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4173/heavy.html > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+      - uses: ./
+        id: measurement
+        continue-on-error: true
+        with:
+          base-url: http://127.0.0.1:4173/heavy.html
+          pr-url: http://127.0.0.1:4173/heavy.html${{ matrix.query }}
+          runs: '10'
+          app: demo-heavy
+          artifact-name: compare-smoke-${{ matrix.case }}
+      - name: Verify the end-to-end outcome
+        if: always()
+        env:
+          ACTUAL: ${{ steps.measurement.outputs.verdict }}
+          EXPECTED: ${{ matrix.expected }}
+        run: |
+          test "$ACTUAL" = "$EXPECTED"

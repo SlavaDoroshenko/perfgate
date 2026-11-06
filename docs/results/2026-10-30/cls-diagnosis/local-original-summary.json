@@ -1,0 +1,47 @@
+{
+  "purpose": "exploratory CLS trace diagnosis, not confirmatory gate evaluation",
+  "source": "847c7b8d17fdeacb72aa42fee30670d3cfd503ed",
+  "chrome": "Google Chrome for Testing 153.0.8010.47",
+  "complete": true,
+  "pairs_planned": 4,
+  "variants": {
+    "base": {
+      "n": 4,
+      "median": 0.23661845822240057,
+      "mean": 0.2167709954149284,
+      "min": 0.15722860699251184,
+      "max": 0.23661845822240057,
+      "values_rounded_9dp": {
+        "0.236618458": 3,
+        "0.157228607": 1
+      }
+    },
+    "pr": {
+      "n": 4,
+      "median": 0.2755005967400191,
+      "mean": 0.2556531339325469,
+      "min": 0.19611074551013033,
+      "max": 0.2755005967400191,
+      "values_rounded_9dp": {
+        "0.275500597": 3,
+        "0.196110746": 1
+      }
+    }
+  },
+  "observed_median_absolute_difference": 0.038882138517618514,
+  "observed_median_relative_difference": 0.16432419858417258,
+  "input_sha256": {
+    "warmup-2-base.json": "e21160cc5253c4e6d70475c9427e65c8d7ddbd65aa38643e2a95ea6215de17cc",
+    "warmup-2-pr.json": "0e416086159cfcb55f52396b75f23cf7cf43bb67b12a2bacd5823d27ab3181f5",
+    "warmup-1-base.json": "f092399433148b10a13de81df472ce38b38f85fb80408f18419c3ff1b51ee416",
+    "warmup-1-pr.json": "9ce782dcc9f81ad53e19cb139a41d6a78516f8a0b0229f226e0a89e3b605b8d1",
+    "run-0-base.json": "f97d331b9625519cfa15edacb2f231d283ec214a5a6fa6571833b31d57189e98",
+    "run-0-pr.json": "52d3fda34817b6a4e7a1d400e55b308406164ef4ce6a63b049d721129f86d5b8",
+    "run-1-base.json": "781d47cad75c4992f173a65ad2df2a5d6a22a2d21a8e57661777eff6d1f9b590",
+    "run-1-pr.json": "6d0b9348a71a2814f5e6648230dbd84d6b53376a32cbf047bb89d54db5a08199",
+    "run-2-base.json": "50f745517ec57d6910c54fe9ebcf161c303bcab29b74da2be116d830da149ba2",
+    "run-2-pr.json": "82d99adf8193fe9d3c8710959eb342ebfaafe92dcbddb31d68113c06ece5052b",
+    "run-3-base.json": "ae4067a620dd14598b85a80d0893c20959977c172324494b3f6493a86ae7ef9b",
+    "run-3-pr.json": "a9eeb56badcb3829125a1dd25e07806ff9c9772cb3ff42bb20d1f8047dd6c276"
+  }
+}
