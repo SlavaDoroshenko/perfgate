@@ -29,6 +29,8 @@ p.add_argument('raw', type=Path, help='raw/ directory of the data branch')
 p.add_argument('--out', type=Path, required=True)
 p.add_argument('--freeze', type=Path, default=ROOT/'docs/protocols/browser-candidate-2026-10-30.json')
 p.add_argument('--candidate', type=Path, help='prospective/<policy>/ directory of the data branch (amendment of 6 November)')
+p.add_argument('--confirmatory', action='store_true',
+               help='keep only the first 200 complete suites and first 100 valid jobs per case, in acquisition order (amendment b)')
 p.add_argument('--through', help='ignore loads after this UTC timestamp (fixed cutoff)')
 args = p.parse_args()
 args.out.mkdir(parents=True, exist_ok=True)
@@ -93,6 +95,8 @@ cases['measured_target_abs'] = [row.get(f'{t}_abs') for t, (_, row) in zip(cases
 rows = []
 valid_suites = suites[suites.status != 'incomplete_suite']
 valid_suites = valid_suites[valid_suites.status != 'invalid']
+if args.confirmatory:
+    valid_suites = valid_suites.sort_values('start').head(freeze['prospective_aa_complete_suites'])
 k, n = int(valid_suites.status.eq('regression').sum()), len(valid_suites)
 lo, hi = wilson(k, n) if n else (float('nan'), float('nan'))
 rows.append({'cohort': 'A/A four-page suite', 'kind': None, 'nominal_pct': None, 'jobs': n, 'invalid': int(len(suites) - n),
@@ -102,6 +106,8 @@ rows.append({'cohort': 'A/A four-page suite', 'kind': None, 'nominal_pct': None,
              'predeclared_target_jobs': freeze['prospective_aa_complete_suites']})
 for (kind, pct), g in cases.groupby(['kind', 'pct']):
     v = g[g.status != 'invalid']
+    if args.confirmatory:
+        v = v.sort_values('start').head(freeze['prospective_jobs_per_primary_injection'])
     k, n = int(v.target_detected.sum()), len(v)
     lo, hi = wilson(k, n) if n else (float('nan'), float('nan'))
     rows.append({'cohort': 'injected', 'kind': kind, 'nominal_pct': pct, 'jobs': n, 'invalid': int(len(g) - n),
