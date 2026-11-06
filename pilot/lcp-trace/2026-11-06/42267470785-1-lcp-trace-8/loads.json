@@ -1,0 +1,7962 @@
+[
+ {
+  "variant": "base",
+  "run_index": 0,
+  "order": 0,
+  "lcp": 11653.835,
+  "fcp": 9512.634,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.155,
+   "resourceLoadDelay": 9496.869,
+   "resourceLoadDuration": 2137.347,
+   "elementRenderDelay": 14.464
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.3269999999902211,
+    "end": 577.0720000000147,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 599.2149999999965,
+    "end": 9167.556000000011,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 599.414999999979,
+    "end": 8865.623999999982,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 599.5559999999823,
+    "end": 1244.4310000000114,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 599.6440000000002,
+    "end": 6226.635999999999,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 600.3009999999776,
+    "end": 4160.424999999988,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 600.43299999999,
+    "end": 7616.9770000000135,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1244.6319999999832,
+    "end": 1848.591999999975,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9501.841000000015,
+    "end": 11638.41399999999,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9502.007000000012,
+    "end": 11956.568,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9503.195999999996,
+    "end": 11161.763999999996,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9503.315000000002,
+    "end": 10796.272999999986,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9503.419999999984,
+    "end": 11170.608000000007,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9585.84699999998,
+    "end": 10287.784000000014,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9586.014999999985,
+    "end": 10923.869999999995,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10268.538,
+    "end": 10799.535000000003,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10516.529999999999,
+    "end": 10805.875,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10518.041999999987,
+    "end": 10805.88500000001,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 0,
+  "order": 1,
+  "lcp": 11652.788,
+  "fcp": 9515.466,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 6.866,
+   "resourceLoadDelay": 9495.508,
+   "resourceLoadDuration": 2134.901,
+   "elementRenderDelay": 15.513
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.8559999999997672,
+    "end": 583.6460000000079,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 606.25,
+    "end": 9173.516999999993,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 606.4520000000193,
+    "end": 8879.103999999992,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 606.6460000000079,
+    "end": 1241.8610000000044,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 606.7589999999909,
+    "end": 6233.161000000022,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 606.8839999999909,
+    "end": 4158.630000000005,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 607.0169999999925,
+    "end": 7623.326000000001,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1242.2140000000072,
+    "end": 1846.4550000000163,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9502.208000000013,
+    "end": 11636.277000000002,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9502.383000000002,
+    "end": 11954.93299999999,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9502.475000000006,
+    "end": 11159.486000000004,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9502.559999999998,
+    "end": 10794.146999999997,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9502.630999999994,
+    "end": 11168.430999999982,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9584.334999999992,
+    "end": 10286.187999999995,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9584.502999999997,
+    "end": 10921.657999999996,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10267.891000000003,
+    "end": 10797.89499999999,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10514.57799999998,
+    "end": 10802.205000000016,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10515.600000000006,
+    "end": 10803.260999999999,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 1,
+  "order": 2,
+  "lcp": 11691.91,
+  "fcp": 9553.865,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.537,
+   "resourceLoadDelay": 9536.722,
+   "resourceLoadDuration": 2136.966,
+   "elementRenderDelay": 14.685
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.157999999995809,
+    "end": 575.4200000000128,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 601.1409999999742,
+    "end": 9165.48000000001,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 601.3479999999981,
+    "end": 8870.915999999997,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 601.4700000000012,
+    "end": 1233.5269999999728,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 601.5720000000147,
+    "end": 6224.718999999983,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 601.7740000000049,
+    "end": 4158.154999999999,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 601.9079999999958,
+    "end": 7615.758000000002,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1233.7930000000051,
+    "end": 1838.3379999999888,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9540.61499999999,
+    "end": 11676.220000000001,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9543.003999999986,
+    "end": 11994.035999999993,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9543.166999999987,
+    "end": 11199.184000000008,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9543.265999999974,
+    "end": 10842.348999999987,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9543.368999999977,
+    "end": 11208.11499999999,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9563.752999999997,
+    "end": 10261.555999999982,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9563.917000000016,
+    "end": 10905.222000000009,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10290.269,
+    "end": 10846.790000000008,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10553.029999999999,
+    "end": 10853.940999999992,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10554.766000000003,
+    "end": 10852.266999999993,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 1,
+  "order": 3,
+  "lcp": 11680.015,
+  "fcp": 9543.103,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.428,
+   "resourceLoadDelay": 9526.57,
+   "resourceLoadDuration": 2133.85,
+   "elementRenderDelay": 14.167
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.120000000053551,
+    "end": 580.6340000000782,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 602.6780000000726,
+    "end": 9169.58500000008,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 602.9100000000326,
+    "end": 8876.177000000083,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 603.0380000000587,
+    "end": 1254.7270000000135,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 603.1320000000414,
+    "end": 6221.01800000004,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 603.2540000000736,
+    "end": 4170.885000000009,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 603.3430000000517,
+    "end": 7620.628000000026,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1254.9450000000652,
+    "end": 1859.0510000000359,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9531.579000000027,
+    "end": 11664.852000000072,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9532.169000000053,
+    "end": 11983.092000000004,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9532.320000000065,
+    "end": 11188.24700000009,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9532.455000000075,
+    "end": 10823.137000000046,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9532.562000000093,
+    "end": 11196.15200000006,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9550.785000000033,
+    "end": 10251.07500000007,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9550.958000000042,
+    "end": 10893.985000000044,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10275.939000000071,
+    "end": 10826.577000000048,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10540.094000000041,
+    "end": 10833.186000000045,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10541.802000000025,
+    "end": 10832.207000000053,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 2,
+  "order": 4,
+  "lcp": 11685.189,
+  "fcp": 9540.086,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.928,
+   "resourceLoadDelay": 9523.412,
+   "resourceLoadDuration": 2140.516,
+   "elementRenderDelay": 16.333
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0509999999776483,
+    "end": 583.2209999999614,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 603.4729999999399,
+    "end": 9164.643999999971,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 603.6579999999958,
+    "end": 8869.836999999941,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 603.8119999999763,
+    "end": 1232.914999999979,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 603.8979999999283,
+    "end": 6231.730999999971,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 604.0370000000112,
+    "end": 4149.938999999955,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 604.1319999999832,
+    "end": 7614.892999999982,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1233.1169999999693,
+    "end": 1837.8119999999763,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9527.921999999962,
+    "end": 11667.950999999943,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9528.824999999953,
+    "end": 11984.983999999997,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9528.93299999996,
+    "end": 11190.999999999942,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9529.021000000008,
+    "end": 10825.646000000008,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9529.121999999974,
+    "end": 11198.922999999952,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9610.794999999984,
+    "end": 10316.294999999984,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9610.97100000002,
+    "end": 10952.218999999925,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10286.402999999991,
+    "end": 10829.226000000024,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10539.674999999988,
+    "end": 10832.98199999996,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10541.758999999962,
+    "end": 10836.64599999995,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 2,
+  "order": 5,
+  "lcp": 11646.719,
+  "fcp": 9510.19,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.331,
+   "resourceLoadDelay": 9489.403,
+   "resourceLoadDuration": 2138.15,
+   "elementRenderDelay": 13.835
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.9650000000256114,
+    "end": 578.3770000000368,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 601.1790000000037,
+    "end": 9168.527999999991,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 601.3660000000382,
+    "end": 8874.530000000028,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 601.4739999999874,
+    "end": 1236.7239999999874,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 601.6289999999572,
+    "end": 6227.723999999987,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 601.755999999994,
+    "end": 4161.568000000028,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 601.8630000000121,
+    "end": 7619.011999999988,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1236.978999999992,
+    "end": 1841.5819999999949,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9494.21100000001,
+    "end": 11631.858000000007,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9494.37400000001,
+    "end": 11949.47100000002,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9494.478999999992,
+    "end": 11155.312000000034,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9494.571999999986,
+    "end": 10789.486999999965,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9494.652999999991,
+    "end": 11163.156000000017,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9572.40399999998,
+    "end": 10272.569000000018,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9572.608999999997,
+    "end": 10909.113000000012,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10266.943000000028,
+    "end": 10793.166000000027,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10501.075000000012,
+    "end": 10798.603000000003,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10502.330000000016,
+    "end": 10805.810999999987,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 3,
+  "order": 6,
+  "lcp": 11637.894,
+  "fcp": 9500.29,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.64,
+   "resourceLoadDelay": 9486.265,
+   "resourceLoadDuration": 2134.149,
+   "elementRenderDelay": 13.84
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.1589999999850988,
+    "end": 577.8150000000023,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 599.9189999999944,
+    "end": 9167.876999999979,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 600.0849999999627,
+    "end": 8873.573999999964,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 600.195000000007,
+    "end": 1236.210999999952,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 600.2770000000019,
+    "end": 6227.058000000019,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 600.4679999999935,
+    "end": 4160.9619999999995,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 600.6089999999967,
+    "end": 7618.098999999987,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1236.4479999999749,
+    "end": 1841.4919999999693,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9490.995999999985,
+    "end": 11623.103999999992,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9491.443000000028,
+    "end": 11941.484999999986,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9491.61499999999,
+    "end": 11146.062999999966,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9491.832999999984,
+    "end": 10765.150000000023,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9491.945999999996,
+    "end": 11155.092999999993,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9574.916999999958,
+    "end": 10280.065999999992,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9575.081999999937,
+    "end": 10915.97299999994,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10260.761999999988,
+    "end": 10769.194999999949,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10502.848999999987,
+    "end": 10774.270000000019,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10504.847999999998,
+    "end": 10776.251999999979,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 3,
+  "order": 7,
+  "lcp": 11662.428,
+  "fcp": 9520.288,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.326,
+   "resourceLoadDelay": 9505.268,
+   "resourceLoadDuration": 2137.705,
+   "elementRenderDelay": 15.129
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.797000000020489,
+    "end": 577.5100000000093,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 598.9490000000224,
+    "end": 9159.190999999992,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 599.1220000000321,
+    "end": 8864.42200000002,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 599.2430000000168,
+    "end": 1235.2690000000293,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 599.3329999999842,
+    "end": 6218.438000000024,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 599.4459999999963,
+    "end": 4160.494000000006,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 599.5370000000112,
+    "end": 7609.585000000021,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1235.488000000012,
+    "end": 1840.9410000000498,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9509.868000000017,
+    "end": 11646.368000000017,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9510.082999999984,
+    "end": 11963.790000000037,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9510.190999999992,
+    "end": 11169.786000000022,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9510.312999999966,
+    "end": 10803.896999999997,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9510.415000000037,
+    "end": 11177.69000000006,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9595.926000000036,
+    "end": 10295.26900000003,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9596.088999999978,
+    "end": 10930.78899999999,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10261.539000000048,
+    "end": 10807.361000000034,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10523.006999999983,
+    "end": 10813.251000000047,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10524.294999999984,
+    "end": 10813.238000000012,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 4,
+  "order": 8,
+  "lcp": 11667.577,
+  "fcp": 9530.015,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.319,
+   "resourceLoadDelay": 9514.429,
+   "resourceLoadDuration": 2133.114,
+   "elementRenderDelay": 14.715
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.5490000000572763,
+    "end": 582.3890000000829,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 604.4930000000168,
+    "end": 9164.608000000007,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 604.8180000000284,
+    "end": 8870.208000000042,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 605.1130000000703,
+    "end": 1233.1920000000391,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 605.3130000000237,
+    "end": 6224.388000000035,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 605.4640000000363,
+    "end": 4157.549000000057,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 605.5620000000345,
+    "end": 7615.2970000000205,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1233.4060000000172,
+    "end": 1838.6530000000494,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9519.592000000004,
+    "end": 11651.897000000055,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9519.780000000028,
+    "end": 11969.660000000033,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9519.886999999988,
+    "end": 11175.094000000041,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9519.990000000049,
+    "end": 10809.899000000034,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9520.090000000084,
+    "end": 11183.040000000037,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9540.130000000063,
+    "end": 10245.002000000037,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9541.964000000036,
+    "end": 10888.882000000041,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10269.38400000002,
+    "end": 10813.47000000003,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10525.404000000039,
+    "end": 10819.783000000054,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10527.367000000027,
+    "end": 10819.456000000006,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 4,
+  "order": 9,
+  "lcp": 11654.787,
+  "fcp": 9508.812,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.009,
+   "resourceLoadDelay": 9493.749,
+   "resourceLoadDuration": 2141.434,
+   "elementRenderDelay": 15.595
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.8009999999776483,
+    "end": 576.9369999999763,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 596.4070000000065,
+    "end": 9158.758999999962,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 596.5679999999702,
+    "end": 8865.143999999971,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 596.7019999999902,
+    "end": 1228.2540000000154,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 596.8029999999562,
+    "end": 6218.098999999987,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 596.9000000000233,
+    "end": 4152.299999999988,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 596.9899999999907,
+    "end": 7609.465000000026,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1228.4599999999627,
+    "end": 1832.8379999999888,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9502.937999999966,
+    "end": 11638.322000000044,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9503.135999999999,
+    "end": 11956.629000000015,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9503.224999999977,
+    "end": 11153.722000000009,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9503.331999999995,
+    "end": 10787.869999999995,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9504.055999999982,
+    "end": 11169.190999999992,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9589.255999999994,
+    "end": 10923.501999999979,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9589.418999999994,
+    "end": 10248.281000000017,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10259.661000000022,
+    "end": 10791.321999999986,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10517.783999999985,
+    "end": 10797.694999999949,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10519.257999999973,
+    "end": 10798.767999999982,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 5,
+  "order": 10,
+  "lcp": 11596.725,
+  "fcp": 9466.416,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.9689999999403955,
+   "resourceLoadDelay": 9445.94300000006,
+   "resourceLoadDuration": 2132.28,
+   "elementRenderDelay": 13.533
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 2.305999999924097,
+    "end": 576.7299999999814,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 595.0920000000042,
+    "end": 9158.554999999935,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 595.2729999999865,
+    "end": 8864.534999999974,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 595.4489999999641,
+    "end": 1227.786999999953,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 595.5669999999809,
+    "end": 6217.754000000015,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 595.6979999999749,
+    "end": 4152.116999999969,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 595.7879999999423,
+    "end": 7608.565000000002,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1227.9579999999842,
+    "end": 1839.859999999986,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9450.103999999992,
+    "end": 11581.884999999951,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9450.314999999944,
+    "end": 11900.523999999976,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9450.641000000003,
+    "end": 11105.467999999935,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9451.718999999983,
+    "end": 10740.228999999992,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9452.587,
+    "end": 11113.358999999997,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9529.256999999925,
+    "end": 10231.185999999929,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9529.585999999952,
+    "end": 10867.387999999977,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10245.630000000005,
+    "end": 10743.700999999943,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10463.252999999968,
+    "end": 10750.281999999948,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10464.27899999998,
+    "end": 10748.13599999994,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 5,
+  "order": 11,
+  "lcp": 11604.138,
+  "fcp": 9459.049,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.49,
+   "resourceLoadDelay": 9445.526,
+   "resourceLoadDuration": 2141.496,
+   "elementRenderDelay": 13.626
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0569999999715947,
+    "end": 575.4799999999814,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 594.6779999999562,
+    "end": 9158.061999999976,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 594.8889999999665,
+    "end": 8863.68299999996,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 595.0119999999879,
+    "end": 1227.0779999999213,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 595.0979999999399,
+    "end": 6217.108999999997,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 595.1929999999702,
+    "end": 4151.304999999993,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 595.2579999999725,
+    "end": 7608.35699999996,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1227.2459999999846,
+    "end": 1831.6019999999553,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9451.017999999982,
+    "end": 11589.194999999949,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9451.195000000007,
+    "end": 11906.937999999966,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9451.289999999979,
+    "end": 11104.502999999968,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9451.391000000003,
+    "end": 10754.752999999968,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9451.477999999945,
+    "end": 11113.296999999962,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9465.450999999943,
+    "end": 10167.384999999951,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9465.585999999952,
+    "end": 10810.550999999978,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10249.162999999942,
+    "end": 10757.973999999987,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10454.537999999942,
+    "end": 10763.668000000005,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10455.60699999996,
+    "end": 10763.49099999998,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 6,
+  "order": 12,
+  "lcp": 11617.424,
+  "fcp": 9482.088,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 6.658,
+   "resourceLoadDelay": 9461.233,
+   "resourceLoadDuration": 2135.781,
+   "elementRenderDelay": 13.752
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0899999999674037,
+    "end": 580.7509999999893,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 600.3989999999176,
+    "end": 9162.523999999976,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 600.6429999999818,
+    "end": 8868.472999999998,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 600.966999999946,
+    "end": 1231.2799999999697,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 601.1089999999385,
+    "end": 6230.171999999904,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 601.2339999999967,
+    "end": 4147.814999999944,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 601.4020000000019,
+    "end": 7613.158999999985,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1231.655999999959,
+    "end": 1836.2979999999516,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9468.141999999993,
+    "end": 11602.449000000022,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9468.310999999987,
+    "end": 11920.186999999918,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9468.402000000002,
+    "end": 11125.714999999967,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9468.48199999996,
+    "end": 10759.648999999976,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9468.581000000006,
+    "end": 11133.527000000002,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9545.339000000036,
+    "end": 10242.990999999922,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9545.548999999999,
+    "end": 10879.408999999985,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10252.258999999962,
+    "end": 10764.180000000051,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10473.586999999941,
+    "end": 10768.008999999962,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10474.534999999916,
+    "end": 10768.01800000004,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 6,
+  "order": 13,
+  "lcp": 11637.814,
+  "fcp": 9500.635,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.552,
+   "resourceLoadDelay": 9482.215,
+   "resourceLoadDuration": 2136.374,
+   "elementRenderDelay": 13.673
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0489999999990687,
+    "end": 578.311999999918,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 597.923000000068,
+    "end": 9159.548999999999,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 598.0899999999674,
+    "end": 8865.826000000001,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 598.2229999998817,
+    "end": 1228.4379999999655,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 598.3449999999721,
+    "end": 6219.073999999906,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 598.4749999999767,
+    "end": 4145.439999999944,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 598.6329999999143,
+    "end": 7610.201999999932,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1228.6369999998715,
+    "end": 1834.0409999999683,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9488.229999999981,
+    "end": 11623.212999999989,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9488.415000000037,
+    "end": 11940.783999999985,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9488.513000000035,
+    "end": 11146.329000000027,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9488.63500000001,
+    "end": 10780.494999999995,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9488.746999999974,
+    "end": 11154.718999999925,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9569.84899999993,
+    "end": 10271.909999999916,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9570.02099999995,
+    "end": 10908,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10257.123999999953,
+    "end": 10783.693999999901,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10504.589999999967,
+    "end": 10792.171999999904,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10506.297999999952,
+    "end": 10790.97199999995,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 7,
+  "order": 14,
+  "lcp": 11645.353,
+  "fcp": 9506.385,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.728,
+   "resourceLoadDelay": 9492.012,
+   "resourceLoadDuration": 2134.341,
+   "elementRenderDelay": 14.272
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 0.9999999998835847,
+    "end": 576.6599999999162,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 599.1429999999236,
+    "end": 9166.397999999928,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 599.35699999996,
+    "end": 8872.47399999993,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 599.4859999999171,
+    "end": 1235.2209999999031,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 599.5629999999655,
+    "end": 6225.71699999983,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 599.6809999998659,
+    "end": 4159.722999999998,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 599.7619999998715,
+    "end": 7616.726999999955,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1235.402999999933,
+    "end": 1840.167999999947,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9496.904999999912,
+    "end": 11630.113999999943,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9497.354999999981,
+    "end": 11947.75399999984,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9497.461999999941,
+    "end": 11152.704999999958,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9497.543999999878,
+    "end": 10780.265999999945,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9497.633999999962,
+    "end": 11161.569999999949,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9518.26099999994,
+    "end": 10859.03999999992,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9518.441999999923,
+    "end": 10168.104999999981,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10260.82899999991,
+    "end": 10783.363999999943,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10510.163999999873,
+    "end": 10788.224999999977,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10511.553999999887,
+    "end": 10789.167999999947,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 7,
+  "order": 15,
+  "lcp": 11622.276,
+  "fcp": 9484.841,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.246,
+   "resourceLoadDelay": 9468.713,
+   "resourceLoadDuration": 2133.433,
+   "elementRenderDelay": 15.884
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.4960000000428408,
+    "end": 576.1550000000279,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 595.2979999999516,
+    "end": 9157.773999999976,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 595.4560000000056,
+    "end": 8863.72199999995,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 595.5690000000177,
+    "end": 1226.4799999999814,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 595.704000000027,
+    "end": 6216.64599999995,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 595.8340000000317,
+    "end": 4150.69299999997,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 595.9590000000317,
+    "end": 7607.849999999977,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1226.673000000068,
+    "end": 1831.792999999947,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9472.722000000067,
+    "end": 11605.483000000007,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9473.212999999989,
+    "end": 11923.515999999945,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9473.34600000002,
+    "end": 11128.032999999938,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9473.451000000001,
+    "end": 10762.863000000012,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9473.542000000016,
+    "end": 11136.977000000072,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9549.429999999935,
+    "end": 10254.315999999992,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9549.60699999996,
+    "end": 10889.873000000021,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10265.215000000084,
+    "end": 10766.591000000015,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10482.408999999985,
+    "end": 10770.380999999936,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10483.993000000017,
+    "end": 10771.501999999979,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 8,
+  "order": 16,
+  "lcp": 11682.372,
+  "fcp": 9538.001,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.626000000119209,
+   "resourceLoadDelay": 9519.28099999988,
+   "resourceLoadDuration": 2144.193,
+   "elementRenderDelay": 14.272
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.3390000000363216,
+    "end": 582.045999999973,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 606.5259999999544,
+    "end": 9171.722999999882,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 606.7649999998976,
+    "end": 8877.761999999871,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 606.8950000000186,
+    "end": 1240.3169999999227,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 606.9919999999693,
+    "end": 6223.678999999887,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 607.1279999999097,
+    "end": 4156.977999999886,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 607.2409999999218,
+    "end": 7614.167999999947,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1240.5049999998882,
+    "end": 1845.417999999947,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9523.579999999842,
+    "end": 11667.066999999923,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9525.939999999944,
+    "end": 11977.253000000026,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9526.071999999927,
+    "end": 11182.714000000036,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9526.169999999925,
+    "end": 10817.286999999895,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9526.275999999838,
+    "end": 11190.819000000018,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9543.951000000001,
+    "end": 10245.068999999901,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9544.107999999891,
+    "end": 10887.92499999993,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10306.640000000014,
+    "end": 10821.804999999935,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10531.593999999925,
+    "end": 10826.660999999847,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10533.699999999953,
+    "end": 10827.100999999908,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 8,
+  "order": 17,
+  "lcp": 11640.862,
+  "fcp": 9496.928,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.512,
+   "resourceLoadDelay": 9480.371,
+   "resourceLoadDuration": 2137.726,
+   "elementRenderDelay": 18.253
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.2510000000474975,
+    "end": 576.7470000000903,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 597.3200000000652,
+    "end": 9158.5,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 597.4890000000596,
+    "end": 8864.77800000005,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 597.670999999973,
+    "end": 1227.359000000055,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 597.7730000000447,
+    "end": 6218.09600000002,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 597.9010000000708,
+    "end": 4151.755000000121,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 597.9910000001546,
+    "end": 7608.933000000077,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1227.5920000000624,
+    "end": 1831.7880000000587,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9484.543999999994,
+    "end": 11621.742000000086,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9490.050000000047,
+    "end": 11939.704000000027,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9490.578000000096,
+    "end": 11137.562999999966,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9490.749000000069,
+    "end": 10787.925000000047,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9490.856000000029,
+    "end": 11153.22100000002,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9578.945000000065,
+    "end": 10279.55700000003,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9579.109999999986,
+    "end": 10915.225000000093,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10256.430999999982,
+    "end": 10791.220000000088,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10503.495000000112,
+    "end": 10798.662000000011,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10505.321000000113,
+    "end": 10799.731000000029,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 9,
+  "order": 18,
+  "lcp": 11658.47,
+  "fcp": 9520.26,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.867999999880791,
+   "resourceLoadDelay": 9500.83900000012,
+   "resourceLoadDuration": 2136.892,
+   "elementRenderDelay": 15.871
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.184999999939464,
+    "end": 581.0860000000102,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 605.8380000001052,
+    "end": 9169.898999999976,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 606.0310000000754,
+    "end": 8876.388999999966,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 606.170999999973,
+    "end": 1239.5750000000698,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 606.2530000000261,
+    "end": 6229.866000000038,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 606.4549999999581,
+    "end": 4163.728000000003,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 607.1050000000978,
+    "end": 7620.484999999986,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1239.7820000000065,
+    "end": 1853.365000000107,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9507.72100000002,
+    "end": 11641.625999999931,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9507.936999999918,
+    "end": 11959.320999999996,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9508.027000000002,
+    "end": 11165.207000000053,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9508.123999999953,
+    "end": 10807.119999999995,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9508.224000000046,
+    "end": 11173.339000000036,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9591.425999999978,
+    "end": 10290.755000000005,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9591.616000000038,
+    "end": 10926.39599999995,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10265.548999999999,
+    "end": 10810.61699999997,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10519.891999999993,
+    "end": 10816.173999999999,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10521.03999999992,
+    "end": 10816.654999999912,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 9,
+  "order": 19,
+  "lcp": 11707.009,
+  "fcp": 9562.697,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.778,
+   "resourceLoadDelay": 9545.659,
+   "resourceLoadDuration": 2140.146,
+   "elementRenderDelay": 15.426
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.4110000000800937,
+    "end": 580.9370000000345,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 603.1469999999972,
+    "end": 9170.79999999993,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 603.3320000000531,
+    "end": 8876.714000000036,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 603.4699999999721,
+    "end": 1240.298999999999,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 603.5690000000177,
+    "end": 6230.263000000035,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 603.7099999999627,
+    "end": 4172.629000000074,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 603.8570000000764,
+    "end": 7621.114999999991,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1240.515000000014,
+    "end": 1853.1469999999972,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9552,
+    "end": 11690.65300000005,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9552.537000000011,
+    "end": 12008.47399999993,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9552.759000000078,
+    "end": 11213.295999999973,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9552.858000000007,
+    "end": 10855.538000000059,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9553.233000000007,
+    "end": 11222.101000000024,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9637.834000000032,
+    "end": 10339.109999999986,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9638.015000000014,
+    "end": 10975.128000000026,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10272.233000000007,
+    "end": 10859.091000000015,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10567.743000000017,
+    "end": 10868.85400000005,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10568.673999999999,
+    "end": 10870.44000000006,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 10,
+  "order": 20,
+  "lcp": 11636.027,
+  "fcp": 9495.321,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.582,
+   "resourceLoadDelay": 9478.374,
+   "resourceLoadDuration": 2138.63,
+   "elementRenderDelay": 14.441
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.1389999999664724,
+    "end": 583.1899999999441,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 608.3999999999069,
+    "end": 9172.68299999996,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 608.6040000000503,
+    "end": 8878.90399999998,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 608.7209999999031,
+    "end": 1241.219000000041,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 608.8139999998966,
+    "end": 6240.027999999933,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 608.9189999999944,
+    "end": 4157.758999999962,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 609.0050000000047,
+    "end": 7622.5449999999255,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1241.4569999999367,
+    "end": 1846.2499999998836,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9482.823999999906,
+    "end": 11620.587999999989,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9483.397999999928,
+    "end": 11938.09699999995,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9483.679999999935,
+    "end": 11151.773999999976,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9483.780999999959,
+    "end": 10770.089999999967,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9484.79999999993,
+    "end": 11143.907000000007,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9502.967999999993,
+    "end": 10206.148999999976,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9503.13599999994,
+    "end": 10849.467999999993,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10278.445999999996,
+    "end": 10773.407000000007,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10498.94599999988,
+    "end": 10778.496000000043,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10500.707000000053,
+    "end": 10779.673999999999,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 10,
+  "order": 21,
+  "lcp": 11655.53,
+  "fcp": 9516.241,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 6.745,
+   "resourceLoadDelay": 9497.528,
+   "resourceLoadDuration": 2137.439,
+   "elementRenderDelay": 13.818
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 3.0919999999459833,
+    "end": 579.1149999999907,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 602.0019999999786,
+    "end": 9169.052999999956,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 602.1669999998994,
+    "end": 8874.863000000012,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 602.3580000000075,
+    "end": 1237.4370000000345,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 602.4590000000317,
+    "end": 6228.889000000083,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 602.6230000000214,
+    "end": 4154.060999999987,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 602.7569999999832,
+    "end": 7619.711999999941,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1237.6509999999544,
+    "end": 1842.7859999999637,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9503.537999999942,
+    "end": 11640.552999999956,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9503.837999999989,
+    "end": 11958.253999999957,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9506.329999999958,
+    "end": 11163.18200000003,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9506.743999999948,
+    "end": 10798.483999999939,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9506.829999999958,
+    "end": 11172,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9524.658999999985,
+    "end": 10225.881999999983,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9525.657000000007,
+    "end": 10869.718999999925,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10282.11400000006,
+    "end": 10801.565999999992,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10514.673999999999,
+    "end": 10808.197999999975,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10516.18200000003,
+    "end": 10807.694000000018,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 11,
+  "order": 22,
+  "lcp": 11654.965,
+  "fcp": 9510.962,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.332,
+   "resourceLoadDelay": 9495.187,
+   "resourceLoadDuration": 2138.959,
+   "elementRenderDelay": 16.487
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0339999999850988,
+    "end": 576.7140000000363,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 598.8670000000857,
+    "end": 9165.996000000043,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 599.0649999999441,
+    "end": 8871.658000000054,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 599.2029999999795,
+    "end": 1234.6330000000307,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 599.3399999999674,
+    "end": 6225.679000000004,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 599.4629999999888,
+    "end": 4159.7639999999665,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 599.579000000027,
+    "end": 7616.738000000012,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1234.8100000000559,
+    "end": 1839.3209999999963,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9501.954000000027,
+    "end": 11637.554000000004,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9502.125999999931,
+    "end": 11955.199000000022,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9502.224000000046,
+    "end": 11160.78899999999,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9502.320000000065,
+    "end": 10795.472999999998,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9502.427000000025,
+    "end": 11168.763000000035,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9519.986000000034,
+    "end": 10222.72900000005,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9520.207000000053,
+    "end": 10866.601000000024,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10263.493000000017,
+    "end": 10798.579000000027,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10510.292000000016,
+    "end": 10805.534000000102,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10511.695000000065,
+    "end": 10806.71000000008,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 11,
+  "order": 23,
+  "lcp": 11666.847,
+  "fcp": 9532.17,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.248999999880791,
+   "resourceLoadDelay": 9510.94500000012,
+   "resourceLoadDuration": 2137.205,
+   "elementRenderDelay": 14.448
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 0.9199999999254942,
+    "end": 582.2839999999851,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 605.0910000000149,
+    "end": 9171.851999999955,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 605.2750000000233,
+    "end": 8876.978000000003,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 605.4309999999823,
+    "end": 1248.2780000000494,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 605.5060000000522,
+    "end": 6231.27899999998,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 605.5949999999721,
+    "end": 4172.548000000068,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 605.6840000000084,
+    "end": 7621.505999999936,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1248.48199999996,
+    "end": 1853.1770000000251,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9514.677999999956,
+    "end": 11651.398999999976,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9514.905999999959,
+    "end": 11969.069999999949,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9515.040999999968,
+    "end": 11173.792999999947,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9515.14599999995,
+    "end": 10800.469000000041,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9515.23999999999,
+    "end": 11182.709999999963,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9531.43299999996,
+    "end": 10228.109000000055,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9531.644000000088,
+    "end": 10871.782000000007,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10286.091999999946,
+    "end": 10803.96399999992,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10526.988000000012,
+    "end": 10809.858000000007,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10529.358000000007,
+    "end": 10809.344000000041,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 12,
+  "order": 24,
+  "lcp": 11692.873,
+  "fcp": 9553.444,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.345,
+   "resourceLoadDelay": 9536.994,
+   "resourceLoadDuration": 2135.752,
+   "elementRenderDelay": 14.782
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0509999999776483,
+    "end": 576.1159999999218,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 595.635999999824,
+    "end": 9158.030999999959,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 595.8159999998752,
+    "end": 8863.701000000001,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 596.6799999999348,
+    "end": 1218.9439999999013,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 596.8009999998612,
+    "end": 6209.543999999878,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 596.918999999878,
+    "end": 4142.697999999975,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 597.0069999999832,
+    "end": 7600.343999999925,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1219.1299999998882,
+    "end": 1831.6219999998575,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9542.26099999994,
+    "end": 11677.162999999942,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9542.926999999909,
+    "end": 11994.280000000028,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9543.051999999909,
+    "end": 11199.538999999873,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9543.170999999857,
+    "end": 10834.204999999958,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9543.915999999968,
+    "end": 11207.736999999965,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9636.285999999847,
+    "end": 10341.698999999906,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9636.469999999856,
+    "end": 10977.854999999981,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10272.192999999854,
+    "end": 10837.277999999933,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10556.12799999991,
+    "end": 10843.779999999912,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10557.228999999817,
+    "end": 10842.851000000024,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 12,
+  "order": 25,
+  "lcp": 11629.269,
+  "fcp": 9486.415,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.899,
+   "resourceLoadDelay": 9470.774,
+   "resourceLoadDuration": 2138.254,
+   "elementRenderDelay": 15.342
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.7859999999636784,
+    "end": 583.1089999999385,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 604.0810000000056,
+    "end": 9164.724999999977,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 604.2369999999646,
+    "end": 8870.722000000067,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 604.3699999998789,
+    "end": 1249.6389999999665,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 604.4679999999935,
+    "end": 6216.280000000028,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 604.8539999999339,
+    "end": 4165.60699999996,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 604.9469999999274,
+    "end": 7607.163999999873,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1249.8660000000382,
+    "end": 1854.1970000000438,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9474.494999999995,
+    "end": 11612.322999999975,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9477.420999999973,
+    "end": 11930.06099999987,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9477.540000000037,
+    "end": 11135.750999999931,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9477.625,
+    "end": 10770.479999999981,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9477.716999999946,
+    "end": 11143.888999999966,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9557.66499999992,
+    "end": 10261.214999999967,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9557.937999999966,
+    "end": 10896.83099999989,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10255.638000000035,
+    "end": 10773.690999999992,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10490.486999999965,
+    "end": 10779.47199999995,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10491.380000000005,
+    "end": 10778.41399999999,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 13,
+  "order": 26,
+  "lcp": 11601.506,
+  "fcp": 9474.337,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.730000000119209,
+   "resourceLoadDelay": 9459.17199999988,
+   "resourceLoadDuration": 2123.341,
+   "elementRenderDelay": 15.263
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.5370000001275912,
+    "end": 579.941000000108,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 598.7000000000698,
+    "end": 9162.24700000009,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 598.8399999999674,
+    "end": 8867.467999999993,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 598.9749999999767,
+    "end": 1230.6980000000913,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 599.0530000000726,
+    "end": 6221.625,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 599.1750000000466,
+    "end": 4147.223000000115,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 599.2650000001304,
+    "end": 7612.101000000024,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1230.9400000000605,
+    "end": 1843.9740000000456,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9463.04600000009,
+    "end": 11585.326000000001,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9468.24700000009,
+    "end": 11911.116000000038,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9468.857000000076,
+    "end": 11124.514000000083,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9469.158999999985,
+    "end": 10759.552000000142,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9469.454000000027,
+    "end": 11133.391000000061,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9549.804000000004,
+    "end": 10250.765000000014,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9550.806000000099,
+    "end": 10886.347999999998,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10250.99199999997,
+    "end": 10763.410000000033,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10482.415000000037,
+    "end": 10769.445999999996,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10484.386000000057,
+    "end": 10770.917000000132,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 13,
+  "order": 27,
+  "lcp": 11728.092,
+  "fcp": 9586.683,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.213,
+   "resourceLoadDelay": 9569.485,
+   "resourceLoadDuration": 2138.99,
+   "elementRenderDelay": 14.404
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.7110000000102445,
+    "end": 581.3399999999674,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 608.0059999999357,
+    "end": 9169.875999999931,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 608.2090000000317,
+    "end": 8876.152000000002,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 608.3680000000168,
+    "end": 1247.3809999999357,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 608.4589999999152,
+    "end": 6229.246999999974,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 608.826999999932,
+    "end": 4163.246999999974,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 608.9250000000466,
+    "end": 7620.113999999943,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1247.6059999999125,
+    "end": 1851.4830000000075,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9574.363999999943,
+    "end": 11712.650000000023,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9574.554000000004,
+    "end": 12031.386999999988,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9574.66100000008,
+    "end": 11228.849000000046,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9574.75800000003,
+    "end": 10870.824000000022,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9574.859999999986,
+    "end": 11244.379000000074,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9669.454000000027,
+    "end": 10370.095000000088,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9669.640999999945,
+    "end": 11005.70299999998,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10278.815999999992,
+    "end": 10873.777999999933,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10590.123000000021,
+    "end": 10878.974000000046,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10591.167000000016,
+    "end": 10881.341999999946,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 14,
+  "order": 28,
+  "lcp": 11739.765,
+  "fcp": 9594.837,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.708,
+   "resourceLoadDelay": 9577.339,
+   "resourceLoadDuration": 2142.188,
+   "elementRenderDelay": 15.53
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.1570000000065193,
+    "end": 582.9320000000298,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 609.1899999999441,
+    "end": 9173.055999999982,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 609.4579999999842,
+    "end": 8870.968999999925,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 609.6549999999115,
+    "end": 1241.7399999998743,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 609.7909999999683,
+    "end": 6231.974000000046,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 610.0219999998808,
+    "end": 4165.876999999979,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 610.1429999999236,
+    "end": 7622.699000000022,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1241.9929999999003,
+    "end": 1854.4070000000065,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9582.701000000001,
+    "end": 11723.278999999864,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9583.449999999953,
+    "end": 12041.80999999994,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9583.562000000034,
+    "end": 11247.011999999988,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9583.677999999956,
+    "end": 10872.845999999903,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9586.82899999991,
+    "end": 11255.320999999996,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9679.449999999953,
+    "end": 10380.76000000001,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9679.609999999986,
+    "end": 11015.904999999912,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10283.722999999998,
+    "end": 10884.75800000003,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10601.45299999998,
+    "end": 10892.684000000008,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10603.576999999932,
+    "end": 10893.209999999963,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 14,
+  "order": 29,
+  "lcp": 11620.912,
+  "fcp": 9485.067,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.411,
+   "resourceLoadDelay": 9469.151,
+   "resourceLoadDuration": 2134.518,
+   "elementRenderDelay": 12.832
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.2229999999981374,
+    "end": 578.0529999999562,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 600.0939999999246,
+    "end": 9160.28899999999,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 600.2679999999236,
+    "end": 8865.534999999916,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 600.436999999918,
+    "end": 1229.042999999947,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 600.5409999999683,
+    "end": 6219.50299999991,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 600.655999999959,
+    "end": 4145.440999999875,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 600.8360000000102,
+    "end": 7610.474999999977,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1229.2309999999125,
+    "end": 1835.3519999999553,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9473.086999999941,
+    "end": 11607.136999999988,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9473.879999999888,
+    "end": 11925.519999999902,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9474.679999999935,
+    "end": 11131.094999999972,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9474.967999999993,
+    "end": 10764.684000000008,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9475.195000000065,
+    "end": 11138.97399999993,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9488.000999999931,
+    "end": 10185.09699999995,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9488.144999999902,
+    "end": 10828.849000000046,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10253.41499999992,
+    "end": 10768.332000000053,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10479.935999999987,
+    "end": 10774.59699999995,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10481.115999999922,
+    "end": 10784.719000000041,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 15,
+  "order": 30,
+  "lcp": 11669.184,
+  "fcp": 9530.075,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.945,
+   "resourceLoadDelay": 9513.985,
+   "resourceLoadDuration": 2136.053,
+   "elementRenderDelay": 14.201
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.577999999979511,
+    "end": 585.277999999933,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 611.1149999999907,
+    "end": 9173.915000000037,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 611.341999999946,
+    "end": 8880.258999999962,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 611.5329999999376,
+    "end": 1243.667999999947,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 611.6399999998976,
+    "end": 6234.405999999959,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 611.7600000000093,
+    "end": 4176.039999999921,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 611.9529999999795,
+    "end": 7624.386999999988,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1243.8859999999404,
+    "end": 1847.8019999999087,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9520.04600000009,
+    "end": 11654.044999999925,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9520.222000000067,
+    "end": 11971.620999999926,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9520.307999999844,
+    "end": 11185.081000000006,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9520.390999999945,
+    "end": 10795.390000000014,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9520.487999999896,
+    "end": 11168.769999999902,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9541.082999999984,
+    "end": 10239.368000000017,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9541.240999999805,
+    "end": 10875.025000000023,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10265.468999999925,
+    "end": 10798.855999999796,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10525.004000000074,
+    "end": 10804.552000000025,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10526.746999999858,
+    "end": 10805.603000000003,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 15,
+  "order": 31,
+  "lcp": 11642.178,
+  "fcp": 9510.499,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 5.030999999880791,
+   "resourceLoadDelay": 9490.173000000119,
+   "resourceLoadDuration": 2132.653999999881,
+   "elementRenderDelay": 14.32000000011921
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.110999999800697,
+    "end": 581.2999999998137,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 602.2989999998827,
+    "end": 9163.730000000098,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 602.5700000000652,
+    "end": 8869.322000000044,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 602.7249999999767,
+    "end": 1239.8809999999357,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 602.8329999999842,
+    "end": 6223.185999999871,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 603.3299999999581,
+    "end": 4156.207999999984,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 604.0300000000279,
+    "end": 7613.430999999982,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1240.0879999999888,
+    "end": 1844.5269999998854,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9494.491999999736,
+    "end": 11626.646999999764,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9494.856000000029,
+    "end": 11944.514000000083,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9494.96699999983,
+    "end": 11150.173000000068,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9495.281999999774,
+    "end": 10776.964999999967,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9495.410000000033,
+    "end": 11158.111999999848,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9570.11699999997,
+    "end": 10275.913000000059,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9570.316999999923,
+    "end": 10912.055999999982,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10278.699999999837,
+    "end": 10780.718999999925,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10500.356000000029,
+    "end": 10786.267999999807,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10501.917999999947,
+    "end": 10786.257999999798,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 16,
+  "order": 32,
+  "lcp": 11603.693,
+  "fcp": 9464.315,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.912000000238419,
+   "resourceLoadDelay": 9447.806999999762,
+   "resourceLoadDuration": 2136.6,
+   "elementRenderDelay": 14.374
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 2.061000000219792,
+    "end": 582.1499999999069,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 603.2380000001285,
+    "end": 9163.810999999987,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 603.3950000000186,
+    "end": 8870.394000000088,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 603.5759999998845,
+    "end": 1232.5409999999683,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 603.7109999998938,
+    "end": 6223.4809999999125,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 603.8210000002291,
+    "end": 4149.961999999825,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 603.9580000001006,
+    "end": 7614.25,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1232.7339999999385,
+    "end": 1837.435999999987,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9455.43200000003,
+    "end": 11588.341999999946,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9455.597999999998,
+    "end": 11905.320000000065,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9455.689999999944,
+    "end": 11111.170000000158,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9455.771000000183,
+    "end": 10721.257999999914,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9455.867000000086,
+    "end": 11118.939999999944,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9473.009000000078,
+    "end": 10173.09999999986,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9473.186999999918,
+    "end": 10808.69299999997,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10252.18299999996,
+    "end": 10724.378000000026,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10458.186999999918,
+    "end": 10729.94299999997,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10459.02600000007,
+    "end": 10729.435999999987,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 16,
+  "order": 33,
+  "lcp": 11661.868,
+  "fcp": 9525.382,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.8040000002384184,
+   "resourceLoadDelay": 9503.917999999761,
+   "resourceLoadDuration": 2135.612,
+   "elementRenderDelay": 18.534
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.3300000000745058,
+    "end": 580.8609999998007,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 601.9069999998901,
+    "end": 9162.366999999853,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 602.0789999999106,
+    "end": 8868.923999999883,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 602.2469999999739,
+    "end": 1231.5359999998473,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 602.3529999998864,
+    "end": 6222.232000000076,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 602.472000000067,
+    "end": 4156.122999999905,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 602.5749999997206,
+    "end": 7613.4179999998305,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1231.753000000026,
+    "end": 1836.466000000015,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9508.043000000063,
+    "end": 11642.4859999998,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9508.79600000009,
+    "end": 11959.63099999982,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9509.118999999948,
+    "end": 11165.314999999944,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9509.392999999924,
+    "end": 10800.060000000056,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9509.500999999931,
+    "end": 11173.287999999942,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9591.009999999776,
+    "end": 10291.104999999981,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9591.242999999784,
+    "end": 10926.449999999953,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10276.26099999994,
+    "end": 10803.333999999799,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10518.624999999767,
+    "end": 10808.561999999918,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10520.160999999847,
+    "end": 10811.822999999858,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 17,
+  "order": 34,
+  "lcp": 11682.488,
+  "fcp": 9546.523,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.937,
+   "resourceLoadDelay": 9531.348,
+   "resourceLoadDuration": 2133.127,
+   "elementRenderDelay": 14.076
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.0740000000223517,
+    "end": 583.1090000001714,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 629.5549999999348,
+    "end": 9196.470999999903,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 629.9299999999348,
+    "end": 8902.007999999914,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 630.7080000001006,
+    "end": 1265.315000000177,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 630.908000000054,
+    "end": 6255.8960000001825,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 631.1610000000801,
+    "end": 4181.57200000016,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 631.6180000000168,
+    "end": 7646.409000000218,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1265.5400000000373,
+    "end": 1871.2790000000969,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9535.314999999944,
+    "end": 11667.486000000034,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9535.491999999853,
+    "end": 11985.793000000063,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9535.586000000127,
+    "end": 11190.381000000052,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9535.67100000009,
+    "end": 10825.137000000104,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9535.79600000009,
+    "end": 11199.246999999974,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9620.983000000007,
+    "end": 10324.559000000125,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9621.152999999933,
+    "end": 10959.985000000102,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10308.564000000246,
+    "end": 10828.469000000041,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10548.485000000102,
+    "end": 10832.430000000168,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10549.41100000008,
+    "end": 10836.084000000032,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 17,
+  "order": 35,
+  "lcp": 11604.649,
+  "fcp": 9470.453,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.519,
+   "resourceLoadDelay": 9453.882,
+   "resourceLoadDuration": 2133.587,
+   "elementRenderDelay": 13.661
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.3140000000130385,
+    "end": 576.688000000082,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 597.3120000001509,
+    "end": 9158.8330000001,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 597.4760000000242,
+    "end": 8865.097999999998,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 597.6280000000261,
+    "end": 1228.0169999999925,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 597.7250000000931,
+    "end": 6218.152000000002,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 599.3719999999739,
+    "end": 4151.787999999942,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 599.5239999999758,
+    "end": 7609.31799999997,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1228.2290000000503,
+    "end": 1840.6359999999404,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9457.324000000022,
+    "end": 11590.136999999871,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9457.496000000043,
+    "end": 11908.065000000177,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9457.61400000006,
+    "end": 11114.131000000052,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9457.70399999991,
+    "end": 10748.120000000112,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9458.693999999901,
+    "end": 11121.934000000125,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9532.081999999937,
+    "end": 10231.560999999987,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9532.459000000032,
+    "end": 10867.020000000019,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10246.418999999994,
+    "end": 10751.318000000203,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10470.188000000082,
+    "end": 10755.904000000097,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10471.516999999993,
+    "end": 10757.982000000076,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 18,
+  "order": 36,
+  "lcp": 11645.404,
+  "fcp": 9506.105,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.527,
+   "resourceLoadDelay": 9489.092,
+   "resourceLoadDuration": 2136.565,
+   "elementRenderDelay": 15.22
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.790999999968335,
+    "end": 576.3910000000615,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 598.0050000001211,
+    "end": 9158.189999999944,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 598.2070000001695,
+    "end": 8856.556000000099,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 598.3740000000689,
+    "end": 1218.5900000000838,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 598.5610000002198,
+    "end": 6217.735000000102,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 598.721000000136,
+    "end": 4151.057999999961,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 598.9520000000484,
+    "end": 7608.414000000106,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1219.1200000001118,
+    "end": 1823.5649999999441,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9493.451000000117,
+    "end": 11629.209000000032,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9493.653000000166,
+    "end": 11947.513999999966,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9493.746000000043,
+    "end": 11152.476000000024,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9493.826000000117,
+    "end": 10787.28600000008,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9496.243999999948,
+    "end": 11161.304999999935,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9509.763999999966,
+    "end": 10207.064000000013,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9509.98900000006,
+    "end": 10850.561999999918,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10259.195999999996,
+    "end": 10790.40100000007,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10499.956000000006,
+    "end": 10795.064000000013,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10501.198000000091,
+    "end": 10797.23900000006,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 18,
+  "order": 37,
+  "lcp": 11639.031,
+  "fcp": 9495.913,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 4.791,
+   "resourceLoadDelay": 9481.148,
+   "resourceLoadDuration": 2138.628,
+   "elementRenderDelay": 14.464
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.4899999999906868,
+    "end": 577.7259999997914,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 600.278999999864,
+    "end": 9167.904000000097,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 600.4459999999963,
+    "end": 8873.674000000115,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 600.8060000000987,
+    "end": 1236.2339999999385,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 600.9109999998473,
+    "end": 6227.641999999993,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 600.9969999999739,
+    "end": 4152.824000000022,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 601.2649999998976,
+    "end": 7618.152000000002,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1236.4930000000168,
+    "end": 1841.4159999999683,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9485.892999999924,
+    "end": 11623.642999999924,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9488.131000000052,
+    "end": 11941.02199999988,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9488.253999999957,
+    "end": 11146.25599999982,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9488.331000000006,
+    "end": 10780.871999999974,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9488.398999999976,
+    "end": 11154.595999999903,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9562.84999999986,
+    "end": 10264.729999999981,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9563.299000000115,
+    "end": 10900.354999999981,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10266.727999999886,
+    "end": 10784.282999999821,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10500.015999999829,
+    "end": 10789.869999999879,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10502.306999999797,
+    "end": 10789.706000000006,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "base",
+  "run_index": 19,
+  "order": 38,
+  "lcp": 11642.008,
+  "fcp": 9497.195,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4178/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 2.977,
+   "resourceLoadDelay": 9484.204,
+   "resourceLoadDuration": 2140.324,
+   "elementRenderDelay": 14.503
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 1.005000000121072,
+    "end": 581.726000000257,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 600.9310000003316,
+    "end": 9163.077000000281,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-Dovhzbw_.js",
+    "start": 601.0940000002738,
+    "end": 8869.326000000117,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 601.2430000000168,
+    "end": 1232.2440000001807,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 601.377000000095,
+    "end": 6222.973000000231,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 601.4990000000689,
+    "end": 4156.23300000024,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 601.5910000002477,
+    "end": 7613.620000000112,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1232.4320000000298,
+    "end": 1837.285000000149,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9486.868000000017,
+    "end": 11626.633000000147,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9488.17600000021,
+    "end": 11944.498000000138,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9488.30100000021,
+    "end": 11150.06200000015,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9488.383000000147,
+    "end": 10776.886000000173,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9488.472000000067,
+    "end": 11157.867000000086,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9570.678000000073,
+    "end": 10903.761000000173,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9570.883000000147,
+    "end": 10228.278000000166,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-CHgvQSRs.js",
+    "start": 10254.917000000132,
+    "end": 10780.5140000002,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10500.273999999976,
+    "end": 10784.933000000194,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10501.299000000115,
+    "end": 10786.394000000088,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ },
+ {
+  "variant": "pr",
+  "run_index": 19,
+  "order": 39,
+  "lcp": 11640.643,
+  "fcp": 9499.538,
+  "lcp_element": {
+   "selector": "div.device > div.device-frame > picture > img",
+   "snippet": "<img src=\"http://127.0.0.1:4179/assets/home-mobile-light@2x-Bd3fod8m.png\" alt=\"Screenshot of Phanpy home timeline on mobile device\" width=\"375\" height=\"812\" loading=\"lazy\">"
+  },
+  "lcp_subparts": {
+   "timeToFirstByte": 3.534,
+   "resourceLoadDelay": 9484.058,
+   "resourceLoadDuration": 2140.126,
+   "elementRenderDelay": 12.925
+  },
+  "requests": [
+   {
+    "path": "/index.html",
+    "start": 0.9420000000391155,
+    "end": 580.966999999946,
+    "bytes": 2860,
+    "type": "Document",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/style-COEVwqbk.css",
+    "start": 602.3680000000168,
+    "end": 9163.191000000108,
+    "bytes": 470897,
+    "type": "Stylesheet",
+    "priority": "VeryHigh",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/main-B8jWkZTA.js",
+    "start": 602.5469999997877,
+    "end": 8869.351000000024,
+    "bytes": 415175,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/rolldown-runtime-BCiCTKAo.js",
+    "start": 602.7249999998603,
+    "end": 1232.3859999999404,
+    "bytes": 1526,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/pwa-viewport-CjZQWPEP.js",
+    "start": 602.808999999892,
+    "end": 6230.250999999931,
+    "bytes": 209900,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/icons-CCjYJVUV.js",
+    "start": 602.902999999933,
+    "end": 4148.462000000058,
+    "bytes": 111741,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/ScheduledAtField-eE8HOyBg.js",
+    "start": 603.0290000000969,
+    "end": 7613.835999999894,
+    "bytes": 296422,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/manifest.webmanifest",
+    "start": 1232.5679999999702,
+    "end": 1836.997999999905,
+    "bytes": 998,
+    "type": "Manifest",
+    "priority": "Medium",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-mobile-light@2x-Bd3fod8m.png",
+    "start": 9489.952000000048,
+    "end": 11626.420999999857,
+    "bytes": 87092,
+    "type": "Image",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/home-tablet-light@2x-BW2RV9T6.png",
+    "start": 9490.142999999924,
+    "end": 11944.102999999886,
+    "bytes": 146967,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/boosts-carousel-BiOaNdMT.jpg",
+    "start": 9490.238999999827,
+    "end": 11150.19299999997,
+    "bytes": 42555,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/catch-up-O5q5C75Z.png",
+    "start": 9490.335999999894,
+    "end": 10783.912999999942,
+    "bytes": 25630,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/nested-comments-thread-hv59kZLc.jpg",
+    "start": 9490.42899999977,
+    "end": 11158.17200000002,
+    "bytes": 43357,
+    "type": "Image",
+    "priority": "Low",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/favicon.ico",
+    "start": 9572.296999999788,
+    "end": 10275.876999999862,
+    "bytes": 3113,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/logo-192.png",
+    "start": 9572.47900000005,
+    "end": 10911.090999999782,
+    "bytes": 2102,
+    "type": "Other",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/dom-D-jAXNPC.js",
+    "start": 10258.434999999823,
+    "end": 10786.852999999886,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/compose-rVOXmESh.js",
+    "start": 10504.333999999799,
+    "end": 10793.068999999901,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   },
+   {
+    "path": "/assets/__vite-browser-external-BwpP9LFt.js",
+    "start": 10505.225000000093,
+    "end": 10793.081999999937,
+    "bytes": 0,
+    "type": "Script",
+    "priority": "High",
+    "protocol": "http/1.1",
+    "status": 200
+   }
+  ]
+ }
+]

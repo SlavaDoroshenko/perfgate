@@ -1,0 +1,1 @@
+GitHub Actions 1000008328 model name	: Intel(R) Xeon(R) 6973P-C
