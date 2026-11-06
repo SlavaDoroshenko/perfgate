@@ -1,0 +1,158 @@
+# Prospective cohort of the frozen browser candidate, see docs/protocols/amendment-2026-11-06.md
+# on research/comparison-mvp.
+# Only the arms the candidate is evaluated on: four-page A/A suites and the primary
+# above-margin injections, abab/devtools/20 loads/two warmups, measured with the frozen
+# collector from research/comparison-mvp. Stored outside raw/ so the historical corpus
+# and the scheduled noise/regressions arms stay as they are.
+name: candidate
+
+on:
+  workflow_dispatch:
+  schedule:
+    # every three hours, between the noise (x:17) and regressions (x:47) runs
+    - cron: "29 */3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: candidate
+  cancel-in-progress: false
+
+env:
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: "20"
+  # frozen sources of browser-candidate-2026-10-30; checked against the manifest below
+  SOURCE_SHA: 30ca8339a7c1767ebe062378c893ac1d2adf93ae
+  FREEZE: docs/protocols/browser-candidate-2026-10-30.json
+
+jobs:
+  collect:
+    name: ${{ matrix.job.label }} ${{ matrix.job.app }} ${{ matrix.job.inject }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { label: aa, app: demo-spa, pkg: demo-spa, script: preview, port: 4173, path: "" }
+          - { label: aa, app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: heavy.html }
+          - { label: aa, app: demo-static, pkg: demo-static, script: preview, port: 4175, path: "" }
+          - { label: aa, app: demo-ssr, pkg: demo-ssr, script: start, port: 4174, path: "" }
+          # primary above-margin cases of research-completion.md, sizes as in regressions.yml
+          - { label: injected, app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: heavy.html, inject: "script-delay:90", tag: script-delay-5 }
+          - { label: injected, app: demo-spa, pkg: demo-spa, script: preview, port: 4173, path: "", inject: "lcp-delay:112", tag: lcp-delay-5 }
+          - { label: injected, app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: heavy.html, inject: "long-task:99", tag: long-task-10 }
+          - { label: injected, app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: heavy.html, inject: "layout-shift:76.8", tag: layout-shift-10 }
+          - { label: injected, app: demo-heavy, pkg: demo-spa, script: preview, port: 4173, path: heavy.html, inject: "layout-shift:96", tag: layout-shift-25 }
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+
+      - name: Check frozen sources
+        run: |
+          python3 - <<'EOF'
+          import hashlib, json, os
+          freeze = json.load(open(os.environ["FREEZE"]))
+          bad = [n for n, d in freeze["source_sha256"].items()
+                 if hashlib.sha256(open(n, "rb").read()).hexdigest() != d]
+          if bad:
+              raise SystemExit(f"frozen sources changed: {bad}")
+          print(f"{len(freeze['source_sha256'])} frozen sources match")
+          EOF
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build and serve the app
+        run: |
+          pnpm --filter ${{ matrix.job.pkg }} build
+          nohup pnpm --filter ${{ matrix.job.pkg }} ${{ matrix.job.script }} > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf "http://127.0.0.1:${{ matrix.job.port }}/${{ matrix.job.path }}" > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+
+      - name: Collect
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          suffix="${{ matrix.job.tag }}"
+          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.job.label }}-${{ matrix.job.app }}${suffix:+-$suffix}-abab-devtools"
+          base="http://127.0.0.1:${{ matrix.job.port }}/${{ matrix.job.path }}"
+          pr="$base"
+          if [ -n "${{ matrix.job.inject }}" ]; then pr="$base?inject=${{ matrix.job.inject }}"; fi
+          app_build=$(git ls-tree HEAD -- "apps/${{ matrix.job.pkg }}" | awk '{print substr($3,1,12)}')
+          label=()
+          if [ "${{ matrix.job.label }}" = injected ]; then label=(--label injected); fi
+          pnpm perfgate collect \
+            --url "$base" \
+            --pr-url "$pr" \
+            --runs "$RUNS" \
+            --mode abab \
+            --throttling devtools \
+            --app "${{ matrix.job.app }}" \
+            "${label[@]}" \
+            --app-build "$app_build" \
+            --experiment "$id" \
+            --out "results/$id.jsonl"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runs-${{ matrix.job.label }}-${{ matrix.job.app }}-${{ matrix.job.tag || 'aa' }}
+          path: results/*.jsonl
+          retention-days: 7
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: runs-*
+          merge-multiple: true
+          path: incoming
+
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*.jsonl)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch data
+
+          dest="prospective/browser-candidate-2026-10-30/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f prospective
+          git commit -m "data: candidate run ${{ github.run_id }}"
+
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1
