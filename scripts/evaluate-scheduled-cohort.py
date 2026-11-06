@@ -28,6 +28,7 @@ p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('raw', type=Path, help='raw/ directory of the data branch')
 p.add_argument('--out', type=Path, required=True)
 p.add_argument('--freeze', type=Path, default=ROOT/'docs/protocols/browser-candidate-2026-10-30.json')
+p.add_argument('--candidate', type=Path, help='prospective/<policy>/ directory of the data branch (amendment of 6 November)')
 p.add_argument('--through', help='ignore loads after this UTC timestamp (fixed cutoff)')
 args = p.parse_args()
 args.out.mkdir(parents=True, exist_ok=True)
@@ -39,7 +40,10 @@ cutoff = pd.Timestamp(freeze['acquisition_after_utc'])
 
 days = sorted(d for d in args.raw.iterdir() if d.is_dir() and d.name[:4].isdigit() and d.name >= str(cutoff.date()))
 files = [f for d in days for f in sorted(d.glob('*.jsonl')) if '-aa-' in f.name or '-injected-' in f.name]
-df = load_runs(files)
+candidate = sorted(args.candidate.rglob('*.jsonl')) if args.candidate else []
+df = load_runs(files + candidate)
+df['source'] = df.experiment.isin({f.stem for f in candidate}).map({True: 'candidate', False: 'scheduled'})
+files = files + candidate
 # a job counts only if all of its loads were acquired after the freeze
 first = df.groupby('experiment').timestamp.transform('min')
 df = df[first > cutoff]
@@ -56,7 +60,7 @@ for exp, g in df.groupby('experiment'):
         continue
     r = compare_frame(g, 20)
     fired = [m['name'].split('/')[-1] for m in r['metrics'] if m['regression']]
-    jobs.append({'experiment': exp, 'run_id': g.run_id.iloc[0], 'app': g.app.iloc[0],
+    jobs.append({'experiment': exp, 'source': g.source.iloc[0], 'run_id': g.run_id.iloc[0], 'app': g.app.iloc[0],
                  'label': g.label.iloc[0], 'is_aa': bool(g.is_aa.iloc[0]),
                  'inject': g.inject.dropna().iloc[0] if g.inject.notna().any() else None,
                  'start': g.timestamp.min(), 'cpu_model': g.cpu_model.iloc[0],
@@ -71,7 +75,7 @@ aa = df[df.is_aa & (df['mode'] == 'abab') & (df.throttling == 'devtools')]
 for run, g in aa.groupby('run_id'):
     complete = set(g.app) == PAGES and g.groupby('app').experiment.nunique().eq(1).all()
     r = compare_frame(g, 20) if complete else None
-    suites.append({'run_id': run, 'start': g.timestamp.min(), 'pages': len(set(g.app)),
+    suites.append({'run_id': run, 'source': g.source.iloc[0], 'start': g.timestamp.min(), 'pages': len(set(g.app)),
                    'cpu_models': ';'.join(sorted(g.cpu_model.dropna().unique())),
                    'status': r['status'] if r else 'incomplete_suite',
                    'issues': '; '.join(r['issues']) if r else 'missing pages',
@@ -94,6 +98,7 @@ lo, hi = wilson(k, n) if n else (float('nan'), float('nan'))
 rows.append({'cohort': 'A/A four-page suite', 'kind': None, 'nominal_pct': None, 'jobs': n, 'invalid': int(len(suites) - n),
              'alarms_or_target_detections': k, 'rate': k / n if n else None, 'wilson_lo': lo, 'wilson_hi': hi,
              'any_metric_detections': None, 'median_measured_target_rel': None,
+             'from_candidate_workflow': int(valid_suites.source.eq('candidate').sum()),
              'predeclared_target_jobs': freeze['prospective_aa_complete_suites']})
 for (kind, pct), g in cases.groupby(['kind', 'pct']):
     v = g[g.status != 'invalid']
@@ -103,6 +108,7 @@ for (kind, pct), g in cases.groupby(['kind', 'pct']):
                  'alarms_or_target_detections': k, 'rate': k / n if n else None, 'wilson_lo': lo, 'wilson_hi': hi,
                  'any_metric_detections': int(v.any_detected.sum()),
                  'median_measured_target_rel': float(v.measured_target_rel.median()) if n else None,
+                 'from_candidate_workflow': int(v.source.eq('candidate').sum()),
                  'predeclared_target_jobs': freeze['prospective_jobs_per_primary_injection']})
 summary = pd.DataFrame(rows)
 
@@ -117,7 +123,8 @@ summary.to_csv(args.out/'summary.csv', index=False)
 per_page.to_csv(args.out/'aa_per_page.csv')
 manifest = {
     'policy': freeze['policy'], 'freeze_sha256': hashlib.sha256(args.freeze.read_bytes()).hexdigest(),
-    'source': 'scheduled main-branch noise/regressions workflows, data branch raw/',
+    'source': 'scheduled main-branch noise/regressions workflows (raw/) and, if given, the candidate workflow (prospective/)',
+    'candidate_files': len(candidate),
     'collector_git_heads': heads, 'freeze_git_head': freeze['git_head'],
     'measurement_sources_sha256': {m: hashlib.sha256((ROOT/m).read_bytes()).hexdigest() for m in MEASUREMENT},
     'deviation': 'metadata recorder differs from the frozen collector (no planned_runs/warmup/duration fields); '
@@ -125,7 +132,7 @@ manifest = {
     'acquisition_after_utc': str(cutoff), 'data_from': str(df.timestamp.min()), 'data_through': str(df.timestamp.max()),
     'loads': len(df), 'jobs_all_protocols': int(df.experiment.nunique()), 'failed_loads': int((~df.ok).sum()),
     'aa_suites_complete': int(len(valid_suites)), 'aa_suite_alarms': int(valid_suites.status.eq('regression').sum()),
-    'files_sha256': {str(f.relative_to(args.raw)): hashlib.sha256(f.read_bytes()).hexdigest() for f in files
+    'files_sha256': {str(f.relative_to(args.raw.parent)): hashlib.sha256(f.read_bytes()).hexdigest() for f in files
                      if f.stem in set(df.experiment)},
 }
 (args.out/'manifest.json').write_text(json.dumps(manifest, indent=2, default=str) + '\n')
