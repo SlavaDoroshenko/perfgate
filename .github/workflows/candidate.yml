@@ -1,5 +1,5 @@
 # Prospective cohort of the frozen browser candidate, see docs/protocols/amendment-2026-11-06.md
-# on research/comparison-mvp.
+# and amendment-2026-11-06b.md on research/comparison-mvp.
 # Only the arms the candidate is evaluated on: four-page A/A suites and the primary
 # above-margin injections, abab/devtools/20 loads/two warmups, measured with the frozen
 # collector from research/comparison-mvp. Stored outside raw/ so the historical corpus
@@ -14,6 +14,8 @@ on:
 
 permissions:
   contents: write
+  # each run dispatches the next one (amendment-2026-11-06b): scheduled runs are often dropped
+  actions: write
 
 concurrency:
   group: candidate
@@ -152,7 +154,21 @@ jobs:
           git commit -m "data: candidate run ${{ github.run_id }}"
 
           for i in 1 2 3; do
-            git push origin data && exit 0
+            git push origin data && break
             git pull --rebase origin data
+            [ "$i" = 3 ] && exit 1
           done
-          exit 1
+
+      - name: Dispatch the next run until the fixed target
+        # a broken run must not keep the chain going
+        if: needs.collect.result == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # complete runs = runs with all nine jobs stored; stop at the predeclared 200 suites
+          done_runs=$(ls prospective/browser-candidate-2026-10-30/*/*.jsonl 2>/dev/null \
+            | sed 's|.*/||' | cut -d- -f1 | sort | uniq -c | awk '$1 == 9' | wc -l)
+          echo "complete candidate runs: $done_runs"
+          if [ "$done_runs" -lt 200 ]; then
+            gh workflow run candidate.yml --repo "${{ github.repository }}" --ref main
+          fi
