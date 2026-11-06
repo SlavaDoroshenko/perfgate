@@ -1,0 +1,19 @@
+{
+  "policy": "browser-candidate-2026-10-30",
+  "loads": 320,
+  "jobs": 8,
+  "invalid_jobs": 0,
+  "failed_loads": 0,
+  "data_from": "2026-11-06 16:36:13.565000+00:00",
+  "data_through": "2026-11-06 17:17:49.621000+00:00",
+  "files_sha256": {
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r1-noswap-abab-devtools.jsonl": "c82983ec613c6d7f7ffa6cb93510be6750f72a0e01e87dbcd326a8766bb79ce7",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r1-swap-abab-devtools.jsonl": "ffaf25b339c4d53a0a1842ce4235133f3e8d5a48c1ee1b2ad02db781f333d933",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r2-noswap-abab-devtools.jsonl": "d03afcf6a18c3deca5247074a1d3b063ad85cafc8846d114680c400faf56cca6",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r2-swap-abab-devtools.jsonl": "6f3c97018264ee029714c344e28a4052163af26627908cd5a67adcce3a10cdad",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r3-noswap-abab-devtools.jsonl": "e1792678c1fe916335171c37236e9332edd9e678f5e977b5a601ecb2a6977042",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r3-swap-abab-devtools.jsonl": "aa2a8e1a806e398a50d3f30259ae52ebf7d7d079f8309a748f65a7936dec081a",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r4-noswap-abab-devtools.jsonl": "23c55e44633398769c8bc7f08df352ce192fd3f1c68dcdab698f801eaa4e88e4",
+    "2026-11-06/42253342143-1-pilot-phanpy-aa-624fa08bde02-r4-swap-abab-devtools.jsonl": "d999344e945ad45fd6a499c81bfd64c0192f35128c0dee40eac6d15da3a88ca4"
+  }
+}

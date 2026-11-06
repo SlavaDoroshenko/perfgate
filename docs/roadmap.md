@@ -1,9 +1,21 @@
-# Roadmap, updated 5 November 2026
+# Roadmap, updated 6 November 2026
 
 A completed empirical study is required alongside the working product. Completion
 criteria and prospective validation are specified in [research-completion.md](research-completion.md).
 Implementation is published in draft PR #1; validation and raw-data archive are
 recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
+
+## Added on 6 November
+
+- [Dedicated candidate collection](protocols/amendment-2026-11-06.md) every three hours
+  with the frozen collector; targets expected in the second half of November.
+- [Before/after on identical jobs](before-after-2026-11-06.md): fixed thresholds vs the
+  candidate, interim.
+- [External pilot](external-pilot-2026-11-06.md) on twelve real Phanpy changes, repeated
+  twice, with same-commit controls. Two FCP regressions repeat; a rare ~140 ms LCP offset
+  caused one control alarm. LCP-only verdicts need confirmation before blocking.
+- Interim results: [prospective](prospective-scheduled-2026-11-04.md),
+  [library replication](oss-replication-2026-11-04.md).
 
 ## Completed foundations
 

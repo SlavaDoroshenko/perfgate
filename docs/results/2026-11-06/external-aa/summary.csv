@@ -1,0 +1,5 @@
+rule,changes_blocked,changes,aa_blocked,aa
+single load >5%,0,0,2,8
+median of 3 >5%,0,0,1,8
+median of 20 >5%,0,0,1,8
+candidate,0,0,0,8
