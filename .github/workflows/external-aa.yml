@@ -1,0 +1,153 @@
+# External A/A diagnosis: the same Phanpy commit built twice, measured in eight jobs.
+# In half of them the two builds swap ports, so a side-specific offset can be told apart
+# from a build-specific one. Follows the 6 November pilot, where one A/A job showed a
+# consistent +1.2% LCP shift between two byte-equivalent builds.
+name: external-aa
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: external-aa
+  cancel-in-progress: false
+
+env:
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: "20"
+  SOURCE_SHA: 30ca8339a7c1767ebe062378c893ac1d2adf93ae
+  FREEZE: docs/protocols/browser-candidate-2026-10-30.json
+  REPO: https://github.com/cheeaun/phanpy.git
+
+jobs:
+  collect:
+    name: ${{ matrix.pair.id }} rep ${{ matrix.rep }} swap ${{ matrix.swap }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        rep: [1, 2, 3, 4]
+        swap: [false, true]
+        pair:
+          - { id: aa-624fa08bde02, before: 624fa08bde02, after: 624fa08bde02, note: "A/A: same commit built twice" }
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+
+      - name: Check frozen sources
+        run: |
+          python3 - <<'EOF'
+          import hashlib, json, os
+          freeze = json.load(open(os.environ["FREEZE"]))
+          bad = [n for n, d in freeze["source_sha256"].items()
+                 if hashlib.sha256(open(n, "rb").read()).hexdigest() != d]
+          if bad:
+              raise SystemExit(f"frozen sources changed: {bad}")
+          EOF
+
+      - name: Register the pair
+        run: |
+          python3 - <<'EOF'
+          import json
+          cases = json.load(open("oss/cases.json"))
+          cases.append({"id": "pilot-phanpy-${{ matrix.pair.id }}", "repo": "${{ env.REPO }}",
+                        "before": "${{ matrix.pair.before }}", "after": "${{ matrix.pair.after }}",
+                        "install": "npm ci --no-audit --no-fund", "build": "npm run build",
+                        "dist": "dist", "path": "index.html"})
+          json.dump(cases, open("oss/cases.json", "w"), indent=2)
+          EOF
+
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build both sides
+        run: node scripts/build-commit-pair.mjs --case pilot-phanpy-${{ matrix.pair.id }}
+
+      - name: Serve each side from its own root
+        run: |
+          d=".oss-dist/pilot-phanpy-${{ matrix.pair.id }}"
+          # base is always measured on 4178; with swap, the "after" build is served there
+          if [ "${{ matrix.swap }}" = true ]; then first=after; second=before; else first=before; second=after; fi
+          nohup pnpm exec sirv "$d/$first" --host 127.0.0.1 --port 4178 > before.log 2>&1 &
+          nohup pnpm exec sirv "$d/$second" --host 127.0.0.1 --port 4179 > after.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:4178/index.html" > /dev/null \
+               && curl -sf "http://127.0.0.1:4179/index.html" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat before.log after.log
+          exit 1
+
+      - name: Collect
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          id="${{ github.run_id }}-${{ github.run_attempt }}-pilot-phanpy-${{ matrix.pair.id }}-r${{ matrix.rep }}-${{ matrix.swap && 'swap' || 'noswap' }}-abab-devtools"
+          pnpm perfgate collect \
+            --url "http://127.0.0.1:4178/index.html" \
+            --pr-url "http://127.0.0.1:4179/index.html" \
+            --runs "$RUNS" \
+            --mode abab \
+            --throttling devtools \
+            --app "pilot-phanpy" \
+            --app-build "${{ matrix.pair.before }}-${{ matrix.pair.after }}-${{ matrix.swap && 'swap' || 'noswap' }}" \
+            --label commit \
+            --experiment "$id" \
+            --out "results/$id.jsonl"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runs-aa-${{ matrix.rep }}-${{ matrix.swap }}
+          path: results/*.jsonl
+          retention-days: 30
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: runs-*
+          merge-multiple: true
+          path: incoming
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*.jsonl)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch data
+          dest="pilot/external-phanpy-aa/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f pilot
+          git commit -m "data: external A/A run ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git push origin data && exit 0
+            git pull --rebase origin data
+          done
+          exit 1
