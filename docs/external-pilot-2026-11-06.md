@@ -61,8 +61,37 @@ What it is not:
   ports swapped, were all quiet; median LCP differences were within ±10 ms.
 
 So a discrete ~140 ms LCP offset hits roughly one job in nine on this app
-(observed in 4 of 36 Phanpy jobs), cause unknown. It is just above the 1% LCP margin.
+(observed in 4 of 36 Phanpy jobs). It is just above the 1% LCP margin.
 Candidate false alarms on external same-commit controls: 1/12 (Wilson 95%: 1.5–35%).
+
+## Trace of the offset (added 11 November)
+
+Sixteen more same-commit jobs of `624fa08b` (`external-lcp-trace.yml`, run
+42267470785; `scripts/diagnose-lcp.mjs`, same protocol as a candidate job) kept the
+LCP element, its subparts and every request of every load. Data:
+`pilot/lcp-trace/2026-11-06/` on the data branch.
+
+- The offset recurred in 2 of 16 jobs: −1.16% (base slower by 138 ms) and +1.04%
+  (PR slower by 122 ms). The other 14 jobs were within ±0.09%.
+- The LCP element is the same lazy hero image in every load. The whole difference is
+  in `resourceLoadDuration` (2274 vs 2137 ms; 2272 vs 2136 ms); TTFB, load delay
+  and render delay are equal.
+- In both jobs the slower side is the one whose `dom-*.js` chunk is transferred over
+  the network: 56,017 bytes in all 20 loads of that side, starting at ~10.3 s while
+  the hero image downloads. In the other 30 of 32 builds the same request transfers
+  0 bytes. At the devtools throughput of 1.6 Mbit/s, 56 KB is ~270 ms of link
+  time; shared with the image it delays the image by ~135 ms, and the concurrent
+  tablet image and `compose` chunk by ~300 and ~160 ms, which matches the trace.
+
+So the cause is the build, not the measurement: two builds of the same commit
+occasionally produce a different `dom` chunk, and the gate measures the real cost
+of that difference. The earlier local check of two builds did not hit the rare
+variant. The build outputs of the traced jobs were not saved, so the chunk content
+is not yet explained; the next trace must keep the `dist/` of both sides.
+
+For users this means a same-commit LCP alarm can be correct and still surprising.
+The comment should therefore show which assets differ in size between base and PR
+next to the verdict; this is a reporting change, not a policy change.
 
 ## Consequences
 
@@ -77,6 +106,6 @@ The frozen candidate is not changed. For deployment and for the thesis:
 3. Repeating every pilot pair at least twice is what exposed the problem; one run per
    pair would have reported four regressions and no reproducibility question.
 
-Next: trace the offset (Lighthouse trace for an affected job: which LCP element, which
-request), and more same-commit jobs on Phanpy to estimate the external false-alarm
-rate with a useful interval.
+Next: keep both build outputs in the trace to explain the variable chunk, and more
+same-commit jobs on Phanpy to estimate the external false-alarm rate with a useful
+interval.

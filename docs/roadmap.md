@@ -1,9 +1,20 @@
-# Roadmap, updated 6 November 2026
+# Roadmap, updated 11 November 2026
 
 A completed empirical study is required alongside the working product. Completion
 criteria and prospective validation are specified in [research-completion.md](research-completion.md).
 Implementation is published in draft PR #1; validation and raw-data archive are
 recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
+
+## Added on 11 November
+
+- [Confirmatory cohort](prospective-confirmatory-2026-11-11.md) of the frozen candidate:
+  0/200 four-page A/A suites (upper 1.9%); FCP/LCP/TBT detection targets met;
+  CLS 87% and 85% miss the ≥80% lower-bound target, traced to page-level CLS
+  instability of `demo-heavy` on newer runner CPUs.
+- The rare Phanpy LCP offset is a nondeterministic build: one of two same-commit
+  builds sometimes ships a 56 KB `dom` chunk that competes with the hero image
+  ([external pilot](external-pilot-2026-11-06.md)). Next: show asset size
+  differences in the PR comment.
 
 ## Added on 6 November
 
