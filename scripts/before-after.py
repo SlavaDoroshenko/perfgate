@@ -6,6 +6,10 @@ the Lighthouse CI default of three loads, and the same twenty loads the candidat
 each against a 5% relative margin on any of FCP/LCP/TBT/CLS. "After" is the frozen
 candidate (compare.compare_frame), unchanged. Every rule sees the same loads in their
 recorded ABAB order; a rule using k loads takes the first k of each variant.
+
+With --sample, the jobs are exactly the fixed confirmatory samples chosen by
+evaluate-scheduled-cohort.py --confirmatory (first 200 suites, first 100 jobs per
+primary case); smaller cases keep all their jobs.
 """
 import argparse
 import hashlib
@@ -30,7 +34,9 @@ BEFORE = {'single load >5%': (single_run(.05), 1), 'median of 3 >5%': (threshold
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('raw', type=Path)
 p.add_argument('--out', type=Path, required=True)
-p.add_argument('--through', required=True)
+p.add_argument('--through', help='ignore loads after this UTC timestamp')
+p.add_argument('--candidate', type=Path, help='prospective/<policy>/ directory of the data branch')
+p.add_argument('--sample', type=Path, help='output directory of evaluate-scheduled-cohort.py --confirmatory')
 p.add_argument('--freeze', type=Path, default=ROOT/'docs/protocols/browser-candidate-2026-10-30.json')
 args = p.parse_args()
 args.out.mkdir(parents=True, exist_ok=True)
@@ -39,11 +45,20 @@ if [n for n, d in freeze['source_sha256'].items() if hashlib.sha256((ROOT/n).rea
     raise SystemExit('Frozen sources changed')
 cutoff = pd.Timestamp(freeze['acquisition_after_utc'])
 days = sorted(d for d in args.raw.iterdir() if d.is_dir() and d.name[:4].isdigit() and d.name >= str(cutoff.date()))
-df = load_runs([f for d in days for f in sorted(d.glob('*-abab-devtools.jsonl')) if '-aa-' in f.name or '-injected-' in f.name])
+files = [f for d in days for f in sorted(d.glob('*-abab-devtools.jsonl')) if '-aa-' in f.name or '-injected-' in f.name]
+df = load_runs(files + (sorted(args.candidate.rglob('*.jsonl')) if args.candidate else []))
 span = df.groupby('experiment').timestamp.agg(['min', 'max'])
-keep = span.index[(span['min'] > cutoff) & (span['max'] <= pd.Timestamp(args.through))]
+keep = span.index[(span['min'] > cutoff) & (span['max'] <= pd.Timestamp(args.through or span['max'].max()))]
 df = df[df.experiment.isin(keep)]
 df['run_id'] = df.experiment.str.split('-').str[0]
+if args.sample:
+    suites = pd.read_csv(args.sample/'aa_suites.csv', dtype={'run_id': str})
+    suites = suites[~suites.status.isin(['invalid', 'incomplete_suite'])].sort_values('start')
+    cases = pd.read_csv(args.sample/'injected_jobs.csv')
+    cases = cases[cases.status != 'invalid'].sort_values('start')
+    cases = cases.groupby(['kind', 'pct'], group_keys=False).head(freeze['prospective_jobs_per_primary_injection'])
+    runs = set(suites.head(freeze['prospective_aa_complete_suites']).run_id)
+    df = df[(df.is_aa & df.run_id.isin(runs)) | df.experiment.isin(set(cases.experiment))]
 
 rows = []
 for exp, g in df.groupby('experiment'):

@@ -7,7 +7,8 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 
 ## Added on 11 November
 
-- [Confirmatory cohort](prospective-confirmatory-2026-11-11.md) of the frozen candidate:
+- [Confirmatory cohort](prospective-confirmatory-2026-11-11.md) of the frozen candidate
+  and [before/after on the same samples](before-after-2026-11-11.md):
   0/200 four-page A/A suites (upper 1.9%); FCP/LCP/TBT detection targets met;
   CLS 87% and 85% miss the ≥80% lower-bound target, traced to page-level CLS
   instability of `demo-heavy` on newer runner CPUs.
