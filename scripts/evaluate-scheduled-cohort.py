@@ -95,22 +95,27 @@ cases['measured_target_abs'] = [row.get(f'{t}_abs') for t, (_, row) in zip(cases
 rows = []
 valid_suites = suites[suites.status != 'incomplete_suite']
 valid_suites = valid_suites[valid_suites.status != 'invalid']
+suites_invalid = len(suites) - len(valid_suites)
+extra_suites = 0
 if args.confirmatory:
+    extra_suites = max(len(valid_suites) - freeze['prospective_aa_complete_suites'], 0)
     valid_suites = valid_suites.sort_values('start').head(freeze['prospective_aa_complete_suites'])
 k, n = int(valid_suites.status.eq('regression').sum()), len(valid_suites)
 lo, hi = wilson(k, n) if n else (float('nan'), float('nan'))
-rows.append({'cohort': 'A/A four-page suite', 'kind': None, 'nominal_pct': None, 'jobs': n, 'invalid': int(len(suites) - n),
+rows.append({'cohort': 'A/A four-page suite', 'kind': None, 'nominal_pct': None, 'jobs': n, 'invalid': int(suites_invalid), 'after_fixed_sample': int(extra_suites),
              'alarms_or_target_detections': k, 'rate': k / n if n else None, 'wilson_lo': lo, 'wilson_hi': hi,
              'any_metric_detections': None, 'median_measured_target_rel': None,
              'from_candidate_workflow': int(valid_suites.source.eq('candidate').sum()),
              'predeclared_target_jobs': freeze['prospective_aa_complete_suites']})
 for (kind, pct), g in cases.groupby(['kind', 'pct']):
     v = g[g.status != 'invalid']
+    invalid, extra = len(g) - len(v), 0
     if args.confirmatory:
+        extra = max(len(v) - freeze['prospective_jobs_per_primary_injection'], 0)
         v = v.sort_values('start').head(freeze['prospective_jobs_per_primary_injection'])
     k, n = int(v.target_detected.sum()), len(v)
     lo, hi = wilson(k, n) if n else (float('nan'), float('nan'))
-    rows.append({'cohort': 'injected', 'kind': kind, 'nominal_pct': pct, 'jobs': n, 'invalid': int(len(g) - n),
+    rows.append({'cohort': 'injected', 'kind': kind, 'nominal_pct': pct, 'jobs': n, 'invalid': int(invalid), 'after_fixed_sample': int(extra),
                  'alarms_or_target_detections': k, 'rate': k / n if n else None, 'wilson_lo': lo, 'wilson_hi': hi,
                  'any_metric_detections': int(v.any_detected.sum()),
                  'median_measured_target_rel': float(v.measured_target_rel.median()) if n else None,

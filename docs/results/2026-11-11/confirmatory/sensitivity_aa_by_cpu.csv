@@ -1,0 +1,28 @@
+app,cpu_model,jobs,page_alarms,nonzero_cls_diff,max_abs_cls_diff
+demo-heavy,AMD EPYC 7763 64-Core Processor,82,1,0,0.0
+demo-heavy,AMD EPYC 9V45 96-Core Processor,50,0,1,0.0383911393707267
+demo-heavy,AMD EPYC 9V74 80-Core Processor,74,2,22,0.0767822787414534
+demo-heavy,INTEL(R) XEON(R) PLATINUM 8573C,19,0,2,0.0767822787414534
+demo-heavy,Intel(R) Xeon(R) 6973P-C,1,0,0,0.0
+demo-heavy,Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz,13,0,0,0.0
+demo-spa,AMD EPYC 7763 64-Core Processor,85,0,0,0.0
+demo-spa,AMD EPYC 9V45 96-Core Processor,44,0,0,0.0
+demo-spa,AMD EPYC 9V74 80-Core Processor,63,0,0,0.0
+demo-spa,INTEL(R) XEON(R) PLATINUM 8573C,23,0,0,0.0
+demo-spa,Intel(R) Xeon(R) 6973P-C,5,0,0,0.0
+demo-spa,Intel(R) Xeon(R) 6975P-C,2,0,0,0.0
+demo-spa,Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz,17,0,0,0.0
+demo-ssr,AMD EPYC 7763 64-Core Processor,83,0,0,0.0
+demo-ssr,AMD EPYC 9V45 96-Core Processor,49,0,0,0.0
+demo-ssr,AMD EPYC 9V74 80-Core Processor,63,0,0,0.0
+demo-ssr,INTEL(R) XEON(R) PLATINUM 8573C,15,0,0,0.0
+demo-ssr,Intel(R) Xeon(R) 6973P-C,10,0,0,0.0
+demo-ssr,Intel(R) Xeon(R) 6975P-C,1,0,0,0.0
+demo-ssr,Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz,18,0,0,0.0
+demo-static,AMD EPYC 7763 64-Core Processor,98,0,0,0.0
+demo-static,AMD EPYC 9V45 96-Core Processor,49,0,0,0.0
+demo-static,AMD EPYC 9V74 80-Core Processor,62,0,0,0.0
+demo-static,INTEL(R) XEON(R) PLATINUM 8573C,16,0,0,0.0
+demo-static,Intel(R) Xeon(R) 6973P-C,3,0,0,0.0
+demo-static,Intel(R) Xeon(R) 6975P-C,1,0,0,0.0
+demo-static,Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz,10,0,0,0.0
