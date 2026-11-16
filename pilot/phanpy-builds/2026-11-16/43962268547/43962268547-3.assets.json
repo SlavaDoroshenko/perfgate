@@ -1,0 +1,133 @@
+{
+  "schema": "perfgate-assets/1",
+  "gzip_level": 9,
+  "skipped": {
+    "base": 12,
+    "pr": 12
+  },
+  "totals": {
+    "js": {
+      "base": {
+        "files": 47,
+        "raw": 3539200,
+        "gzip": 1205949
+      },
+      "pr": {
+        "files": 47,
+        "raw": 3539200,
+        "gzip": 1205953
+      }
+    },
+    "css": {
+      "base": {
+        "files": 1,
+        "raw": 470677,
+        "gzip": 73926
+      },
+      "pr": {
+        "files": 1,
+        "raw": 470677,
+        "gzip": 73926
+      }
+    },
+    "img": {
+      "base": {
+        "files": 21,
+        "raw": 804874,
+        "gzip": 733247
+      },
+      "pr": {
+        "files": 21,
+        "raw": 804874,
+        "gzip": 733247
+      }
+    },
+    "font": {
+      "base": {
+        "files": 1,
+        "raw": 9404,
+        "gzip": 9427
+      },
+      "pr": {
+        "files": 1,
+        "raw": 9404,
+        "gzip": 9427
+      }
+    },
+    "other": {
+      "base": {
+        "files": 8,
+        "raw": 11478,
+        "gzip": 4595
+      },
+      "pr": {
+        "files": 8,
+        "raw": 11478,
+        "gzip": 4594
+      }
+    },
+    "all": {
+      "base": {
+        "files": 78,
+        "raw": 4835633,
+        "gzip": 2027144
+      },
+      "pr": {
+        "files": 78,
+        "raw": 4835633,
+        "gzip": 2027147
+      }
+    }
+  },
+  "counts": {
+    "unchanged": 76,
+    "changed": 2,
+    "added": 0,
+    "removed": 0
+  },
+  "files": [
+    {
+      "name": "assets/main-[hash].js",
+      "type": "js",
+      "status": "changed",
+      "base": {
+        "files": 1,
+        "raw": 414948,
+        "gzip": 124784,
+        "paths": [
+          "assets/main-DIS5_VHT.js"
+        ]
+      },
+      "pr": {
+        "files": 1,
+        "raw": 414948,
+        "gzip": 124787,
+        "paths": [
+          "assets/main-BGXXu3Df.js"
+        ]
+      }
+    },
+    {
+      "name": "version.json",
+      "type": "other",
+      "status": "changed",
+      "base": {
+        "files": 1,
+        "raw": 64,
+        "gzip": 84,
+        "paths": [
+          "version.json"
+        ]
+      },
+      "pr": {
+        "files": 1,
+        "raw": 64,
+        "gzip": 84,
+        "paths": [
+          "version.json"
+        ]
+      }
+    }
+  ],
+  "files_truncated": 0
+}
