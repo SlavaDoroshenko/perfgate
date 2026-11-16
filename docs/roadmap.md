@@ -83,7 +83,9 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
   native-x86 smoke workflow ([docker.md](docker.md)). Built locally; the live
   pinned-browser check awaits hosted CI because amd64 emulation cannot run Chrome.
 - GitLab include template with merge request notes ([gitlab.md](gitlab.md)),
-  exercised with gitlab-ci-local only; GitLab CE validation still required.
+  validated end to end on a self-managed GitLab CE 19.5 with a Docker runner
+  ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md));
+  the pinned x86-64 image on a GitLab runner is still unverified.
 - [User guide](user-guide.md) with verdict interpretation and limitations.
 
 ## Research work still required
@@ -100,7 +102,7 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 
 - Persistent history and a small dashboard; history warnings advisory initially.
 - Docker packaging: hosted x86-64 smoke run of the pinned-browser image.
-- GitLab: self-hosted CE validation of the template and merge request notes.
+- GitLab: the pinned x86-64 image on an x86-64 runner; Kubernetes executor.
 - Deployment pilot and completed-system comparison against fixed thresholds.
 
 ## Future scope

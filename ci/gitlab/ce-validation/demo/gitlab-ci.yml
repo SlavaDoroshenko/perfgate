@@ -1,0 +1,15 @@
+# .gitlab-ci.yml of the CE validation demo project (copy it to the project root
+# as .gitlab-ci.yml, with the template at ci/perfgate.gitlab-ci.yml).
+include:
+  - local: ci/perfgate.gitlab-ci.yml
+
+variables:
+  PERFGATE_IMAGE: perfgate:ce-debian # local image; the runner uses pull_policy if-not-present
+  PERFGATE_REFS_CONFIG: perfgate-refs.json
+  PERFGATE_RUNS: '10'
+  PERFGATE_APP: demo-static
+
+# Validation only: the measuring job must not receive the environment-scoped token.
+perfgate:
+  before_script:
+    - test -z "${PERFGATE_GITLAB_TOKEN:-}" && echo "PERFGATE_GITLAB_TOKEN absent in perfgate job"

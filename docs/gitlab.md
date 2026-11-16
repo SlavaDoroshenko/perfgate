@@ -72,47 +72,41 @@ The renderer treats artifacts as untrusted text (see [pr-comments.md](pr-comment
 it validates `comparison.json`, escapes all strings and only updates a note that
 starts with its marker and was written by the token's own user.
 
+## Retries
+
+Retrying only the `perfgate` job does not re-run `perfgate-comment`, so the note
+keeps the previous result. Retry the comment job as well, or run a new pipeline.
+
 ## Verification status
 
-**Not yet tested on a GitLab CE/EE instance.** What was checked:
+Validated end to end on GitLab CE 19.5.5 with a Docker-executor runner 19.5.3 on
+one machine; see [gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md)
+for the setup, the merge requests, the note text and timings. Verified there:
+real `CI_MERGE_REQUEST_*` values and `compare-refs` in the job, exit codes 0 and
+1, artifact and dotenv upload, the `.post` comment job with `needs` after a failed
+and a successful measurement, one note created and then updated (not duplicated)
+by retries and new pushes, the environment-scoped masked token (absent from the
+`perfgate` job), `environment: action: access`, and the comment job without a
+token. The run used the native ARM Debian-Chromium image. Not covered: the pinned
+x86-64 image, the Kubernetes executor, a container registry, `include: remote:`,
+merged-results and fork pipelines. Older GitLab versions lack
+`environment: action: access`; use `prepare` there.
 
-- `gitlab-ci-local` 4.77.1 validated the template against the GitLab CI schema
-  and ran both jobs with Docker on a test repository (refs mode, a base commit
-  and a head commit with a 400 ms blocking script, 10 loads per variant). The
-  measuring job reported a regression (FCP +69%) and exited 1; the comment job ran
-  after the failure, received `PERFGATE_RUN_URL` through the dotenv report and
-  rendered the note. This used the native ARM Debian-Chromium image, not the
-  pinned x86-64 image.
-- The `gitlab` mode of `scripts/comment/cli.mjs` created and then updated a single
-  note against a local fake of the notes API, and the API request sequence is
-  covered by unit tests.
+Earlier checks: `gitlab-ci-local` 4.77.1 validated the template against the GitLab
+CI schema and ran both jobs on a test repository; the notes API request sequence
+of `scripts/comment/cli.mjs gitlab` is covered by unit tests.
 
-Not verified: real `CI_MERGE_REQUEST_*` values, environment-scoped variables,
-`environment: action: access` (absent from older GitLab versions; use `prepare` there), masked-variable behaviour, the
-`.post` stage with `needs`, and remote include from GitHub.
+Notes from the CE run:
 
-### How to verify on GitLab CE
+- Instances with a plain `http://` external URL are supported: the note links to
+  the job and to its `perfgate/` artifact directory.
+- When a merge request's net diff is empty (for example a change and its revert),
+  GitLab leaves `CI_MERGE_REQUEST_DIFF_BASE_SHA` unset; the template then fetches
+  the target branch and compares against `git merge-base`.
+- On an isolated network, preload the runner helper image
+  (`registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:<arch>-v<version>`)
+  next to the perfgate image; the runner pulls it for the first job.
 
-1. Start a disposable instance and a runner on an x86-64 Linux machine:
-   ```sh
-   docker run -d --name gitlab -p 8080:80 --shm-size 256m gitlab/gitlab-ce:<version>-ce.0
-   docker run -d --name runner -v /var/run/docker.sock:/var/run/docker.sock gitlab/gitlab-runner:<version>
-   ```
-   Wait for GitLab to start, sign in as root (initial password in
-   `/etc/gitlab/initial_root_password` inside the container), create a project
-   and register the runner with the Docker executor
-   (`gitlab-runner register --executor docker --docker-image alpine`).
-2. Push the perfgate image to the instance's registry or a registry the runner
-   can reach; set `PERFGATE_IMAGE` to it.
-3. Push a small application with `perfgate-refs.json` and the include above
-   (use `include: local:` with a copy of the template if the instance has no
-   Internet access). On a branch, add a deliberate slowdown, e.g. a 400 ms
-   blocking script in `<head>`, and open a merge request.
-4. Expect: `perfgate` fails with exit 1 and uploads `perfgate/`; `perfgate-comment`
-   succeeds, and the merge request shows one note headed
-   "perfgate: Performance regression detected" with links to the job and artifacts.
-5. Push another commit: the same note must be updated, not duplicated. Remove the
-   slowdown: the note must change to "No regression detected". Unset the token:
-   the comment job must succeed without posting.
-6. Check that `PERFGATE_GITLAB_TOKEN` is absent in the `perfgate` job
-   (`test -z "$PERFGATE_GITLAB_TOKEN"` in a temporary `before_script`).
+To repeat the check, [ci/gitlab/ce-validation](../ci/gitlab/ce-validation) starts a
+disposable GitLab CE and runner bound to `127.0.0.1`, registers the runner, creates
+the project, token and variable, and removes everything afterwards.
