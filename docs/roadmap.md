@@ -98,7 +98,8 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 
 ## Product work after the first verified integration
 
-- Persistent history and a small dashboard; history warnings advisory initially.
+- Persistent history and a small dashboard, implemented: history branch, static
+  page and advisory change-point warnings ([history.md](history.md)). Hosted run pending.
 - Docker packaging: hosted x86-64 smoke run of the pinned-browser image.
 - GitLab: self-hosted CE validation of the template and merge request notes.
 - Deployment pilot and completed-system comparison against fixed thresholds.
