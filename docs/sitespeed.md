@@ -82,6 +82,43 @@ uv run python -m perfgate_analysis.tool_comparison \
   ../../perfgate-data/comparisons/sitespeed/39149657629 --out reports/sitespeed
 ```
 
+## Replication, 17 November 2026
+
+[Predeclared](protocols/sitespeed-replication-2026-11-17.md) ten repetitions per case,
+tool order balanced (15 jobs sitespeed first, 15 Lighthouse first), same workflow and
+analysis as the pilot; 30 jobs, 1,200 measured loads, no failed job.
+[Run 43962053827](https://github.com/SlavaDoroshenko/perfgate/actions/runs/43962053827);
+raw data with checksums at `comparisons/sitespeed/43962053827/` on the data branch;
+tables in [results/2026-11-17/sitespeed](results/2026-11-17/sitespeed/).
+
+Jobs with a detection, ten loads per variant (Wilson 95%):
+
+| Case | Rule | Lighthouse | sitespeed |
+|---|---|---:|---:|
+| A/A, any of four metrics | native, unadjusted one-sided | 3/10 (11–60%) | 5/10 (24–76%) |
+| A/A, any of four metrics | Holm + margins | 1/10 (2–40%) | 1/10 (2–40%) |
+| FCP +2%, FCP | either rule | 10/10 (72–100%) | 10/10 (72–100%) |
+| TBT +10%, TBT | either rule | 8/10 (49–94%) | 8/10 (49–94%) |
+
+Both post-processed A/A alarms are in the same job (repetition 2, one runner): an LCP
+rise of 1.1% for sitespeed and 1.9% for Lighthouse (with FCP +1.3%), i.e. the runner
+changed during that job, and both tools saw it. Without correction across the four
+metrics, sitespeed's own comparison flags half of the unchanged jobs; Holm plus the
+margins removes that difference. The measured TBT effect again differs between the
+tools (median +47% for sitespeed's TBT, +11% for Lighthouse's) because they define the
+collection window differently; each tool missed two TBT jobs, not the same ones.
+No clear order effect is visible at this size (native A/A alarms 1–3 of 5 in each
+tool/order group; Lighthouse missed TBT in two Lighthouse-first jobs, sitespeed in
+one of each order). Wall time per comparison: sitespeed 274–286 s, Lighthouse
+429–431 s (medians per case).
+
+Conclusion across 39 jobs (pilot and replication): with the same statistical
+post-processing the two collectors detect the same injected regressions equally
+often; the statistical procedure, not the collector, decides the false-alarm rate.
+sitespeed is about a third faster per comparison at ten loads. Ten loads per
+variant are below the primary twenty of the candidate, so these A/A rates are not
+comparable with the confirmatory 0/200.
+
 ## Reproduce locally
 
 Build and serve `demo-spa`, then:
