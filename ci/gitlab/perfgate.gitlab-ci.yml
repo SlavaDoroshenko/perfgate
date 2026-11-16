@@ -14,6 +14,9 @@
 #   * URLs: extend the `perfgate` job with a before_script that builds and starts
 #     both versions, then set PERFGATE_BASE_URL and PERFGATE_PR_URL.
 #
+# In URL mode, set PERFGATE_BASE_DIST and PERFGATE_PR_DIST to the two build output
+# directories to add a built-asset size diff (assets.json) to the report and note.
+#
 # The measuring job fails with exit 1 on a detected regression and 2 on invalid
 # measurements. `perfgate-comment` then creates or updates one merge request note
 # when PERFGATE_GITLAB_TOKEN is available; without it the note is skipped.
@@ -25,6 +28,8 @@ variables:
   PERFGATE_REFS_CONFIG: ''
   PERFGATE_BASE_URL: ''
   PERFGATE_PR_URL: ''
+  PERFGATE_BASE_DIST: ''
+  PERFGATE_PR_DIST: ''
   PERFGATE_COMMENT_KEY: default
 
 .perfgate-rules:
@@ -54,6 +59,11 @@ perfgate:
       else
         perfgate compare --url "$PERFGATE_BASE_URL" --pr-url "$PERFGATE_PR_URL" --runs "$PERFGATE_RUNS" \
           --app "$PERFGATE_APP" --out "perfgate/$PERFGATE_APP" || status=$?
+      fi
+    - |
+      if [ -n "$PERFGATE_BASE_DIST" ] && [ -n "$PERFGATE_PR_DIST" ] && [ -d "perfgate/$PERFGATE_APP" ]; then
+        perfgate assets --base "$PERFGATE_BASE_DIST" --pr "$PERFGATE_PR_DIST" --out "perfgate/$PERFGATE_APP/assets.json" ||
+          echo "asset diff failed; the verdict is unaffected"
       fi
     - echo "PERFGATE_EXIT=$status" >> perfgate.env
     - find perfgate -name comparison.md -exec cat {} \;

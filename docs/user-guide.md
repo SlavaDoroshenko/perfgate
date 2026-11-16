@@ -134,11 +134,17 @@ the Markdown report to the job summary, exposes `verdict` and
 pull request comment add the separate trusted workflow from
 [pr-comments.md](pr-comments.md); complete examples are in `examples/github/`.
 
+Optional inputs `base-dist`/`pr-dist` (the two build output directories) add
+`assets.json`, a per-file size diff shown in the comment
+([built assets](pr-comments.md#built-assets)).
+
 **GitLab CI.** Include `ci/gitlab/perfgate.gitlab-ci.yml`; see [gitlab.md](gitlab.md).
 
 **Other CI systems.** Run the Docker image, keep the output directory as an
 artifact and use the exit code. `perfgate comment render --reports <dir>`
-produces the same Markdown summary for any code review system.
+produces the same Markdown summary for any code review system;
+`perfgate assets --base <dist> --pr <dist> --out <dir>/assets.json` adds the
+built-asset diff to it.
 
 ## 6. Reading the result
 

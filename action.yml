@@ -16,6 +16,12 @@ inputs:
   artifact-name:
     description: Unique artifact name within this workflow run
     default: perfgate
+  base-dist:
+    description: Optional build output directory of the baseline; with pr-dist, adds assets.json (built asset sizes) to the report
+    default: ''
+  pr-dist:
+    description: Optional build output directory of the changed application
+    default: ''
 outputs:
   report-directory:
     description: Directory containing raw data, comparison JSON/Markdown and timing
@@ -68,6 +74,15 @@ runs:
         fi
         echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
         if [ -f "$report_dir/comparison.md" ]; then cat "$report_dir/comparison.md" >> "$GITHUB_STEP_SUMMARY"; fi
+    - name: Diff built assets
+      if: always() && steps.compare.outputs.directory != '' && inputs.base-dist != '' && inputs.pr-dist != ''
+      continue-on-error: true
+      shell: bash
+      env:
+        BASE_DIST: ${{ inputs.base-dist }}
+        PR_DIST: ${{ inputs.pr-dist }}
+        OUT: ${{ steps.compare.outputs.directory }}/assets.json
+      run: node "$GITHUB_ACTION_PATH/scripts/assets/diff.mjs" --base "$BASE_DIST" --pr "$PR_DIST" --out "$OUT"
     - uses: actions/upload-artifact@v7
       if: always() && steps.compare.outputs.directory != ''
       with:

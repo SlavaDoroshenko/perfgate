@@ -41,7 +41,11 @@ required for the pinned browser.
      `before_script` that builds and starts both versions, and set
      `PERFGATE_BASE_URL` / `PERFGATE_PR_URL`.
 4. Optional variables: `PERFGATE_RUNS` (10 or 20, default 20), `PERFGATE_APP`
-   (report label, default `web`), `PERFGATE_COMMENT_KEY`.
+   (report label, default `web`), `PERFGATE_COMMENT_KEY`, and in URL mode
+   `PERFGATE_BASE_DIST` / `PERFGATE_PR_DIST`: the two build output directories,
+   which add a [built-asset diff](pr-comments.md#built-assets) to the report and
+   the note. In refs mode the worktrees are removed after measuring, so there is
+   no asset diff.
 5. For notes, create a project access token with role **Reporter** and scope
    **api**, and store it as CI/CD variable `PERFGATE_GITLAB_TOKEN`: masked, and with
    environment scope `perfgate-comment`. Without the token the comment job prints

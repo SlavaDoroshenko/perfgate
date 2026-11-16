@@ -2,6 +2,7 @@
 // perfgate pull/merge request comment.
 //
 //   node scripts/comment/cli.mjs render --reports DIR [--key K] [--run-url URL] [--sha SHA] [--out FILE]
+//                                      [--base-dist DIR --pr-dist DIR]
 //   node scripts/comment/cli.mjs github --reports DIR [--key K] [--dry-run]
 //   node scripts/comment/cli.mjs gitlab --reports DIR [--key K] [--dry-run]
 //
@@ -10,9 +11,11 @@
 // pipeline and reads predefined CI variables plus PERFGATE_GITLAB_TOKEN.
 // Exit status is 0 whenever the comment was rendered (and posted), regardless of
 // the verdict: the measuring job carries the pass/fail status.
+// `render --base-dist/--pr-dist` diffs two build outputs (scripts/assets/diff.mjs)
+// and shows the result in every report that has no assets.json of its own.
 import { appendFile, readFile, writeFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
-import { loadReports, marker, renderComment } from './render.mjs';
+import { loadReports, marker, parseAssets, renderComment } from './render.mjs';
 import { artifactLinks, findPullRequest, upsertGithubComment, upsertGitlabNote } from './publish.mjs';
 
 const log = message => process.stderr.write(`${message}\n`);
@@ -33,6 +36,7 @@ async function main() {
     reports: { type: 'string' }, key: { type: 'string', default: 'default' },
     'run-url': { type: 'string' }, sha: { type: 'string' }, out: { type: 'string' },
     'dry-run': { type: 'boolean', default: false }, author: { type: 'string', default: 'github-actions[bot]' },
+    'base-dist': { type: 'string' }, 'pr-dist': { type: 'string' },
   } });
   if (!['render', 'github', 'gitlab'].includes(command) || !values.reports) {
     throw new Error('usage: cli.mjs render|github|gitlab --reports <directory> [options]');
@@ -41,6 +45,12 @@ async function main() {
   const key = values.key;
 
   if (command === 'render') {
+    if (Boolean(values['base-dist']) !== Boolean(values['pr-dist'])) throw new Error('--base-dist and --pr-dist go together');
+    if (values['base-dist']) {
+      const { diffAssets } = await import('../assets/diff.mjs');
+      const assets = parseAssets(await diffAssets(values['base-dist'], values['pr-dist']));
+      for (const report of reports) report.assets ??= assets;
+    }
     const { status, body } = renderComment(reports, { key, runUrl: values['run-url'], sha: values.sha });
     if (values.out) await writeFile(values.out, body); else process.stdout.write(body);
     log(`perfgate comment: ${status}, ${reports.length} report(s)`);

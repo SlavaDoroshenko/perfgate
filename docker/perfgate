@@ -2,10 +2,15 @@
 # perfgate entry point inside the container image.
 #   perfgate collect|compare|compare-refs ...   collector CLI (compiled JavaScript)
 #   perfgate comment render|github|gitlab ...    pull/merge request comment
+#   perfgate assets --base DIR --pr DIR --out F  built asset diff (assets.json)
 set -e
 root="${PERFGATE_HOME:-/opt/perfgate}"
 if [ "$1" = comment ]; then
   shift
   exec node "$root/scripts/comment/cli.mjs" "$@"
+fi
+if [ "$1" = assets ]; then
+  shift
+  exec node "$root/scripts/assets/diff.mjs" "$@"
 fi
 exec node "$root/packages/collector/dist/cli.js" "$@"

@@ -12,6 +12,9 @@ const MAX_REPORTS = 20;
 const MAX_METRICS = 40;
 const MAX_ISSUES = 20;
 const MAX_DEPTH = 6;
+const MAX_ASSET_ENTRIES = 1000;
+const ASSET_ROWS = 10; // changed files listed per report
+const ASSET_INLINE_ROWS = 5; // longer lists are collapsed
 export const MAX_COMMENT_LENGTH = 60000; // GitHub rejects bodies above 65,536 characters
 
 const METRIC_LABELS = { fcp: 'FCP', lcp: 'LCP', tbt: 'TBT', cls: 'CLS' };
@@ -84,6 +87,44 @@ export function parseComparison(raw) {
   };
 }
 
+const ASSET_TYPES = { js: 'JS', css: 'CSS', img: 'Images', font: 'Fonts', other: 'Other', all: 'All' };
+const ASSET_STATUSES = ['changed', 'added', 'removed'];
+
+function count(value, field) {
+  if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${field}: non-negative integer expected`);
+  return value;
+}
+function sizes(value, field) {
+  if (!isObject(value)) throw new Error(`${field}: object expected`);
+  return { files: count(value.files, `${field}.files`), raw: count(value.raw, `${field}.raw`), gzip: count(value.gzip, `${field}.gzip`) };
+}
+
+/** Validates an assets.json object produced by scripts/assets/diff.mjs. */
+export function parseAssets(raw) {
+  if (!isObject(raw) || raw.schema !== 'perfgate-assets/1') throw new Error('assets: unknown schema');
+  if (!isObject(raw.totals) || !isObject(raw.counts) || !Array.isArray(raw.files)) throw new Error('assets: totals, counts and files required');
+  const totals = {};
+  for (const type of Object.keys(ASSET_TYPES)) {
+    const t = raw.totals[type];
+    if (!isObject(t)) throw new Error(`assets.totals.${type}: object expected`);
+    totals[type] = { base: sizes(t.base, `assets.totals.${type}.base`), pr: sizes(t.pr, `assets.totals.${type}.pr`) };
+  }
+  const counts = {};
+  for (const status of ['unchanged', ...ASSET_STATUSES]) counts[status] = count(raw.counts[status], `assets.counts.${status}`);
+  const files = raw.files.slice(0, MAX_ASSET_ENTRIES).map((f, i) => {
+    const at = `assets.files[${i}]`;
+    if (!isObject(f) || typeof f.name !== 'string' || !ASSET_STATUSES.includes(f.status) || !(f.type in ASSET_TYPES) || f.type === 'all') {
+      throw new Error(`${at}: name/status/type invalid`);
+    }
+    const base = f.base === null ? null : sizes(f.base, `${at}.base`);
+    const pr = f.pr === null ? null : sizes(f.pr, `${at}.pr`);
+    if ((base === null) !== (f.status === 'added') || (pr === null) !== (f.status === 'removed')) throw new Error(`${at}: sides do not match status`);
+    return { name: f.name, type: f.type, status: f.status, base, pr };
+  });
+  const truncated = raw.files.length - files.length + (raw.files_truncated === undefined ? 0 : count(raw.files_truncated, 'assets.files_truncated'));
+  return { totals, counts, files, truncated };
+}
+
 async function readJson(path) {
   const info = await lstat(path);
   if (!info.isFile()) throw new Error('not a regular file');
@@ -116,7 +157,7 @@ export async function loadReports(root) {
   const reports = [];
   for (const dir of found) {
     const path = relative(root, dir).split(sep).filter(Boolean);
-    const report = { path: path.join('/') || '.', artifact: path[0] ?? null, comparison: null, error: null, seconds: null, refs: null };
+    const report = { path: path.join('/') || '.', artifact: path[0] ?? null, comparison: null, error: null, seconds: null, refs: null, assets: null };
     if (await exists(join(dir, 'comparison.json'))) {
       try { report.comparison = parseComparison(await readJson(join(dir, 'comparison.json'))); }
       catch (error) { report.error = `unreadable comparison.json (${error.message})`; }
@@ -133,6 +174,13 @@ export async function loadReports(root) {
         const refs = await readJson(candidate);
         if (/^[0-9a-f]{40}$/.test(refs.base) && /^[0-9a-f]{40}$/.test(refs.pr)) { report.refs = { base: refs.base, pr: refs.pr }; break; }
       } catch { /* optional */ }
+    }
+    // assets.json (scripts/assets/diff.mjs) sits beside comparison.json or refs.json.
+    for (const candidate of [join(dir, 'assets.json'), join(dir, '..', 'assets.json')]) {
+      if (!(await exists(candidate))) continue;
+      try { report.assets = parseAssets(await readJson(candidate)); }
+      catch (error) { report.assets = { error: `unreadable assets.json (${error.message})` }; }
+      break;
     }
     reports.push(report);
   }
@@ -181,6 +229,56 @@ function decision(m) {
   return 'no change detected';
 }
 
+function formatBytes(bytes) {
+  const abs = Math.abs(bytes);
+  if (abs < 1000) return `${bytes} B`;
+  return abs < 1e6 ? `${(bytes / 1e3).toFixed(1)} kB` : `${(bytes / 1e6).toFixed(2)} MB`;
+}
+function signedBytes(bytes) {
+  return bytes > 0 ? `+${formatBytes(bytes)}` : bytes < 0 ? `−${formatBytes(-bytes)}` : '0 B';
+}
+function sizeChange(base, pr) {
+  const change = signedBytes(pr - base);
+  if (pr === base || !base) return pr === base ? change : `${change} (new)`;
+  const rel = (pr - base) / base * 100;
+  return `${change} (${rel >= 0 ? '+' : '−'}${Math.abs(rel).toFixed(1)}%)`;
+}
+
+function renderAssets(assets) {
+  if (assets.error) return [`Built assets: ${escapeText(assets.error, 300)}`, ''];
+  const { totals, counts, files, truncated } = assets;
+  const all = totals.all;
+  const differing = counts.changed + counts.added + counts.removed;
+  if (!differing) {
+    return [`**Built assets:** no differences in ${all.pr.files} files (${formatBytes(all.pr.gzip)} gzip).`, ''];
+  }
+  const lines = [`**Built assets** (gzip; base → PR): ${counts.changed} changed, ${counts.added} added, ` +
+    `${counts.removed} removed, ${counts.unchanged} unchanged.`, '',
+  '| Type | Files | Base | PR | Change | Raw change |', '|---|---:|---:|---:|---:|---:|'];
+  for (const [type, label] of Object.entries(ASSET_TYPES)) {
+    const { base, pr } = totals[type];
+    if (!base.files && !pr.files) continue;
+    const row = `| ${label} | ${base.files} → ${pr.files} | ${formatBytes(base.gzip)} | ${formatBytes(pr.gzip)} | ` +
+      `${sizeChange(base.gzip, pr.gzip)} | ${signedBytes(pr.raw - base.raw)} |`;
+    lines.push(type === 'all' ? row.replace(/^\| All \|/, '| **All** |') : row);
+  }
+  lines.push('');
+  const shown = files.slice(0, ASSET_ROWS);
+  const more = files.length - shown.length + truncated;
+  const table = ['| File | Status | Base | PR | Change | Raw change |', '|---|---|---:|---:|---:|---:|'];
+  for (const f of shown) {
+    const base = f.base ?? { files: 0, raw: 0, gzip: 0 };
+    const pr = f.pr ?? { files: 0, raw: 0, gzip: 0 };
+    const status = f.status === 'changed' && (base.files !== 1 || pr.files !== 1) ? `changed (${base.files} → ${pr.files} files)` : f.status;
+    table.push(`| ${escapeText(f.name, 100)} | ${status} | ${f.base ? formatBytes(base.gzip) : '—'} | ${f.pr ? formatBytes(pr.gzip) : '—'} | ` +
+      `${signedBytes(pr.gzip - base.gzip)} | ${signedBytes(pr.raw - base.raw)} |`);
+  }
+  if (more > 0) table.push('', `${more} more differing files are in assets.json.`);
+  if (files.length <= ASSET_INLINE_ROWS && !truncated) lines.push(...table, '');
+  else lines.push(`<details><summary>Differing files: top ${shown.length} of ${files.length + truncated} by gzip change</summary>`, '', ...table, '', '</details>', '');
+  return lines;
+}
+
 function safeUrl(url) {
   if (typeof url !== 'string' || !/^https:\/\/[^\s()<>]+$/.test(url)) return null;
   return url;
@@ -201,6 +299,7 @@ function renderReport(report, links) {
   if (facts.length) lines.push(facts.join(' · '), '');
   if (report.error) {
     lines.push(`Report problem: ${escapeText(report.error, 300)}`, '');
+    if (report.assets) lines.push(...renderAssets(report.assets));
     return lines;
   }
   const { metrics, issues } = report.comparison;
@@ -223,6 +322,7 @@ function renderReport(report, links) {
     if (metrics.length > MAX_METRICS) lines.push('', `${metrics.length - MAX_METRICS} more metrics are in the artifact.`);
     lines.push('');
   }
+  if (report.assets) lines.push(...renderAssets(report.assets));
   return lines;
 }
 
@@ -260,6 +360,7 @@ export function renderComment(reports, options = {}) {
     '- Intervals are descriptive pointwise bootstrap intervals of the median difference; they do not decide the verdict.',
     '- "Invalid" means failed loads, missing metrics or a broken protocol. Never treat it as a pass.',
     '- This comment reports measurements of pull request code. It is advisory; enforce merges with a required status check.',
+    ...(reports.some(r => r.assets) ? ['- Built assets compare the two build outputs file by file, with content hashes stripped from names. They can explain a verdict but do not change it.'] : []),
     '', '</details>', '');
   let body = lines.join('\n');
   const max = options.maxLength ?? MAX_COMMENT_LENGTH;

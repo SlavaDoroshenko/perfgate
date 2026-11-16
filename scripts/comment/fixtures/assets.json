@@ -1,0 +1,140 @@
+{
+  "schema": "perfgate-assets/1",
+  "gzip_level": 9,
+  "skipped": {
+    "base": 1,
+    "pr": 0
+  },
+  "totals": {
+    "js": {
+      "base": {
+        "files": 3,
+        "raw": 4043,
+        "gzip": 3146
+      },
+      "pr": {
+        "files": 3,
+        "raw": 74711,
+        "gzip": 56668
+      }
+    },
+    "css": {
+      "base": {
+        "files": 1,
+        "raw": 7,
+        "gzip": 27
+      },
+      "pr": {
+        "files": 1,
+        "raw": 7,
+        "gzip": 27
+      }
+    },
+    "img": {
+      "base": {
+        "files": 0,
+        "raw": 0,
+        "gzip": 0
+      },
+      "pr": {
+        "files": 0,
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    "font": {
+      "base": {
+        "files": 0,
+        "raw": 0,
+        "gzip": 0
+      },
+      "pr": {
+        "files": 0,
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    "other": {
+      "base": {
+        "files": 1,
+        "raw": 50,
+        "gzip": 66
+      },
+      "pr": {
+        "files": 1,
+        "raw": 50,
+        "gzip": 66
+      }
+    },
+    "all": {
+      "base": {
+        "files": 5,
+        "raw": 4100,
+        "gzip": 3239
+      },
+      "pr": {
+        "files": 5,
+        "raw": 74768,
+        "gzip": 56761
+      }
+    }
+  },
+  "counts": {
+    "unchanged": 3,
+    "changed": 1,
+    "added": 1,
+    "removed": 1
+  },
+  "files": [
+    {
+      "name": "assets/dom-[hash].js",
+      "type": "js",
+      "status": "changed",
+      "base": {
+        "files": 1,
+        "raw": 4001,
+        "gzip": 3064,
+        "paths": [
+          "assets/dom-Ab12Cd34.js"
+        ]
+      },
+      "pr": {
+        "files": 1,
+        "raw": 74669,
+        "gzip": 56586,
+        "paths": [
+          "assets/dom-Zz99Yy88.js"
+        ]
+      }
+    },
+    {
+      "name": "assets/new-chunk.js",
+      "type": "js",
+      "status": "added",
+      "base": null,
+      "pr": {
+        "files": 1,
+        "raw": 2,
+        "gzip": 22,
+        "paths": [
+          "assets/new-chunk.js"
+        ]
+      }
+    },
+    {
+      "name": "assets/old.js",
+      "type": "js",
+      "status": "removed",
+      "base": {
+        "files": 1,
+        "raw": 2,
+        "gzip": 22,
+        "paths": [
+          "assets/old.js"
+        ]
+      },
+      "pr": null
+    }
+  ],
+  "files_truncated": 0
+}
