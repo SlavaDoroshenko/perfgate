@@ -6,6 +6,9 @@ on:
       runs:
         description: Measured loads per variant and tool
         default: "10"
+      repeats:
+        description: JSON list of repetition numbers; odd = sitespeed first, even = Lighthouse first
+        default: "[1, 2, 3]"
 
 permissions:
   contents: read
@@ -19,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         case: [aa, fcp2, tbt10]
-        repeat: [1, 2, 3]
+        repeat: ${{ fromJSON(inputs.repeats) }}
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
