@@ -31,6 +31,8 @@ p.add_argument('--freeze', type=Path, default=ROOT/'docs/protocols/browser-candi
 p.add_argument('--candidate', type=Path, help='prospective/<policy>/ directory of the data branch (amendment of 6 November)')
 p.add_argument('--confirmatory', action='store_true',
                help='keep only the first 200 complete suites and first 100 valid jobs per case, in acquisition order (amendment b)')
+p.add_argument('--runs', type=int, default=20, choices=(10, 20),
+               help='10 = the predeclared secondary comparison: the first ten loads of each variant')
 p.add_argument('--through', help='ignore loads after this UTC timestamp (fixed cutoff)')
 args = p.parse_args()
 args.out.mkdir(parents=True, exist_ok=True)
@@ -52,6 +54,10 @@ df = df[first > cutoff]
 if args.through:
     last = df.groupby('experiment').timestamp.transform('max')
     df = df[last <= pd.Timestamp(args.through)]
+if args.runs == 10:
+    # a 20-load ABAB job truncated to its first ten slots per variant is the 10-load job
+    df = df[df.run_index < 10].copy()
+    df['planned_runs'] = df.planned_runs.where(df.planned_runs.isna(), 10)
 heads = sorted(df.git_sha.dropna().unique()) if 'git_sha' in df else []
 df['run_id'] = df.experiment.str.split('-').str[0]
 
@@ -60,7 +66,7 @@ for exp, g in df.groupby('experiment'):
     eligible = g['mode'].iloc[0] == 'abab' and g.throttling.iloc[0] == 'devtools'
     if not eligible:
         continue
-    r = compare_frame(g, 20)
+    r = compare_frame(g, args.runs)
     fired = [m['name'].split('/')[-1] for m in r['metrics'] if m['regression']]
     jobs.append({'experiment': exp, 'source': g.source.iloc[0], 'run_id': g.run_id.iloc[0], 'app': g.app.iloc[0],
                  'label': g.label.iloc[0], 'is_aa': bool(g.is_aa.iloc[0]),
@@ -76,7 +82,7 @@ suites = []
 aa = df[df.is_aa & (df['mode'] == 'abab') & (df.throttling == 'devtools')]
 for run, g in aa.groupby('run_id'):
     complete = set(g.app) == PAGES and g.groupby('app').experiment.nunique().eq(1).all()
-    r = compare_frame(g, 20) if complete else None
+    r = compare_frame(g, args.runs) if complete else None
     suites.append({'run_id': run, 'source': g.source.iloc[0], 'start': g.timestamp.min(), 'pages': len(set(g.app)),
                    'cpu_models': ';'.join(sorted(g.cpu_model.dropna().unique())),
                    'status': r['status'] if r else 'incomplete_suite',
