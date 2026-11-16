@@ -258,10 +258,12 @@ def main():
     if r2 and r2['note']:
         forged = gl.call('POST', gl.p(f'/merge_requests/{iid2}/notes'), {'body': f'{MARKER}\nforged by root'})
         job = gl.wait_job(gl.call('POST', gl.p(f'/jobs/{r2["comment"]["id"]}/retry'))['id'])
-        run.save_trace(job, 'foreign-comment')
+        log = run.save_trace(job, 'foreign-comment')
         notes = {n['id']: n for n in gl.notes(iid2)}
         run.check(notes[forged['id']]['body'].endswith('forged by root'), 'foreign: root note untouched')
-        run.check(notes[r2['note']['id']]['updated_at'] != r2['note']['updated_at'], 'foreign: bot note updated')
+        # GitLab keeps updated_at when the body is unchanged, so check the job's own report.
+        run.check(f'updated note {r2["note"]["id"]} on !{iid2}' in log, f'foreign: bot note {r2["note"]["id"]} updated')
+        run.check(len(run.perfgate_notes(iid2)) == 2, 'foreign: no third marker note created')
         run.save_notes(iid2, 'foreign')
 
     # 7. Token masked in the environment, absent outside it, and in no job log.
