@@ -182,7 +182,8 @@ function decision(m) {
 }
 
 function safeUrl(url) {
-  if (typeof url !== 'string' || !/^https:\/\/[^\s()<>]+$/.test(url)) return null;
+  // http is allowed for self-managed GitLab instances on internal networks.
+  if (typeof url !== 'string' || !/^https?:\/\/[^\s()<>]+$/.test(url)) return null;
   return url;
 }
 
