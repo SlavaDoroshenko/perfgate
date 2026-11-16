@@ -138,6 +138,10 @@ Optional inputs `base-dist`/`pr-dist` (the two build output directories) add
 `assets.json`, a per-file size diff shown in the comment
 ([built assets](pr-comments.md#built-assets)).
 
+**Main-branch history.** `examples/github/perfgate-history.yml` measures every push
+to `main` against the previous state, appends the result to a history branch and
+deploys a static dashboard with advisory change-point warnings; see [history.md](history.md).
+
 **GitLab CI.** Include `ci/gitlab/perfgate.gitlab-ci.yml`; see [gitlab.md](gitlab.md).
 
 **Other CI systems.** Run the Docker image, keep the output directory as an
@@ -203,7 +207,8 @@ records or run a separate, pre-planned confirmation.
   labelled Debian-Chromium image, and amd64 emulation cannot measure at all.
 - The PR comment and GitLab note are advisory reports of code the pull request
   controls; enforce with the failing job.
-- No history, dashboard or trend alerts yet; native (non-browser) applications are
+- History trend warnings are advisory and not yet calibrated on real commit
+  histories ([history.md](history.md)); native (non-browser) applications are
   out of scope ([native-adapters.md](native-adapters.md)).
 
 ## 8. Troubleshooting

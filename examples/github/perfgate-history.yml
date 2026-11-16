@@ -1,0 +1,115 @@
+# Main-branch history and dashboard. Copy to .github/workflows/perfgate-history.yml.
+#
+# After every push to main, the pushed commit is measured against the previous state
+# of main (`before` of the push event; the parent for a new branch) with the root
+# action. The verdict catches a regression merged without a pull request check; the
+# median of the measured commit becomes one point of the history. Records are kept
+# in history.jsonl on the `perfgate-history` branch, which also holds the rendered
+# index.html; the dashboard is deployed to GitHub Pages.
+#
+# Three jobs, so that application code never runs with a write token: `measure`
+# builds and measures read-only and uploads the report artifact; `history` only
+# appends to the history branch; `pages` deploys. Change-point warnings in the
+# dashboard and job summary are advisory and never fail a job.
+#
+# Enable Pages with "Source: GitHub Actions" in the repository settings. Adapt the
+# build/start step and replace <perfgate-commit> with a reviewed full commit SHA.
+name: perfgate history
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+# One run at a time, in push order; GitHub drops all but the newest pending run,
+# so a burst of pushes yields fewer points rather than conflicting writes.
+concurrency:
+  group: perfgate-history
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    outputs:
+      base: ${{ steps.base.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: head
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Resolve the previous state of main
+        id: base
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          base=$BEFORE
+          if [ -z "$base" ] || [ "$base" = 0000000000000000000000000000000000000000 ]; then
+            # new branch: the parent, or the commit itself (an A/A point) for a root commit
+            base=$(git -C head rev-parse HEAD^ 2> /dev/null || git -C head rev-parse HEAD)
+          fi
+          echo "sha=$base" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.base.outputs.sha }}
+          path: base
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Build and start base (4173) and head (4174)
+        run: |
+          for side in base head; do
+            (cd "$side" && npm ci && npm run build)
+          done
+          (cd base && nohup npx --no-install vite preview --host 127.0.0.1 --port 4173 --strictPort > ../base.log 2>&1 &)
+          (cd head && nohup npx --no-install vite preview --host 127.0.0.1 --port 4174 --strictPort > ../head.log 2>&1 &)
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              curl -fsS "http://127.0.0.1:$port/" > /dev/null && break
+              if [ "$i" = 60 ]; then cat base.log head.log; exit 1; fi
+              sleep 1
+            done
+          done
+      # Uploads artifact perfgate-<attempt>; fails the job on a regression or invalid data.
+      - uses: SlavaDoroshenko/perfgate@<perfgate-commit>
+        with:
+          base-url: http://127.0.0.1:4173/
+          pr-url: http://127.0.0.1:4174/
+          runs: '20'
+          app: home
+
+  history:
+    needs: measure
+    # also record regressions and invalid measurements; skip only when nothing ran
+    if: always() && needs.measure.result != 'skipped' && needs.measure.result != 'cancelled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write # push to the perfgate-history branch
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: perfgate*-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reports
+      - uses: SlavaDoroshenko/perfgate/history@<perfgate-commit>
+        id: history
+        with:
+          reports: ${{ runner.temp }}/reports
+          base-commit: ${{ needs.measure.outputs.base }}
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ steps.history.outputs.dashboard-directory }}
+
+  pages:
+    needs: history
+    if: always() && needs.history.result == 'success'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deploy

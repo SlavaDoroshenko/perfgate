@@ -22,7 +22,8 @@ Results can be published as one sticky pull request comment through a separate
 trusted workflow ([PR comments](docs/pr-comments.md)) or as a GitLab merge request
 note ([GitLab template](docs/gitlab.md)). A [Docker image](docs/docker.md) with
 the pinned Chrome supports offline installation.
-The history dashboard is not built yet.
+A [main-branch history and static dashboard](docs/history.md) keeps one record per
+push on a dedicated branch; its change-point warnings are advisory.
 
 Start with the [user guide](docs/user-guide.md).
 
@@ -44,6 +45,7 @@ immutable historical report, not a count of all subsequently collected data.
 | `analysis/` | Python: noise, minimum detectable effect, detection methods, run order, change points |
 | `action.yml`, `comment/action.yml` | GitHub Actions: measure two URLs; publish the PR comment |
 | `scripts/comment/` | comment renderer and GitHub/GitLab publisher (untrusted-input safe) |
+| `history/action.yml`, `scripts/history/` | main-branch history records and static dashboard |
 | `Dockerfile`, `docker/` | measurement image with pinned Chrome for Testing |
 | `ci/gitlab/` | GitLab CI include template |
 | `examples/` | compare-refs config and external-project GitHub workflows |

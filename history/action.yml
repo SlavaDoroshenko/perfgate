@@ -1,0 +1,105 @@
+name: perfgate history
+description: >
+  Append perfgate comparison results of a main-branch push to a history file on a
+  dedicated branch and regenerate the static dashboard. Change-point warnings are
+  advisory: this action never fails because of them.
+inputs:
+  reports:
+    description: Directory tree containing perfgate report directories (comparison.json, runs.jsonl)
+    required: true
+  commit:
+    description: Measured commit
+    default: ${{ github.sha }}
+  base-commit:
+    description: Commit the measured commit was compared against
+    default: ''
+  branch:
+    description: Branch that stores history.jsonl and index.html; created as an orphan branch if missing
+    default: perfgate-history
+  title:
+    description: Dashboard title
+    default: perfgate history of ${{ github.repository }}
+  page:
+    description: Page label for reports without measurements
+    default: web
+  github-token:
+    description: Token with contents write permission on this repository
+    default: ${{ github.token }}
+  push:
+    description: Commit and push the history branch (false only appends and renders locally)
+    default: 'true'
+outputs:
+  dashboard-directory:
+    description: Directory with index.html and history.jsonl, ready for actions/upload-pages-artifact
+    value: ${{ steps.history.outputs.directory }}
+  warnings:
+    description: Number of advisory change-point warnings
+    value: ${{ steps.history.outputs.warnings }}
+runs:
+  using: composite
+  steps:
+    - uses: astral-sh/setup-uv@v10.1.0
+    - name: Install pinned analysis environment
+      shell: bash
+      working-directory: ${{ github.action_path }}/..
+      run: uv sync --locked --directory analysis
+    - name: Append record and render dashboard
+      id: history
+      shell: bash
+      env:
+        REPORTS: ${{ inputs.reports }}
+        COMMIT: ${{ inputs.commit }}
+        BASE_COMMIT: ${{ inputs.base-commit }}
+        BRANCH: ${{ inputs.branch }}
+        TITLE: ${{ inputs.title }}
+        PAGE: ${{ inputs.page }}
+        TOKEN: ${{ inputs.github-token }}
+        PUSH: ${{ inputs.push }}
+        ROOT: ${{ github.action_path }}/..
+        REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}
+      run: |
+        history() { uv run --locked --project "$ROOT/analysis" python "$ROOT/scripts/history/perfgate_history.py" "$@"; }
+        new="$RUNNER_TEMP/perfgate-history-new.jsonl"
+        dir="$RUNNER_TEMP/perfgate-history"
+        rm -rf "$new" "$dir"
+        history record --reports "$REPORTS" --out "$new" --commit "$COMMIT" --base-commit "$BASE_COMMIT" \
+          --ref "$GITHUB_REF" --run-url "$RUN_URL" --commit-url "$REPO_URL/commit/$COMMIT" --page "$PAGE"
+
+        auth="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$TOKEN" | base64 | tr -d '\n')"
+        echo "::add-mask::$(printf 'x-access-token:%s' "$TOKEN" | base64 | tr -d '\n')"
+        remote() { git -C "$dir" -c http.extraheader="$auth" "$@"; }
+        git init -q "$dir"
+        git -C "$dir" config user.name "github-actions[bot]"
+        git -C "$dir" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # Re-apply the new records on top of the latest branch state until the push wins:
+        # both files are regenerated, so a concurrent update never needs a merge.
+        for attempt in 1 2 3; do
+          if remote ls-remote --exit-code --heads "$REPO_URL.git" "$BRANCH" > /dev/null; then
+            remote fetch -q --depth 1 "$REPO_URL.git" "$BRANCH"
+            git -C "$dir" checkout -q -B "$BRANCH" FETCH_HEAD
+          else
+            git -C "$dir" checkout -q --orphan "$BRANCH"
+            git -C "$dir" rm -rqf --cached --ignore-unmatch .
+            rm -f "$dir/history.jsonl" "$dir/index.html"
+          fi
+          cat "$new" >> "$dir/history.jsonl"
+          rm -f "$RUNNER_TEMP/perfgate-history-summary.md"
+          history dashboard --history "$dir/history.jsonl" --out "$dir/index.html" --title "$TITLE" \
+            --summary "$RUNNER_TEMP/perfgate-history-summary.md" | tee "$RUNNER_TEMP/perfgate-history.log"
+          if [ "$PUSH" != true ]; then break; fi
+          # -f: a global or repository ignore rule for *.jsonl must not drop the record
+          git -C "$dir" add -f history.jsonl index.html
+          git -C "$dir" commit -q -m "perfgate history: ${COMMIT:0:12}"
+          if remote push -q "$REPO_URL.git" "HEAD:refs/heads/$BRANCH"; then break; fi
+          if [ "$attempt" = 3 ]; then echo "::error::could not push $BRANCH"; exit 1; fi
+          git -C "$dir" reset -q --hard
+        done
+        cat "$RUNNER_TEMP/perfgate-history-summary.md" >> "$GITHUB_STEP_SUMMARY"
+        # The site directory holds no .git: it can be uploaded to GitHub Pages as is.
+        site="$RUNNER_TEMP/perfgate-dashboard"
+        rm -rf "$site" && mkdir -p "$site"
+        cp "$dir/index.html" "$dir/history.jsonl" "$site/"
+        echo "directory=$site" >> "$GITHUB_OUTPUT"
+        echo "warnings=$(grep -c '^::warning' "$RUNNER_TEMP/perfgate-history.log" || true)" >> "$GITHUB_OUTPUT"
