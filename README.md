@@ -7,31 +7,61 @@ thresholds either miss real regressions or fire on noise. perfgate measures how 
 they actually are, and compares base and PR builds with statistical tests instead of
 single-run thresholds.
 
-**Status:** measurement bench and research analysis, plus a candidate comparison MVP.
-`perfgate compare` measures two running URLs or analyzes a saved experiment;
-`perfgate compare-refs` builds two Git refs in isolated worktrees and compares them.
-The root composite Action wraps URL comparison, artifacts and a job summary.
-The Action passed hosted A/A and injected-regression checks. Local URL and Git-ref
-checks also passed; see [validation results](docs/validation-2026-10-30.md).
-A [trace-based CLS investigation](docs/cls-diagnosis-2026-10-30.md) documents how
-mixed layout shifts can mask an injected effect in the sample median.
-A [measured rare-stall pilot](docs/tail-browser-results-2026-10-30.md) found a
-limitation: mean TBT increased 22–33% while the median stayed nearly unchanged,
-and the current gate missed those three sparse-regression series.
-Results can be published as one sticky pull request comment through a separate
-trusted workflow ([PR comments](docs/pr-comments.md)) or as a GitLab merge request
-note ([GitLab template](docs/gitlab.md)). A [Docker image](docs/docker.md) with
-the pinned Chrome supports offline installation.
-A [main-branch history and static dashboard](docs/history.md) keeps one record per
-push on a dedicated branch; its change-point warnings are advisory.
+Each check loads the base and the changed version alternately, 20 times each, on the
+same runner in the same job, and flags FCP, LCP, TBT or CLS only when a one-sided
+Mann–Whitney test (Holm-corrected over all pages and metrics) is significant and the
+median moved by more than a small margin (1% FCP/LCP, max(5%, 5 ms) TBT, 0.005 CLS).
 
-Start with the [user guide](docs/user-guide.md).
+## Results
 
-See [comparison usage and policy](docs/compare.md), [roadmap](docs/roadmap.md), and
-[research completion criteria](docs/research-completion.md). The candidate gate is
-not yet prospectively calibrated; no detected regression is not proof of equivalence.
-The dated [18 October research snapshot](docs/research-2026-10-18.md) remains an
-immutable historical report, not a count of all subsequently collected data.
+The policy was frozen on 30 October 2026 together with the hashes of its sources,
+targets and sample sizes, and then evaluated only on data collected afterwards
+([confirmatory report](docs/prospective-confirmatory-2026-11-11.md),
+[before/after](docs/before-after-2026-11-11.md)). On the same 118,120 loads of GitHub
+`ubuntu-24.04` runners:
+
+| | 5% threshold, 1 load | 5% threshold, median of 20 | perfgate |
+|---|---:|---:|---:|
+| False alarms, unchanged four-page check | 77/200 | 17/200 | **0/200** |
+| FCP +5% detected | 60/100 | 70/100 | **100/100** |
+| FCP / LCP +2% detected | 0–1/37 | 0/37 | **37/37** |
+| TBT +10% detected | 96/100 | 99/100 | 98/100 |
+| CLS +10% / +25% detected | 83 / 83 | 91 / 93 | 87 / 85 |
+
+The false-alarm target (Wilson upper bound ≤ 5%) and the detection targets for FCP,
+LCP and TBT (lower bound ≥ 80%) are met. The CLS target is not: the demo page itself
+has unstable CLS on newer runner CPUs; a predeclared follow-up on a CLS-stable page is
+in [extensions-2026-11-17](docs/protocols/extensions-2026-11-17.md). Known blind
+spots: TBT changes below the 5% margin, and rare long tasks that move the mean but
+not the median ([rare-stall pilot](docs/tail-browser-results-2026-10-30.md)).
+Change-point detection on the history of `main` is several times less sensitive on
+shared runners and stays advisory ([history-cpd.md](docs/history-cpd.md)).
+
+On a real application (twelve consecutive commits of Phanpy, each measured twice),
+two FCP regressions of 2.5–3.3% were found in both repetitions; a 5% threshold sees
+neither ([external pilot](docs/external-pilot-2026-11-06.md)).
+
+A check costs about 13 min of runner time per page with 20 loads, or 7 min with
+the secondary 10-load setting ([machine time](docs/machine-time-2026-11-17.md)).
+
+## What you get
+
+- `perfgate compare` (two running URLs) and `perfgate compare-refs` (builds two Git
+  refs in isolated worktrees): JSON and Markdown reports, exit code = verdict.
+- A GitHub Action ([action.yml](action.yml)) and a sticky pull request comment from a
+  separate trusted workflow ([PR comments](docs/pr-comments.md)), including which
+  built assets changed size.
+- A GitLab CI template with a merge request note ([GitLab](docs/gitlab.md)).
+- A Docker image with the pinned Chrome, installable offline ([Docker](docs/docker.md)).
+- A main-branch history on a dedicated branch with a static dashboard and advisory
+  change-point warnings ([history](docs/history.md)).
+
+Start with the [user guide](docs/user-guide.md). Statistical policy:
+[compare.md](docs/compare.md) (frozen text of the evaluated candidate). No detected
+regression is not proof of equivalence.
+
+Research documents: [roadmap](docs/roadmap.md), [completion criteria](docs/research-completion.md),
+[18 October snapshot](docs/research-2026-10-18.md) (immutable historical report).
 
 ## Layout
 
