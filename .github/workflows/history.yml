@@ -1,0 +1,108 @@
+# perfgate's own main-branch history (examples/github/perfgate-history.yml applied to this
+# repository): the heavy demo page of the pushed commit against the previous state of
+# main, one history point per run, dashboard on GitHub Pages. Runs when the demo app
+# changes, or by hand (then the base is the parent commit).
+name: history
+on:
+  push:
+    branches: [main]
+    paths: ['apps/demo-spa/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: perfgate-history
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    outputs:
+      base: ${{ steps.base.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: head
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Resolve the previous state of main
+        id: base
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          base=$BEFORE
+          if [ -z "$base" ] || [ "$base" = 0000000000000000000000000000000000000000 ]; then
+            base=$(git -C head rev-parse HEAD^ 2> /dev/null || git -C head rev-parse HEAD)
+          fi
+          echo "sha=$base" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.base.outputs.sha }}
+          path: base
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: head/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Build and serve base (4173) and head (4174)
+        run: |
+          for side in base head; do
+            (cd "$side" && pnpm install --frozen-lockfile && pnpm --filter demo-spa build)
+          done
+          nohup pnpm --dir head exec sirv "$PWD/base/apps/demo-spa/dist" --host 127.0.0.1 --port 4173 > base.log 2>&1 &
+          nohup pnpm --dir head exec sirv "$PWD/head/apps/demo-spa/dist" --host 127.0.0.1 --port 4174 > head.log 2>&1 &
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              curl -fsS "http://127.0.0.1:$port/heavy.html" > /dev/null && break
+              if [ "$i" = 60 ]; then cat base.log head.log; exit 1; fi
+              sleep 1
+            done
+          done
+      - uses: ./head
+        with:
+          base-url: http://127.0.0.1:4173/heavy.html
+          pr-url: http://127.0.0.1:4174/heavy.html
+          runs: '20'
+          app: demo-heavy
+          base-dist: ${{ github.workspace }}/base/apps/demo-spa/dist
+          pr-dist: ${{ github.workspace }}/head/apps/demo-spa/dist
+
+  history:
+    needs: measure
+    if: always() && needs.measure.result != 'skipped' && needs.measure.result != 'cancelled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: perfgate*-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reports
+      - uses: ./history
+        id: history
+        with:
+          reports: ${{ runner.temp }}/reports
+          base-commit: ${{ needs.measure.outputs.base }}
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ${{ steps.history.outputs.dashboard-directory }}
+
+  pages:
+    needs: history
+    if: always() && needs.history.result == 'success'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deploy
