@@ -148,6 +148,10 @@ class Run:
     def mr_pipeline(self, name, iid, sha, expect_exit, headline, bot_id=None, extra=()):
         """Waits for the merge request pipeline of sha and checks the two jobs and the note."""
         pid = self.gl.pipeline_for(sha, 'merge_request_event')
+        time.sleep(20)
+        same = [p['id'] for p in self.gl.call('GET', self.gl.p(f'/pipelines?sha={sha}&per_page=20')) if p['source'] == 'merge_request_event']
+        self.check(len(same) == 1, f'{name}: one merge request pipeline for {sha[:7]} (found {same})')
+        pid = max(same)
         pipeline = self.gl.wait_pipeline(pid)
         jobs = self.gl.jobs(pid)
         perfgate, comment = jobs.get('perfgate'), jobs.get('perfgate-comment')
@@ -176,7 +180,7 @@ class Run:
                        f'{name}: note links to the job and the artifact')
             self.check(f'commit `{sha[:7]}`' in note['body'], f'{name}: note names commit {sha[:7]}')
         self.results.append({'scenario': name, 'mr': iid, 'pipeline': pid, 'pipeline_status': pipeline['status'],
-                             'perfgate_job': perfgate['id'], 'perfgate_status': perfgate['status'],
+                             'mr_pipelines_for_sha': len(same), 'perfgate_job': perfgate['id'], 'perfgate_status': perfgate['status'],
                              'perfgate_seconds': perfgate.get('duration'), 'comment_seconds': comment.get('duration'),
                              'note_id': note and note['id'], 'note_updated_at': note and note['updated_at'],
                              'comment_log': [l.split(' ', 2)[-1] for l in clog.splitlines() if ' note ' in l][-1:]})
@@ -216,6 +220,9 @@ def main():
     main_sha = gl.commit('main', 'Demo application with perfgate', files)
 
     def mr(source, title):
+        # Let GitLab finish processing the branch push first; otherwise the push
+        # refresh can start a second merge request pipeline for the same commit.
+        time.sleep(30)
         return gl.call('POST', gl.p('/merge_requests'), {'source_branch': source, 'target_branch': 'main', 'title': title})['iid']
 
     # 1. Regression merge request.
