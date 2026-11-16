@@ -7,6 +7,9 @@ on:
       - 'analysis/**'
       - 'schema/**'
       - '.github/workflows/compare-smoke.yml'
+      - 'apps/demo-spa/**'
+      - 'scripts/assets/**'
+      - 'scripts/comment/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -57,3 +60,55 @@ jobs:
           EXPECTED: ${{ matrix.expected }}
         run: |
           test "$ACTUAL" = "$EXPECTED"
+
+  # Base and PR built separately, with their build outputs passed to the action:
+  # exercises the built-asset section of the comment on a real pull request.
+  assets:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Build base and PR
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          pnpm install --frozen-lockfile
+          git worktree add "$RUNNER_TEMP/base" "$BASE_SHA"
+          (cd "$RUNNER_TEMP/base" && pnpm install --frozen-lockfile && pnpm --filter demo-spa build)
+          pnpm --filter demo-spa build
+          cp -r "$RUNNER_TEMP/base/apps/demo-spa/dist" "$RUNNER_TEMP/base-dist"
+          cp -r apps/demo-spa/dist "$RUNNER_TEMP/pr-dist"
+          echo "BASE_DIST=$RUNNER_TEMP/base-dist" >> "$GITHUB_ENV"
+          echo "PR_DIST=$RUNNER_TEMP/pr-dist" >> "$GITHUB_ENV"
+      - name: Serve both builds
+        run: |
+          nohup pnpm exec sirv "$BASE_DIST" --host 127.0.0.1 --port 4173 > base.log 2>&1 &
+          nohup pnpm exec sirv "$PR_DIST" --host 127.0.0.1 --port 4174 > pr.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:4173/heavy.html > /dev/null && curl -fsS http://127.0.0.1:4174/heavy.html > /dev/null && exit 0
+            sleep 1
+          done
+          cat base.log pr.log
+          exit 1
+      - uses: ./
+        id: measurement
+        continue-on-error: true
+        with:
+          base-url: http://127.0.0.1:4173/heavy.html
+          pr-url: http://127.0.0.1:4174/heavy.html
+          runs: '10'
+          app: demo-heavy
+          artifact-name: compare-smoke-assets
+          base-dist: ${{ env.BASE_DIST }}
+          pr-dist: ${{ env.PR_DIST }}
+      - name: Require a report with assets.json
+        env:
+          DIR: ${{ steps.measurement.outputs.report-directory }}
+        run: test -f "$DIR/comparison.json" && test -f "$DIR/assets.json"
