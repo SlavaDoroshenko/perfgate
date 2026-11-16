@@ -96,7 +96,7 @@ jobs:
         with:
           reports: ${{ runner.temp }}/reports
           base-commit: ${{ needs.measure.outputs.base }}
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: ${{ steps.history.outputs.dashboard-directory }}
 
@@ -111,5 +111,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v5
         id: deploy
