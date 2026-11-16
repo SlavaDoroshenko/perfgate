@@ -1,0 +1,9 @@
+{
+  "title": "perfgate: statistical detection of frontend performance regressions in CI",
+  "upload_type": "software",
+  "creators": [{"name": "Doroshenko, Vyacheslav", "affiliation": "MIREA – Russian Technological University"}],
+  "description": "perfgate compares the lab page-load performance (FCP, LCP, TBT, CLS) of two versions of a web application in the same CI job, with interleaved loads and a one-sided Mann–Whitney test with Holm correction and minimum effect margins. The release contains the tool (GitHub Action, GitLab template, Docker image, PR/MR comment, history dashboard), the predeclared experiment protocols and the analysis code. Raw measurements are archived separately from the repository's data branch.",
+  "license": "MIT",
+  "keywords": ["web performance", "performance regression", "continuous integration", "Lighthouse", "Mann-Whitney test", "change point detection"],
+  "language": "eng"
+}

@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: If you use perfgate or its data, please cite it as below.
+title: "perfgate: statistical detection of frontend performance regressions in CI"
+type: software
+authors:
+  - family-names: Doroshenko
+    given-names: Vyacheslav
+    affiliation: MIREA – Russian Technological University
+repository-code: https://github.com/SlavaDoroshenko/perfgate
+license: MIT
+version: 0.1.0
+keywords:
+  - web performance
+  - performance regression
+  - continuous integration
+  - Lighthouse
+  - Mann–Whitney test
+  - change point detection
+abstract: >
+  perfgate compares the lab page-load performance (FCP, LCP, TBT, CLS) of two
+  versions of a web application in the same CI job, with interleaved loads and a
+  one-sided Mann–Whitney test with Holm correction and minimum effect margins. The
+  repository contains the tool (GitHub Action, GitLab template, Docker image, PR/MR
+  comment, history dashboard), the experiment protocols and the analysis code; the
+  raw measurements are on the data branch.
