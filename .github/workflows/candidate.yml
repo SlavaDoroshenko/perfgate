@@ -7,10 +7,9 @@
 name: candidate
 
 on:
+  # the fixed samples were reached on 11 November (docs/prospective-confirmatory-2026-11-11.md);
+  # the restart schedule is removed, manual runs only
   workflow_dispatch:
-  schedule:
-    # every three hours, between the noise (x:17) and regressions (x:47) runs
-    - cron: "29 */3 * * *"
 
 permissions:
   contents: write

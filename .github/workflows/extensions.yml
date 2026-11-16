@@ -1,0 +1,209 @@
+# Three predeclared follow-up cohorts, see docs/protocols/extensions-2026-11-17.md:
+#   cls  - the frozen candidate on the reserved-layout heavy page (CLS stable by design)
+#   tail - rare-stall jobs for the advisory TBT tail signal (frozen pilot collector and seeds)
+#   load - the frozen candidate with seeded on/off CPU load beside the browser,
+#          interleaved vs sequential (a shared single CI server)
+# Measurement code is checked out at the frozen SOURCE_SHA; only the load generator comes
+# from this workflow's commit. Each run dispatches the next until 100 complete runs exist.
+name: extensions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: extensions
+  cancel-in-progress: false
+
+env:
+  CHROME_VERSION: "153.0.8010.47"
+  RUNS: "20"
+  SOURCE_SHA: 30ca8339a7c1767ebe062378c893ac1d2adf93ae
+  FREEZE: docs/protocols/browser-candidate-2026-10-30.json
+  TARGET_RUNS: "100"
+  JOBS_PER_RUN: "10"
+
+jobs:
+  collect:
+    name: ${{ matrix.job.key }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { key: cls-aa-reserved, study: cls, label: aa, page: heavy-reserved.html, app: demo-heavy-reserved, mode: abab }
+          - { key: cls-ls10-reserved, study: cls, label: injected, page: heavy-reserved.html, app: demo-heavy-reserved, mode: abab, inject: "layout-shift:70.4" }
+          - { key: cls-ls25-reserved, study: cls, label: injected, page: heavy-reserved.html, app: demo-heavy-reserved, mode: abab, inject: "layout-shift:80" }
+          - { key: tail-rare, study: tail, condition: rare }
+          - { key: tail-aa, study: tail, condition: aa }
+          - { key: load-aa-abab, study: load, label: aa, page: heavy.html, app: demo-heavy, mode: abab, seed: 1 }
+          - { key: load-aa-sequential, study: load, label: aa, page: heavy.html, app: demo-heavy, mode: sequential, seed: 2 }
+          - { key: load-sd5-abab, study: load, label: injected, page: heavy.html, app: demo-heavy, mode: abab, inject: "script-delay:90", seed: 3 }
+          - { key: load-sd5-sequential, study: load, label: injected, page: heavy.html, app: demo-heavy, mode: sequential, inject: "script-delay:90", seed: 4 }
+          - { key: load-lt10-abab, study: load, label: injected, page: heavy.html, app: demo-heavy, mode: abab, inject: "long-task:99", seed: 5 }
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+
+      - uses: actions/checkout@v7
+        if: matrix.job.study == 'load'
+        with:
+          path: ext
+          sparse-checkout: scripts/background-load.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Check frozen sources
+        run: |
+          python3 - <<'EOF'
+          import hashlib, json, os
+          for freeze in (os.environ["FREEZE"], "docs/protocols/tail-browser-pilot-2026-10-30.json"):
+              digests = json.load(open(freeze))["source_sha256"]
+              bad = [n for n, d in digests.items() if hashlib.sha256(open(n, "rb").read()).hexdigest() != d]
+              if bad:
+                  raise SystemExit(f"{freeze}: frozen sources changed: {bad}")
+              print(f"{freeze}: {len(digests)} frozen sources match")
+          EOF
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+          install-dependencies: true
+
+      - name: Build and serve the page
+        run: |
+          pnpm --filter demo-spa build
+          if [ "${{ matrix.job.study }}" = cls ]; then node scripts/prepare-cls-control.mjs; fi
+          if [ "${{ matrix.job.study }}" = tail ]; then
+            pnpm --filter @perfgate/collector build
+            node scripts/prepare-tail-fixture.mjs
+          fi
+          nohup pnpm --filter demo-spa preview > server.log 2>&1 &
+          page="${{ matrix.job.page }}"
+          for i in $(seq 1 60); do
+            curl -sf "http://127.0.0.1:4173/${page:-tail-heavy.html}" > /dev/null && exit 0
+            sleep 1
+          done
+          cat server.log
+          exit 1
+
+      - name: Start background load
+        if: matrix.job.study == 'load'
+        run: |
+          mkdir -p results
+          seed=$(( ${{ github.run_id }} % 1000000 * 10 + ${{ matrix.job.seed }} ))
+          nohup node ext/scripts/background-load.mjs --seed "$seed" --workers 2 --min-s 5 --max-s 60 \
+            --log "results/load.log.jsonl" > load.out 2>&1 &
+          echo $! > load.pid
+
+      - name: Collect with the frozen collector
+        if: matrix.job.study != 'tail'
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          mkdir -p results
+          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.job.key }}-${{ matrix.job.mode }}-devtools"
+          base="http://127.0.0.1:4173/${{ matrix.job.page }}"
+          pr="$base"
+          if [ -n "${{ matrix.job.inject }}" ]; then pr="$base?inject=${{ matrix.job.inject }}"; fi
+          app_build=$(git ls-tree HEAD -- apps/demo-spa | awk '{print substr($3,1,12)}')
+          label=()
+          if [ "${{ matrix.job.label }}" = injected ]; then label=(--label injected); fi
+          pnpm perfgate collect \
+            --url "$base" --pr-url "$pr" --runs "$RUNS" \
+            --mode "${{ matrix.job.mode }}" --throttling devtools \
+            --app "${{ matrix.job.app }}" "${label[@]}" --app-build "$app_build" \
+            --experiment "$id" --out "results/$id.jsonl"
+          if [ -f results/load.log.jsonl ]; then mv results/load.log.jsonl "results/$id.load.log"; fi
+
+      - name: Collect rare-stall series with the frozen pilot collector
+        if: matrix.job.study == 'tail'
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: |
+          # the two predeclared pilot seeds, alternating by run number
+          seeds=(2026103001 2026103002)
+          seed=${seeds[$(( ${{ github.run_number }} % 2 ))]}
+          mkdir -p results
+          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.job.key }}-$seed-abab-devtools"
+          node scripts/collect-tail.mjs --url http://127.0.0.1:4173/tail-heavy.html \
+            --out results/job --condition "${{ matrix.job.condition }}" --seed "$seed" --experiment "$id"
+          # stored: one series file plus small manifest/evidence; traces stay in the artifact
+          cp results/job/runs.jsonl "results/$id.jsonl"
+          cp results/job/manifest.json "results/$id.manifest.json"
+          tar -czf "results/$id.evidence.tar.gz" -C results/job/evidence $(cd results/job/evidence && ls *.json)
+
+      - name: Stop background load
+        if: always() && matrix.job.study == 'load'
+        run: |
+          if [ -f load.pid ]; then kill "$(cat load.pid)" || true; fi
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ext-${{ matrix.job.key }}
+          path: results/
+          retention-days: 7
+          if-no-files-found: warn
+
+  store:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: ext-*
+          path: incoming
+
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          files=(incoming/*/*.jsonl incoming/*/*.load.log incoming/*/*.manifest.json incoming/*/*.evidence.tar.gz)
+          if [ ${#files[@]} -eq 0 ]; then echo "no data"; exit 0; fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch data
+
+          dest="prospective/extensions-2026-11-17/$(date -u +%F)"
+          mkdir -p "$dest"
+          cp "${files[@]}" "$dest/"
+          git add -f prospective
+          git commit -m "data: extensions run ${{ github.run_id }}"
+
+          for i in 1 2 3; do
+            git push origin data && break
+            git pull --rebase origin data
+            [ "$i" = 3 ] && exit 1
+          done
+
+      - name: Dispatch the next run until the fixed target
+        if: needs.collect.result == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          done_runs=$(ls prospective/extensions-2026-11-17/*/*.jsonl 2>/dev/null \
+            | sed 's|.*/||' | cut -d- -f1 | sort | uniq -c | awk -v n="$JOBS_PER_RUN" '$1 == n' | wc -l)
+          echo "complete extension runs: $done_runs"
+          if [ "$done_runs" -lt "$TARGET_RUNS" ]; then
+            gh workflow run extensions.yml --repo "${{ github.repository }}" --ref main
+          fi

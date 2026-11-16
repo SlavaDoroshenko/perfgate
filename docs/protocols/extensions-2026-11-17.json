@@ -1,0 +1,39 @@
+{
+  "protocol": "extensions-2026-11-17",
+  "recorded_utc": "2026-11-16T21:33:12+00:00",
+  "gate_policy": "browser-candidate-2026-10-30",
+  "measurement_source_sha": "30ca8339a7c1767ebe062378c893ac1d2adf93ae",
+  "target_complete_runs": 100,
+  "jobs_per_run": 10,
+  "sample": "first 100 valid jobs per job type in acquisition order",
+  "cls": {
+    "workload": "demo-heavy-reserved",
+    "base_banner_px": 64,
+    "cases_px": {
+      "ls10": 70.4,
+      "ls25": 80
+    }
+  },
+  "tail": {
+    "rule": "one-sided Welch on TBT, Holm over pages, p<0.05 and mean rise > max(10%, 20 ms)",
+    "seeds": [
+      2026103001,
+      2026103002
+    ],
+    "stall_ms": 800,
+    "stalled_loads": 3
+  },
+  "load": {
+    "workers": 2,
+    "period_s": [
+      5,
+      60
+    ]
+  },
+  "source_sha256": {
+    ".github/workflows/extensions.yml": "dcb00a8de621fa2281831623a9b61afbda885ae4d479e96ed9c10181ba9590fc",
+    "scripts/background-load.mjs": "26f547a0d2bec048af4f6513782e913eec7cecb62661eb676b580ccc7710aa99",
+    "scripts/tail_signal.py": "978ce09686ac2b8cedb55d9086a3fd6a3052bce19c653eae473acda3cbe4982b",
+    "docs/protocols/extensions-2026-11-17.md": "046a1ca51ace71cd7f5e73f331495e5bf3bc5beecb0587648c73edfa95a06708"
+  }
+}
