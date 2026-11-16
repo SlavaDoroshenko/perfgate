@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>perfgate history (sample: scheduled A/A jobs)</title><style>
+:root { --bg: #ffffff; --fg: #1a1a1a; --muted: #5f5f5f; --grid: #e2e2e2; --line: #9a9a9a; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #161616; --fg: #e8e8e8; --muted: #a8a8a8; --grid: #333333; --line: #777777; }
+}
+body { background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, sans-serif; margin: 0 auto;
+       max-width: 960px; padding: 16px; }
+h1 { font-size: 20px; } h2 { font-size: 17px; margin-top: 32px; } h3 { font-size: 14px; margin: 18px 0 4px; }
+p, li { color: var(--fg); } .muted { color: var(--muted); }
+svg { width: 100%; height: auto; display: block; }
+svg text { fill: var(--muted); font: 11px system-ui, sans-serif; }
+.grid { stroke: var(--grid); } .series { stroke: var(--line); fill: none; }
+.mark { stroke: var(--fg); stroke-width: 1; } .cp { stroke: var(--fg); stroke-dasharray: 5 3; }
+.browser { stroke: var(--muted); stroke-dasharray: 1 3; }
+.table { overflow-x: auto; }
+table { border-collapse: collapse; font-size: 13px; white-space: nowrap; }
+th, td { border-bottom: 1px solid var(--grid); padding: 3px 8px; text-align: left; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+a { color: inherit; }
+.swatch { display: inline-block; width: 10px; height: 10px; margin-right: 4px; vertical-align: baseline; }
+.legend > span { white-space: nowrap; margin-right: 12px; }
+</style></head><body>
+<h1>perfgate history (sample: scheduled A/A jobs)</h1>
+<p class="muted">60 measurements of 2 page(s), 2026-10-30 to 2026-11-11.</p>
+<p>Each point is the median of the measured commit's loads in one perfgate comparison against the previous state of the branch. A triangle marks a per-push regression verdict for that metric, a cross an invalid or failed measurement. Colours are runner CPU models; dotted lines mark a Chrome version change. Change-point warnings are advisory: E-Divisive on the latest 20 points with the benchmarkIndex adjustment learned from earlier points (docs/history-cpd.md). They do not fail any job; in the research data they also fired without a change in up to 17% of windows on some series.</p>
+<p class="legend">CPU models: <span><span class="swatch" style="background:#0072B2"></span>AMD EPYC 7763 64-Core Processor</span> <span><span class="swatch" style="background:#E69F00"></span>AMD EPYC 9V74 80-Core Processor</span> <span><span class="swatch" style="background:#009E73"></span>AMD EPYC 9V45 96-Core Processor</span> <span><span class="swatch" style="background:#CC79A7"></span>INTEL(R) XEON(R) PLATINUM 8573C</span> <span><span class="swatch" style="background:#56B4E9"></span>Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz</span></p>
+<h2 id="demo-heavy">demo-heavy</h2>
+<h3>FCP</h3><svg viewBox="0 0 900 210" role="img" aria-label="FCP history"><line class="grid" x1="64" x2="888" y1="154.1" y2="154.1"/><text x="58" y="158.1" text-anchor="end">1700</text><line class="grid" x1="64" x2="888" y1="103.5" y2="103.5"/><text x="58" y="107.5" text-anchor="end">1750</text><line class="grid" x1="64" x2="888" y1="52.8" y2="52.8"/><text x="58" y="56.8" text-anchor="end">1800</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,57.6 105.2,42.3 132.7,119.4 160.1,159.4 187.6,101.2 215.1,54.1 242.5,150.3 270.0,146.0 297.5,53.3 324.9,32.9 352.4,101.9 379.9,65.1 407.3,48.4 434.8,103.4 462.3,123.8 489.7,148.2 517.2,124.5 544.7,146.5 572.1,77.3 599.6,54.3 627.1,40.9 654.5,151.4 682.0,169.1 709.5,51.7 736.9,168.2 764.4,79.2 791.9,136.7 819.3,108.8 846.8,37.9 874.3,70.4"/><circle cx="77.7" cy="57.6" r="3.2" fill="#0072B2"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 1795 ms, change -0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="42.3" r="3.2" fill="#0072B2"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 1810 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="119.4" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 1734 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="159.4" r="3.2" fill="#009E73"><title>2026-10-31T06:58 1abe844
+no regression detected
+median 1695 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="101.2" r="3.2" fill="#E69F00"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 1752 ms, change +0.3% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="54.1" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 1799 ms, change +0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="150.3" r="3.2" fill="#009E73"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 1704 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="146.0" r="3.2" fill="#009E73"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 1708 ms, change -0.3% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="53.3" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 1800 ms, change -0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="32.9" r="3.2" fill="#0072B2"><title>2026-11-02T07:40 1abe844
+no regression detected
+median 1820 ms, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="101.9" r="3.2" fill="#E69F00"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 1752 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="65.1" r="3.2" fill="#0072B2"><title>2026-11-03T07:55 1abe844
+no regression detected
+median 1788 ms, change -0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="48.4" r="3.2" fill="#E69F00"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 1804 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="103.4" r="3.2" fill="#E69F00"><title>2026-11-04T07:29 1abe844
+no regression detected
+median 1750 ms, change +0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="123.8" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 1730 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="148.2" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 1706 ms, change +0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="124.5" r="3.2" fill="#E69F00"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 1729 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="146.5" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 1708 ms, change -0.4% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="77.3" r="3.2" fill="#CC79A7"><title>2026-11-06T19:58 f58a3be
+no regression detected
+median 1776 ms, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="54.3" r="3.2" fill="#0072B2"><title>2026-11-07T07:06 f58a3be
+no regression detected
+median 1799 ms, change -0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="40.9" r="3.2" fill="#E69F00"><title>2026-11-07T13:59 f58a3be
+no regression detected
+median 1812 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="151.4" r="3.2" fill="#009E73"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 1703 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 1685 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="51.7" r="3.2" fill="#0072B2"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 1801 ms, change +0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="168.2" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 1686 ms, change +0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="79.2" r="3.2" fill="#CC79A7"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 1774 ms, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="136.7" r="3.2" fill="#009E73"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 1717 ms, change -0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="108.8" r="3.2" fill="#E69F00"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 1745 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="37.9" r="3.2" fill="#E69F00"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 1815 ms, change +0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="70.4" r="3.2" fill="#0072B2"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 1783 ms, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 0.720 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>LCP</h3><svg viewBox="0 0 900 210" role="img" aria-label="LCP history"><line class="grid" x1="64" x2="888" y1="175.1" y2="175.1"/><text x="58" y="179.1" text-anchor="end">2200</text><line class="grid" x1="64" x2="888" y1="126.8" y2="126.8"/><text x="58" y="130.8" text-anchor="end">2300</text><line class="grid" x1="64" x2="888" y1="78.5" y2="78.5"/><text x="58" y="82.5" text-anchor="end">2400</text><line class="grid" x1="64" x2="888" y1="30.2" y2="30.2"/><text x="58" y="34.2" text-anchor="end">2500</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,35.0 105.2,114.6 132.7,117.6 160.1,164.2 187.6,111.2 215.1,34.3 242.5,160.5 270.0,160.5 297.5,32.9 324.9,113.7 352.4,109.1 379.9,37.1 407.3,115.6 434.8,107.8 462.3,120.0 489.7,157.8 517.2,121.3 544.7,159.2 572.1,36.8 599.6,33.8 627.1,109.1 654.5,160.9 682.0,169.1 709.5,36.4 736.9,168.8 764.4,39.9 791.9,153.4 819.3,109.8 846.8,109.1 874.3,40.8"/><circle cx="77.7" cy="35.0" r="3.2" fill="#0072B2"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 2490 ms, change -0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="114.6" r="3.2" fill="#0072B2"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 2325 ms, change -4.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="117.6" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 2319 ms, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="164.2" r="3.2" fill="#009E73"><title>2026-10-31T06:58 1abe844
+no regression detected
+median 2223 ms, change +0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="111.2" r="3.2" fill="#E69F00"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 2332 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="34.3" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 2492 ms, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="160.5" r="3.2" fill="#009E73"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 2230 ms, change -0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="160.5" r="3.2" fill="#009E73"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 2230 ms, change -0.5% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="32.9" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 2495 ms, change +0.4% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="113.7" r="3.2" fill="#0072B2"><title>2026-11-02T07:40 1abe844
+no regression detected
+median 2327 ms, change +0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="109.1" r="3.2" fill="#E69F00"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 2337 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="37.1" r="3.2" fill="#0072B2"><title>2026-11-03T07:55 1abe844
+no regression detected
+median 2486 ms, change -0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="115.6" r="3.2" fill="#E69F00"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 2323 ms, change -0.3% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="107.8" r="3.2" fill="#E69F00"><title>2026-11-04T07:29 1abe844
+no regression detected
+median 2339 ms, change +0.5% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="120.0" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 2314 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="157.8" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 2236 ms, change +0.4% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="121.3" r="3.2" fill="#E69F00"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 2311 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="159.2" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 2233 ms, change -0.4% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="36.8" r="3.2" fill="#CC79A7"><title>2026-11-06T19:58 f58a3be
+no regression detected
+median 2486 ms, change +0.1% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="33.8" r="3.2" fill="#0072B2"><title>2026-11-07T07:06 f58a3be
+no regression detected
+median 2493 ms, change -0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="109.1" r="3.2" fill="#E69F00"><title>2026-11-07T13:59 f58a3be
+no regression detected
+median 2337 ms, change +0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="160.9" r="3.2" fill="#009E73"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 2229 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 2212 ms, change +0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="36.4" r="3.2" fill="#0072B2"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 2487 ms, change -0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="168.8" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 2213 ms, change +0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="39.9" r="3.2" fill="#CC79A7"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 2480 ms, change -0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="153.4" r="3.2" fill="#009E73"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 2245 ms, change -0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="109.8" r="3.2" fill="#E69F00"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 2335 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="109.1" r="3.2" fill="#E69F00"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 2337 ms, change -0.3% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="40.8" r="3.2" fill="#0072B2"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 2478 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 0.810 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>TBT</h3><svg viewBox="0 0 900 210" role="img" aria-label="TBT history"><line class="grid" x1="64" x2="888" y1="164.0" y2="164.0"/><text x="58" y="168.0" text-anchor="end">300</text><line class="grid" x1="64" x2="888" y1="109.8" y2="109.8"/><text x="58" y="113.8" text-anchor="end">400</text><line class="grid" x1="64" x2="888" y1="55.7" y2="55.7"/><text x="58" y="59.7" text-anchor="end">500</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,62.5 105.2,59.5 132.7,122.3 160.1,155.6 187.6,121.9 215.1,61.2 242.5,157.1 270.0,156.8 297.5,60.6 324.9,58.9 352.4,121.9 379.9,62.1 407.3,35.1 434.8,120.6 462.3,123.0 489.7,155.5 517.2,122.7 544.7,152.0 572.1,51.2 599.6,56.0 627.1,32.9 654.5,167.7 682.0,169.1 709.5,59.4 736.9,169.1 764.4,57.7 791.9,152.8 819.3,122.6 846.8,34.2 874.3,65.5"/><circle cx="77.7" cy="62.5" r="3.2" fill="#0072B2"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 487 ms, change -0.5% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="59.5" r="3.2" fill="#0072B2"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 493 ms, change -0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="122.3" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 377 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="155.6" r="3.2" fill="#009E73"><title>2026-10-31T06:58 1abe844
+no regression detected
+median 315 ms, change +2.4% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="121.9" r="3.2" fill="#E69F00"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 378 ms, change +0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="61.2" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 490 ms, change -0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="157.1" r="3.2" fill="#009E73"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 313 ms, change -1.9% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="156.8" r="3.2" fill="#009E73"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 313 ms, change -2.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="60.6" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 491 ms, change -0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="58.9" r="3.2" fill="#0072B2"><title>2026-11-02T07:40 1abe844
+no regression detected
+median 494 ms, change -0.8% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="121.9" r="3.2" fill="#E69F00"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 378 ms, change -0.4% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="62.1" r="3.2" fill="#0072B2"><title>2026-11-03T07:55 1abe844
+no regression detected
+median 488 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="35.1" r="3.2" fill="#E69F00"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 538 ms, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="120.6" r="3.2" fill="#E69F00"><title>2026-11-04T07:29 1abe844
+no regression detected
+median 380 ms, change +0.5% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="123.0" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 376 ms, change -0.7% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="155.5" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 316 ms, change +3.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="122.7" r="3.2" fill="#E69F00"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 376 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="152.0" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 322 ms, change -0.9% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="51.2" r="3.2" fill="#CC79A7"><title>2026-11-06T19:58 f58a3be
+no regression detected
+median 508 ms, change +0.9% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="56.0" r="3.2" fill="#0072B2"><title>2026-11-07T07:06 f58a3be
+no regression detected
+median 499 ms, change +0.5% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="32.9" r="3.2" fill="#E69F00"><title>2026-11-07T13:59 f58a3be
+no regression detected
+median 542 ms, change +0.9% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="167.7" r="3.2" fill="#009E73"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 293 ms, change -1.4% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 290 ms, change +0.3% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="59.4" r="3.2" fill="#0072B2"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 493 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 291 ms, change +0.5% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="57.7" r="3.2" fill="#CC79A7"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 496 ms, change -0.7% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="152.8" r="3.2" fill="#009E73"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 321 ms, change -1.5% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="122.6" r="3.2" fill="#E69F00"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 376 ms, change -0.3% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="34.2" r="3.2" fill="#E69F00"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 540 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="65.5" r="3.2" fill="#0072B2"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 482 ms, change -1.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 0.755 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>CLS</h3><svg viewBox="0 0 900 210" role="img" aria-label="CLS history"><line class="grid" x1="64" x2="888" y1="177.0" y2="177.0"/><text x="58" y="181.0" text-anchor="end">0.15</text><line class="grid" x1="64" x2="888" y1="88.3" y2="88.3"/><text x="58" y="92.3" text-anchor="end">0.2</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,169.1 105.2,169.1 132.7,169.1 160.1,169.1 187.6,169.1 215.1,169.1 242.5,169.1 270.0,169.1 297.5,169.1 324.9,169.1 352.4,32.9 379.9,169.1 407.3,169.1 434.8,169.1 462.3,32.9 489.7,169.1 517.2,169.1 544.7,169.1 572.1,169.1 599.6,169.1 627.1,169.1 654.5,169.1 682.0,169.1 709.5,169.1 736.9,169.1 764.4,169.1 791.9,169.1 819.3,169.1 846.8,169.1 874.3,169.1"/><circle cx="77.7" cy="169.1" r="3.2" fill="#0072B2"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="169.1" r="3.2" fill="#0072B2"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="169.1" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="169.1" r="3.2" fill="#009E73"><title>2026-10-31T06:58 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="169.1" r="3.2" fill="#E69F00"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="169.1" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="169.1" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="169.1" r="3.2" fill="#0072B2"><title>2026-11-02T07:40 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="32.9" r="3.2" fill="#E69F00"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 0.231, change +49.7% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="169.1" r="3.2" fill="#0072B2"><title>2026-11-03T07:55 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="169.1" r="3.2" fill="#E69F00"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="169.1" r="3.2" fill="#E69F00"><title>2026-11-04T07:29 1abe844
+no regression detected
+median 0.154, change -33.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="32.9" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 0.231, change +19.9% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="169.1" r="3.2" fill="#E69F00"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="169.1" r="3.2" fill="#CC79A7"><title>2026-11-06T19:58 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="169.1" r="3.2" fill="#0072B2"><title>2026-11-07T07:06 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="169.1" r="3.2" fill="#E69F00"><title>2026-11-07T13:59 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="169.1" r="3.2" fill="#0072B2"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="169.1" r="3.2" fill="#CC79A7"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="169.1" r="3.2" fill="#E69F00"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="169.1" r="3.2" fill="#E69F00"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="169.1" r="3.2" fill="#0072B2"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 0.154, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 0.090 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>Latest measurements</h3><div class="table"><table><thead><tr><th>Measured (UTC)</th><th>Commit</th><th>Verdict</th><th>FCP</th><th>LCP</th><th>TBT</th><th>CLS</th><th>CPU</th><th>Chrome</th><th>Run</th></tr></thead><tbody><tr><td>2026-11-11 07:44</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1783 ms, +0.0%</td><td class="num">2478 ms, +0.1%</td><td class="num">482 ms, -1.3%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42981528463">run</a></td></tr><tr><td>2026-11-10 20:28</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1815 ms, +0.2%</td><td class="num">2337 ms, -0.3%</td><td class="num">540 ms, +0.1%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42895334339">run</a></td></tr><tr><td>2026-11-10 08:24</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1745 ms, -0.2%</td><td class="num">2335 ms, +0.1%</td><td class="num">376 ms, -0.3%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42782179421">run</a></td></tr><tr><td>2026-11-09 22:59</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1717 ms, -0.1%</td><td class="num">2245 ms, -0.2%</td><td class="num">321 ms, -1.5%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42716485447">run</a></td></tr><tr><td>2026-11-09 07:56</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1774 ms, +0.0%</td><td class="num">2480 ms, -0.0%</td><td class="num">496 ms, -0.7%</td><td class="num">0.154, +0.0%</td><td>INTEL(R) XEON(R) PLATINUM 8573C</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42582248243">run</a></td></tr><tr><td>2026-11-08 22:52</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1686 ms, +0.2%</td><td class="num">2213 ms, +0.2%</td><td class="num">291 ms, +0.5%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42532285358">run</a></td></tr><tr><td>2026-11-08 14:20</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1801 ms, +0.3%</td><td class="num">2487 ms, -0.3%</td><td class="num">493 ms, +0.1%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42489151845">run</a></td></tr><tr><td>2026-11-08 07:17</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1685 ms, +0.0%</td><td class="num">2212 ms, +0.1%</td><td class="num">290 ms, +0.3%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42458082776">run</a></td></tr><tr><td>2026-11-07 22:43</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1703 ms, +0.0%</td><td class="num">2229 ms, +0.0%</td><td class="num">293 ms, -1.4%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42421822420">run</a></td></tr><tr><td>2026-11-07 13:59</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1812 ms, -0.1%</td><td class="num">2337 ms, +0.2%</td><td class="num">542 ms, +0.9%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42379297268">run</a></td></tr><tr><td>2026-11-07 07:06</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1799 ms, -0.0%</td><td class="num">2493 ms, -0.2%</td><td class="num">499 ms, +0.5%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42349687072">run</a></td></tr><tr><td>2026-11-06 19:58</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1776 ms, +0.0%</td><td class="num">2486 ms, +0.1%</td><td class="num">508 ms, +0.9%</td><td class="num">0.154, +0.0%</td><td>INTEL(R) XEON(R) PLATINUM 8573C</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42283977926">run</a></td></tr><tr><td>2026-11-06 07:55</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/1abe844a4c947828fed28953dd365d56e02de77e">1abe844</a></td><td>no regression detected</td><td class="num">1708 ms, -0.4%</td><td class="num">2233 ms, -0.4%</td><td class="num">322 ms, -0.9%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.0.0</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42183840211">run</a></td></tr><tr><td>2026-11-05 20:39</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/1abe844a4c947828fed28953dd365d56e02de77e">1abe844</a></td><td>no regression detected</td><td class="num">1729 ms, -0.1%</td><td class="num">2311 ms, -0.0%</td><td class="num">376 ms, -0.2%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.0.0</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42105176464">run</a></td></tr><tr><td>2026-11-05 07:54</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/1abe844a4c947828fed28953dd365d56e02de77e">1abe844</a></td><td>no regression detected</td><td class="num">1706 ms, +0.1%</td><td class="num">2236 ms, +0.4%</td><td class="num">316 ms, +3.0%</td><td class="num">0.154, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.0.0</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/41990345123">run</a></td></tr></tbody></table></div><p class="muted">Metric cells: median of the measured commit, change of the median against the compared base commit.</p>
+<h2 id="demo-static">demo-static</h2>
+<h3>FCP</h3><svg viewBox="0 0 900 210" role="img" aria-label="FCP history"><line class="grid" x1="64" x2="888" y1="179.8" y2="179.8"/><text x="58" y="183.8" text-anchor="end">1220</text><line class="grid" x1="64" x2="888" y1="108.2" y2="108.2"/><text x="58" y="112.2" text-anchor="end">1240</text><line class="grid" x1="64" x2="888" y1="36.6" y2="36.6"/><text x="58" y="40.6" text-anchor="end">1260</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,105.0 105.2,45.6 132.7,80.4 160.1,32.9 187.6,141.6 215.1,69.8 242.5,91.1 270.0,140.2 297.5,45.2 324.9,148.3 352.4,78.6 379.9,81.8 407.3,83.2 434.8,63.1 462.3,55.4 489.7,111.0 517.2,160.8 544.7,169.1 572.1,55.0 599.6,131.3 627.1,160.6 654.5,67.1 682.0,93.3 709.5,136.8 736.9,167.6 764.4,101.8 791.9,123.5 819.3,86.7 846.8,86.0 874.3,127.2"/><circle cx="77.7" cy="105.0" r="3.2" fill="#E69F00"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 1241 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="45.6" r="3.2" fill="#56B4E9"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 1257 ms, change -0.2% vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="80.4" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 1248 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="32.9" r="3.2" fill="#56B4E9"><title>2026-10-31T06:59 1abe844
+no regression detected
+median 1261 ms, change +0.2% vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="141.6" r="3.2" fill="#009E73"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 1231 ms, change +0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="69.8" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 1251 ms, change +0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="91.1" r="3.2" fill="#0072B2"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 1245 ms, change -0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="140.2" r="3.2" fill="#E69F00"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 1231 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="45.2" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 1258 ms, change +0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="148.3" r="3.2" fill="#009E73"><title>2026-11-02T07:39 1abe844
+no regression detected
+median 1229 ms, change -0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="78.6" r="3.2" fill="#CC79A7"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 1248 ms, change +0.1% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="81.8" r="3.2" fill="#0072B2"><title>2026-11-03T07:54 1abe844
+no regression detected
+median 1247 ms, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="83.2" r="3.2" fill="#0072B2"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 1247 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="63.1" r="3.2" fill="#0072B2"><title>2026-11-04T07:30 1abe844
+no regression detected
+median 1253 ms, change -0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="55.4" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 1255 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="111.0" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 1239 ms, change +0.3% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="160.8" r="3.2" fill="#009E73"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 1225 ms, change -0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 1223 ms, change -0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="55.0" r="3.2" fill="#0072B2"><title>2026-11-06T19:57 f58a3be
+no regression detected
+median 1255 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="131.3" r="3.2" fill="#E69F00"><title>2026-11-07T07:05 f58a3be
+no regression detected
+median 1234 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="160.6" r="3.2" fill="#009E73"><title>2026-11-07T13:58 f58a3be
+no regression detected
+median 1225 ms, change -0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="67.1" r="3.2" fill="#0072B2"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 1251 ms, change -0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="93.3" r="3.2" fill="#CC79A7"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 1244 ms, change -0.1% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="136.8" r="3.2" fill="#E69F00"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 1232 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="167.6" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 1223 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="101.8" r="3.2" fill="#E69F00"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 1242 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="123.5" r="3.2" fill="#E69F00"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 1236 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="86.7" r="3.2" fill="#0072B2"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 1246 ms, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="86.0" r="3.2" fill="#0072B2"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 1246 ms, change +0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="127.2" r="3.2" fill="#E69F00"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 1235 ms, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 0.085 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>LCP</h3><svg viewBox="0 0 900 210" role="img" aria-label="LCP history"><line class="grid" x1="64" x2="888" y1="160.5" y2="160.5"/><text x="58" y="164.5" text-anchor="end">1790</text><line class="grid" x1="64" x2="888" y1="116.6" y2="116.6"/><text x="58" y="120.6" text-anchor="end">1800</text><line class="grid" x1="64" x2="888" y1="72.7" y2="72.7"/><text x="58" y="76.7" text-anchor="end">1810</text><line class="grid" x1="64" x2="888" y1="28.8" y2="28.8"/><text x="58" y="32.8" text-anchor="end">1820</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,104.7 105.2,41.0 132.7,82.6 160.1,32.9 187.6,128.7 215.1,54.9 242.5,87.5 270.0,153.0 297.5,44.5 324.9,132.0 352.4,72.2 379.9,79.0 407.3,76.5 434.8,56.2 462.3,53.5 489.7,96.2 517.2,164.7 544.7,162.1 572.1,48.5 599.6,133.4 627.1,167.4 654.5,55.9 682.0,80.7 709.5,136.3 736.9,169.1 764.4,106.8 791.9,123.2 819.3,91.6 846.8,93.7 874.3,130.7"/><circle cx="77.7" cy="104.7" r="3.2" fill="#E69F00"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 1803 ms, change +0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="41.0" r="3.2" fill="#56B4E9"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 1817 ms, change -0.1% vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="82.6" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 1808 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="32.9" r="3.2" fill="#56B4E9"><title>2026-10-31T06:59 1abe844
+no regression detected
+median 1819 ms, change -0.1% vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="128.7" r="3.2" fill="#009E73"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 1797 ms, change +0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="54.9" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 1814 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="87.5" r="3.2" fill="#0072B2"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 1807 ms, change -0.3% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="153.0" r="3.2" fill="#E69F00"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 1792 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="44.5" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 1816 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="132.0" r="3.2" fill="#009E73"><title>2026-11-02T07:39 1abe844
+no regression detected
+median 1796 ms, change +0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="72.2" r="3.2" fill="#CC79A7"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 1810 ms, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="79.0" r="3.2" fill="#0072B2"><title>2026-11-03T07:54 1abe844
+no regression detected
+median 1809 ms, change -0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="76.5" r="3.2" fill="#0072B2"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 1809 ms, change -0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="56.2" r="3.2" fill="#0072B2"><title>2026-11-04T07:30 1abe844
+no regression detected
+median 1814 ms, change -0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="53.5" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 1814 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="96.2" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 1805 ms, change +0.2% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="164.7" r="3.2" fill="#009E73"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 1789 ms, change -0.3% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="162.1" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 1790 ms, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="48.5" r="3.2" fill="#0072B2"><title>2026-11-06T19:57 f58a3be
+no regression detected
+median 1816 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="133.4" r="3.2" fill="#E69F00"><title>2026-11-07T07:05 f58a3be
+no regression detected
+median 1796 ms, change -0.1% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="167.4" r="3.2" fill="#009E73"><title>2026-11-07T13:58 f58a3be
+no regression detected
+median 1788 ms, change -0.3% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="55.9" r="3.2" fill="#0072B2"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 1814 ms, change +0.2% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="80.7" r="3.2" fill="#CC79A7"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 1808 ms, change +0.3% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="136.3" r="3.2" fill="#E69F00"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 1796 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="169.1" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 1788 ms, change +0.1% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="106.8" r="3.2" fill="#E69F00"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 1802 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="123.2" r="3.2" fill="#E69F00"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 1799 ms, change -0.2% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="91.6" r="3.2" fill="#0072B2"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 1806 ms, change -0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="93.7" r="3.2" fill="#0072B2"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 1805 ms, change +0.1% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="130.7" r="3.2" fill="#E69F00"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 1797 ms, change -0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 0.065 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>TBT</h3><svg viewBox="0 0 900 210" role="img" aria-label="TBT history"><line class="grid" x1="64" x2="888" y1="180.0" y2="180.0"/><text x="58" y="184.0" text-anchor="end">0</text><line class="grid" x1="64" x2="888" y1="101.0" y2="101.0"/><text x="58" y="105.0" text-anchor="end">0</text><line class="grid" x1="64" x2="888" y1="22.0" y2="22.0"/><text x="58" y="26.0" text-anchor="end">1</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,180.0 105.2,180.0 132.7,180.0 160.1,180.0 187.6,180.0 215.1,180.0 242.5,180.0 270.0,180.0 297.5,180.0 324.9,180.0 352.4,180.0 379.9,180.0 407.3,180.0 434.8,180.0 462.3,180.0 489.7,180.0 517.2,180.0 544.7,180.0 572.1,180.0 599.6,180.0 627.1,180.0 654.5,180.0 682.0,180.0 709.5,180.0 736.9,180.0 764.4,180.0 791.9,180.0 819.3,180.0 846.8,180.0 874.3,180.0"/><circle cx="77.7" cy="180.0" r="3.2" fill="#E69F00"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="180.0" r="3.2" fill="#56B4E9"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 0 ms, change – vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="180.0" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="180.0" r="3.2" fill="#56B4E9"><title>2026-10-31T06:59 1abe844
+no regression detected
+median 0 ms, change – vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="180.0" r="3.2" fill="#009E73"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="180.0" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="180.0" r="3.2" fill="#009E73"><title>2026-11-02T07:39 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="180.0" r="3.2" fill="#CC79A7"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 0 ms, change – vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-03T07:54 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-04T07:30 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="180.0" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="180.0" r="3.2" fill="#009E73"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="180.0" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-06T19:57 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-07T07:05 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="180.0" r="3.2" fill="#009E73"><title>2026-11-07T13:58 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="180.0" r="3.2" fill="#CC79A7"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 0 ms, change – vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="180.0" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="180.0" r="3.2" fill="#0072B2"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="180.0" r="3.2" fill="#E69F00"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 0 ms, change – vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">Change-point check not run: median is zero.</p>
+<h3>CLS</h3><svg viewBox="0 0 900 210" role="img" aria-label="CLS history"><line class="grid" x1="64" x2="888" y1="177.5" y2="177.5"/><text x="58" y="181.5" text-anchor="end">0.074</text><line class="grid" x1="64" x2="888" y1="136.8" y2="136.8"/><text x="58" y="140.8" text-anchor="end">0.076</text><line class="grid" x1="64" x2="888" y1="96.2" y2="96.2"/><text x="58" y="100.2" text-anchor="end">0.078</text><line class="grid" x1="64" x2="888" y1="55.6" y2="55.6"/><text x="58" y="59.6" text-anchor="end">0.08</text><text x="77.7" y="200" text-anchor="middle">2026-10-30</text><text x="215.1" y="200" text-anchor="middle">2026-10-31</text><text x="352.4" y="200" text-anchor="middle">2026-11-02</text><text x="489.7" y="200" text-anchor="middle">2026-11-05</text><text x="627.1" y="200" text-anchor="middle">2026-11-07</text><text x="764.4" y="200" text-anchor="middle">2026-11-09</text><polyline class="series" points="77.7,101.0 105.2,101.0 132.7,101.0 160.1,101.0 187.6,101.0 215.1,101.0 242.5,101.0 270.0,101.0 297.5,101.0 324.9,101.0 352.4,101.0 379.9,101.0 407.3,101.0 434.8,101.0 462.3,101.0 489.7,101.0 517.2,101.0 544.7,101.0 572.1,101.0 599.6,101.0 627.1,101.0 654.5,101.0 682.0,101.0 709.5,101.0 736.9,101.0 764.4,101.0 791.9,101.0 819.3,101.0 846.8,101.0 874.3,101.0"/><circle cx="77.7" cy="101.0" r="3.2" fill="#E69F00"><title>2026-10-30T07:05 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="105.2" cy="101.0" r="3.2" fill="#56B4E9"><title>2026-10-30T14:06 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="132.7" cy="101.0" r="3.2" fill="#E69F00"><title>2026-10-30T22:58 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="160.1" cy="101.0" r="3.2" fill="#56B4E9"><title>2026-10-31T06:59 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Chrome 153.0.0.0</title></circle><circle cx="187.6" cy="101.0" r="3.2" fill="#009E73"><title>2026-10-31T13:38 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="215.1" cy="101.0" r="3.2" fill="#0072B2"><title>2026-10-31T22:28 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="242.5" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-01T07:31 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="270.0" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-01T18:26 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="297.5" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-01T22:48 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="324.9" cy="101.0" r="3.2" fill="#009E73"><title>2026-11-02T07:39 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="352.4" cy="101.0" r="3.2" fill="#CC79A7"><title>2026-11-02T22:19 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.0.0</title></circle><circle cx="379.9" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-03T07:54 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="407.3" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-03T20:06 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="434.8" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-04T07:30 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="462.3" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-04T20:26 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="489.7" cy="101.0" r="3.2" fill="#009E73"><title>2026-11-05T07:54 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="517.2" cy="101.0" r="3.2" fill="#009E73"><title>2026-11-05T20:39 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="544.7" cy="101.0" r="3.2" fill="#009E73"><title>2026-11-06T07:55 1abe844
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.0.0</title></circle><circle cx="572.1" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-06T19:57 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="599.6" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-07T07:05 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="627.1" cy="101.0" r="3.2" fill="#009E73"><title>2026-11-07T13:58 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="654.5" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-07T22:43 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="682.0" cy="101.0" r="3.2" fill="#CC79A7"><title>2026-11-08T07:17 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+INTEL(R) XEON(R) PLATINUM 8573C
+Chrome 153.0.8010.47</title></circle><circle cx="709.5" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-08T14:20 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="736.9" cy="101.0" r="3.2" fill="#009E73"><title>2026-11-08T22:52 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V45 96-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="764.4" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-09T07:56 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="791.9" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-09T22:59 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="819.3" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-10T08:24 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="846.8" cy="101.0" r="3.2" fill="#0072B2"><title>2026-11-10T20:28 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 7763 64-Core Processor
+Chrome 153.0.8010.47</title></circle><circle cx="874.3" cy="101.0" r="3.2" fill="#E69F00"><title>2026-11-11T07:44 f58a3be
+no regression detected
+median 0.078, change +0.0% vs base
+AMD EPYC 9V74 80-Core Processor
+Chrome 153.0.8010.47</title></circle></svg><p class="muted">No change point in the latest window; E-Divisive p = 1.000 on the last 20 points, 10 earlier points for the adjustment.</p>
+<h3>Latest measurements</h3><div class="table"><table><thead><tr><th>Measured (UTC)</th><th>Commit</th><th>Verdict</th><th>FCP</th><th>LCP</th><th>TBT</th><th>CLS</th><th>CPU</th><th>Chrome</th><th>Run</th></tr></thead><tbody><tr><td>2026-11-11 07:44</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1235 ms, +0.0%</td><td class="num">1797 ms, -0.0%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42981528463">run</a></td></tr><tr><td>2026-11-10 20:28</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1246 ms, +0.2%</td><td class="num">1805 ms, +0.1%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42895334339">run</a></td></tr><tr><td>2026-11-10 08:24</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1246 ms, +0.0%</td><td class="num">1806 ms, -0.1%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42782179421">run</a></td></tr><tr><td>2026-11-09 22:59</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1236 ms, -0.2%</td><td class="num">1799 ms, -0.2%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42716485447">run</a></td></tr><tr><td>2026-11-09 07:56</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1242 ms, -0.0%</td><td class="num">1802 ms, -0.2%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42582248243">run</a></td></tr><tr><td>2026-11-08 22:52</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1223 ms, +0.0%</td><td class="num">1788 ms, +0.1%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42532285358">run</a></td></tr><tr><td>2026-11-08 14:20</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1232 ms, -0.2%</td><td class="num">1796 ms, -0.0%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42489151845">run</a></td></tr><tr><td>2026-11-08 07:17</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1244 ms, -0.1%</td><td class="num">1808 ms, +0.3%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>INTEL(R) XEON(R) PLATINUM 8573C</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42458082776">run</a></td></tr><tr><td>2026-11-07 22:43</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1251 ms, -0.1%</td><td class="num">1814 ms, +0.2%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42421822420">run</a></td></tr><tr><td>2026-11-07 13:58</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1225 ms, -0.0%</td><td class="num">1788 ms, -0.3%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42379297268">run</a></td></tr><tr><td>2026-11-07 07:05</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1234 ms, +0.1%</td><td class="num">1796 ms, -0.1%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V74 80-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42349687072">run</a></td></tr><tr><td>2026-11-06 19:57</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/f58a3becea660d6f8abccc9827e9c04e595894e2">f58a3be</a></td><td>no regression detected</td><td class="num">1255 ms, +0.1%</td><td class="num">1816 ms, +0.1%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 7763 64-Core Processor</td><td>153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42283977926">run</a></td></tr><tr><td>2026-11-06 07:55</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/1abe844a4c947828fed28953dd365d56e02de77e">1abe844</a></td><td>no regression detected</td><td class="num">1223 ms, -0.0%</td><td class="num">1790 ms, +0.0%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.0.0</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42183840211">run</a></td></tr><tr><td>2026-11-05 20:39</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/1abe844a4c947828fed28953dd365d56e02de77e">1abe844</a></td><td>no regression detected</td><td class="num">1225 ms, -0.1%</td><td class="num">1789 ms, -0.3%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.0.0</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/42105176464">run</a></td></tr><tr><td>2026-11-05 07:54</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/commit/1abe844a4c947828fed28953dd365d56e02de77e">1abe844</a></td><td>no regression detected</td><td class="num">1239 ms, +0.3%</td><td class="num">1805 ms, +0.2%</td><td class="num">0 ms, –</td><td class="num">0.078, +0.0%</td><td>AMD EPYC 9V45 96-Core Processor</td><td>153.0.0.0</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/41990345123">run</a></td></tr></tbody></table></div><p class="muted">Metric cells: median of the measured commit, change of the median against the compared base commit.</p>
+</body></html>
