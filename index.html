@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>perfgate history of SlavaDoroshenko/perfgate</title><style>
+:root {
+  color-scheme: light;
+  --bg: #fafafa; --card: #ffffff; --raised: #f4f4f5; --hair: rgba(23, 23, 23, 0.08);
+  --text: #171717; --text-2: #525252; --muted: #6e6e6e;
+  --cpu-1: #2a78d6; --cpu-2: #eb6834; --cpu-3: #1baf7a; --cpu-other: #a3a3a3;
+  --regression: #dc2626; --advisory: #b45309; --quiet: #d4d4d4; --trace: #a3a3a3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #141415; --card: #19191b; --raised: #232325; --hair: rgba(237, 237, 237, 0.08);
+    --text: #ededed; --text-2: #a1a1a6; --muted: #8b8b91;
+    --cpu-1: #3987e5; --cpu-2: #d95926; --cpu-3: #199e70; --cpu-other: #6b6b70;
+    --regression: #e5484d; --advisory: #f0a020; --quiet: #3a3a3d; --trace: #5c5c61;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #141415; --card: #19191b; --raised: #232325; --hair: rgba(237, 237, 237, 0.08);
+  --text: #ededed; --text-2: #a1a1a6; --muted: #8b8b91;
+  --cpu-1: #3987e5; --cpu-2: #d95926; --cpu-3: #199e70; --cpu-other: #6b6b70;
+  --regression: #e5484d; --advisory: #f0a020; --quiet: #3a3a3d; --trace: #5c5c61;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+       font: 14px/20px system-ui, -apple-system, "Segoe UI", sans-serif; }
+.mono, td.num, .figure, svg text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+       font-variant-numeric: tabular-nums; }
+main { max-width: 1280px; margin: 0 auto; padding: 32px; }
+header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+         padding-bottom: 24px; border-bottom: 1px solid var(--hair); }
+.brand { font-size: 16px; font-weight: 600; }
+h1 { font-size: 28px; line-height: 36px; font-weight: 500; margin: 24px 0 4px; }
+h2 { font-size: 20px; line-height: 28px; font-weight: 500; margin: 0; }
+h3 { font-size: 14px; line-height: 20px; font-weight: 500; margin: 0; }
+p { margin: 0; }
+.text-2 { color: var(--text-2); } .muted { color: var(--muted); }
+.meta { font-size: 12px; line-height: 16px; color: var(--muted); }
+section { margin-top: 48px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+                flex-wrap: wrap; margin-bottom: 16px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12px; line-height: 16px; color: var(--text-2); }
+.legend span { white-space: nowrap; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 4px; margin-right: 8px; }
+.cell { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 8px; }
+.panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px) { .panels { grid-template-columns: 1fr; } main { padding: 16px; } }
+.panel { background: var(--card); border: 1px solid var(--hair); border-radius: 12px; padding: 20px; }
+.panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.figure { font-size: 20px; line-height: 28px; font-weight: 500; text-align: right; }
+.figure small { display: block; font-size: 12px; line-height: 16px; font-weight: 400; color: var(--text-2); }
+.panel .note { margin-top: 12px; font-size: 13px; line-height: 20px; color: var(--text-2); }
+.panel .note.warn::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px;
+                            margin-right: 8px; background: var(--advisory); }
+svg { width: 100%; height: auto; display: block; overflow: visible; }
+svg text { fill: var(--muted); font-size: 12px; }
+.grid { stroke: var(--hair); stroke-width: 1; }
+.trace { stroke: var(--trace); stroke-width: 1.5; fill: none; stroke-linejoin: round; }
+.ring { fill: none; stroke: var(--regression); stroke-width: 2; }
+.latest { fill: none; stroke: var(--text); stroke-width: 1.5; }
+.cp { stroke: var(--advisory); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.cp-span { fill: var(--advisory); opacity: 0.08; }
+.browser { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 1 3; }
+.strip-quiet { fill: var(--quiet); } .strip-regression { fill: var(--regression); }
+.strip-invalid { fill: none; stroke: var(--muted); stroke-width: 1; }
+.table { overflow-x: auto; background: var(--card); border: 1px solid var(--hair); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; line-height: 20px; white-space: nowrap; }
+th { font-weight: 500; color: var(--text-2); text-align: left; }
+th, td { padding: 8px 16px; border-bottom: 1px solid var(--hair); }
+tbody tr:last-child td { border-bottom: 0; }
+th.num, td.num { text-align: right; }
+td .delta { color: var(--muted); margin-left: 8px; }
+.verdict-regression { color: var(--regression); }
+details { margin-top: 16px; }
+summary { cursor: pointer; color: var(--text-2); font-size: 13px; line-height: 20px; padding: 4px 0; }
+summary:focus-visible, a:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 4px; }
+details .table { margin-top: 8px; }
+a { color: inherit; text-decoration-color: var(--hair); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+.how { max-width: 72ch; color: var(--text-2); }
+.how li { margin-bottom: 8px; }
+</style></head><body><main>
+<header><span class="brand">perfgate</span>
+<span class="meta">1 measurements · 1 page · 2026-11-16 to 2026-11-16</span>
+</header><h1>perfgate history of SlavaDoroshenko/perfgate</h1>
+<p class="text-2">Each point is one perfgate comparison of a pushed commit; its height is the median of that commit's loads</p>
+<section><div class="section-head"><h2>Now</h2><p class="legend"><span><span class="dot" style="background:var(--cpu-1)"></span>EPYC 7763</span><span><span class="cell" style="background:var(--regression)"></span>regression</span><span><span class="cell" style="background:var(--advisory)"></span>advisory change</span></p></div><div class="table"><table><thead><tr><th>Page</th><th>Last measured (UTC)</th><th>Gate</th><th class="num">FCP</th><th class="num">LCP</th><th class="num">TBT</th><th class="num">CLS</th><th>History</th></tr></thead><tbody><tr><td><a href="#demo-heavy">demo-heavy</a></td><td><span class="mono">2026-11-16 22:26</span></td><td><span class="verdict-no_regression_detected">no regression detected</span></td><td class="num">2,631 ms</td><td class="num">3,124 ms</td><td class="num">496 ms</td><td class="num">0.154</td><td>quiet</td></tr></tbody></table></div><p class="meta" style="margin-top:8px">Latest median; beside it the change against the median of up to ten earlier measurements on the same runner CPU model</p></section>
+<section id="demo-heavy"><div class="section-head"><h2>demo-heavy</h2><span class="meta">1 measurements</span></div><div class="panels"><div class="panel"><div class="panel-head"><div><h3>FCP</h3><p class="meta">First Contentful Paint</p></div><div class="figure">2,631 ms<small>latest median</small></div></div><svg viewBox="0 0 560 232" role="img" aria-label="First Contentful Paint, median per measured commit"><line class="grid" x1="52" x2="552" y1="175.4" y2="175.4"/><text x="44" y="179.4" text-anchor="end">2,500</text><line class="grid" x1="52" x2="552" y1="114.6" y2="114.6"/><text x="44" y="118.6" text-anchor="end">2,600</text><line class="grid" x1="52" x2="552" y1="53.7" y2="53.7"/><text x="44" y="57.7" text-anchor="end">2,700</text><polyline class="trace" points="302.0,96.0"/><rect class="strip-quiet" x="298.5" y="196" width="7.0" height="8" rx="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 2,631 ms, +0.0% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></rect><circle cx="302.0" cy="96.0" r="3.5" fill="var(--cpu-1)" stroke="var(--card)" stroke-width="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 2,631 ms, +0.0% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></circle><circle class="latest" cx="302.0" cy="96.0" r="6.5"/><text x="302.0" y="228" text-anchor="middle">11-16</text><text x="44" y="204" text-anchor="end">gate</text></svg><p class="note">Change-point check not run: 1 of 12 comparable points</p></div><div class="panel"><div class="panel-head"><div><h3>LCP</h3><p class="meta">Largest Contentful Paint</p></div><div class="figure">3,124 ms<small>latest median</small></div></div><svg viewBox="0 0 560 232" role="img" aria-label="Largest Contentful Paint, median per measured commit"><line class="grid" x1="52" x2="552" y1="159.7" y2="159.7"/><text x="44" y="163.7" text-anchor="end">3,000</text><line class="grid" x1="52" x2="552" y1="108.5" y2="108.5"/><text x="44" y="112.5" text-anchor="end">3,100</text><line class="grid" x1="52" x2="552" y1="57.3" y2="57.3"/><text x="44" y="61.3" text-anchor="end">3,200</text><polyline class="trace" points="302.0,96.0"/><rect class="strip-quiet" x="298.5" y="196" width="7.0" height="8" rx="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 3,124 ms, -0.2% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></rect><circle cx="302.0" cy="96.0" r="3.5" fill="var(--cpu-1)" stroke="var(--card)" stroke-width="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 3,124 ms, -0.2% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></circle><circle class="latest" cx="302.0" cy="96.0" r="6.5"/><text x="302.0" y="228" text-anchor="middle">11-16</text><text x="44" y="204" text-anchor="end">gate</text></svg><p class="note">Change-point check not run: 1 of 12 comparable points</p></div><div class="panel"><div class="panel-head"><div><h3>TBT</h3><p class="meta">Total Blocking Time</p></div><div class="figure">496 ms<small>latest median</small></div></div><svg viewBox="0 0 560 232" role="img" aria-label="Total Blocking Time, median per measured commit"><line class="grid" x1="52" x2="552" y1="146.5" y2="146.5"/><text x="44" y="150.5" text-anchor="end">480</text><line class="grid" x1="52" x2="552" y1="81.9" y2="81.9"/><text x="44" y="85.9" text-anchor="end">500</text><line class="grid" x1="52" x2="552" y1="17.4" y2="17.4"/><text x="44" y="21.4" text-anchor="end">520</text><polyline class="trace" points="302.0,96.0"/><rect class="strip-quiet" x="298.5" y="196" width="7.0" height="8" rx="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 496 ms, +0.7% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></rect><circle cx="302.0" cy="96.0" r="3.5" fill="var(--cpu-1)" stroke="var(--card)" stroke-width="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 496 ms, +0.7% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></circle><circle class="latest" cx="302.0" cy="96.0" r="6.5"/><text x="302.0" y="228" text-anchor="middle">11-16</text><text x="44" y="204" text-anchor="end">gate</text></svg><p class="note">Change-point check not run: 1 of 12 comparable points</p></div><div class="panel"><div class="panel-head"><div><h3>CLS</h3><p class="meta">Cumulative Layout Shift</p></div><div class="figure">0.154<small>latest median</small></div></div><svg viewBox="0 0 560 232" role="img" aria-label="Cumulative Layout Shift, median per measured commit"><line class="grid" x1="52" x2="552" y1="142.2" y2="142.2"/><text x="44" y="146.2" text-anchor="end">0.150</text><line class="grid" x1="52" x2="552" y1="90.4" y2="90.4"/><text x="44" y="94.4" text-anchor="end">0.155</text><line class="grid" x1="52" x2="552" y1="38.6" y2="38.6"/><text x="44" y="42.6" text-anchor="end">0.160</text><polyline class="trace" points="302.0,96.0"/><rect class="strip-quiet" x="298.5" y="196" width="7.0" height="8" rx="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 0.154, +0.0% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></rect><circle cx="302.0" cy="96.0" r="3.5" fill="var(--cpu-1)" stroke="var(--card)" stroke-width="1"><title>2026-11-16 22:26  32d5ef7
+no regression detected
+median 0.154, +0.0% vs base
+EPYC 7763, Chrome 153.0.8010.47</title></circle><circle class="latest" cx="302.0" cy="96.0" r="6.5"/><text x="302.0" y="228" text-anchor="middle">11-16</text><text x="44" y="204" text-anchor="end">gate</text></svg><p class="note">Change-point check not run: 1 of 12 comparable points</p></div></div><details><summary>Latest 1 measurements</summary><div class="table"><table><thead><tr><th>Measured (UTC)</th><th>Commit</th><th>Gate</th><th class="num">FCP</th><th class="num">LCP</th><th class="num">TBT</th><th class="num">CLS</th><th>CPU</th><th>Chrome</th><th>Run</th></tr></thead><tbody><tr><td class="mono">2026-11-16 22:26</td><td class="mono"><a href="https://github.com/SlavaDoroshenko/perfgate/commit/32d5ef74da6ab1da6812eea36c76c2010170729b">32d5ef7</a></td><td class="verdict-no_regression_detected">no regression detected</td><td class="num">2,631 ms<span class="delta">+0.0%</span></td><td class="num">3,124 ms<span class="delta">-0.2%</span></td><td class="num">496 ms<span class="delta">+0.7%</span></td><td class="num">0.154<span class="delta">+0.0%</span></td><td>EPYC 7763</td><td class="mono">153.0.8010.47</td><td><a href="https://github.com/SlavaDoroshenko/perfgate/actions/runs/43969724108/attempts/1">run</a></td></tr></tbody></table></div><p class="meta" style="margin-top:8px">Median of the measured commit; beside it the change of the median against the compared base commit</p></details></section>
+<section><h2>How to read this</h2><ul class="how"><li>Colour is the runner CPU model. On shared CI runners the CPU changes between jobs and moves the medians; that is why each push is judged inside its own job, against its base, and the history only advises.</li><li>The gate row under each chart shows that per-push verdict: grey no regression, red a regression of this metric, outlined invalid. A red ring marks the same point on the trace.</li><li>A dashed amber line is an advisory change point: E-Divisive on the latest 20 points with the benchmarkIndex adjustment learned from earlier points (docs/history-cpd.md). It never fails a job; in the research data it also fired without a change in up to 17% of windows on some series.</li><li>Dotted lines mark a Chrome version change; the ringed point is the latest measurement.</li></ul></section>
+</main></body></html>
