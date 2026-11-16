@@ -360,7 +360,7 @@ export function renderComment(reports, options = {}) {
     '- "No regression detected" is not proof that performance is unchanged: small, rare or tail-only slowdowns can pass unnoticed.',
     '- Intervals are descriptive pointwise bootstrap intervals of the median difference; they do not decide the verdict.',
     '- "Invalid" means failed loads, missing metrics or a broken protocol. Never treat it as a pass.',
-    '- This comment reports measurements of pull request code. It is advisory; enforce merges with a required status check.',
+    '- This comment reports measurements of pull request code. It is advisory; to block merges, require the measurement job (a required status check on GitHub, "pipelines must succeed" on GitLab).',
     ...(reports.some(r => r.assets) ? ['- Built assets compare the two build outputs file by file, with content hashes stripped from names. They can explain a verdict but do not change it.'] : []),
     '', '</details>', '');
   let body = lines.join('\n');
