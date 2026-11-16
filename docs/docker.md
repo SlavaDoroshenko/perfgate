@@ -24,8 +24,9 @@ Chrome for Testing has no Linux ARM build, so the measurement image is
 `linux/amd64`. On an ARM machine the build still succeeds (JavaScript is compiled
 in a native build stage), but Chrome **cannot measure under QEMU emulation**: on
 an Apple Silicon/colima host every load failed with `Target closed`, and perfgate
-correctly reported the comparison as invalid (exit 2). Use an x86-64 host for
-real measurements.
+correctly reported the comparison as invalid (exit 2). With Rosetta emulation
+(colima `vmType: vz`, `rosetta: true`) Chrome aborts with a core dump at start
+(checked 16 November 2026). Use an x86-64 host for real measurements.
 
 For a native ARM smoke image there is a clearly separate variant:
 

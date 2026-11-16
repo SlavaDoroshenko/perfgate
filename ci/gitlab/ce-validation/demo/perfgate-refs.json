@@ -1,0 +1,6 @@
+{
+  "start": ["node", "serve.mjs", "{port}"],
+  "path": "/",
+  "readyPath": "/",
+  "app": "demo-static"
+}
