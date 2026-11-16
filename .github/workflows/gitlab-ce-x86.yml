@@ -1,0 +1,90 @@
+# End-to-end check of ci/gitlab/perfgate.gitlab-ci.yml on a disposable GitLab CE
+# instance with a Docker-executor runner, on x86-64 with the pinned-Chrome image
+# built from the repository Dockerfile. GitLab is bound to the job's 127.0.0.1.
+# See docs/gitlab-ce-validation-2026-11-16.md.
+name: gitlab-ce-x86
+on:
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: loads per variant
+        type: choice
+        options: ['20', '10']
+        default: '20'
+  push:
+    branches: [validate/gitlab-x86]
+permissions:
+  contents: read
+concurrency:
+  group: gitlab-ce-x86-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  gitlab-ce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      RUNS: ${{ inputs.runs || '20' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Prepare
+        run: |
+          echo "OUT=$RUNNER_TEMP/gitlab-ce-out" >> "$GITHUB_ENV"
+          echo "STATE=$RUNNER_TEMP/gitlab-ce-state" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/gitlab-ce-out/logs"
+          nproc; free -h; df -h /; docker version --format '{{.Server.Version}} {{.Server.Arch}}'
+      - name: Start GitLab CE and runner (background)
+        working-directory: ci/gitlab/ce-validation
+        run: nohup ./up.sh > "$OUT/logs/up.log" 2>&1 &
+      - name: Build perfgate image (pinned Chrome for Testing)
+        run: |
+          start=$(date +%s)
+          docker build --platform linux/amd64 -t perfgate:ci . > "$OUT/logs/docker-build.log" 2>&1 || { tail -50 "$OUT/logs/docker-build.log"; exit 1; }
+          echo "image build $(( $(date +%s) - start )) s" | tee "$OUT/logs/build-time.txt"
+          docker run --rm --entrypoint cat perfgate:ci /opt/perfgate/chrome-version.txt | tee "$OUT/logs/chrome-version.txt" | grep -F 153.0.8010.47
+          docker image inspect perfgate:ci --format '{{.Id}} {{.Architecture}} {{.Size}}' | tee -a "$OUT/logs/build-time.txt"
+      - name: Wait for GitLab and bootstrap
+        working-directory: ci/gitlab/ce-validation
+        run: |
+          for i in $(seq 1 120); do
+            grep -q 'GitLab ready' "$OUT/logs/up.log" && break
+            grep -q 'did not become ready' "$OUT/logs/up.log" && break
+            sleep 10
+          done
+          cat "$OUT/logs/up.log"
+          grep -q 'GitLab ready' "$OUT/logs/up.log"
+          ./bootstrap.sh 2>&1 | grep -viE 'token=' | tee "$OUT/logs/bootstrap.log"
+          docker exec pgce-runner cat /etc/gitlab-runner/config.toml | grep -viE 'token' > "$OUT/logs/runner-config.toml"
+      - name: Run scenarios
+        run: python3 ci/gitlab/ce-validation/scenarios.py --state "$STATE" --out "$OUT" --image perfgate:ci --runs "$RUNS"
+      - name: Summary
+        if: always()
+        run: |
+          test -f "$OUT/summary.json" || exit 0
+          python3 - "$OUT/summary.json" >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          import json, sys
+          s = json.load(open(sys.argv[1]))
+          print(f"GitLab {s['version']['version']} · image {s['image']} · {s['runs']} loads per variant · {s['total_seconds']} s\n")
+          print('| Scenario | MR | Pipeline | perfgate | perfgate s | Note |')
+          print('|---|---|---|---|---:|---|')
+          for r in s['results']:
+              print(f"| {r['scenario']} | !{r['mr']} | {r['pipeline']} {r['pipeline_status']} | {r['perfgate_status']} | {r['perfgate_seconds'] or 0:.0f} | {r['note_id']} {' '.join(r['comment_log'])} |")
+          print('\nFailures: ' + ('; '.join(s['failures']) or 'none'))
+          EOF
+      - name: Collect service logs
+        if: always()
+        run: |
+          docker logs --tail 300 pgce-gitlab > "$OUT/logs/gitlab-container.log" 2>&1 || true
+          docker logs pgce-runner > "$OUT/logs/runner-container.log" 2>&1 || true
+          docker stats --no-stream > "$OUT/logs/docker-stats.txt" 2>&1 || true
+      - name: Tear down
+        if: always()
+        working-directory: ci/gitlab/ce-validation
+        run: ./down.sh
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: gitlab-ce-x86-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/gitlab-ce-out
+          retention-days: 30
