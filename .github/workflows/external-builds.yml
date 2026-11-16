@@ -1,0 +1,109 @@
+# Build determinism of Phanpy: the same commit built twice per job, 16 jobs, compared
+# with scripts/assets/diff.mjs. The 6 November pilot traced a same-commit LCP offset to a
+# `dom-*.js` chunk transferred in 2 of 32 builds (docs/external-pilot-2026-11-06.md).
+# Exploratory diagnosis, no page loads: keeps every assets.json and, when the builds
+# differ, the differing files of both sides.
+name: external-builds
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: external-builds
+  cancel-in-progress: false
+
+env:
+  REPO: https://github.com/cheeaun/phanpy.git
+  COMMIT: 624fa08bde02
+
+jobs:
+  build:
+    name: builds ${{ matrix.rep }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        rep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Register the same-commit pair
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          cases = json.load(open("oss/cases.json"))
+          c = os.environ["COMMIT"]
+          cases.append({"id": "phanpy-builds", "repo": os.environ["REPO"], "before": c, "after": c,
+                        "install": "npm ci --no-audit --no-fund", "build": "npm run build",
+                        "dist": "dist", "path": "index.html"})
+          json.dump(cases, open("oss/cases.json", "w"), indent=2)
+          EOF
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Build twice and compare
+        run: |
+          node scripts/build-commit-pair.mjs --case phanpy-builds
+          d=.oss-dist/phanpy-builds
+          mkdir -p results
+          node scripts/assets/diff.mjs --base "$d/before" --pr "$d/after" \
+            --out "results/${{ github.run_id }}-${{ matrix.rep }}.assets.json"
+          node -e '
+            const a = require(process.argv[1]);
+            console.log(JSON.stringify(a.counts));
+            for (const f of a.files) console.log(f.status, f.name, f.base?.gzip, f.pr?.gzip);
+            const paths = a.files.flatMap((f) => [...(f.base?.paths ?? []), ...(f.pr?.paths ?? [])]);
+            require("fs").writeFileSync("changed.txt", paths.map((p) => p + "\n").join(""));
+          ' "$PWD/results/${{ github.run_id }}-${{ matrix.rep }}.assets.json"
+          if [ -s changed.txt ]; then
+            while read -r p; do
+              for side in before after; do
+                if [ -f "$d/$side/$p" ]; then mkdir -p "results/files/$side/$(dirname "$p")"; cp "$d/$side/$p" "results/files/$side/$p"; fi
+              done
+            done < changed.txt
+          fi
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: builds-${{ matrix.rep }}
+          path: results/
+          retention-days: 30
+
+  store:
+    needs: build
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: builds-*
+          path: incoming
+      - name: Commit to data branch
+        run: |
+          shopt -s nullglob
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch data
+          dest="pilot/phanpy-builds/$(date -u +%F)/${{ github.run_id }}"
+          mkdir -p "$dest"
+          for job in incoming/builds-*; do
+            rep=${job##*-}
+            cp "$job"/*.assets.json "$dest/" 2>/dev/null || true
+            if [ -d "$job/files" ]; then mkdir -p "$dest/files-$rep"; cp -r "$job/files/." "$dest/files-$rep/"; fi
+          done
+          git add -f pilot
+          git commit -m "data: phanpy build determinism ${{ github.run_id }}" || exit 0
+          for i in 1 2 3; do
+            git push origin data && break
+            git pull --rebase origin data
+            [ "$i" = 3 ] && exit 1
+          done
