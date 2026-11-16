@@ -48,15 +48,22 @@ same commit (for example scheduled A/A jobs) are separate points.
 ## Dashboard
 
 `index.html` is one self-contained file: inline CSS and SVG, no scripts, no external
-requests. It opens from disk and can be deployed to GitHub Pages. Per page and metric:
+requests. It opens from disk and can be deployed to GitHub Pages, and follows the
+system light or dark theme.
 
-- the history value over time, coloured by runner CPU model (the hardware lottery of
-  [rq1-preliminary.md](rq1-preliminary.md) is directly visible);
-- a triangle where the per-push verdict was a regression for that metric, a cross at
-  the bottom for an invalid or failed comparison;
-- dotted vertical lines at Chrome version changes;
-- the advisory change-point result, with a dashed line at the suspected change;
-- a table of the latest measurements with links to the commit and the run.
+- An overview table: per page the last verdict, the latest median of each metric with
+  its change against up to ten earlier points on the same runner CPU model (across
+  models the medians differ by more than most regressions), and the number of
+  advisory warnings.
+- Per page, one panel per metric: the history value over time, coloured by runner
+  CPU model in order of first appearance (three colour-vision-safe colours, further
+  models grey), so the hardware lottery of [rq1-preliminary.md](rq1-preliminary.md)
+  is directly visible; the latest point is ringed.
+- Under each trace a gate row with the per-push verdict: grey no regression, red a
+  regression of this metric (also ringed red on the trace), outlined invalid or failed.
+- Dotted vertical lines at Chrome version changes; an advisory change point as a
+  dashed amber line with the span after it shaded.
+- A collapsible table of the latest measurements with links to the commit and the run.
 
 Hovering a point shows commit, verdict, median, change against the base and the
 machine. A [sample dashboard](../examples/history/index.html) (open the file locally)
