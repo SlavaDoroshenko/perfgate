@@ -31,9 +31,16 @@
     ]
   },
   "source_sha256": {
-    ".github/workflows/extensions.yml": "dcb00a8de621fa2281831623a9b61afbda885ae4d479e96ed9c10181ba9590fc",
+    ".github/workflows/extensions.yml": "cd6b26f8009362c190119083d3dcb9cca7c4923f59b2a46da453bb906e592e5e",
     "scripts/background-load.mjs": "26f547a0d2bec048af4f6513782e913eec7cecb62661eb676b580ccc7710aa99",
     "scripts/tail_signal.py": "978ce09686ac2b8cedb55d9086a3fd6a3052bce19c653eae473acda3cbe4982b",
     "docs/protocols/extensions-2026-11-17.md": "046a1ca51ace71cd7f5e73f331495e5bf3bc5beecb0587648c73edfa95a06708"
-  }
+  },
+  "amendments": [
+    {
+      "date": "2026-11-16",
+      "change": "storage only: the load log is written under its final name; run 43961300835 stored manually from its artifacts",
+      "measurement_changed": false
+    }
+  ]
 }

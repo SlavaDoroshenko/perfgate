@@ -95,3 +95,12 @@ the frozen margins) applied to the sequential samples; this is the RQ3 compariso
 Policy, margins, correction, exclusions and the confirmatory sample. Any failure of a
 target is reported as a failure; no job is dropped except invalid ones under the
 existing validity rules, which are reported separately.
+
+## Amendment (storage only), 16 November 2026, 21:56 UTC
+
+The first run (43961300835) collected all ten jobs, but its store step failed: the load
+generator appended its final `stop` line after the log had been renamed, recreating a
+`load.log.jsonl` in every load job that collided on the data branch. The log is now
+written under its final name from the start; nothing in the measurement changed. The
+ten jobs of the first run were stored manually from the run's artifacts (the four load
+logs lack their final `stop` line). The workflow hash in the JSON record is updated.
