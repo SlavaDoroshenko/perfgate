@@ -78,7 +78,43 @@ is empty when commenting was skipped. Stage 2 succeeds regardless of the verdict
   decision: regression / significant within margin / above margin but not
   significant / no change detected;
 - measurement issues when the comparison was rejected as invalid;
+- built assets, when the report directory contains `assets.json` (see below);
 - a short reminder of how to read the result and its limits.
+
+## Built assets
+
+A same-commit comparison can raise a correct alarm when two builds of one commit
+differ (in the [Phanpy pilot](external-pilot-2026-11-06.md#trace-of-the-offset) one
+build shipped an extra 56 KB chunk). To show such differences next to the verdict,
+pass the two build output directories to the root action:
+
+```yaml
+- uses: SlavaDoroshenko/perfgate@<perfgate-commit>
+  with:
+    base-url: http://127.0.0.1:4173/
+    pr-url: http://127.0.0.1:4174/
+    base-dist: base/dist
+    pr-dist: pr/dist
+```
+
+`scripts/assets/diff.mjs` then writes `assets.json` into the report directory and
+the comment gains a "Built assets" section: gzip totals per type (JS, CSS, images,
+fonts, other) for base and PR, and the files that differ most, collapsed when
+there are more than five. Files are matched by path with content hashes removed
+(`index-BmXy3_aZ.js`, `main.3f2a1b9c.chunk.js` → `index-[hash].js`,
+`main.[hash].chunk.js`); a file is unchanged when its bytes are equal, or equal
+after masking the hashes it references. Several files with one hash-free name
+(e.g. multiple `index-[hash].js`) are paired by identical content first and the
+rest are shown as one group. Source maps and `.gz`/`.br` copies are skipped.
+Asset names come from the PR build and are escaped like all other artifact text.
+The section is descriptive: sizes never change the verdict, and a large size
+difference with no regression (or the reverse) is possible.
+
+Without the action:
+
+```sh
+node scripts/assets/diff.mjs --base base/dist --pr pr/dist --out results/my-comparison/assets.json
+```
 
 ## Local preview
 
@@ -87,7 +123,9 @@ node scripts/comment/cli.mjs render --reports results/my-comparison
 ```
 
 `--reports` accepts any directory tree containing perfgate report directories
-(`comparison.json`, `execution.json`, `refs.json` from `compare-refs`).
+(`comparison.json`, `execution.json`, `refs.json` from `compare-refs`,
+`assets.json`). `--base-dist DIR --pr-dist DIR` diffs two build outputs on the fly
+for reports without their own `assets.json`.
 
 ## Verification status
 

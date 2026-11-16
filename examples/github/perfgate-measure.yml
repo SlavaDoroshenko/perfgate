@@ -54,3 +54,6 @@ jobs:
           pr-url: http://127.0.0.1:4174/
           runs: '20'
           app: home
+          # Optional: show built asset size differences in the comment.
+          base-dist: base/dist
+          pr-dist: pr/dist

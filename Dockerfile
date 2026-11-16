@@ -77,6 +77,7 @@ COPY --from=collector /prod/ ./
 COPY analysis/perfgate_analysis analysis/perfgate_analysis
 COPY schema schema
 COPY scripts/comment scripts/comment
+COPY scripts/assets/diff.mjs scripts/assets/diff.mjs
 COPY examples examples
 COPY docker/perfgate /usr/local/bin/perfgate
 RUN perfgate --help > /dev/null \

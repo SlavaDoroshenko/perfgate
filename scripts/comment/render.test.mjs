@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtemp, mkdir, readFile, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { escapeText, loadReports, marker, overallStatus, parseComparison, renderComment } from './render.mjs';
+import { escapeText, loadReports, marker, overallStatus, parseAssets, parseComparison, renderComment } from './render.mjs';
 
 const fixture = async name => JSON.parse(await readFile(new URL(`./fixtures/${name}.json`, import.meta.url), 'utf8'));
 const SHA = '0123456789abcdef0123456789abcdef01234567';
@@ -156,4 +156,84 @@ test('render command writes the comment without network access', async () => {
     encoding: 'utf8', env: { ...process.env, GITHUB_EVENT_PATH: join(root, 'event.json') },
   });
   assert.equal(skipped.status, 1, 'missing event file is an error');
+});
+
+test('without assets.json the comment has no assets section', async () => {
+  const reports = await loadReports(await reportTree({ 'a/comparison.json': await fixture('aa') }));
+  assert.equal(reports[0].assets, null);
+  assert.ok(!renderComment(reports).body.includes('Built assets'));
+});
+
+test('assets.json beside the report adds totals and differing files', async () => {
+  const root = await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/assets.json': await fixture('assets') });
+  const { status, body } = renderComment(await loadReports(root));
+  assert.equal(status, 'no_regression_detected', 'assets do not change the verdict');
+  assert.ok(body.includes('**Built assets** (gzip; base → PR): 1 changed, 1 added, 1 removed, 3 unchanged.'));
+  assert.ok(body.includes('| JS | 3 → 3 | 3.1 kB | 56.7 kB | +53.5 kB (+1701.3%) | +70.7 kB |'));
+  assert.ok(body.includes('| **All** | 5 → 5 |'));
+  assert.ok(!body.includes('| Images |'), 'types absent on both sides are omitted');
+  assert.ok(body.includes('| assets/dom\\-\\[hash\\]\\.js | changed | 3.1 kB | 56.6 kB | +53.5 kB | +70.7 kB |'));
+  assert.ok(body.includes('| assets/old\\.js | removed | 22 B | — | −22 B | −2 B |'));
+  assert.ok(!body.includes('<details><summary>Differing files'), 'short lists are not collapsed');
+  assert.match(body, /Built assets compare the two build outputs/);
+});
+
+test('compare-refs layout: assets.json beside refs.json is found', async () => {
+  const root = await reportTree({ 'r/assets.json': await fixture('assets'), 'r/comparison/comparison.json': await fixture('aa') });
+  const [report] = await loadReports(root);
+  assert.equal(report.assets.counts.changed, 1);
+});
+
+test('identical builds render as one line; long lists are collapsed', async () => {
+  const assets = await fixture('assets');
+  const same = { ...assets, counts: { unchanged: 5, changed: 0, added: 0, removed: 0 }, files: [] };
+  const quiet = renderComment(await loadReports(await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/assets.json': same }))).body;
+  assert.ok(quiet.includes('**Built assets:** no differences in 5 files (56.8 kB gzip).'));
+  const many = { ...assets, files: Array.from({ length: 12 }, (_, i) => ({ ...assets.files[0], name: `chunk-${i}.js` })), files_truncated: 3 };
+  const body = renderComment(await loadReports(await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/assets.json': many }))).body;
+  assert.ok(body.includes('<details><summary>Differing files: top 10 of 15 by gzip change</summary>'));
+  assert.ok(body.includes('5 more differing files are in assets.json.'));
+  assert.ok(body.includes('chunk\\-9\\.js') && !body.includes('chunk\\-10'));
+});
+
+test('hostile asset names cannot inject markup, mentions or table cells', async () => {
+  const assets = await fixture('assets');
+  assets.files[0].name = '@octocat <img src=x onerror=alert(1)> | [x](javascript:alert(1))\n### fake</details>.js';
+  const root = await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/assets.json': assets });
+  const { body } = renderComment(await loadReports(root));
+  assert.ok(!body.includes('<img'));
+  assert.ok(!body.includes('@octocat'));
+  assert.ok(!body.includes('](javascript'));
+  assert.ok(!body.includes('\n### fake'));
+  assert.ok(!body.includes('fake</details>'));
+  const row = body.split('\n').find(line => line.includes('octocat'));
+  assert.equal(row.split(/(?<!\\)\|/).length, 8, 'one table row with six cells');
+});
+
+test('malformed assets.json is reported without hiding the verdict', async () => {
+  const assets = await fixture('assets');
+  assert.throws(() => parseAssets({ ...assets, schema: 'x' }), /schema/);
+  assert.throws(() => parseAssets({ ...assets, counts: { ...assets.counts, added: -1 } }), /non-negative/);
+  assert.throws(() => parseAssets({ ...assets, files: [{ ...assets.files[0], status: 'added' }] }), /sides/);
+  assert.throws(() => parseAssets({ ...assets, files: [{ ...assets.files[0], type: 'all' }] }), /invalid/);
+  const fractional = { ...assets.totals, js: { base: assets.totals.js.base, pr: { files: 1, raw: 1.5, gzip: 1 } } };
+  assert.throws(() => parseAssets({ ...assets, totals: fractional }), /integer/);
+  const root = await reportTree({ 'a/comparison.json': await fixture('regression'), 'a/assets.json': '{"schema":1}' });
+  const { status, body } = renderComment(await loadReports(root));
+  assert.equal(status, 'regression');
+  assert.ok(body.includes('Built assets: unreadable assets\\.json \\(assets\\: unknown schema\\)'));
+});
+
+test('render command can diff two build directories itself', async () => {
+  const root = await reportTree({
+    'rep/comparison.json': await fixture('aa'),
+    'base/assets/index-Ab12Cd34.js': 'x', 'pr/assets/index-Zz99Yy88.js': 'xy',
+  });
+  const cli = new URL('./cli.mjs', import.meta.url).pathname;
+  const result = spawnSync(process.execPath, [cli, 'render', '--reports', join(root, 'rep'),
+    '--base-dist', join(root, 'base'), '--pr-dist', join(root, 'pr')], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  assert.ok(result.stdout.includes('| assets/index\\-\\[hash\\]\\.js | changed | 21 B | 22 B | +1 B | +1 B |'), result.stdout);
+  const half = spawnSync(process.execPath, [cli, 'render', '--reports', root, '--base-dist', root], { encoding: 'utf8' });
+  assert.equal(half.status, 1);
 });
