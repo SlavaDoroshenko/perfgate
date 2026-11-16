@@ -1,114 +1,56 @@
-# Roadmap, updated 11 November 2026
+# Roadmap, updated 17 November 2026
 
-A completed empirical study is required alongside the working product. Completion
-criteria and prospective validation are specified in [research-completion.md](research-completion.md).
-Implementation is published in draft PR #1; validation and raw-data archive are
-recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
+Completion criteria: [research-completion.md](research-completion.md). Results in order
+of evidence: the [confirmatory cohort](prospective-confirmatory-2026-11-11.md), then the
+reports linked below. Dated reports are snapshots and are not rewritten afterwards,
+except for marked corrections.
 
-## Added on 11 November
+## Product: done
 
-- [Confirmatory cohort](prospective-confirmatory-2026-11-11.md) of the frozen candidate
-  and [before/after on the same samples](before-after-2026-11-11.md):
-  0/200 four-page A/A suites (upper 1.9%); FCP/LCP/TBT detection targets met;
-  CLS 87% and 85% miss the ≥80% lower-bound target, traced to page-level CLS
-  instability of `demo-heavy` on newer runner CPUs.
-- The rare Phanpy LCP offset is not noise and not a nondeterministic build (sixteen
-  double builds are identical): a chunk whose hash contains `_` escapes the app's
-  service-worker asset route and competes with the hero image
-  ([external pilot](external-pilot-2026-11-06.md)). Asset size differences are now
-  shown in the PR comment.
+- `perfgate compare` and `perfgate compare-refs`, JSON/Markdown reports, exit codes;
+  the frozen policy `browser-candidate-2026-10-30` ([compare.md](compare.md)).
+- GitHub Action, two-stage sticky pull request comment, verified on real pull
+  requests ([pr-comments.md](pr-comments.md)); built-asset size differences in the
+  comment.
+- GitLab CI template with merge request notes, validated on GitLab CE 19.5
+  ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md)).
+- Docker image with the pinned Chrome, offline installation; x86-64 smoke in CI
+  ([docker.md](docker.md)); published to ghcr.io on release tags.
+- Main-branch history and static dashboard with advisory change-point warnings
+  ([history.md](history.md)); this repository's own history is on GitHub Pages.
+- [User guide](user-guide.md), [changelog](../CHANGELOG.md), citation metadata.
 
-## Added on 6 November
+## Research: done
 
-- [Dedicated candidate collection](protocols/amendment-2026-11-06.md) every three hours
-  with the frozen collector; targets expected in the second half of November.
-- [Before/after on identical jobs](before-after-2026-11-06.md): fixed thresholds vs the
-  candidate, interim.
-- [External pilot](external-pilot-2026-11-06.md) on twelve real Phanpy changes, repeated
-  twice, with same-commit controls. Two FCP regressions repeat; a rare ~140 ms LCP offset
-  caused one control alarm. LCP-only verdicts need confirmation before blocking.
-- Interim results: [prospective](prospective-scheduled-2026-11-04.md),
-  [library replication](oss-replication-2026-11-04.md).
+- RQ1 noise and minimum detectable effects; RQ2 eleven detection rules; RQ3 interleaved
+  versus sequential order ([research-2026-10-18.md](research-2026-10-18.md)).
+- Policy frozen with source hashes on 30 October; prospective confirmatory cohort:
+  0/200 false alarms on four-page checks, FCP/LCP/TBT targets met, CLS target missed
+  and traced to the demo page ([report](prospective-confirmatory-2026-11-11.md)).
+- [Before/after](before-after-2026-11-11.md) against fixed thresholds on the same loads;
+  [machine time and the ten-load setting](machine-time-2026-11-17.md).
+- Real application: [Phanpy pilot](external-pilot-2026-11-06.md), including the traced
+  same-commit LCP offset (a service-worker route that skips `_` in hashes, reported
+  upstream).
+- [CLS diagnosis](cls-diagnosis-2026-10-30.md), [rare-stall pilot](tail-browser-results-2026-10-30.md),
+  [library and commit cases](oss-cases.md), [replication](oss-replication-2026-11-04.md).
+- [sitespeed.io comparison](sitespeed.md), pilot and balanced ten-repetition replication.
+- History change-point detection, online evaluation and a
+  [temporal hold-out](history-holdout-2026-11-17.md): sensitivity transfers, false alarms
+  stay too high for blocking; advisory only.
+- [Local laptop pilot](local-comparison.md).
 
-## Completed foundations
+## In progress
 
-- Lighthouse collector, four demo pages, pinned browser, versioned raw data.
-- Noise/MDE, eleven historical detection rules, injected-regression power,
-  run ordering, multiple-metric and four-page checks.
-- Fifteen real upgrade/commit scenarios. New library cases now have eleven
-  additional daily repetitions per throttling mode after the 18 October pilot.
-- Actual sitespeed comparison and local/CI pilot from 18 October.
-- Past-only history adjustment, E-Divisive and Mozilla-style detector diagnostics.
+- [Follow-up cohorts](protocols/extensions-2026-11-17.md), 100 runs: the gate on a
+  CLS-stable page, an advisory tail signal for rare long tasks, and background CPU load
+  as on a shared single CI server (interleaved versus sequential).
+- The pinned x86-64 image inside a GitLab runner (GitLab CE on an x86-64 Actions runner).
 
-## Implemented on 30 October
+## Not in scope of this release
 
-- Whole-comparison validation before sample selection, requested-size enforcement,
-  exclusion reasons and collector failure propagation.
-- Raw metadata for planned sample counts, warmup failures/duration, measured-load
-  duration and full binary version when CHROME_PATH is provided.
-- URL and recorded-data `perfgate compare`, one-sided multi-metric candidate gate,
-  absolute/relative margins, zero-baseline support, JSON/Markdown and elapsed times.
-- `perfgate compare-refs`: isolated ref builds, HTTP readiness, comparison and cleanup.
-- Composite GitHub Action for running URLs, artifact and job-summary output.
-- An exploratory permutation-mean rule and reproducible distribution-shape/
-  serial-dependence simulations. These are not evidence of native/browser tail performance.
-- Explicit research completion criteria and source-hash protocol freeze utility.
-
-## Immediate validation and integration
-
-- Completed: local URL and isolated Git-ref checks (80 loads), hosted Action
-  A/A/injected checks, and the first post-freeze CI pilot (1,320 loads / 33 jobs).
-- Review the published implementation and exercise it on an external project;
-  observe the trusted PR-comment integration on hosted CI.
-- Completed: [CLS trace diagnosis](cls-diagnosis-2026-10-30.md) and a separate
-  reserved-layout control. Mixed layout shifts and mode occupancy can mask the
-  banner effect in the median; preserve this limitation of the original workload.
-  Use separately labelled calibration controls in subsequent experiments.
-- Continue the required later A/A and injected cohorts without tuning on that
-  holdout. One quiet A/A suite is insufficient to establish its false-alarm rate.
-- Completed: [measured rare-stall pilot](tail-browser-results-2026-10-30.md),
-  seven jobs / 280 measured loads. The gate misses the three sparse cases while
-  their mean TBT rises 22–33%; both dense and A/A controls behave as expected.
-- Predeclare a mean/tail endpoint study with sufficient null controls and familywise
-  error handling before changing the product gate. Improve paint-anchored treatment
-  timing in a separately versioned fixture; retain the original pilot outcomes.
-- Compare same-load and same-time budgets using newly recorded durations.
-
-## Implemented on 5 November
-
-- Two-stage pull request comment: measurement stays in the read-only
-  `pull_request` job; a `workflow_run` job validates and escapes the artifact and
-  updates one sticky comment ([pr-comments.md](pr-comments.md)). Hosted
-  end-to-end run pending (requires the workflow on the default branch).
-- Docker image with pinned Chrome for Testing, offline installation notes and a
-  native-x86 smoke workflow ([docker.md](docker.md)). Built locally; the live
-  pinned-browser check awaits hosted CI because amd64 emulation cannot run Chrome.
-- GitLab include template with merge request notes ([gitlab.md](gitlab.md)),
-  validated end to end on a self-managed GitLab CE 19.5 with a Docker runner
-  ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md));
-  the pinned x86-64 image on a GitLab runner is still unverified.
-- [User guide](user-guide.md) with verdict interpretation and limitations.
-
-## Research work still required
-
-- More sitespeed repetitions with balanced tool order, stored raw data and explicit
-  sampling targets. This workflow is manual and has not replicated automatically.
-- Multiple local sessions/pages/modes and, where available, additional machines.
-- History calibration on later data, temporal dependence, alert clustering and
-  detection delay. Current false alarms do not justify automatic blocking.
-- PELT, multiple changes and longer drifts only where needed to answer these questions.
-- Final reproducible reports, source/data archive and explicit claims/limitations.
-
-## Product work after the first verified integration
-
-- Persistent history and a small dashboard, implemented: history branch, static
-  page and advisory change-point warnings ([history.md](history.md)). Hosted run pending.
-- Docker packaging: hosted x86-64 smoke run of the pinned-browser image.
-- GitLab: the pinned x86-64 image on an x86-64 runner; Kubernetes executor.
-- Deployment pilot and completed-system comparison against fixed thresholds.
-
-## Future scope
-
-Native application collectors are feasible extensions of the statistical kernel,
-but require separate platform experiments. See [native-adapters.md](native-adapters.md).
-They are not a requirement for completing the browser research scope.
+- A deployment pilot in an organisation (needs permission) and the completed-system
+  comparison there.
+- Several local machines and long local sessions; a dedicated measurement server.
+- PELT, several changes per window, drifts longer than the window.
+- Native application collectors ([native-adapters.md](native-adapters.md)).

@@ -54,7 +54,8 @@ the secondary 10-load setting ([machine time](docs/machine-time-2026-11-17.md)).
 - A GitLab CI template with a merge request note ([GitLab](docs/gitlab.md)).
 - A Docker image with the pinned Chrome, installable offline ([Docker](docs/docker.md)).
 - A main-branch history on a dedicated branch with a static dashboard and advisory
-  change-point warnings ([history](docs/history.md)).
+  change-point warnings ([history](docs/history.md)); perfgate's own:
+  [slavadoroshenko.github.io/perfgate](https://slavadoroshenko.github.io/perfgate/).
 
 Start with the [user guide](docs/user-guide.md). Statistical policy:
 [compare.md](docs/compare.md) (frozen text of the evaluated candidate). No detected
