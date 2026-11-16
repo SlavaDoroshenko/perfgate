@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { GLOSSARY } from "./glossary";
 import type { Inject } from "./inject";
 import { makeProducts } from "./products";
 import { buildSeries, sparkline, summarize, type Summary } from "./work";
@@ -7,6 +8,7 @@ import { buildSeries, sparkline, summarize, type Summary } from "./work";
 // A page with the main-thread cost of a real app: large DOM, post-paint computation
 // in several chunks (non-zero TBT) and a late banner (non-zero CLS).
 const PRODUCTS = makeProducts(400);
+const GLOSSARY_WORDS = GLOSSARY.split(" ").length;
 // TBT only counts the part of a task above 50 ms, so each chunk must be clearly
 // longer than that even on a fast machine — otherwise TBT stays a degenerate zero.
 const CHUNKS = 3;
@@ -56,7 +58,7 @@ export function HeavyApp({ inject }: { inject: Inject | null }) {
           <a href="#">Reports</a>
         </nav>
       </header>
-      <main>
+      <main data-glossary-words={GLOSSARY_WORDS}>
         <img className="hero" src={heroSrc} width={1200} height={480} alt="Autumn sale" />
         <h1>Sales overview</h1>
         <svg className="chart" viewBox="0 0 600 120" width="600" height="120" role="img" aria-label="Sales trend">
