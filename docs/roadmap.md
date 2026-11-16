@@ -12,10 +12,11 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
   0/200 four-page A/A suites (upper 1.9%); FCP/LCP/TBT detection targets met;
   CLS 87% and 85% miss the ≥80% lower-bound target, traced to page-level CLS
   instability of `demo-heavy` on newer runner CPUs.
-- The rare Phanpy LCP offset is a nondeterministic build: one of two same-commit
-  builds sometimes ships a 56 KB `dom` chunk that competes with the hero image
-  ([external pilot](external-pilot-2026-11-06.md)). Next: show asset size
-  differences in the PR comment.
+- The rare Phanpy LCP offset is not noise and not a nondeterministic build (sixteen
+  double builds are identical): a chunk whose hash contains `_` escapes the app's
+  service-worker asset route and competes with the hero image
+  ([external pilot](external-pilot-2026-11-06.md)). Asset size differences are now
+  shown in the PR comment.
 
 ## Added on 6 November
 
