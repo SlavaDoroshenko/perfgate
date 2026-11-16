@@ -89,7 +89,8 @@ runs:
           history dashboard --history "$dir/history.jsonl" --out "$dir/index.html" --title "$TITLE" \
             --summary "$RUNNER_TEMP/perfgate-history-summary.md" | tee "$RUNNER_TEMP/perfgate-history.log"
           if [ "$PUSH" != true ]; then break; fi
-          git -C "$dir" add history.jsonl index.html
+          # -f: a global or repository ignore rule for *.jsonl must not drop the record
+          git -C "$dir" add -f history.jsonl index.html
           git -C "$dir" commit -q -m "perfgate history: ${COMMIT:0:12}"
           if remote push -q "$REPO_URL.git" "HEAD:refs/heads/$BRANCH"; then break; fi
           if [ "$attempt" = 3 ]; then echo "::error::could not push $BRANCH"; exit 1; fi
