@@ -99,7 +99,7 @@ test('untrusted text cannot inject markup, mentions or table cells', async () =>
   assert.ok(!body.includes('@octocat'));
   assert.ok(!body.includes('](javascript'));
   assert.ok(!body.includes('\n### fake'));
-  assert.ok(!body.includes('measurement run'), 'non-https run URL is dropped');
+  assert.ok(!body.includes('measurement run'), 'non-http(s) run URL is dropped');
   const row = body.split('\n').find(line => line.includes('octocat'));
   assert.equal(row.split(/(?<!\\)\|/).length, 9, 'one table row with seven cells');
   assert.equal(escapeText('a'.repeat(500), 10).length, 10);
@@ -236,4 +236,16 @@ test('render command can diff two build directories itself', async () => {
   assert.ok(result.stdout.includes('| assets/index\\-\\[hash\\]\\.js | changed | 21 B | 22 B | +1 B | +1 B |'), result.stdout);
   const half = spawnSync(process.execPath, [cli, 'render', '--reports', root, '--base-dist', root], { encoding: 'utf8' });
   assert.equal(half.status, 1);
+});
+
+test('plain http links of internal GitLab instances are kept', async () => {
+  const root = await reportTree({ 'web/comparison/comparison.json': await fixture('regression') });
+  const { body } = renderComment(await loadReports(root), {
+    runUrl: 'http://gitlab.internal/g/app/-/jobs/5',
+    artifactLinks: { web: 'http://gitlab.internal/g/app/-/jobs/5/artifacts/browse/perfgate' },
+  });
+  assert.match(body, /\[measurement run\]\(http:\/\/gitlab\.internal\/g\/app\/-\/jobs\/5\)/);
+  assert.match(body, /\[report artifact\]\(http:\/\/gitlab\.internal\/g\/app\/-\/jobs\/5\/artifacts\/browse\/perfgate\)/);
+  const { body: other } = renderComment(await loadReports(root), { runUrl: 'ftp://gitlab.internal/x' });
+  assert.ok(!other.includes('measurement run'));
 });

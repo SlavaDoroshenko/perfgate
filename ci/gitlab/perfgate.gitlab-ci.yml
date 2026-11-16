@@ -54,8 +54,17 @@ perfgate:
       if [ -n "$PERFGATE_REFS_CONFIG" ]; then
         git config --global --add safe.directory "$CI_PROJECT_DIR"
         base="${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_MERGE_REQUEST_TARGET_BRANCH_SHA}"
-        perfgate compare-refs --repo "$CI_PROJECT_DIR" --base-ref "$base" --pr-ref "$CI_COMMIT_SHA" \
-          --config "$PERFGATE_REFS_CONFIG" --runs "$PERFGATE_RUNS" --out "perfgate/$PERFGATE_APP" || status=$?
+        if [ -z "$base" ]; then
+          # GitLab omits the diff base when the merge request's diff is empty.
+          git fetch --quiet origin "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" && base=$(git merge-base FETCH_HEAD "$CI_COMMIT_SHA") || true
+          echo "merge request diff base unavailable; using merge-base ${base:-(none)}"
+        fi
+        if [ -z "$base" ]; then
+          echo "cannot determine the merge request base commit"; status=3
+        else
+          perfgate compare-refs --repo "$CI_PROJECT_DIR" --base-ref "$base" --pr-ref "$CI_COMMIT_SHA" \
+            --config "$PERFGATE_REFS_CONFIG" --runs "$PERFGATE_RUNS" --out "perfgate/$PERFGATE_APP" || status=$?
+        fi
       else
         perfgate compare --url "$PERFGATE_BASE_URL" --pr-url "$PERFGATE_PR_URL" --runs "$PERFGATE_RUNS" \
           --app "$PERFGATE_APP" --out "perfgate/$PERFGATE_APP" || status=$?
