@@ -105,7 +105,8 @@ worker's own fetches; this part was not tested separately.
 
 So the alarm reflects a real, if small, behaviour of the application (assets whose
 hash contains `_` are not handled by its asset cache), triggered by an arbitrary
-hash, not noise in the measurement. Two further traced jobs (4 and 14) show the same
+hash, not noise in the measurement. Reported upstream as
+[cheeaun/phanpy#1634](https://github.com/cheeaun/phanpy/issues/1634). Two further traced jobs (4 and 14) show the same
 56 KB transfer in single loads with ordinary hashes, consistent with loads where the
 service worker did not yet control the page.
 
