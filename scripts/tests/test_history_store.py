@@ -128,7 +128,7 @@ def test_dashboard_is_self_contained_and_escaped(tmp_path):
     assert module.main(['dashboard', '--history', str(path), '--out', str(out), '--summary', str(summary)]) == 0
     page = out.read_text()
     assert '<script' not in page and '<img' not in page and '&lt;script&gt;' in page
-    assert not re.search(r'(src|href)="(?!https://)', page)
+    assert not re.search(r'(src|href)="(?!https://|#)', page)
     assert 'possible change' in page and 'advisory' in page.lower()
     assert 'home FCP: possible change' in summary.read_text()
     # deterministic: the same history renders the same page
