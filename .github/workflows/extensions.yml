@@ -106,8 +106,10 @@ jobs:
         run: |
           mkdir -p results
           seed=$(( ${{ github.run_id }} % 1000000 * 10 + ${{ matrix.job.seed }} ))
+          # final name from the start: the generator appends until it is stopped
+          id="${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.job.key }}-${{ matrix.job.mode }}-devtools"
           nohup node ext/scripts/background-load.mjs --seed "$seed" --workers 2 --min-s 5 --max-s 60 \
-            --log "results/load.log.jsonl" > load.out 2>&1 &
+            --log "results/$id.load.log" > load.out 2>&1 &
           echo $! > load.pid
 
       - name: Collect with the frozen collector
@@ -128,7 +130,6 @@ jobs:
             --mode "${{ matrix.job.mode }}" --throttling devtools \
             --app "${{ matrix.job.app }}" "${label[@]}" --app-build "$app_build" \
             --experiment "$id" --out "results/$id.jsonl"
-          if [ -f results/load.log.jsonl ]; then mv results/load.log.jsonl "results/$id.load.log"; fi
 
       - name: Collect rare-stall series with the frozen pilot collector
         if: matrix.job.study == 'tail'

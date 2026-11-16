@@ -83,15 +83,36 @@ LCP element, its subparts and every request of every load. Data:
   time; shared with the image it delays the image by ~135 ms, and the concurrent
   tablet image and `compose` chunk by ~300 and ~160 ms, which matches the trace.
 
-So the cause is the build, not the measurement: two builds of the same commit
-occasionally produce a different `dom` chunk, and the gate measures the real cost
-of that difference. The earlier local check of two builds did not hit the rare
-variant. The build outputs of the traced jobs were not saved, so the chunk content
-is not yet explained; the next trace must keep the `dist/` of both sides.
+**Correction, 17 November.** An earlier version of this section concluded that the
+build is nondeterministic. It is not. Sixteen jobs each building `624fa08b` twice
+(`external-builds.yml`, run 43962268547, compared with `scripts/assets/diff.mjs`;
+data in `pilot/phanpy-builds/` on the data branch) found the two builds identical in
+every pair except `main-*.js` (a few bytes of embedded build time) and `version.json`.
+The `dom` chunk has the same content in every build; only its content hash in the
+file name differs.
+
+The file name is what matters. The two slow sides are the only 2 of the 32 traced builds
+whose `dom` chunk hash contains an underscore (`dom-_Aqan-22.js`, `dom-3mzK_nIF.js`).
+Phanpy's service worker (`public/sw.js` at this commit) routes hashed scripts and
+styles to its asset cache only if the URL matches `/-[0-9a-z-]{4,}\./i`. That class
+has no `_`, although Rollup hashes use the URL-safe alphabet including `_`. A chunk
+whose hash contains an underscore therefore bypasses the service worker and is
+fetched by the page itself, under the page's throttled network, at the moment the hero
+image downloads; requests the service worker answers show 0 transferred bytes in the
+page's network log. The likely reason the bypass costs time in the lab is that
+DevTools network throttling applies to the page's requests, not to the service
+worker's own fetches; this part was not tested separately.
+
+So the alarm reflects a real, if small, behaviour of the application (assets whose
+hash contains `_` are not handled by its asset cache), triggered by an arbitrary
+hash, not noise in the measurement. Two further traced jobs (4 and 14) show the same
+56 KB transfer in single loads with ordinary hashes, consistent with loads where the
+service worker did not yet control the page.
 
 For users this means a same-commit LCP alarm can be correct and still surprising.
-The comment should therefore show which assets differ in size between base and PR
-next to the verdict; this is a reporting change, not a policy change.
+The comment now shows which built assets differ between base and PR next to the
+verdict; here it would show identical builds, which points the investigation away
+from the code and towards how the files are served.
 
 ## Consequences
 
@@ -106,6 +127,5 @@ The frozen candidate is not changed. For deployment and for the thesis:
 3. Repeating every pilot pair at least twice is what exposed the problem; one run per
    pair would have reported four regressions and no reproducibility question.
 
-Next: keep both build outputs in the trace to explain the variable chunk, and more
-same-commit jobs on Phanpy to estimate the external false-alarm rate with a useful
-interval.
+Next: more same-commit jobs on Phanpy to estimate the external false-alarm rate with
+a useful interval.
