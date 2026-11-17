@@ -21,6 +21,8 @@ The pinned x86-64 image (`--platform linux/amd64`) also builds on this host, but
 Chrome for Testing 153 aborts with a core dump under Rosetta, as it fails under
 QEMU ([docker.md](docker.md)). The measurements below therefore use the unpinned
 Debian Chromium image: they test the integration, not the research protocol.
+The pinned image was then verified inside GitLab on x86-64; see
+[x86-64 run with the pinned browser](#x86-64-run-with-the-pinned-browser-github-actions).
 
 ## Merge requests and results
 
@@ -110,18 +112,93 @@ retry the comment job too, or run a new pipeline.
 | `perfgate` job, refs mode, 10 loads per variant | 405–422 s (checkout 10 s, worktrees and warm-up ~90 s, ~17 s per load) |
 | `perfgate-comment` job | 1.4–1.8 s |
 
+## x86-64 run with the pinned browser (GitHub Actions)
+
+The same scenarios, automated with assertions in
+[.github/workflows/gitlab-ce-x86.yml](../.github/workflows/gitlab-ce-x86.yml) and
+[scenarios.py](../ci/gitlab/ce-validation/scenarios.py), passed on a hosted
+`ubuntu-24.04` x86-64 runner (4 vCPU, 16 GB):
+[run 43981190090](https://github.com/SlavaDoroshenko/perfgate/actions/runs/43981190090),
+16–17 November 2026, all 54 checks passed.
+
+- Image built from the repository `Dockerfile` with `--platform linux/amd64`:
+  Chrome for Testing **153.0.8010.47** (pinned), 1.48 GB, used by the runner as a
+  local image (`perfgate:ci`, `pull_policy = if-not-present`).
+- GitLab CE 19.5.5 (revision `342e9f9e0b4`) and runner `alpine-v19.5.3` started by
+  `up.sh`/`bootstrap.sh`, published on the job's `127.0.0.1:8929` only; same
+  memory settings, ~2.9 GiB RSS at the end.
+- **20 loads per variant** (`PERFGATE_RUNS` set as a project variable).
+
+| Scenario | MR | `perfgate` | FCP / LCP change | Note |
+|---|---|---|---|---|
+| 400 ms blocking script | !1 | failed, exit 1 | +412 ms (+33.2%) / +426 ms (+23.6%) | note 1 created, "Performance regression detected" |
+| README only (A/A) | !2 | success | +0.2% / −0.0% | note 2 created, "No regression detected" |
+| new push to !1: script removed, NOTES.md added | !1 | success | +0.4% / +0.1% | same note 1 updated, "No regression detected" |
+| change and revert, empty diff (merge-base fallback) | !3 | success | −0.1% / +0.2% | note 4 created, "No regression detected" |
+
+Each check also asserted: one merge request pipeline per commit, both jobs
+present, artifacts (`archive`, `dotenv`) uploaded, the token absent in the
+`perfgate` job, exactly one perfgate note per MR with job and artifact links and
+the measured commit. Afterwards: the comment job without the token rendered
+without posting and left the note unchanged; a root note with the marker was not
+edited while the bot's note was; the token was printed as `[MASKED]` inside the
+`perfgate-comment` environment, was absent outside it and appeared in no job log.
+
+Note on !1 after the first pipeline:
+
+```markdown
+<!-- perfgate-comment:default -->
+### perfgate: Performance regression detected
+
+commit `f95022c` · [measurement run](http://gitlab-ce/root/perfgate-demo/-/jobs/1) · policy `browser-candidate-2026-10-30` (candidate)
+
+1 comparison(s): 1 with a regression, 0 invalid or incomplete, 0 without a detected regression.
+
+#### demo\-static/comparison: regression
+
+20 loads per variant requested · 768 s measurement and analysis · base `01b0eba` → PR `f95022c` · [report artifact](http://gitlab-ce/root/perfgate-demo/-/jobs/1/artifacts/browse/perfgate)
+
+| Metric | Base median | PR median | Change | 95% interval of change | Raw p, one-sided | Result |
+|---|---:|---:|---:|---:|---:|---|
+| demo\-static · FCP | 1239 ms | 1651 ms | +412 ms (+33.2%) | [+407 ms, +419 ms] | <0.0001 | **regression** |
+| demo\-static · LCP | 1803 ms | 2229 ms | +426 ms (+23.6%) | [+421 ms, +435 ms] | <0.0001 | **regression** |
+| demo\-static · TBT | 0.0 ms | 0.0 ms | 0.0 ms (zero base) | [0.0 ms, 0.0 ms] | 1.0000 | no change detected |
+| demo\-static · CLS | 0.0778 | 0.0778 | 0.0000 (+0.0%) | [0.0000, 0.0000] | 1.0000 | no change detected |
+
+<details><summary>How to read this</summary> … </details>
+```
+
+After the push, the same note (id 1) read "No regression detected" for commit
+`779ad31` with FCP 1237 → 1242 ms and LCP 1802 → 1804 ms.
+
+| Step | Time |
+|---|---|
+| Image build (cold, hosted runner) | 86 s |
+| GitLab start to sign-in page (in parallel with the build) | 171 s |
+| `perfgate` job, 20 loads per variant | 763–775 s (checkout to first load ~90 s, ~17.3 s per load) |
+| `perfgate-comment` job | 2.3–2.6 s |
+| Whole workflow | 59 min (scenarios 54 min) |
+
+An earlier attempt ([run 43969764812](https://github.com/SlavaDoroshenko/perfgate/actions/runs/43969764812))
+measured the same results but failed two harness checks: GitLab keeps a note's
+`updated_at` when it is rewritten with an identical body, and creating the merge
+request immediately after an API commit started two pipelines for one commit. In
+that case both comment jobs kept a single note (created by one, updated by the
+other). The script now checks the comment job's own report and waits before
+opening the merge request.
+
 ## Not verified
 
-- The pinned Chrome for Testing image on an x86-64 runner (no x86-64 host was
-  available); measurements here used unpinned Debian Chromium on arm64.
 - The Kubernetes executor, shell executor, autoscaling runners and runners on a
   different machine than GitLab.
 - A container registry (the image was a local Docker image) and pulling by digest.
 - `include: remote:` from GitHub and `include: project:`.
 - Merged-results pipelines (`CI_MERGE_REQUEST_TARGET_BRANCH_SHA`, Premium), fork
   merge requests, protected environments, HTTPS with a private CA.
-- URL mode (`PERFGATE_BASE_URL` / `PERFGATE_PR_URL`), exit 2 (invalid
-  measurements), and 20 loads per variant.
+- URL mode (`PERFGATE_BASE_URL` / `PERFGATE_PR_URL`) and exit 2 (invalid
+  measurements).
+- A dedicated, quiet x86-64 machine: the hosted runner also ran GitLab itself,
+  so the timings above include that load.
 - Fully offline operation: the runner pulled
   `registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:arm64-v19.5.3`
   on the first job; an isolated runner needs that helper image preloaded.
@@ -132,10 +209,15 @@ retry the comment job too, or run a new pipeline.
 cd ci/gitlab/ce-validation
 ./up.sh                      # GitLab CE + runner, ~3-4 min until ready
 STATE=/tmp/pgce ./bootstrap.sh
-docker build --build-arg CHROME_SOURCE=debian -t perfgate:ce-debian ../../..
-# push a project with apps/demo-static/public, demo/serve.mjs, demo/perfgate-refs.json,
-# demo/gitlab-ci.yml as .gitlab-ci.yml and the template as ci/perfgate.gitlab-ci.yml
-# (http://127.0.0.1:8929/root/perfgate-demo, root token in $STATE/root-token),
-# then open merge requests
+docker build --platform linux/amd64 -t perfgate:ci ../../..   # x86-64 host
+# (on ARM: --build-arg CHROME_SOURCE=debian, unpinned)
+python3 scenarios.py --state /tmp/pgce --out /tmp/pgce-out --image perfgate:ci --runs 20
 ./down.sh                    # removes containers, volumes and the network
 ```
+
+`scenarios.py` pushes the demo project (the page from `apps/demo-static`,
+`demo/serve.mjs`, `demo/perfgate-refs.json`, `demo/gitlab-ci.yml` and the
+template), opens the merge requests, asserts the outcomes and writes job logs,
+notes and `summary.json` to `--out`; it exits 1 if any check fails. The
+`gitlab-ce-x86` workflow runs these steps on a hosted x86-64 runner
+(`workflow_dispatch`).

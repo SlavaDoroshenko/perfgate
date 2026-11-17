@@ -81,12 +81,12 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
   updates one sticky comment ([pr-comments.md](pr-comments.md)). Hosted
   end-to-end run pending (requires the workflow on the default branch).
 - Docker image with pinned Chrome for Testing, offline installation notes and a
-  native-x86 smoke workflow ([docker.md](docker.md)). Built locally; the live
-  pinned-browser check awaits hosted CI because amd64 emulation cannot run Chrome.
+  native-x86 smoke workflow ([docker.md](docker.md)); the pinned-browser image
+  measures on hosted x86-64 runners (amd64 emulation on ARM cannot run Chrome).
 - GitLab include template with merge request notes ([gitlab.md](gitlab.md)),
-  validated end to end on a self-managed GitLab CE 19.5 with a Docker runner
-  ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md));
-  the pinned x86-64 image on a GitLab runner is still unverified.
+  validated end to end on a self-managed GitLab CE 19.5 with a Docker runner,
+  including the pinned x86-64 image with 20 loads per variant
+  ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md)).
 - [User guide](user-guide.md) with verdict interpretation and limitations.
 
 ## Research work still required
@@ -103,8 +103,7 @@ recorded in [validation-2026-10-30.md](validation-2026-10-30.md).
 
 - Persistent history and a small dashboard, implemented: history branch, static
   page and advisory change-point warnings ([history.md](history.md)). Hosted run pending.
-- Docker packaging: hosted x86-64 smoke run of the pinned-browser image.
-- GitLab: the pinned x86-64 image on an x86-64 runner; Kubernetes executor.
+- GitLab: Kubernetes executor, container registry, a dedicated x86-64 runner.
 - Deployment pilot and completed-system comparison against fixed thresholds.
 
 ## Future scope
