@@ -12,7 +12,8 @@ except for marked corrections.
 - GitHub Action, two-stage sticky pull request comment, verified on real pull
   requests ([pr-comments.md](pr-comments.md)); built-asset size differences in the
   comment.
-- GitLab CI template with merge request notes, validated on GitLab CE 19.5
+- GitLab CI template with merge request notes, validated on GitLab CE 19.5, including
+  the pinned x86-64 image with 20 loads per variant on an x86-64 runner
   ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md)).
 - Docker image with the pinned Chrome, offline installation; x86-64 smoke in CI
   ([docker.md](docker.md)); published to ghcr.io on release tags.
@@ -45,12 +46,13 @@ except for marked corrections.
 - [Follow-up cohorts](protocols/extensions-2026-11-17.md), 100 runs: the gate on a
   CLS-stable page, an advisory tail signal for rare long tasks, and background CPU load
   as on a shared single CI server (interleaved versus sequential).
-- The pinned x86-64 image inside a GitLab runner (GitLab CE on an x86-64 Actions runner).
 
 ## Not in scope of this release
 
 - A deployment pilot in an organisation (needs permission) and the completed-system
   comparison there.
 - Several local machines and long local sessions; a dedicated measurement server.
+- GitLab with Kubernetes or shell executors, a container registry, a separate runner
+  machine and fully offline runner images.
 - PELT, several changes per window, drifts longer than the window.
 - Native application collectors ([native-adapters.md](native-adapters.md)).

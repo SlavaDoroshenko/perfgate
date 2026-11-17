@@ -91,8 +91,10 @@ real `CI_MERGE_REQUEST_*` values and `compare-refs` in the job, exit codes 0 and
 and a successful measurement, one note created and then updated (not duplicated)
 by retries and new pushes, the environment-scoped masked token (absent from the
 `perfgate` job), `environment: action: access`, and the comment job without a
-token. The run used the native ARM Debian-Chromium image. Not covered: the pinned
-x86-64 image, the Kubernetes executor, a container registry, `include: remote:`,
+token. The scenarios ran first with the native ARM Debian-Chromium image and then,
+with assertions, on a hosted x86-64 runner with the pinned-Chrome image and 20
+loads per variant (`.github/workflows/gitlab-ce-x86.yml`). Not covered: the
+Kubernetes executor, a container registry, `include: remote:`,
 merged-results and fork pipelines. Older GitLab versions lack
 `environment: action: access`; use `prepare` there.
 

@@ -111,4 +111,8 @@ the Dockerfile with its SHA-256. Set `CHROME_PATH` to the extracted `chrome`.
   About 7 minutes each. Reports: [docs/results/2026-11-05/docker-smoke](results/2026-11-05/docker-smoke).
   These are functional smoke tests with an unpinned browser, not research data.
 - The native x86-64 build and live check with the pinned browser is automated in
-  `.github/workflows/docker-smoke.yml`; it has not run on hosted CI yet.
+  `.github/workflows/docker-smoke.yml`.
+- 16–17 November 2026: on a hosted x86-64 runner the `linux/amd64` image (pinned
+  Chrome for Testing 153.0.8010.47) built in 86 s and measured inside GitLab CE
+  merge request pipelines, 20 loads per variant, ~17 s per load
+  ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md)).
