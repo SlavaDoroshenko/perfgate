@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0
+## 0.1.0 (2026-11-18)
 
 First release. The statistical policy is `browser-candidate-2026-10-30`, frozen on
 30 October 2026 and evaluated prospectively afterwards

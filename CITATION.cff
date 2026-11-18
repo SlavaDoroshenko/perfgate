@@ -9,6 +9,7 @@ authors:
 repository-code: https://github.com/SlavaDoroshenko/perfgate
 license: MIT
 version: 0.1.0
+date-released: 2026-11-18
 keywords:
   - web performance
   - performance regression
