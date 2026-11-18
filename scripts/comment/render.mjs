@@ -125,6 +125,22 @@ export function parseAssets(raw) {
   return { totals, counts, files, truncated };
 }
 
+/** Validates a tail.json object produced by scripts/tail/tail-note.py. */
+export function parseTail(raw) {
+  if (!isObject(raw) || raw.schema !== 'perfgate-tail/1' || !Array.isArray(raw.pages)) throw new Error('tail: unknown schema');
+  return raw.pages.slice(0, MAX_METRICS).map((page, i) => {
+    const at = `tail.pages[${i}]`;
+    if (!isObject(page) || typeof page.name !== 'string') throw new Error(`${at}: name invalid`);
+    const p = finite(page.p_holm, `${at}.p_holm`);
+    if (p < 0 || p > 1) throw new Error(`${at}.p_holm: outside [0, 1]`);
+    return {
+      name: page.name, n: count(page.n, `${at}.n`), p, warning: bool(page.warning, `${at}.warning`),
+      baseMean: finite(page.base_mean, `${at}.base_mean`), prMean: finite(page.pr_mean, `${at}.pr_mean`),
+      baseMedian: finite(page.base_median, `${at}.base_median`), prMedian: finite(page.pr_median, `${at}.pr_median`),
+    };
+  });
+}
+
 async function readJson(path) {
   const info = await lstat(path);
   if (!info.isFile()) throw new Error('not a regular file');
@@ -157,7 +173,7 @@ export async function loadReports(root) {
   const reports = [];
   for (const dir of found) {
     const path = relative(root, dir).split(sep).filter(Boolean);
-    const report = { path: path.join('/') || '.', artifact: path[0] ?? null, comparison: null, error: null, seconds: null, refs: null, assets: null };
+    const report = { path: path.join('/') || '.', artifact: path[0] ?? null, comparison: null, error: null, seconds: null, refs: null, assets: null, tail: null };
     if (await exists(join(dir, 'comparison.json'))) {
       try { report.comparison = parseComparison(await readJson(join(dir, 'comparison.json'))); }
       catch (error) { report.error = `unreadable comparison.json (${error.message})`; }
@@ -181,6 +197,11 @@ export async function loadReports(root) {
       try { report.assets = parseAssets(await readJson(candidate)); }
       catch (error) { report.assets = { error: `unreadable assets.json (${error.message})` }; }
       break;
+    }
+    // tail.json (scripts/tail/tail-note.py) sits beside comparison.json.
+    if (await exists(join(dir, 'tail.json'))) {
+      try { report.tail = parseTail(await readJson(join(dir, 'tail.json'))); }
+      catch (error) { report.tail = { error: `unreadable tail.json (${error.message})` }; }
     }
     reports.push(report);
   }
@@ -279,6 +300,28 @@ function renderAssets(assets) {
   return lines;
 }
 
+function percent(base, pr) {
+  if (!base) return 'zero base';
+  const rel = (pr - base) / base * 100;
+  return `${rel >= 0 ? '+' : '−'}${Math.abs(rel).toFixed(1)}%`;
+}
+
+function renderTail(tail) {
+  if (tail.error) return [`Rare long tasks: ${escapeText(tail.error, 300)}`, ''];
+  const warned = tail.filter(page => page.warning);
+  if (!warned.length) return [];
+  const lines = ['**Rare long tasks (advisory, does not change the verdict):** mean TBT rose much more than the median, ' +
+    'so a few loads were far slower than the rest.', '',
+  '| Page | Base mean | PR mean | Mean change | Median change | Welch p, Holm |', '|---|---:|---:|---:|---:|---:|'];
+  for (const page of warned) {
+    lines.push(`| ${escapeText(page.name, 60)} | ${formatValue(page.baseMean, 'ms')} | ${formatValue(page.prMean, 'ms')} | ` +
+      `${signed(page.prMean - page.baseMean, 'ms')} (${percent(page.baseMean, page.prMean)}) | ` +
+      `${signed(page.prMedian - page.baseMedian, 'ms')} (${percent(page.baseMedian, page.prMedian)}) | ${formatP(page.p)} |`);
+  }
+  lines.push('');
+  return lines;
+}
+
 function safeUrl(url) {
   // http is allowed for self-managed GitLab instances on internal networks.
   if (typeof url !== 'string' || !/^https?:\/\/[^\s()<>]+$/.test(url)) return null;
@@ -323,6 +366,7 @@ function renderReport(report, links) {
     if (metrics.length > MAX_METRICS) lines.push('', `${metrics.length - MAX_METRICS} more metrics are in the artifact.`);
     lines.push('');
   }
+  if (report.tail) lines.push(...renderTail(report.tail));
   if (report.assets) lines.push(...renderAssets(report.assets));
   return lines;
 }
@@ -361,6 +405,7 @@ export function renderComment(reports, options = {}) {
     '- Intervals are descriptive pointwise bootstrap intervals of the median difference; they do not decide the verdict.',
     '- "Invalid" means failed loads, missing metrics or a broken protocol. Never treat it as a pass.',
     '- This comment reports measurements of pull request code. It is advisory; to block merges, require the measurement job (a required status check on GitHub, "pipelines must succeed" on GitLab).',
+    ...(reports.some(r => Array.isArray(r.tail) && r.tail.some(page => page.warning)) ? ['- Rare long tasks: a one-sided Welch test on mean TBT, Holm over pages, shown when the mean rose by more than max(10%, 20 ms). It catches a few very slow loads that the median ignores. It is a hint to look at the trace, not a verdict.'] : []),
     ...(reports.some(r => r.assets) ? ['- Built assets compare the two build outputs file by file, with content hashes stripped from names. They can explain a verdict but do not change it.'] : []),
     '', '</details>', '');
   let body = lines.join('\n');

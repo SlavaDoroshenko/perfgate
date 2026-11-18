@@ -1,0 +1,8 @@
+{
+  "schema": "perfgate-tail/1",
+  "rule": {"test": "one-sided Welch t-test on TBT, Holm over pages", "alpha": 0.05, "relative": 0.1, "absolute_ms": 20.0},
+  "pages": [
+    {"name": "tail-heavy", "n": 20, "base_mean": 353.32, "pr_mean": 463.3, "base_median": 353.53, "pr_median": 351.76, "p_holm": 0.0447, "warning": true},
+    {"name": "demo-spa", "n": 20, "base_mean": 40.1, "pr_mean": 41.0, "base_median": 39.8, "pr_median": 40.2, "p_holm": 0.61, "warning": false}
+  ]
+}

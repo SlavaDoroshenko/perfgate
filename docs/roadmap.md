@@ -1,4 +1,4 @@
-# Roadmap, updated 17 November 2026
+# Roadmap, updated 18 November 2026
 
 Completion criteria: [research-completion.md](research-completion.md). Results in order
 of evidence: the [confirmatory cohort](prospective-confirmatory-2026-11-11.md), then the
@@ -17,6 +17,8 @@ except for marked corrections.
   ([gitlab-ce-validation-2026-11-16.md](gitlab-ce-validation-2026-11-16.md)).
 - Docker image with the pinned Chrome, offline installation; x86-64 smoke in CI
   ([docker.md](docker.md)); published to ghcr.io on release tags.
+- Advisory rare long-task note (`tail.json`) in the comment, never part of the verdict
+  ([pr-comments.md](pr-comments.md#rare-long-tasks)).
 - Main-branch history and static dashboard with advisory change-point warnings
   ([history.md](history.md)); this repository's own history is on GitHub Pages.
 - [User guide](user-guide.md), [changelog](../CHANGELOG.md), citation metadata.
@@ -40,12 +42,11 @@ except for marked corrections.
   [temporal hold-out](history-holdout-2026-11-17.md): sensitivity transfers, false alarms
   stay too high for blocking; advisory only.
 - [Local laptop pilot](local-comparison.md).
-
-## In progress
-
-- [Follow-up cohorts](protocols/extensions-2026-11-17.md), 100 runs: the gate on a
-  CLS-stable page, an advisory tail signal for rare long tasks, and background CPU load
-  as on a shared single CI server (interleaved versus sequential).
+- [Follow-up cohorts](extensions-2026-11-18.md), 1,000 jobs: CLS on a CLS-stable page
+  (targets met), the advisory tail signal (no false warnings in 500 checks, 67% of
+  rare-stall jobs warned, below target) and background CPU load as on a shared single
+  server (interleaved 1/100 vs sequential 7/100 false alarms; TBT sensitivity drops).
+  Scheduled research collection ended on 18 November.
 
 ## Not in scope of this release
 

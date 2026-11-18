@@ -30,10 +30,17 @@ targets and sample sizes, and then evaluated only on data collected afterwards
 
 The false-alarm target (Wilson upper bound ≤ 5%) and the detection targets for FCP,
 LCP and TBT (lower bound ≥ 80%) are met. The CLS target is not: the demo page itself
-has unstable CLS on newer runner CPUs; a predeclared follow-up on a CLS-stable page is
-in [extensions-2026-11-17](docs/protocols/extensions-2026-11-17.md). Known blind
-spots: TBT changes below the 5% margin, and rare long tasks that move the mean but
-not the median ([rare-stall pilot](docs/tail-browser-results-2026-10-30.md)).
+has unstable CLS on newer runner CPUs. On a page with deterministic layout the same
+gate found CLS +10% and +25% in 100/100 jobs each, with 0/100 false alarms
+([follow-up cohorts](docs/extensions-2026-11-18.md)). Known blind spots: TBT changes
+below the 5% margin, and rare long tasks that move the mean but not the median; an
+advisory note in the comment catches about two thirds of them and never fired on 500
+unchanged checks.
+
+With background CPU load on the runner, as on a shared single CI server, interleaved
+order kept false alarms at 1/100 against 7/100 for sequential order, and FCP +5% was
+still found in 100/100 jobs; TBT +10% dropped to 61/100, so run the measurement alone
+on the machine when TBT matters.
 Change-point detection on the history of `main` is several times less sensitive on
 shared runners and stays advisory ([history-cpd.md](docs/history-cpd.md)).
 

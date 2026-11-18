@@ -78,6 +78,8 @@ COPY analysis/perfgate_analysis analysis/perfgate_analysis
 COPY schema schema
 COPY scripts/comment scripts/comment
 COPY scripts/assets/diff.mjs scripts/assets/diff.mjs
+COPY scripts/tail_signal.py scripts/tail_signal.py
+COPY scripts/tail/tail-note.py scripts/tail/tail-note.py
 COPY examples examples
 COPY docker/perfgate /usr/local/bin/perfgate
 RUN perfgate --help > /dev/null \

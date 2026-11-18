@@ -78,6 +78,7 @@ is empty when commenting was skipped. Stage 2 succeeds regardless of the verdict
   decision: regression / significant within margin / above margin but not
   significant / no change detected;
 - measurement issues when the comparison was rejected as invalid;
+- rare long tasks, when `tail.json` holds a warning (see below);
 - built assets, when the report directory contains `assets.json` (see below);
 - a short reminder of how to read the result and its limits.
 
@@ -110,7 +111,28 @@ Asset names come from the PR build and are escaped like all other artifact text.
 The section is descriptive: sizes never change the verdict, and a large size
 difference with no regression (or the reverse) is possible.
 
+## Rare long tasks
+
+The gate compares medians, so a few loads with a long main-thread stall do not move
+it. The action, the Docker image (`perfgate tail <report dir>`) and the GitLab
+template therefore also write `tail.json`: per page, a one-sided Welch t-test on mean
+TBT, Holm over the pages, with a warning when the adjusted p < 0.05 and mean TBT rose
+by more than max(10%, 20 ms) (`scripts/tail_signal.py`). Only warned pages appear in
+the comment, as an advisory table of mean and median TBT change. The verdict and the
+exit code never depend on it.
+
+Evaluated in the [follow-up cohorts](extensions-2026-11-18.md#b-advisory-tail-signal-for-tbt):
+no warning in 500 unchanged checks (200 four-page suites and 300 single-page jobs,
+including a loaded runner); 67 of 100 jobs with three 800 ms stalls in twenty PR loads
+were warned. A missing note is therefore no evidence that there are no stalls.
+
 Without the action:
+
+```sh
+analysis/.venv/bin/python scripts/tail/tail-note.py results/my-comparison
+```
+
+## Built assets, without the action
 
 ```sh
 node scripts/assets/diff.mjs --base base/dist --pr pr/dist --out results/my-comparison/assets.json
