@@ -3,6 +3,7 @@
 #   perfgate collect|compare|compare-refs ...   collector CLI (compiled JavaScript)
 #   perfgate comment render|github|gitlab ...    pull/merge request comment
 #   perfgate assets --base DIR --pr DIR --out F  built asset diff (assets.json)
+#   perfgate tail DIR                            advisory rare long-task note (tail.json)
 set -e
 root="${PERFGATE_HOME:-/opt/perfgate}"
 if [ "$1" = comment ]; then
@@ -12,5 +13,9 @@ fi
 if [ "$1" = assets ]; then
   shift
   exec node "$root/scripts/assets/diff.mjs" "$@"
+fi
+if [ "$1" = tail ]; then
+  shift
+  exec "$root/analysis/.venv/bin/python" "$root/scripts/tail/tail-note.py" "$@"
 fi
 exec node "$root/packages/collector/dist/cli.js" "$@"

@@ -9,6 +9,8 @@ on:
       - 'docker/**'
       - 'packages/collector/**'
       - 'analysis/**'
+      - 'scripts/tail/**'
+      - 'scripts/tail_signal.py'
       - '.github/workflows/docker-smoke.yml'
   workflow_dispatch:
 permissions:
@@ -54,6 +56,12 @@ jobs:
           injected=$(run injected '?inject=script-delay:179' | tail -1)
           echo "A/A exit $aa, injected exit $injected"
           test "$aa" = 0 && test "$injected" = 1
+      - name: Rare long-task note in the container
+        run: |
+          for side in aa injected; do
+            docker run --rm -v "$PWD/reports:/work" perfgate:ci tail "/work/perfgate-$side"
+            test -s "reports/perfgate-$side/tail.json"
+          done
       - name: Render the comment from the container reports
         if: always()
         run: |

@@ -249,3 +249,30 @@ test('plain http links of internal GitLab instances are kept', async () => {
   const { body: other } = renderComment(await loadReports(root), { runUrl: 'ftp://gitlab.internal/x' });
   assert.ok(!other.includes('measurement run'));
 });
+
+test('tail.json with a warning adds an advisory table; the verdict is unchanged', async () => {
+  const root = await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/tail.json': await fixture('tail') });
+  const { status, body } = renderComment(await loadReports(root));
+  assert.equal(status, 'no_regression_detected');
+  assert.ok(body.includes('**Rare long tasks (advisory, does not change the verdict):**'));
+  assert.ok(body.includes('| tail\\-heavy | 353 ms | 463 ms | +110 ms (+31.1%) | −1.8 ms (−0.5%) | 0.0447 |'));
+  assert.ok(!body.includes('demo\\-spa |'), 'pages without a warning are not listed');
+  assert.match(body, /Rare long tasks: a one-sided Welch test/);
+});
+
+test('tail.json without a warning adds nothing; malformed tail.json is reported', async () => {
+  const tail = await fixture('tail');
+  const quiet = { ...tail, pages: tail.pages.map(p => ({ ...p, warning: false })) };
+  const body = renderComment(await loadReports(await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/tail.json': quiet }))).body;
+  assert.ok(!body.includes('Rare long tasks'));
+  const broken = { ...tail, pages: [{ ...tail.pages[0], p_holm: 'small' }] };
+  const bad = renderComment(await loadReports(await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/tail.json': broken }))).body;
+  assert.match(bad, /Rare long tasks: unreadable tail\\.json/);
+});
+
+test('hostile tail page names are escaped', async () => {
+  const tail = await fixture('tail');
+  const hostile = { ...tail, pages: [{ ...tail.pages[0], name: '<img src=x> | @team [x](http://e)' }] };
+  const body = renderComment(await loadReports(await reportTree({ 'a/comparison.json': await fixture('aa'), 'a/tail.json': hostile }))).body;
+  assert.ok(!body.includes('<img') && !body.includes('@team') && !body.includes('](http'));
+});

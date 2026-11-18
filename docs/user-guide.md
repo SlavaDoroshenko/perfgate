@@ -136,7 +136,9 @@ pull request comment add the separate trusted workflow from
 
 Optional inputs `base-dist`/`pr-dist` (the two build output directories) add
 `assets.json`, a per-file size diff shown in the comment
-([built assets](pr-comments.md#built-assets)).
+([built assets](pr-comments.md#built-assets)). Every run also writes `tail.json`,
+an advisory check for a few very slow loads that the median ignores
+([rare long tasks](pr-comments.md#rare-long-tasks)).
 
 **Main-branch history.** `examples/github/perfgate-history.yml` measures every push
 to `main` against the previous state, appends the result to a history branch and
@@ -148,7 +150,7 @@ deploys a static dashboard with advisory change-point warnings; see [history.md]
 artifact and use the exit code. `perfgate comment render --reports <dir>`
 produces the same Markdown summary for any code review system;
 `perfgate assets --base <dist> --pr <dist> --out <dir>/assets.json` adds the
-built-asset diff to it.
+built-asset diff to it, and `perfgate tail <dir>` the rare long-task note.
 
 ## 6. Reading the result
 

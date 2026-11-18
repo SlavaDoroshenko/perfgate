@@ -70,6 +70,10 @@ perfgate:
           --app "$PERFGATE_APP" --out "perfgate/$PERFGATE_APP" || status=$?
       fi
     - |
+      if [ -d "perfgate/$PERFGATE_APP" ]; then
+        perfgate tail "perfgate/$PERFGATE_APP" || echo "tail note failed; the verdict is unaffected"
+      fi
+    - |
       if [ -n "$PERFGATE_BASE_DIST" ] && [ -n "$PERFGATE_PR_DIST" ] && [ -d "perfgate/$PERFGATE_APP" ]; then
         perfgate assets --base "$PERFGATE_BASE_DIST" --pr "$PERFGATE_PR_DIST" --out "perfgate/$PERFGATE_APP/assets.json" ||
           echo "asset diff failed; the verdict is unaffected"

@@ -25,3 +25,23 @@ def test_small_mean_rise_is_below_the_margin():
     base = np.full(20, 300.0) + np.arange(20) % 3
     pr = base + 15  # significant, but 15 ms < max(10%, 20 ms)
     assert not tail_signal({"p": (base, pr)})["p"]["warning"]
+
+
+def test_tail_note_writes_tail_json_beside_the_loads(tmp_path):
+    import json
+    import subprocess
+    rng = np.random.default_rng(2)
+    rows = []
+    for variant in ("base", "pr"):
+        tbt = rng.normal(340, 5, 20)
+        if variant == "pr":
+            tbt[[2, 12, 14]] += 800
+        rows += [{"app": "heavy", "variant": variant, "error": None, "metrics": {"tbt": float(x)}} for x in tbt]
+    comparison = tmp_path / "comparison"
+    comparison.mkdir()
+    (comparison / "runs.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    note = Path(__file__).resolve().parents[1] / "tail" / "tail-note.py"
+    subprocess.run([sys.executable, str(note), str(tmp_path)], check=True)
+    out = json.loads((comparison / "tail.json").read_text())
+    assert out["schema"] == "perfgate-tail/1"
+    assert out["pages"][0]["warning"] and out["pages"][0]["n"] == 20
