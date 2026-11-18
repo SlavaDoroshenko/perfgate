@@ -3,16 +3,13 @@
 # one library. Version changes are cases to measure, not ground-truth regressions.
 name: oss-libs
 
+# Scheduled collection ended on 18 November 2026; the series stays on the data branch.
 on:
   workflow_dispatch:
     inputs:
       runs:
         description: Loads per variant
         default: "20"
-  schedule:
-    # once a day, in a window none of the other schedules use (noise x:17, oss 3:37/15:37,
-    # oss-commits 5:47, regressions x:47 at 4/10/16/22)
-    - cron: "27 9 * * *"
 
 permissions:
   contents: write

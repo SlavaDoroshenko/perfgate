@@ -3,14 +3,13 @@
 # a failure to rebuild then shows up as a failed job, not as missing data.
 name: oss-commits
 
+# Scheduled collection ended on 18 November 2026; the series stays on the data branch.
 on:
   workflow_dispatch:
     inputs:
       runs:
         description: Loads per variant
         default: "20"
-  schedule:
-    - cron: "47 5 * * *"
 
 permissions:
   contents: write

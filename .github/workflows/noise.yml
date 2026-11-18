@@ -2,6 +2,7 @@
 # Raw JSONL is committed to the `data` branch (artifacts expire, the data must not).
 name: noise
 
+# Scheduled collection ended on 18 November 2026; the series stays on the data branch.
 on:
   workflow_dispatch:
     inputs:
@@ -12,9 +13,6 @@ on:
       runs:
         description: Loads per variant
         default: "20"
-  schedule:
-    # 4 times a day to capture time-of-day variance of shared runners
-    - cron: "17 1,7,13,19 * * *"
 
 permissions:
   contents: write

@@ -80,7 +80,7 @@ Research documents: [roadmap](docs/roadmap.md), [completion criteria](docs/resea
 | `Dockerfile`, `docker/` | measurement image with pinned Chrome for Testing |
 | `ci/gitlab/` | GitLab CI include template |
 | `examples/` | compare-refs config and external-project GitHub workflows |
-| `.github/workflows/noise.yml` | scheduled A/A measurements on GitHub runners → `data` branch |
+| `.github/workflows/noise.yml` | A/A measurements on GitHub runners → `data` branch (scheduled until 18 November 2026) |
 | `docs/protocol.md` | experiment protocol |
 | `docs/rq1-preliminary.md` | measured noise, MDE and false alarm rates |
 | `docs/rq2-methods.md` | comparison of eleven detection rules |

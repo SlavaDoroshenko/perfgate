@@ -8,6 +8,7 @@
 # base), since TBT is not additive in the injected time.
 name: regressions
 
+# Scheduled collection ended on 18 November 2026; the series stays on the data branch.
 on:
   workflow_dispatch:
     inputs:
@@ -18,9 +19,6 @@ on:
       runs:
         description: Loads per variant
         default: "20"
-  schedule:
-    # between the noise (x:17), oss (3:37, 15:37) and oss-commits (5:47) runs
-    - cron: "47 4,10,16,22 * * *"
 
 permissions:
   contents: write
