@@ -1,5 +1,7 @@
 # perfgate
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24352383.svg)](https://doi.org/10.5281/zenodo.24352383)
+
 Statistical detection of frontend performance regressions in CI.
 
 Lab metrics (LCP, FCP, TBT, CLS) are noisy, especially on shared CI runners, so fixed

@@ -6,6 +6,7 @@ authors:
   - family-names: Doroshenko
     given-names: Vyacheslav
     affiliation: MIREA – Russian Technological University
+doi: 10.5281/zenodo.24352383
 repository-code: https://github.com/SlavaDoroshenko/perfgate
 license: MIT
 version: 0.1.0

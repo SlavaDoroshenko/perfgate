@@ -6,7 +6,7 @@
 # The job fails on a detected regression (exit 1) or invalid measurements (exit 2),
 # so make this job a required status check if regressions should block merging.
 #
-# Adapt the build/start step to your project. Replace <perfgate-commit> with a
+# Adapt the build/start step to your project. The perfgate steps are pinned to the v0.1.0 release commit; to upgrade, replace it with a
 # reviewed full commit SHA of SlavaDoroshenko/perfgate.
 name: perfgate
 on:
@@ -48,7 +48,7 @@ jobs:
             done
           done
       # Artifact name perfgate-<attempt>; the comment workflow downloads it.
-      - uses: SlavaDoroshenko/perfgate@<perfgate-commit>
+      - uses: SlavaDoroshenko/perfgate@6eac19c58f8004530db91a094edc57866cb14dfe # v0.1.0
         with:
           base-url: http://127.0.0.1:4173/
           pr-url: http://127.0.0.1:4174/

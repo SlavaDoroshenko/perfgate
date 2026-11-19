@@ -39,8 +39,8 @@ branch protection on the measuring job and review workflow changes.
 
 1. Copy [examples/github/perfgate-measure.yml](../examples/github/perfgate-measure.yml)
    to `.github/workflows/perfgate.yml`. Adapt the build/start step: both versions
-   must be built and served on two ports before the perfgate step. Replace
-   `<perfgate-commit>` with a reviewed full commit SHA.
+   must be built and served on two ports before the perfgate step. The example is
+   pinned to the v0.1.0 release commit; pin later releases by full commit SHA too.
 2. Copy [examples/github/perfgate-comment.yml](../examples/github/perfgate-comment.yml)
    to `.github/workflows/perfgate-comment.yml`. `workflows:` must match the
    measuring workflow's `name:`.
@@ -90,7 +90,7 @@ build shipped an extra 56 KB chunk). To show such differences next to the verdic
 pass the two build output directories to the root action:
 
 ```yaml
-- uses: SlavaDoroshenko/perfgate@<perfgate-commit>
+- uses: SlavaDoroshenko/perfgate@6eac19c58f8004530db91a094edc57866cb14dfe # v0.1.0
   with:
     base-url: http://127.0.0.1:4173/
     pr-url: http://127.0.0.1:4174/

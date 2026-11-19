@@ -120,7 +120,7 @@ Treat 2 and 3 as failures, never as passes.
 **GitHub Actions.** Build and start both versions, then:
 
 ```yaml
-- uses: SlavaDoroshenko/perfgate@<reviewed-commit>
+- uses: SlavaDoroshenko/perfgate@6eac19c58f8004530db91a094edc57866cb14dfe # v0.1.0
   with:
     base-url: http://127.0.0.1:4173/
     pr-url: http://127.0.0.1:4174/

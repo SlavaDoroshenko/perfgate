@@ -14,7 +14,9 @@ required for the pinned browser.
 
 ## Setup
 
-1. Build and push the image, e.g. to the project's container registry:
+1. Use the published image `ghcr.io/slavadoroshenko/perfgate:v0.1.0` (digest
+   `sha256:c5d1b1964c94dc3ca5505e52860df5008095e9a63573f8c962b6650e1e81dd8b`), or mirror it into your registry (`docker pull`, `docker tag`,
+   `docker push`), or build and push it yourself:
    ```sh
    docker build --platform linux/amd64 -t registry.example.com/tools/perfgate:1 .
    docker push registry.example.com/tools/perfgate:1
@@ -22,10 +24,10 @@ required for the pinned browser.
 2. In the application's `.gitlab-ci.yml`:
    ```yaml
    include:
-     - remote: https://raw.githubusercontent.com/SlavaDoroshenko/perfgate/<commit>/ci/gitlab/perfgate.gitlab-ci.yml
+     - remote: https://raw.githubusercontent.com/SlavaDoroshenko/perfgate/6eac19c58f8004530db91a094edc57866cb14dfe/ci/gitlab/perfgate.gitlab-ci.yml
        # recent GitLab versions can pin the content with integrity: sha256-<base64 digest>
    variables:
-     PERFGATE_IMAGE: registry.example.com/tools/perfgate@sha256:<digest>
+     PERFGATE_IMAGE: ghcr.io/slavadoroshenko/perfgate:v0.1.0@sha256:c5d1b1964c94dc3ca5505e52860df5008095e9a63573f8c962b6650e1e81dd8b
      PERFGATE_REFS_CONFIG: perfgate-refs.json
    ```
    For offline instances copy the template into the project (or a shared CI

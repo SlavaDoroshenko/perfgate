@@ -22,4 +22,4 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: SlavaDoroshenko/perfgate/comment@<perfgate-commit>
+      - uses: SlavaDoroshenko/perfgate/comment@6eac19c58f8004530db91a094edc57866cb14dfe # v0.1.0

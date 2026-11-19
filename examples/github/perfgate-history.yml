@@ -13,7 +13,8 @@
 # dashboard and job summary are advisory and never fail a job.
 #
 # Enable Pages with "Source: GitHub Actions" in the repository settings. Adapt the
-# build/start step and replace <perfgate-commit> with a reviewed full commit SHA.
+# build/start step. perfgate is pinned to the v0.1.0 release commit; upgrade to a
+# reviewed full commit SHA of a later release.
 name: perfgate history
 on:
   push:
@@ -71,7 +72,7 @@ jobs:
             done
           done
       # Uploads artifact perfgate-<attempt>; fails the job on a regression or invalid data.
-      - uses: SlavaDoroshenko/perfgate@<perfgate-commit>
+      - uses: SlavaDoroshenko/perfgate@6eac19c58f8004530db91a094edc57866cb14dfe # v0.1.0
         with:
           base-url: http://127.0.0.1:4173/
           pr-url: http://127.0.0.1:4174/
@@ -91,7 +92,7 @@ jobs:
         with:
           pattern: perfgate*-${{ github.run_attempt }}
           path: ${{ runner.temp }}/reports
-      - uses: SlavaDoroshenko/perfgate/history@<perfgate-commit>
+      - uses: SlavaDoroshenko/perfgate/history@6eac19c58f8004530db91a094edc57866cb14dfe # v0.1.0
         id: history
         with:
           reports: ${{ runner.temp }}/reports

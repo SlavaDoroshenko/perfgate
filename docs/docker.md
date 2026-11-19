@@ -14,6 +14,15 @@ The [Dockerfile](../Dockerfile) packages everything a comparison needs:
 The entry point is `perfgate`; `perfgate comment ...` runs the
 [comment renderer](pr-comments.md). Reports go to the mounted working directory `/work`.
 
+## Published image
+
+Release tags publish `ghcr.io/slavadoroshenko/perfgate:<tag>` and `:latest`
+(`.github/workflows/release.yml`, after a pinned-browser check). v0.1.0:
+
+```sh
+docker pull ghcr.io/slavadoroshenko/perfgate:v0.1.0@sha256:c5d1b1964c94dc3ca5505e52860df5008095e9a63573f8c962b6650e1e81dd8b
+```
+
 ## Build
 
 ```sh
