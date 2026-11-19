@@ -1,0 +1,50 @@
+{
+  "protocol": "followup-2026-11-19",
+  "recorded_utc": "2026-11-19T14:54:51+00:00",
+  "gate_policy": "browser-candidate-2026-10-30",
+  "measurement_source_sha": "30ca8339a7c1767ebe062378c893ac1d2adf93ae",
+  "target_complete_runs": 25,
+  "jobs_per_run": 30,
+  "sample_per_type": {
+    "tail-rare": 150,
+    "tail-aa": 100,
+    "load-aa": 200,
+    "load-lt10-r60": 100,
+    "pin-aa": 100,
+    "pin-lt10": 100
+  },
+  "runs_per_variant": {
+    "load-lt10-r60": 60
+  },
+  "tail_rule": {
+    "threshold": "median(base TBT) + max(100 ms, 20% of median)",
+    "warn": "at least 2 PR loads above, no base load above"
+  },
+  "load": {
+    "workers": 2,
+    "period_s": [
+      5,
+      60
+    ],
+    "pinned": {
+      "load": "2,3",
+      "browser": "0,1"
+    }
+  },
+  "targets": {
+    "tail-rare": "count rule, Wilson lower >= 0.80",
+    "tail-aa / load-aa / pin-aa": "count rule false warnings, Wilson upper <= 0.05",
+    "load-aa": "gate alarm any metric, Wilson upper <= 0.05",
+    "load-lt10-r60": "TBT detected, Wilson lower >= 0.80",
+    "pin-lt10": "TBT detected, Wilson lower >= 0.80",
+    "pin-aa": "gate alarm any metric, Wilson upper <= 0.05"
+  },
+  "source_sha256": {
+    ".github/workflows/followup.yml": "fd7087986e6f719c25ec500a9abae71a39cf877624f7e55f68bcac37f2cc6853",
+    "scripts/background-load.mjs": "26f547a0d2bec048af4f6513782e913eec7cecb62661eb676b580ccc7710aa99",
+    "scripts/tail_exceedance.py": "1a54f9e7e189eed0c71e507149c6b2f5b60a4686e5657a55932bb9f33659305b",
+    "scripts/calibrate-tail-exceedance.py": "da421c90051766ea2f75da48a65b3e64f60702d41e992a14e9a138f11935a467",
+    "scripts/evaluate-followup.py": "864fb32f154bb1d7ed561ca78e235d8a847ccfee7c918f575230f6401b745104",
+    "docs/protocols/followup-2026-11-19.md": "df8783fa9ed5450be990015ad18ac8bb75b1a41bf2f6c1bff9a0b24219b17aff"
+  }
+}
