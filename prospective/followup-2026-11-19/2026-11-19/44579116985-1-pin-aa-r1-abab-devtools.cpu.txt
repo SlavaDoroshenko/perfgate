@@ -1,0 +1,7 @@
+nproc: 4
+load affinity: pid 3023's current affinity list: 2,3
+CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE    MAXMHZ   MINMHZ       MHZ
+  0    0      0    0 0:0:0:0          yes 2300.0000 800.0000 3583.4890
+  1    0      0    0 0:0:0:0          yes 2300.0000 800.0000 3488.3860
+  2    0      0    1 1:1:1:0          yes 2300.0000 800.0000 3514.1201
+  3    0      0    1 1:1:1:0          yes 2300.0000 800.0000 3498.5061
