@@ -1,0 +1,7 @@
+nproc: 4
+load affinity: pid 3213's current affinity list: 2,3
+CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE    MAXMHZ   MINMHZ       MHZ
+  0    0      0    0 0:0:0:0          yes 2300.0000 800.0000 3099.3469
+  1    0      0    0 0:0:0:0          yes 2300.0000 800.0000  800.0000
+  2    0      0    1 1:1:1:0          yes 2300.0000 800.0000 3105.4490
+  3    0      0    1 1:1:1:0          yes 2300.0000 800.0000 3112.8081
