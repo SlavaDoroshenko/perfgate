@@ -1,0 +1,7 @@
+nproc: 4
+load affinity: pid 3092's current affinity list: 0-3
+CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE
+  0    0      0    0 0:0:0:0          yes
+  1    0      0    1 1:1:1:0          yes
+  2    0      0    0 0:0:0:0          yes
+  3    0      0    1 1:1:1:0          yes
