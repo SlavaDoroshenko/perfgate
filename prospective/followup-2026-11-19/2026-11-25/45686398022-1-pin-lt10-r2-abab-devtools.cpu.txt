@@ -1,0 +1,7 @@
+nproc: 4
+load affinity: pid 3267's current affinity list: 2,3
+CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE    MAXMHZ   MINMHZ       MHZ
+  0    0      0    0 0:0:0:0          yes 2300.0000 800.0000 3030.1489
+  1    0      0    0 0:0:0:0          yes 2300.0000 800.0000 3076.4290
+  2    0      0    1 1:1:1:0          yes 2300.0000 800.0000 2996.6460
+  3    0      0    1 1:1:1:0          yes 2300.0000 800.0000 2930.4570
