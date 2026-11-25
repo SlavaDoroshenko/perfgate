@@ -1,0 +1,7 @@
+nproc: 4
+load affinity: pid 3084's current affinity list: 0-3
+CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE    MAXMHZ   MINMHZ       MHZ
+  0    0      0    0 0:0:0:0          yes 2600.0000 800.0000 4082.9419
+  1    0      0    0 0:0:0:0          yes 2600.0000 800.0000 4090.3210
+  2    0      0    1 1:1:1:0          yes 2600.0000 800.0000 4093.6440
+  3    0      0    1 1:1:1:0          yes 2600.0000 800.0000 4097.8301
